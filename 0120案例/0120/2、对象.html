@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var o={a:1,b:2};
+
+        // var a=1;
+        // var b=2;
+        // var c=3;
+        // var d=4;
+
+        // var arr=[1,2,3,4]
+        // 键值对  key（唯一）  value
+
+
+        // 点语法设置属性，在已有的对象上添加，修改，获取
+        var obj={}
+        // obj.a=10;//设置obj.a这个键对应的值
+        // obj.b=20;
+        // obj.a-c=3;  使用点语法时，属性名key，不能使用字母数字下划线$以外的任何符号，而且不能以数字起头
+
+
+
+        // obj.a={};
+        // 方法 如果key对应的值是一个函数，这个key就是方法名
+        // obj.c=function(){
+        //     console.log("aa");
+        // }
+
+        // console.log(obj.a);//获取到obj.a 这个a键对应的值
+        // console.log(obj);
+        // obj.c();
+
+
+
+        // 在创建对象上添加属性
+        // var obj={
+        //     a:1,
+        //     b:2,
+        //     "a-b":3,//如果在对象上添加属性时，使用到非字母数字下划线$的其他字符，必须在前后使用""
+        //     c:function(){
+        //
+        //     }
+        // }
+
+        // console.log(obj);
+
+
+
+        // 在对象上添加已定义的变量作为属性
+
+        // var a="ab";
+        // var o={};
+        // var obj={
+        //     a:1,
+        //     "a":2,//只能放入字符---使用"" 可以使用任意字符
+        //     [a]:3,//使用[]放入变量，意味着将这个变量的值作为key使用
+        //     ["a"]:4,//[]里除了可以放入变量，也可以放人任何其他内容---会将上面的2覆盖点
+        //     [o]:5,//如果将一个数据作为对象的key，那么这个数据必然会隐式转换为字符类型
+        // }
+        //
+        // console.log(obj);
+
+
+        // var obj={
+        //     [{a:1}]:10,
+        //     [{a:2}]:20,   //转换成{a:2}-->[object Object]
+        // }
+        // console.log(obj);
+        // {
+        //     "[object Object]":20
+        // }
+        // // 在已有对象上添加变量,变量作为属性或者添加各种符号的字符作为属性---不懂
+
+
+        // var obj={}
+        //
+        // obj["a"]=1;//obj.a=1;
+        // obj["a-1"]=2;
+        // var a=3;
+        // obj[a]=3;
+        // var b=true;
+        // obj[b]=4;
+        // var o={a:1};
+        // obj[o]=5;
+        // var c;
+        // obj[c]=10;
+        // var arr=[];
+        // obj[arr]=100;
+        // var arr1=[3];
+        // obj[arr1]=5;
+        // console.log(obj);
+        // // console.log(obj[{a:10}]);
+        // console.log(obj["3"]);
+
+
+        // var obj={a:1,b:2,c:3};
+        // 删除属性
+        // delete obj.a;
+        // console.log(obj);
+
+
+        // 广度遍历，深度遍历
+        // var obj={a:1,b:2,c:3};
+
+
+        // 判断a字符是否是obj的属性，如果是返回true，否则返回false
+        // console.log("a" in obj);
+
+
+        // 复制。拷贝  对象复制，对象拷贝   对象浅复制 ，对象浅拷贝
+        //obj[key] == value
+        // var obj1={};
+        // for(var key in obj){
+        //     console.log(key,obj[key]);
+        //     // console.log(obj.key);
+        //     obj1[key]=obj[key];
+        //
+        // }
+        // console.log(obj1);
+
+
+        // Object.keys(o)  获取o对象的所有key组成的数组
+        // Object.values(o) 获取o对象的所有value组成的数组
+
+        // 对象没有长度
+
+        // var obj={a:1,b:2,c:3};
+        // var obj1={a:1,b:2,c:3};
+
+
+        // console.log(obj===obj1);
+
+        // 对象浅比较
+        // var bool=true;
+        // for(var key in Object.keys(obj).length>Object.keys(obj1).length ? obj : obj1){
+        //     if(obj[key]!==obj1[key]){
+        //         bool=false;
+        //         break;
+        //     }
+
+        // }
+
+        // if(bool){
+        //     console.log("证明对象相等");
+
+        // }else{
+        //     console.log("对象不相同");
+
+        // }
+
+
+
+        // var obj={a:1,b:2,c:3,d:4,r:{a:2,b:2}};
+        // var obj1={a:1,b:2,c:3,d:4,r:{b:2,a:2}};
+        // console.log(obj);
+        // obj.a=3;
+
+
+        // 将对象转换为json字符串
+        // JSON.stringify()
+        // 将json字符串转换为对象
+        // JSON.parse()
+
+
+        // console.log(JSON.stringify(obj));
+
+        // var str='{"a":1,"b":"a","c":true,"d":{"a":10}}'
+        // console.log(JSON.parse(str));
+
+
+        // 对象深复制，有问题（以后再说）
+        // var obj1=JSON.parse(JSON.stringify(obj));
+        // console.log(obj1);
+
+        // 只能比较两个对象，属性，属性值，和属性的顺序完全相同的对象
+        // console.log(JSON.stringify(obj)===JSON.stringify(obj1));
+
+
+         // var obj={a:1,b:2,o:{c:3,d:4}};
+         // var obj1=obj;
+
+        // console.log(obj1===obj);
+
+        // obj.a=10;
+        // console.log(obj1);//obj1.a改变
+        // obj["a"]=10;
+        // console.log(obj1);//obj1.a改变
+
+         // obj={c:10};//obj1不改变
+         //
+         // console.log(obj1);
+
+        // var arr=[1,2,3];
+        // var arr1=arr;
+        // arr[0]=10;
+        // arr=[3,4,5];
+        // console.log(arr1);
+
+        // 变量直接赋值和变量的某个属性发生改变是不同
+        // 变量直接赋值不会引起相同引用关系的内容改变
+        // 变量的属性改变，会引起相同引用关系的内容的改变
+
+        // var a=3;
+        // var b=a;
+        // a=5;
+        // console.log(b);
+
+
+
+        // function fn(o){
+        //     o.a=10;
+        //     // o={a:1};
+        // }
+
+        // var obj={a:1,b:2};
+        // fn(obj);
+
+        // console.log(obj);
+
+
+
+
+        // var obj={a:1,b:2};
+        // var obj1=obj;
+        //内存回收---类型不变，所指的无用内存清除
+        // obj=null;
+        // obj={abc:10,def:20};
+        // obj1=null;
+        // obj1={aa:10};
+
+        // 复制，浅复制 ES6
+        // Object.assign()
+
+
+        // var obj={a:1,b:2};
+        // var o={c:1}
+
+        // Object.assign(o,obj);
+        // 将obj复制所有属性到o对象上
+        // console.log(o);
+
+
+        // var obj={a:1,b:2};
+        // 将obj和{c:3}的所有属性复制到{}上，并且将这个{}返回到变量o中
+        // 如果属性名相同，后面的将会覆盖前面的
+        // var o=Object.assign({},obj,{c:3})
+        // console.log(o);
+
+
+        // 对象遍历的顺序
+        // 正常情况遍历是无序的，松散结构，对象不能排序
+        // 按照属性添加的先后顺序，如果属性强转数值时：不是NaN（是数值型）优先遍历
+        // 先按照key中数值的从小到大优先遍历，然后按照属性的添加顺序遍历
+        //对象中是按照ASCA码进行遍历
+        var obj={a:1};
+        obj.c=3;
+        obj.b=5;
+        obj["5"]=7;
+        obj["2a"]=7;
+        obj["1"]=4;
+
+        console.log(obj);
+
+        for(var key in obj){
+            console.log(key);
+        }
+    </script>
+</body>
+</html>

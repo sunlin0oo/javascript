@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="row col-xs-5" >
+  <div class="btn-group dropdown col-xs-4" id="province">
+    <button class="btn btn-default show-txt"></button>
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+    <ul class="dropdown-menu">
+    </ul>
+  </div>
+  <div class="btn-group dropdown col-xs-4" id="city">
+    <button class="btn btn-default show-txt"></button>
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+    <ul class="dropdown-menu">
+    </ul>
+  </div>
+  <div class="btn-group dropdown col-xs-4" id="county">
+    <button class="btn btn-default show-txt"></button>
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+    <ul class="dropdown-menu">
+    </ul>
+  </div>
+</div>
+<script>
+  getCityData();
+  async  function getCityData(menuType,id){
+      var data;
+      var router;
+          switch (menuType){
+            case "province":
+              //fetch返回的是一个promise对象, fetch是ajax传送给服务器数据的一种方式, 这里使用的方法是Post, 发送的数据是省份的id
+              data=await fetch("http://localhost:4020/city",{method:"post",body:JSON.stringify({provinceId:id})});
+              router="city";
+              break;
+            case "city":
+              data=await  fetch("http://localhost:4020/county",{method:"post",body:JSON.stringify({cityId:id})});
+              router="county";
+              break;
+            case "county":
+              return;
+            default:
+              data=await fetch("http://localhost:4020/province");
+              router="province"
+              break;
+          }
+          data=await data.json();//数据传输过程中转为json对象
+           setMenu(router,data);
+      }
+
+      function  clickHandler(e){
+         if(e.target.nodeName!=="A") return;//如果点击的不是a标签就退出, 防止点到其他位置
+         $(e.target).parents("ul").prevAll(".show-txt").text($(e.target).text());//获得点击的元素集合的所有父元素（ul）的向上同级.show-txt元素的文本内容
+         var menuType=$(e.target).parents(".btn-group").attr("id");//创建一个菜单类型变量等于点击元素的所有父元素（.btn-group）的(id)属性值
+         var id=$(e.target).attr("id");//获取到点击的城市的id属性值
+        getCityData(menuType,id);//将获取到的菜单类型(是省还是市还是区)还有id传给getCityData, 菜单类型只有3个, 但是id可能会有很多变化
+        }
+
+      //渲染页面
+      function setMenu(type,data){
+        var str="";//数据驱动显示, 每次进入都清空
+        //.each是json里面用来遍历使用的
+        //在这里是遍历Data, 由于data已经被转换成JSON对象
+        //所以这里data是对象, key是它的键, value是它的值
+        //data是传来的citydata里面的数据
+        $.each(data,function (key,value){
+          str+=`<li><a id="${key}" href="javascript:void(0)">${value}</a></li>`
+        });
+        $("#"+type+">ul").html(str).on("click",clickHandler);
+        console.log($("#"+type+">ul").html(str));
+        var evt=new Event("click",{bubbles:true});
+        $("#"+type+">ul>li:first-child>a")[0].dispatchEvent(evt);
+      }
+
+ 
+</script>
+</body>
+</html>

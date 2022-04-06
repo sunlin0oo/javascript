@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // + - * /   %(取模)
+
+        // console.log(45%6)
+        // 小数点后转二进制会出现bug
+        // console.log(0.12+0.235)
+
+
+
+    //    字符运算
+    //   运算符一侧是字符，或者两侧都是字符
+    // 加法运算按照字符连接运算，非字符会自动隐式转换为字符
+    // - * / % 都会自动隐式转换为数值运算
+
+    // console.log("a"+"b");
+    // console.log("a"+1);
+    // console.log("a"+true);
+    // console.log(""+undefined)
+    // console.log("a"+{a:1});//"a[object Object]"
+    // console.log(''+null);
+    // console.log(""+[]);
+    // console.log([]+[]);//遇到数组+法运算时优先转换为字符类型
+    // console.log([]+1);
+    // console.log([]+true);
+    // console.log([1]+1);
+
+
+    // console.log("10"-5)
+    // console.log("8a"-3)
+    // console.log("10"-true);
+    // console.log("10"-undefined);
+    // console.log("10"-null);
+    // console.log("10"-[]);
+    // console.log("10"-[5])
+    // console.log("10"-{})
+
+
+    // boolean  undefined null 
+    // + - * / % 都会遵从数值运算
+    // console.log(true+true);
+    // console.log(true+false);
+    // console.log(true-true)
+    // console.log(true+undefined)
+    // console.log(false+null)
+    // console.log(undefined+null);
+    // console.log(true+10);
+    // console.log(null+true+20)
+
+    // object  优先把对象转换为字符串[object Object];
+    // console.log({}+{})
+    // console.log({}+1)
+    // console.log({}-1)
+    // console.log(0+{})
+    // console.log([]+{})
+    // console.log({}+[])
+    
+    </script>
+</body>
+</html>

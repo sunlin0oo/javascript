@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="div4">123</div>
+    <script>
+        function addCSS(selector, styleObj) {
+            var styleSheet = Array.from(document.styleSheets).find(function (item) {
+                return item.title === "abc";
+            })
+            if (!styleSheet) {
+                var style = document.createElement("style");
+                style.title = "abc";
+                document.head.appendChild(style);
+                styleSheet = document.styleSheets[document.styleSheets.length - 1];
+            }
+            var str = Object.keys(styleObj).reduce(function (v, key) {
+                return v + key.replace(/[A-Z]/g, function (t) {
+                    return "-" + t.toLowerCase();
+                }) + ":" + styleObj[key] + ";"
+            }, "");
+            styleSheet.addRule(selector, str, styleSheet.cssRules.length);
+            console.log(styleSheet)
+        }
+
+        var obj={
+                width:"50px",
+                height:"50px",
+                lineHeight:"30px",
+                border:"1px solid #000",
+                textAlign:"center",
+                color:"red",
+                backgroundColor:"green"
+            }
+        addCSS(".div4", obj);
+        
+    </script>
+</body>
+
+</html>

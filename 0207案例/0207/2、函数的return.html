@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #div1{
+            top:100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div0"></div>
+    <div id="div1"></div>
+    <script>
+        /*
+            return
+            1、跳出函数
+            2、执行函数返回结果
+            如果没有使用return，函数默认返回undefined
+         */
+        // function fn(){
+        //     console.log(1);
+        //     return 2;
+        // }
+
+        // console.log(fn());
+
+
+// 直接跳出
+//         function fn(n){
+//             for(var i=0;i<10;i++){
+//                 // if(i===n)break;
+//                 if(i===n) return;//直接跳出整个函数，不再执行循环后面的语句
+//                 console.log(i);
+//             }
+//             console.log("a");
+//         }
+
+//       fn(4)
+
+
+// 缩小参数范围
+    //    function fn(n){
+    //       if(n<0) return;
+    //       console.log(n);
+    //    }
+
+    //    function fn(n){
+    //       if(n>=0){
+    //           console.log(0);
+    //       }
+
+    //    }
+
+    //    fn(5);
+    //    fn(-10);
+
+
+    // 利用条件控制进入函数时间或者方式
+
+    // 不好的。极差的
+        // var div0=document.getElementById("div0");
+        // var x=0;
+        // var n=0;
+        // var id;
+        // div0.onclick=function(){
+        //     n++;
+        //     if(n%2===0){
+        //         clearInterval(id);
+        //     }else{
+        //       id=setInterval(function(){
+        //             x++;
+        //             div0.style.left=x+"px";
+        //         },16);
+        //     }
+        // }
+
+        // var x=0,bool=false;
+        // var div;
+        // init();
+        // function init(){
+        //     div = document.getElementById("div0");
+        //     div.onclick=clickhandler();
+        //     id = setInterval(animation,16);
+        // }
+        //
+        // function clickhandler(){
+        //     bool =!bool;
+        // }
+        //
+        // function animation(){
+        //     if (!bool){
+        //         return;
+        //     }
+        //         x++;
+        //         div.style.left = x+"px";
+        // }
+
+
+
+
+
+        /*
+        var x1=0,x2=0,bool1=false,bool2=false;
+        var div1,div2;
+        init();
+        function init(){
+            div1=document.getElementById("div0");
+            div2=document.getElementById("div1");
+            div1.onclick=clickhandler1;
+            div2.onclick=clickhandler2;
+            setInterval(animation,16)
+        }
+
+        function clickhandler1(){
+            bool1=!bool1;
+        }
+
+        function clickhandler2(){
+            bool2=!bool2;
+        }
+
+        function animation(){
+            // if(bool1){
+            //     x1++;
+            //     div1.style.left=x1+"px";
+            // }
+            // if(bool2){
+            //     x2++;
+            //     div2.style.left=x2+"px";
+            // }
+            if(bool1) x1=setMove(div1,x1);//将运算完成的值重新赋值回x变量
+            if(bool2) x2=setMove(div2,x2);
+        }
+
+        function setMove(div,x){
+            x++;
+            div.style.left=x+"px";
+            return x;
+        } */
+
+
+        // 跳出返回值
+        // function fn(a,b){
+        //     return a+b;
+        // }
+
+        // var s=fn(4,5);
+        // console.log(s);
+
+
+
+
+// 将数值转换为中文，return 可以有效节制后续代码运行的条件
+    //     var arr=["零","一","二","三","四","五","六","七","八","九","十"];
+
+    //     function showNum(n){
+    //         if(n<0 || n>=100) throw new RangeError("请输入0-99以内的数值!");
+    //         if(n<11) return arr[n];
+    //         if(n<20) return "十"+arr[n%10];
+    //         if(n%10===0) return arr[n/10]+"十";
+    //         return arr[~~(n/10)]+"十"+arr[n%10];
+
+    //     }
+
+    //   console.log(showNum(5));//五
+    //   console.log(showNum(10));//十
+    //   console.log(showNum(15));//十五
+    //   console.log(showNum(20));//二十
+    //   console.log(showNum(23));//二十三
+
+
+        // 工厂模式，根据参数使用return返回不同的对象
+        // function fn(name,sex,age){
+        //     // 如果属性名和赋值的变量名相同时，直接就写入变量即可
+        //     // return {
+        //     //     name:name,
+        //     //     sex:sex,
+        //     //     age:age
+        //     // }
+        //     return {
+        //         name,
+        //         sex,
+        //         age
+        //     }
+        // }
+
+
+        // console.log(fn("谢天","男",30));
+        // console.log(fn("李雪","女",22));
+
+
+
+        // 单例模式   单独唯一的实例
+        // var instance;
+
+        // function getInstance(){
+        //     if(instance) return instance;
+        //     return instance={a:1,b:2};
+        // }
+        // function getInstance(){
+        //     if(!instance) instance={a:1,b:2};
+        //     return instance;
+        // }
+
+        // function getInstance(){
+        //    return instance || (instance={a:1,b:2});
+        // }
+
+
+        // var a=getInstance();
+        // var b=getInstance();
+        // console.log(a===b,a);
+
+
+
+    //     function fn(){
+    //         return function(){
+    //             console.log("a");
+    //         }
+    //     }
+
+    //     var f=fn();
+    //     var f1=fn();
+    //   console.log(f===f1);
+
+
+
+// 返回函数执行时执行的另外一个函数的结果，从内向外传递数据
+//     function fn1(a,b){
+//         var s=a+b;
+//        return fn3(s);
+//     }
+
+//     function fn2(s){
+//         return s*s;
+//     }
+
+//     function fn3(s){
+//         return s+s;
+//     }
+
+
+//    var s=fn1(3,5);
+//    console.log(s);
+
+
+    </script>
+</body>
+</html>

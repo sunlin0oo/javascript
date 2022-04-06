@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr;
+        var ids;
+        var times=20;
+
+        init()
+        function init(){
+            arr=Array(20).fill(1).map(function(){
+                return {clientX:~~(Math.random()*1390),clientY:~~(Math.random()*(document.documentElement.clientHeight-50))}
+            })
+            document.addEventListener("click",clickHandler);
+           ids=setInterval(animation,16);
+        }
+
+
+        function createElem(type,style,parent){
+            var elem=document.createElement(type);
+            if(style && typeof style==="object") Object.assign(elem.style,style);
+            if(typeof parent==="string") parent=document.querySelector(parent);
+            if(parent) parent.appendChild(elem);
+            return elem;
+        }
+
+        function clickHandler(e){
+            // console.log(e.clientX,e.clientY);//相对视口的距离
+            createElem("div",{
+                width:"50px",
+                height:"50px",
+                backgroundColor:Array(6).fill(1).reduce(function(v,t){return v+(~~(Math.random()*16)).toString(16)},"#"),
+                position:"absolute",
+                borderRadius:"50px",
+                left:e.clientX-25+"px",
+                top:e.clientY-25+"px"
+            },"body")
+        }
+
+
+        function animation(){
+            times--;
+            if(times>0) return;
+            times=~~(Math.random()*20+20);
+            if(arr.length===0) return clearInterval(ids);
+            var o=arr.shift();
+            var evt=new PointerEvent("click",o);
+            document.dispatchEvent(evt);
+        }
+
+
+    </script>
+</body>
+</html>

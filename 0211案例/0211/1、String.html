@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var str="aaa";
+        // var str1=new String("aa");
+
+        // 不能够修改原字符串
+
+        var str="abcde";
+        // console.log(str[0]);//有下标
+        // console.log(str.length);//字符串的长度，只读
+        //倒叙
+        // var s=''
+        // for(var i=str.length-1;i>=0;i--){
+        //     s+=str[i];
+        // }
+        // console.log(s)
+
+
+        // 获取字符串对应下标的字符
+    //    var s=str.charAt(2);
+    //    console.log(s) //c
+    // console.log(str[2]) 
+
+            // 获取字符串对应下标的字符的Unicode编码
+            // console.log(str.charCodeAt(0))
+
+            // 48-57 0-9
+            // 65-90  A-Z
+            // 97-122 a-z
+            // var str="azAZ09";
+            // for(var i=0;i<str.length;i++){
+            //     console.log(str.charCodeAt(i));
+            // }
+
+                // 将Unicode编码转换为字符
+        //    console.log(String.fromCharCode(65))
+
+
+    //     var arr=[];
+    //     for(var i=48;i<123;i++){
+    //         if(i===58)i=65;
+    //         if(i===91)i=97;
+    //         arr.push(String.fromCharCode(i));
+    //     }//输出所有的字母
+    //     arr.sort(function(){
+    //         return Math.random()-0.5;
+    //     });//乱序
+
+    //    arr.length=4;
+    //    var str=arr.join("");
+    //    console.log(str)
+
+            // 连接字符串
+    //     var str="abcd";
+    //   var s=str.concat("cde")
+    //     console.log(s)
+
+        // 如果没有查找到返回-1
+        // var str="abcde";
+        // var index=str.indexOf("c");
+        // var index=str.lastIndexOf("c");
+        // console.log(index);
+
+
+
+        // replace 替换---替换第一个；  后面讲  很强大  
+        // var str="abcdefc";
+        // var s=str.replace("c","z");
+        // console.log(s)
+
+        // match 后面讲  非常强大
+        // console.log(str.match("c"))
+
+
+        // search 后面讲，找c的数量 
+        // console.log(str.search("z"));
+
+        // 截取字符串
+        // var s=str.slice(1,4);
+        // var s=str.slice(1);
+        // var s=str.slice(-1);
+        // var s=str.slice(0,-1);//去除最后一个字符
+        // console.log(s)
+
+        // 从from位置开始截取一个长度的字符串
+        // str.substr(from,length); 
+        // var s=str.substr(2,4);
+        // var s=str.substr(-4,2);
+        // console.log(s)
+
+
+        // 从开始位置截取到end位置,不允许有负数，如果是负数默认为0
+        // 可以从前面截取到后面，也可以从后面向前截取
+        // str.substring(start,end)
+        // var s=str.substring(1);
+        // var s=str.substring(2,4);
+        // var s=str.substring(2,-1);
+        // var s=str.substring(4,2);
+        // console.log(s)
+
+
+        // 转换为小写字母
+        // console.log(str.toLowerCase());
+        // 转换为大写字母
+        // console.log(str.toUpperCase());
+
+
+        // 使用分隔符将字符串分割为数组，返回一个新数组 后面讲
+        // str.split()
+
+        // var str="a-b-c-d-e";
+        // var arr=str.split("-");
+
+        // var str="abcdef";
+        // var arr=str.split("");
+        // console.log(arr)
+        // str=str.split("").reverse().join("");
+        // console.log(str)
+
+
+         var url="http://www.163.com/news/index.html?pid=1011123&s=123&name=xie#a"
+
+        // pid=1011123&s=123&name=xie  querystring
+    //    var o={pid:1011123,s:123,name:"xie"}
+        // '{"a":1,"b":2}'
+
+        // function queryParse(url){
+        //     var index = url.indexOf("?");
+        //     var end = url.indexOf("#");
+        //     var str = url.slice(index+1,end);
+        //     var arr = str.split("&");
+        //     var obj={};
+        //     for(var i=0;i<arr.length;i++){
+        //         var arr1 = arr[i].split("=");
+        //         var key = arr1[0];
+        //         var value = arr1[1]
+        //         obj[key] = isNaN(value) ? value : Number(value);//转换数值
+        //     }
+        //     return obj;
+        // }
+
+        
+    //     function queryParse(url){ 
+        //url.split("?")[1]--->切割取后半部分pid=1011123&s=123&name=xie#a
+        //.split("#")[0]--->取前半部分pid=1011123&s=123&name=xie
+        //.split("&")--->用&进行分割三部分pid=1011123，s=123，name=xie
+    //       return url.split("?")[1].split("#")[0].split("&").reduce(function(v,t){
+    //         var arr=t.split("=");
+    //         v[arr[0]]=isNaN(arr[1]) ? arr[1] : Number(arr[1]);
+    //         return v;
+    //       },{})
+    //     }
+
+    //   var obj=queryParse(url);
+    //   console.log(obj)
+    
+
+    var o={pid:1011123,s:123,name:"xie"}
+
+    // var str="";
+    // for(var key in o){
+    //     str+=key+"="+o[key]+"&";
+    // }
+    // str=str.slice(0,-1);
+    // console.log(str)
+
+        // Object.keys(o)--->获取所有的key    key每一个key
+        var str=Object.keys(o).reduce(function(v,key,i){
+         //i是key的索引
+            return v+(i===0 ? "" : "&")+key+"="+o[key]
+        },"")
+        console.log(str);
+
+
+        // var arr=[1,2,3];
+        // try{
+        //     // 尝试执行
+        //     arr.forEach(function(item,i){
+        //         if(i===1) throw new Error("aaa");
+        //     })
+        // }catch(e){
+        //     // 错误异常时执行
+        //     console.log("aaa")
+        // }finally{
+        //     // 无论任何时候都执行
+        // }
+        
+
+
+        // var x=1;
+        // var z;
+        // // try执行过程中没有错误的地方仍然属于运行过的，一旦遇到错误，就会执行catch 
+        // try{
+        //     x++;
+        //     z=x+y;
+        //     console.log(z,"_____");
+        // }catch(error){
+        //     // console.log(error)
+        //     y=10;
+        //     z=x+y;
+        //     console.log(z)
+        // }finally{
+        //     console.log("aaa")
+        // }
+
+
+        //  var arr=[1,2,3,4,5,6];
+        // try{
+        //     // 尝试执行 循环的桥接模式使用try catch干预跳出循环
+        //     arr.reduce(function(v,t){
+        //         console.log(t)
+        //         if(t>2){
+        //             v=true;
+        //             throw new Error("");
+        //         }
+        //         return v;
+        //     },false)
+        // }catch(e){
+        //     // 错误异常时执行
+        //     console.log("aaa")
+        // }finally{
+        //     // 无论任何时候都执行
+        // }
+    </script>
+</body>
+</html>

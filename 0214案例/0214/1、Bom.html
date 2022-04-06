@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 6000px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div></div> -->
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <script>
+        // BOM  Browser Object Model   浏览器对象模型
+        // DOM  Document Object Model  文档对象模型
+
+        // DOM是属于BOM的一部分
+        // BOM中根节点是window，DOM中根节点是document
+        // window.document
+
+        // window.status  //浏览器的状态的值
+        // window.screen
+        // window.alert(); //alert() 方法用于显示带有一条指定消息和一个 确认 按钮的警告框。
+        // window.prompt();用于显示可提示用户进行输入的对话框。
+        // window.postMessage()//安全地实现跨源通信
+        // window.a=10;
+        // window.abc=function(){
+
+        // }
+
+        // document.body
+        // document.title
+        // document.write();
+        //  document.ab=10;
+        //  document.abc=function(){
+
+        //  }
+
+        // Model 模型    标准
+
+        // BOM
+        // window.document
+        // window.location //对象用于获得当前页面的地址 (URL)，并把浏览器重定向到新的页面
+        // window.screen  //获取屏幕信息
+        // window.history // 对象包含浏览器的历史
+        // window.navigator  //对象包含有关访问者浏览器的信息
+
+
+        // open("http://www.163.com","网易","width=300,height=300")
+        // close();
+
+        // 可视区域宽高 (包括滚动条)，只读，不能修改
+        // console.log(innerWidth,innerHeight);
+        // 浏览器宽高，只读，不能修改
+        // console.log(outerWidth,outerHeight);
+
+
+            // 窗口左上角距离屏幕左上角的坐标，只读，不能修改
+        // console.log(screenLeft,screenTop);
+        // console.log(screenX,screenY);
+
+
+
+        // location.hash    #  hash要写在search的后面
+        // location.search  ?
+        // console.log(location.hash);
+        // console.log(location.search)
+
+            // 域名和端口号
+        // console.log(location.host)
+        // // 域名
+        // console.log(location.hostname)
+        // // 端口号
+        // console.log(location.port);
+        // // 协议+域名+端口号
+        // console.log(location.origin);
+        // // 路径和页面名称
+        // console.log(location.pathname);
+        // // 协议 http https ftp  file
+        // console.log(location.protocol);
+
+        // 跳转当前页面
+        // location.assign("http://www.163.com")
+
+        // location.href="http://www.163.com";
+
+        // location.replace("http://www.163.com");
+
+        // /1%E3%80%81Bom.html   URI编码
+        // decodeURIComponent()
+        // 将全角字符转换为URI编码格式
+    //   var str=encodeURIComponent("欢迎来到千锋好程序");
+    //   console.log(str)
+    //   %E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E5%8D%83%E9%94%8B%E5%A5%BD%E7%A8%8B%E5%BA%8F
+            // 将URI编码格式转换为全角字符  
+//    var str=decodeURIComponent("%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0%E5%8D%83%E9%94%8B%E5%A5%BD%E7%A8%8B%E5%BA%8F");
+//    console.log(str)
+
+            // document.onclick=function(){
+            //     // location.assign("http://www.163.com");//会有历史记录，主要是跳转页面
+            //     // location.href="http://www.163.com";//会有历史记录，可以跳转页面，也可以获取当前页面的地址
+            //     // location.replace("http://www.163.com");//没有历史记录
+            //     // console.log(location.href)
+            // }
+
+
+
+    // screen
+                // 屏幕的宽高
+            // console.log(screen.width,screen.height);
+            // 屏幕减去附件的宽高
+            // console.log(screen.availWidth,screen.availHeight);
+
+
+
+    // navigator
+    // 当前浏览器的版本及系统版本
+        //    console.log(navigator.userAgent)
+        
+//         navigator.geolocation.getCurrentPosition(function(success){
+//             console.log(success.coords)
+// //             GeolocationPosition { 
+// //             coords: GeolocationCoordinates { latitude: 40.1154788096299, longitude: 116.2454500521627, altitude: 46.737335205078125, … }
+// //             timestamp: 1644804568803
+// //             }
+//         },function(error){
+//             console.log(error)
+//         })
+
+
+        // console.log(navigator.onLine);//在线
+
+        // console.log(navigator.appCodeName)
+        // console.log(navigator.appName)
+        // console.log(navigator.appVersion)
+
+        // console.log(navigator.mimeTypes)
+
+        // console.log(navigator.platform)
+
+
+        // history 历史
+        // history.length  当前历史数量
+        // history.state  当前历史状态
+        // history.back();//历史回退
+        // history.forward();//历史前进
+        // history.go();//历史跳转
+        // history.pushState();//添加历史状态数据
+        // history.replaceState();//替换历史状态数据
+
+
+    //    document.onclick=function(){
+    //     // history.pushState({a:1,b:2},"a","#a");//会产生新的历史记录，并且有新的历史数据
+    //     history.replaceState({a:1,b:2},"a","#a");//不会产生新历史记录，但是会替换当前的历史数据
+    //     console.log(history.state)
+    //     console.log(history.length)
+    //    }
+
+
+        // var bns=Array.from(document.getElementsByTagName("button"));
+        // bns.forEach(function(item){
+        //     item.onclick=clickHandler
+        // })
+        // // 当hash发生改变时触发
+        // // window.onhashchange
+        // // 当弹出状态--》历史状态发生改变，修改时不触发，改变历史记录时，触发（必须使用pushState或者replaceState来产生的历史记录）
+        // // window.onpopstate
+
+        // function clickHandler(){
+        //     history.pushState(this.innerHTML,this.innerHTML);
+        //     // console.log(history.length)
+        // }
+
+
+
+
+        // 两种内容会产生历史记录，并且可以在历史记录回退前进时激活
+        // 1、hash
+        // 2、history.state
+        
+     
+    </script>
+</body>
+</html>

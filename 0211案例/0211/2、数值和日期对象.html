@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div0"></div>
+    <script>
+        // Number
+        // Number.isNaN("a") 不能隐式转换，只有NaN返回true
+
+        // Number.NEGATIVE_INFINITY  负无穷
+        // Number.POSITIVE_INFINITY  正无穷
+        // 判断是否有限，不是无穷大的  Number.isFinite
+        // console.log(Number.isFinite(Number.NEGATIVE_INFINITY))
+
+        // 判断是否是整数
+    //    console.log( Number.isInteger(3))
+    // 判断是否是整数，并且长度不超限
+    // console.log(Number.isSafeInteger(Math.pow(2,52)))
+
+    // console.log(NaN,Number.NaN)
+
+
+        // date 是一个日期对象
+        // 格林尼治时间  世界时标准时间 UTC
+        // 格林尼治时间起始时间 1970.1.1 0：0：0
+        // var date=new Date();
+        // console.log(date)
+
+        // console.log(date.getFullYear());
+        // console.log(date.getYear());
+        // console.log(date.getMonth());//0-11
+        // console.log(date.getDate());
+        // console.log(date.getDay());//星期 0-6 0是周日
+        // console.log(date.getHours());//小时
+        // console.log(date.getMinutes());//分钟
+        // console.log(date.getSeconds());//秒
+        // console.log(date.getMilliseconds());//毫秒
+
+
+        // console.log(date.getUTCHours())
+
+        // 时间戳  从1970.1.1到现在的毫秒数  永远不会重复
+        // console.log(date.getTime());
+
+        // GET 如果地址完全相同时，没有设置其他请求头和响应头时，
+        // 会调用缓存数据 可以通过给增加search内容添加时间戳完成地址不同
+
+
+        // 可以获取时间差
+        // var date1=new Date();
+        // var time1=Date.now();//当前时间戳
+        // for(var i=0;i<100000000;i++){
+
+        // }
+        // // var date2=new Date();
+        // var time2=Date.now();
+        // console.log(date2.getTime()-date1.getTime());
+        // console.log(date2-date1)//可以得到毫秒差
+        // console.log(time2-time1)
+
+
+
+
+        // var date=new Date();
+        // date.setMonth(12);//如果超出最大值，将会进位
+        // console.log(date)
+        // // date.setDate(13);
+        // date.setHours(14); //设置时间
+
+        // console.log(date.getTime()-Date.now());
+
+        
+
+        // var div0=document.getElementById("div0");
+        // setInterval(function(){
+        //     div0.innerHTML=new Date();
+        // },500);
+
+
+        // var time=Date.now();
+        // time+=100000;
+
+        // var date=new Date(time);
+        // console.log(date)
+        
+        // 倒计时
+
+        // var targetTime,div;
+        // init();
+        // function init(){
+        //     div=document.getElementById("div0");
+        //     targetTime=new Date();
+        //     targetTime.setHours(16);
+        //     setInterval(animation,500);
+        // }
+
+        // function animation(){
+        //     var time=~~((targetTime-new Date())/1000);
+        //     var hours=~~(time/3600);
+        //     var minutes=~~((time-hours*3600)/60);
+        //     var second=time-hours*3600-minutes*60;
+        //     div.innerHTML=getZero(hours)+":"+getZero(minutes)+":"+getZero(second);
+        // }
+
+        // function getZero(n){
+        //     return n<10 ? "0"+n : n;
+        // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        // function fn1(f){
+        //     f();
+        // }
+        // function fn2(){
+        //     console.log("aa");
+        // }
+
+        // fn1(fn2);
+
+
+
+        // 回调函数中this指向问题
+
+
+        // var obj={
+        //     a:function(f){
+        //         f();
+        //     },
+        //     b:function(){
+        //         console.log(this);
+        //     }
+        // }
+
+        // obj.b();//obj
+
+        // obj.a(obj.b);//回调函数中，被执行时会重新指向window
+
+
+        var obj={
+            a:function(f){
+                arguments[0]()
+            },
+            b:function (){
+                console.log(this);
+            }
+        }
+
+        obj.a(obj.b);//若用arguments执行回调函数时：指向回调当前函数的上下文环境中arguments对象
+        // obj.a(obj.b,1,2,3);
+
+
+
+        // 回调函数，在某一个时间之后，或者某件事情做完以后，或者某个代码执行之后再执行该函数
+        // 回调函数本身是不能传参的
+
+        // setTimeout(fn,16)
+
+        // function fn(){
+
+        // }
+
+        // var obj={
+        //     init:function(){
+        //         console.log(this);//指向obj
+        //         setTimeout(function(){
+        //             console.log(this);//指向window
+        //         })
+        //     }
+        // }
+
+        // obj.init();
+
+            // document.onclick=function(){
+
+            // }
+
+            // document.addEventListener("click",clickhandler);
+
+            // function clickhandler(){
+
+            // }
+
+
+/*
+            function showRed(fn1,fn2){
+                setTimeout(function(){
+                    console.log("red");
+                    fn1(fn2,showRed);
+                },2000);
+            }
+
+            function showYellow(fn1,fn2){
+                setTimeout(function(){
+                    console.log("yellow");
+                    fn1(fn2,showYellow);
+                },1000);
+            }
+
+            function showGreen(fn1,fn2){
+                setTimeout(function(){
+                    console.log("green");
+                    fn1(fn2,showGreen);
+                },2000);
+            }
+
+
+            showRed(showYellow,showGreen) */
+
+
+            // 回调函数如何改变传参--->再添加一个return函数
+
+            // function fn1(f){
+            //     f();
+            // }
+
+
+            // function fn2(a){
+            //     return function(){
+            //         console.log(a);
+            //     }
+            // }
+
+            // fn1(fn2(10));
+
+
+            // 回调函数循环
+            // 堆栈上限溢出  Uncaught RangeError: Maximum call stack size exceeded
+            // 挂起状态
+
+            // var i=0;
+            // function fn1(f){
+            //     f(fn1);
+            //     console.log(1);
+            // }
+
+            // function fn2(f){
+            //     i++;
+            //     if(i>3) return;
+            //     f(fn2);
+            //     console.log(2);
+            // }
+
+            // fn1(fn2);
+    </script>
+</body>
+</html>

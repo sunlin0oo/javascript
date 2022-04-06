@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./querystring.js"></script>
+</head>
+<body>
+    aaa
+    <input type="file" multiple>
+    <div>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+
+    <form action="#">
+       <label>user:</label> <input type="text" name="user">
+       <label>password:</label> <input type="password" name="password">
+        <button>提交</button>
+    </form>
+    <script>
+
+        /* 
+            GET/POST
+        
+        GET在浏览器回退时是无害的，而POST会再次提交请求。
+        GET产生的URL地址可以被Bookmark，而POST不可以。
+        GET请求会被浏览器主动cache，而POST不会，除非手动设置。
+        GET请求只能进行url编码，而POST支持多种编码方式。
+        GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。
+        GET请求在URL中传送的参数是有长度限制的，而POST么有。
+        对参数的数据类型，GET只接受ASCII字符，而POST没有限制。
+        GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。
+        GET参数通过URL传递，POST放在Request body中。
+        GET产生一个TCP数据包；POST产生两个TCP数据包,Firefox就只发送一次。
+         */
+        // var xhr=new XMLHttpRequest();
+        // xhr.open("GET","http://localhost:4020")
+
+
+        // decodeURIComponent();
+        // %E4%BD%A0%E5%A5%BD URI编码
+        // console.log(encodeURIComponent("你好"))//把汉字转换为URI编码格式
+        // console.log(decodeURIComponent("%E4%BD%A0%E5%A5%BD"));//
+
+
+
+        // 加载JSON
+        // var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.open("GET","./config.json");
+        // xhr.send();
+
+        // function loadHandler(e){
+        //     // console.log()
+        //     document.body.style.color=JSON.parse(xhr.response).bgc
+        // }
+
+
+        // 加载xml
+        /* var xhr=new XMLHttpRequest();
+        xhr.addEventListener("load",loadHandler);
+        xhr.open("GET","./new_icon.xml");
+        xhr.send();
+
+        function loadHandler(e){
+        //    var human=xhr.responseXML.querySelector("human");
+        //    console.log(human);
+        var list=xhr.responseXML.querySelectorAll("[n|=f-seat]");
+        list.forEach(item=>{
+            console.log(item.getAttribute("x"),item.getAttribute("y"));
+        })
+        } */
+
+        // query字符串
+        // var str="name=张三&age=30&sex=男|name=张三&age=30&sex=男";
+        // console.log(str.length)
+
+        // var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.open("GET","./a.json");
+        // xhr.send();
+
+        // function loadHandler(e){
+        //     console.log(xhr.response.length);
+        // }
+
+
+
+
+            // 异步
+        // var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.open("GET","http://localhost:4020");
+        // xhr.send();
+
+        // function loadHandler(e){
+        //     console.log(xhr.response);
+        // }
+
+
+
+        // 禁止使用
+        // var xhr=new XMLHttpRequest();
+        // // 第三个参数是否异步，默认true
+        // xhr.open("GET","http://localhost:4020",false);
+        // xhr.send();
+        // console.log(xhr.response);
+        // console.log("b")
+
+
+        // var xhr=new XMLHttpRequest();
+        // // 第四个参数是用户名和密码
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.open("PUT","http://localhost:4020",true,"xietian","xie123");
+        // xhr.send();
+
+        // function loadHandler(e){
+        //     console.log(xhr.response);
+        // }
+
+
+
+        //  var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.open("POST","http://localhost:4020");
+        // xhr.send("xietian");
+
+        // function loadHandler(e){
+        //     console.log(xhr.response);
+        // }
+
+
+        // var arr=[
+        //     {a:1,b:2},
+        //     {a:1,b:2},
+        //     {a:1,b:2}
+        // ]
+        // var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.open("POST","http://localhost:4020");
+        // xhr.send(JSON.stringify(arr));
+
+        // function loadHandler(e){
+        //     console.log(xhr.response);
+        // }
+
+
+        // var o={a:1,b:2,c:3}
+        // console.log(QueryString.stringify(o))
+        // console.log(QueryString.parse("a=1&b=2&c=3"))
+        // var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.open("POST","http://localhost:4020");
+        // xhr.send('a=1&b=2&c=3');
+
+        // function loadHandler(e){
+        //     console.log(xhr.response);
+        // }
+
+
+
+        // var arr=new Uint8Array([97,98,99]);
+        // ArrayBuffer
+       /*  var str="i love javascript";
+        var arr=str.split("").map(item=>item.charCodeAt(0)^123);
+        
+       var xhr=new XMLHttpRequest();
+        xhr.addEventListener("load",loadHandler);
+        xhr.open("POST","http://localhost:4020");
+        xhr.send(new Uint8Array(arr));
+
+        function loadHandler(e){
+            console.log(xhr.response);
+        } */
+
+      /*   var str="你好，欢迎来到千锋";
+        var arr=str.split("").map(item=>item.charCodeAt(0));
+        
+       var xhr=new XMLHttpRequest();
+        xhr.addEventListener("load",loadHandler);
+        xhr.open("POST","http://localhost:4020");
+        xhr.send(new Uint16Array(arr));
+
+        function loadHandler(e){
+            console.log(xhr.response);
+        } */
+
+
+
+        // var input=document.querySelector("input");
+        // input.addEventListener("change",changehandler);
+        // function changehandler(e){
+        //     console.log(input.files)
+        // }
+
+
+
+        // var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.open("POST","http://localhost:4020");
+        // xhr.send(document.querySelector("div"));
+
+        // function loadHandler(e){
+        //     console.log(xhr.response);
+        // }
+
+
+
+        // var form=document.querySelector("form");
+        // form.addEventListener("submit",submitHandler);
+
+        // function submitHandler(e){
+        //     e.preventDefault();
+        //     var fd=new FormData(form);
+        //     var xhr=new XMLHttpRequest();
+        //     xhr.addEventListener("load",loadHandler);
+        //     xhr.open("POST","http://localhost:4020");
+        //     xhr.send(fd);
+        // }
+
+        // function loadHandler(e){
+        //     console.log("aa")
+        // }
+
+
+
+       /*  var xhr=new XMLHttpRequest();
+        xhr.addEventListener("load",loadHandler);
+        xhr.open("POST","http://localhost:4020");
+        // 必须写在open后面，send前面
+        // xhr.setRequestHeader("Content-Type","text/html;charset=utf-8");
+        // 在使用ajax的post向php服务端发送消息时，必须写这个请求头
+        // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
+        xhr.setRequestHeader("X-Name","xietian");
+        xhr.send("abcedef");
+
+        function loadHandler(e){
+            console.log(xhr.response);
+            console.log(xhr.getAllResponseHeaders());
+        }  */
+
+
+
+
+        // var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("load",loadHandler);
+        // xhr.addEventListener("timeout",timeoutHandler);
+        // xhr.open("POST","http://localhost:4020");
+        // xhr.timeout=5;
+        // xhr.send("aaa");
+
+        // function loadHandler(e){
+        //     console.log(xhr.response);
+        // }
+
+        // function timeoutHandler(e){
+        //     xhr.abort();//主动关闭服务连接
+        //     console.log("aaaa")
+        // }
+
+
+
+         var xhr=new XMLHttpRequest();
+        xhr.addEventListener("readystatechange",loadHandler);
+        xhr.open("POST","http://localhost:4020");
+        xhr.send("aa");
+
+        function loadHandler(e){
+            // console.log(xhr.response);
+            // xhr.readyState  当前通信的状态码
+            // console.log(xhr.status,xhr.readyState)
+            // xhr.readyState===1   open调用时，服务器接受到了url地址
+            // if(xhr.readyState===2){
+            //     // 调用了send，并且把请求头和请求数据发送给了服务器
+            //     // 服务器返回了响应头数据
+            //     console.log(xhr.getAllResponseHeaders());
+            //     console.log(xhr.response)
+            // }
+            // if(xhr.readyState===3){
+            //     // 服务器开始向客户端发送数据，接受过程
+            //     console.log(xhr.response)
+            // }
+            // if(xhr.readyState===4){
+            //     // 服务器发送的数据全部接收完成
+            //     console.log(xhr.response)
+            // }
+
+            if(xhr.readyState===4 && xhr.status===200){
+
+            }else if(xhr.readyState===4 && xhr.status!==200){
+                
+            }
+        }
+    </script>
+</body>
+</html>

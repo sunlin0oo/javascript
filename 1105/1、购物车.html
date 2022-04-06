@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/Data.js"></script>
+    <style>
+        .shopping-show{
+            font-size: 12px;
+            text-align: center;
+            width: 1200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="goods-show"></div>
+    <table class="shopping-show">
+        <thead>
+            <tr>
+                <td colspan="2" style="text-align: left;padding-left: 3px;"><input type="checkbox">全选</td>
+                <td style="width: 350px;">商品</td>
+                <td style="width: 180px;"></td>
+                <td style="width: 120px;">单价</td>
+                <td style="width:120px;">数量</td>
+                <td style="width: 140px;">小计</td>
+                <td style="width:120px">操作</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <div class="sums"></div>
+    <script type="module">
+        import Goods from "./js/Goods.js";
+        import StepNumber from "./js/StepNumber.js";
+
+        var shoppingList=[];
+        var tbody,all,sums;
+        init();
+        function init(){
+            var goodsShow=document.querySelector(".goods-show");
+            tbody=document.querySelector(".shopping-show>tbody");
+            goodsShow.addEventListener(Goods.GOODS_SELECTED_EVENT,goodsHandler)
+            goodsList.forEach(item=>{
+                let goods=new Goods(item);
+                goods.appendTo(".goods-show");
+                // goods.addEventListener(Goods.GOODS_SELECTED_EVENT,goodsHandler);
+            })
+            all=document.querySelector(".shopping-show>thead>tr>td>input");
+            sums=document.querySelector(".sums");
+            all.addEventListener("click",selectHandler);
+        }
+
+        function goodsHandler(e){
+            // addShopping(e.ids);
+            var o=shoppingList.find(item=>item.id===e.ids);
+            if(!o){
+                addShopping(e.ids);
+            }else{
+                o.num++;
+                o.total=o.price*o.num;
+            }
+            renderShopping();
+        }
+
+
+        function addShopping(ids){
+            var goods=goodsList.reduce((value,item)=>{
+            var o=item.list.find(t=>t.id===ids);
+            if(o) value={
+                id:ids,
+                selected:false,
+                img:o.img,
+                title:item.info,
+                info:item.arguments.join(","),
+                price:o.price,
+                num:1,
+                total:o.price,
+                deleted:false
+            }
+            return value;
+           },null);
+           shoppingList.push(goods);
+        }
+
+        function renderShopping(){
+            // tbody.innerHTML=shoppingList.reduce((value,item)=>{
+            //     return value+`<tr>${Object.keys(item).reduce((v,t)=>{
+            //         return v+`<td>${item[t]}</td>`
+            //     },'')}</tr>`
+            // },'');
+
+            tbody.innerHTML="";
+            var elem=document.createDocumentFragment();
+            for(var i=0;i<shoppingList.length;i++){
+                var tr=document.createElement("tr");
+                for(var key in shoppingList[i]){
+                    if(key==="id") continue; 
+                    var td=document.createElement("td");
+                    // td.textContent=shoppingList[i][key];
+                    createTdContent(td,key,shoppingList[i]);
+                    tr.appendChild(td);
+                }
+                elem.appendChild(tr);
+            }
+            tbody.appendChild(elem);
+            all.checked=shoppingList.every(item=>item.selected);
+            sums.textContent=shoppingList.reduce((value,item)=>{
+                if(item.selected) value+=item.total;
+                return value;
+            },0);
+        }
+
+
+        function createTdContent(td,key,data){
+            switch(key){
+                case "selected":
+                    var ck=document.createElement("input");
+                    ck.type="checkbox";
+                    ck.ids=data.id;
+                    ck.checked=data[key];
+                    ck.addEventListener("click",selectHandler)
+                    td.appendChild(ck);
+                    break;
+                case "img":
+                    var img=new Image();
+                    img.src=data[key];
+                    Object.assign(img.style,{width:"80px",height:"80px"})
+                    td.appendChild(img);
+                    break;
+                case "price":
+                case "total":
+                    td.textContent="￥"+data[key].toFixed(2);
+                    break;
+                case "num":
+                    var step=new StepNumber(data);
+                    step.appendTo(td);
+                    step.setStep(data[key]);
+                    step.addEventListener(StepNumber.STEP_CHANGE_EVENT,numChangeHandler)
+                    break;
+                case "deleted":
+                    var a=document.createElement("a");
+                    a.href="javascript:void(0)";
+                    a.textContent="删除";
+                    td.appendChild(a);
+                    a.ids=data.id;
+                    a.addEventListener("click",deleteHandler);
+                    break;
+                default:
+                    td.textContent=data[key];
+            }
+        }
+
+        function numChangeHandler(e){
+           var o=shoppingList.find(item=>item.id===e.ids);
+           if(!o)return;
+           o.num=e.step;
+           o.total=o.num*o.price;
+           renderShopping();
+        }
+
+        function deleteHandler(e){
+            shoppingList=shoppingList.filter(item=>item.id!=this.ids);
+            renderShopping();
+        }
+
+        function selectHandler(e){
+            if(this===all){
+                shoppingList.forEach(item=>item.selected=this.checked);
+            }else{
+               shoppingList.forEach(item=>{
+                   if(item.id===this.ids){
+                       item.selected=this.checked;
+                   }
+               })
+            }
+            renderShopping();
+        }
+    </script>
+</body>
+</html>

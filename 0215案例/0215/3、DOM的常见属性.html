@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 50px;
+            padding: 10px;
+            border: 2px solid #000;
+            overflow: auto;
+        }
+        .div2{
+            width: 1000px;
+            height: 1000px;
+        }
+        .div3{
+            width: 3000px;
+            height: 3000px;
+        }
+        .div4{
+            width: 300px;
+            height: 300px;
+            border: 2px solid #000;
+            position: relative;
+            left: 200px;
+            top: 200px;
+        }
+        .div5{
+            width: 50px;
+            height: 50px;
+            border: 2px solid #000;
+            background-color: red;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="div1">
+        <div class="div2"></div>
+    </div> -->
+    <div class="div3"></div>  
+     <div class="div4">
+        <div class="div5">
+            1<br>
+            1<br>
+            2<br>
+            3<br>
+            4<br>
+            5<br>
+            6<br>
+            7<br>
+        </div>
+    </div>
+    <script>
+        // 没有放在body中的元素无法获取一下的所有内容,图片在没有加载完之前也是不能获取其宽高
+        // 获取宽高
+        // clientWidth clientHeight  只读   客户宽高
+        // offsetWidth offsetHeight  只读   偏移宽高
+        // scrollWidth scrollHeight  只读    滚动条宽高
+
+        // 获取位置
+
+        // clientLeft clientTop  只读  客户坐标
+        // offsetLeft offsetTop  只读  偏移坐标
+        // scrollLeft scrollTop  可读可写  滚动条坐标
+
+
+        // var img=document.createElement("img");
+        // var img=new Image();//仅有img可以这样创建
+        // img.src="./img/a.jpg"
+
+        // document.documentElement//html
+
+        // 获取宽高  
+        // 元素宽高
+        // var div1=document.querySelector(".div1");
+        // console.log(div1.clientWidth,div1.clientHeight);//width+padding-滚动条宽高--103,103
+
+        // console.log(div1.offsetWidth,div1.offsetHeight);//width+padding+border  实际占位的大小--124,124
+        // // 获取指定标签内容层的真实宽度（可视区域宽度+被隐藏区域宽度）
+        // console.log(div1.scrollWidth,div1.scrollHeight);//实际内容的宽度+padding(LeftPadding) 内容宽度--1010,1020
+
+        // // html宽高和body宽高
+        // //窗口宽-滚动条宽（可视区域宽度），高度是可视区域高度---1535 754 
+        // console.log(document.documentElement.clientWidth,document.documentElement.clientHeight)
+        // //窗口宽度-滚动条-body的margin*2，高度是实际内容的高度---1519 124
+        // console.log(document.body.clientWidth,document.body.clientHeight)
+
+        // //窗口宽-滚动条宽  高度是实际内容高度---1535 224
+        // console.log(document.documentElement.offsetWidth,document.documentElement.offsetHeight)
+        // //html的offset宽高-body的margin*2---1519 124
+        // console.log(document.body.offsetWidth,document.body.offsetHeight);
+        // //内容宽高----1535 754
+        // console.log(document.documentElement.scrollWidth,document.documentElement.scrollHeight);
+        // //HTML的scroll宽高-boyd的margin*2----1519 174
+        // console.log(document.body.scrollWidth,document.body.scrollHeight);
+
+
+        // // 元素的位置
+        // var div5=document.querySelector(".div5");
+        // console.log(div5.clientLeft,div5.clientTop);//边线宽度
+
+        // console.log(div5.offsetLeft,div5.offsetTop);//相对父元素的定位
+
+        // // 获取元素范围矩形 其中包括距离视口的距离，已经元素的宽高，还有left，top，bottom，right
+        // var rect=div5.getBoundingClientRect();
+        // console.log(rect)
+
+        // // 当滚动条拉动时，就是当前滚动条的位置
+        // console.log(div5.scrollLeft,div5.scrollTop);
+
+        // div5.onscroll=function(){
+        //     console.log(div5.scrollLeft,div5.scrollTop);
+        // }
+
+        // div5.scrollTop=100; //可以修改的
+
+
+        // html和body中的数据
+        // html\body的clientLeft,clientTop,offsetLeft,offsetTop
+
+            // window的滚动条使用这个值
+        // console.log(document.documentElement.scrollLeft,document.documentElement.scrollTop)
+        // console.log(document.body.scrollLeft,document.body.scrollTop);//早期的谷歌浏览器使用这个
+
+        // 直接设置是不可以的，因为页面需要完成第一次渲染才可以确定html容器宽高，在没有完成第一次渲染之前设置该值是无用
+        // document.documentElement.scrollTop=400;
+
+        // document.onclick=function(){
+        //     document.documentElement.scrollTop=1400;
+        // }
+    </script>
+</body>
+</html>

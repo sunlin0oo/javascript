@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // fn();
+        // 命名函数
+        // function fn(){
+
+        // }
+
+
+        // 匿名函数
+        // var fn=function(){
+
+        // }
+
+
+        // 构造函数定义
+        // var fn=new Function();
+
+
+        // 预解析  命名函数的预解析，不但将函数名做了预解析，还将函数体直接赋值给了函数名
+        // function fn(){
+        //     console.log("a");
+        // }
+
+
+
+        /*  var a=3;
+         function a(){
+             console.log("aa");
+         }
+
+         a(); */
+
+        /*
+        a();
+        var a=3;
+        function a(){
+            console.log("aaa");
+        } */
+
+        // 定义变量，首先考虑在当前定义变量之前，a是否已经定义，如果没有定义过，则开辟一个栈
+        // 中空间，给这个变量赋值undefined，如果已经定义过，则不改变原值
+        // var a;
+        // 不管a是否定义过，在这里都重新赋值为undefined
+        // var a=undefined;
+
+        // console.log(a);
+        // function a(){
+        //     console.log("aaa");
+        // }
+
+        // a();
+
+
+
+
+        // var fn=function(){
+        //     console.log("aa");
+        // }
+
+
+        // var obj={
+        //     a:1,
+        //     b:function(){
+
+        //     }
+        // }
+
+        // 自执行函数
+        // console.log("a");
+        // (function(){
+        //     console.log("aa");
+        // })();
+
+        // ~function(){
+        //     console.log("aa");
+        // }();
+
+        // +function(){
+        //     console.log("aa");
+        // }();
+
+        // document.onclick=function(){
+
+        // }
+
+
+
+        // init();
+
+
+
+        /*
+
+         function a(){
+
+         }
+
+         function b(){
+
+         }
+         function c(){
+
+         }
+
+         function init(){
+             console.log(1);
+             a();
+             console.log(2);
+             b();
+             console.log(3);
+             c();
+             console.log(4);
+         } */
+
+
+
+
+      /*   function a() {
+            // 很多代码
+            b();
+        }
+
+        function b() {
+            // 很多代码
+            c();
+            // 很多代码
+        }
+
+        function c() {
+            // 很多代码
+        }
+
+        function init() {
+            console.log(1);
+            a();
+            console.log(2);
+        } */
+
+
+
+
+        // function init(){
+        //     a(b);
+        // }
+
+
+        // function a(f){
+        //     f();
+        //     c();
+        // }
+        // function b(){
+
+        // }
+        // function c(){
+
+        // }
+
+
+        // function fn(a,b){
+        //     var s=a+b;
+        //     console.log(s);
+        // }
+
+        // Function前面的参数就是函数的参数，最后一个参数是一个字符串，这个字符串就是函数体内容
+        // 函数中所有参数全部都是字符串，创建后将会把这里的所有字符串映射到代码中
+        // var fn=new Function("a","b","var s=a+b;console.log(s);");
+        // fn();
+
+
+
+        // this
+
+        // console.log(this);//window  确定
+
+        // fn();//window 可能
+        // function fn(){
+        //     console.log(this);
+        // }
+
+
+        var b=10;
+        var obj={
+            b:2,
+            a:this.b,//当前对象外上下文环境中的this
+            c:function(){
+                console.log(this.a);
+                // 在对象的方法中this指当前的对象，也指谁调用当前这个方法，this就是谁
+            }
+        }
+
+        var o=obj;
+        obj={z:10};
+
+        o.c();
+        console.log(o);
+
+
+
+
+        // var a=10;
+        // var o={
+        //     a:100,
+        //     b:function(){
+        //            上下文环境，this，谁调用o调用，o环境下的a
+        //         console.log(this);
+        //         var obj1={
+        //             a:1,
+        //             b:this.a
+        //         }
+        //         console.log(obj1.b);
+        //     }
+        // }
+
+        // o.b();
+    </script>
+
+</body>
+
+</html>

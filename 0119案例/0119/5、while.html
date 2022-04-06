@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 1200px;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid #000;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+     <ul id="ul1"></ul>
+    <table id="table1"></table>
+    <script>
+        // 同步
+        // console.log("a");
+
+        // var i=0,s=0;
+        // while(i<=100){
+        //     s+=i;
+        //     i++;
+        // }
+        // console.log(s);
+        // console.log("b");
+
+
+        // 异步
+        // console.log("a");
+        // setInterval(function(){
+        //     console.log("b");
+
+        // },0);
+        // console.log("c");
+
+
+
+        // var i=0,s=0;
+        // while(i++<100) s+=i;
+
+
+        // var i=0,s=0;
+        // while(s+=i++,i<=100);
+
+        // console.log(s);
+
+
+
+        // var ul1=document.getElementById("ul1");
+        // var str="",i=0;
+        // while(i<10){
+        //     str+="<li>"+i+"</li>";
+        //     i++;
+        // }
+        // ul1.innerHTML=str;
+
+
+        // var table1=document.getElementById("table1");
+        // var str="",i=0;
+        // while(i<10){
+        //     str+="<tr>";
+        //         var j=0;
+        //         while(j<10){
+        //             str+="<td>"+(i*10+j)+"</td>";
+        //             j++;
+        //         }
+        //     str+="</tr>"
+        //     i++;
+        // }
+        // table1.innerHTML=str;
+
+
+        // 求质数
+        // var i=2;
+        // while(i<100){
+        //     var j=2;
+        //     var bool=true;
+        //     while(j<i){
+        //         if(i%j===0){
+        //             bool=false;
+        //         }
+        //         j++;
+        //     }
+        //     if(bool){
+        //         console.log(i+"是质数");
+        //     }
+        //     i++;
+        // }
+
+        // 求斐波那契数列 1+1+2+3+5+8+13+...
+
+        // var a=1,b=1,sum=a+b,str=a+"+"+b;
+        // while(a+b<=100){
+        //     var s=a+b;
+        //     a=b;
+        //     b=s;
+        //     str+="+"+b;
+        //     sum+=b;
+        // }
+
+        // console.log(str,sum);
+
+
+        // var s;
+        // var a=1,b=1,sum=a+b,str=a+"+"+b;
+        // while((s=a+b)<=100){
+        //     a=b;
+        //     b=s;
+        //     str+="+"+b;
+        //     sum+=b;
+        // }
+
+        // console.log(str,sum);
+
+
+        // 链表
+        // var link = {
+        //     value: 1,
+        //     next: {
+        //         value: 2,
+        //         next: {
+        //             value: 3,
+        //             next: {
+        //                 value: 4,
+        //                 next: {
+        //                     value: 5,
+        //                     next: null
+        //                 }
+        //             }
+        //         }
+        //     }
+        // };
+
+        // // 深度遍历
+        // while(link){
+        //     console.log(link.value);
+        //     link=link.next;
+        // }
+
+
+        // var link1={value:6,next:null};
+        // var link2={value:5,next:link1};
+        // var link3={value:4,next:link2};
+        // var link4={value:3,next:link3};
+        // var link5={value:2,next:link4};
+        // var link={value:1,next:link5};
+
+
+        // break 跳出
+        // continue 继续
+
+        // var i=0;
+        // while(i<100){
+        //     if(i===50) break;
+        //     console.log(i);
+        //     i++;
+        // }
+
+        // var i=0;
+        // while(true){
+        //     i++;
+        //     if(i>20) break;//动态条件和筛选
+        //     console.log(i);
+        // }
+
+
+        // continue跳出后重新判定循环条件
+        // var i=0;
+        // while(i++<100){
+        //     if(i===50) continue;
+        //     console.log(i);
+        // }
+
+
+        // var i=0;
+        // 循环label名
+    //   xietian: while(i<100){
+    //         var j=0;
+    //         while(j<100){
+    //             if(j===50) break xietian;
+    //             j++;
+    //         }
+    //         i++;
+    //     }
+    //     console.log(i,j);
+
+    // var i=0;
+    //   xietian: while(i++<10){
+    //         var j=0;
+    //         while(j<10){
+    //             if(j===5) continue xietian;
+    //             j++;
+    //             console.log(i,j);
+    //         }
+
+    //     }
+
+
+
+     var i=1;
+     xietian: while(i++<100){
+            var j=2;
+            while(j<i){
+                if(i%j===0) continue xietian;
+                j++;
+            }
+            console.log(i+"是质数");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table
+        {
+            border-collapse: collapse;
+            width: 1200px;
+        }
+        td{
+            border:1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <script>
+
+        // 纯函数  与函数体外没有任何交集，不会因为执行函数修改函数体外的其他内容
+        // 纯函数具备有抽象性，不是为了解决某一具体事务而产生，根据需要完成特定需求并且返回结果
+    // var s=createTable(5,6);
+    // s+=createTable(10,10);
+    // s+=createTable(3,3);
+    // document.body.innerHTML+=s;
+
+        // row col叫做参数 形参，5，6传递进来赋值按顺序赋值给了row和col，5，6在这里叫做实参
+        // 参数的作用范围仅在函数内部，函数外参数无效
+        // 当没有任何实参赋值给对应的形参时，这个形参的默认值是undefined
+        // 如果参数给入时的作用域与函数内部既定的内容作用域不符时，就会产生错误
+
+       /*  function createTable(row,col){
+            if(isNaN(row)) row=10;
+            if(isNaN(col)) col=10;
+            var str="<table>";
+            for(var i=0;i<row;i++){
+                str+="<tr>";
+                for(var j=0;j<col;j++){
+                    str+="<td>1</td>";
+                }
+                str+="</tr>";
+            }
+            str+="</table>";
+            return str;
+        } */
+
+
+        // // 工厂模式
+        // function createTable(row,col){
+        //     // throw 抛出异常 终止执行后续代码
+        //     //  new TypeError()   创建一个类型错误的实例抛出异常
+        //     //  new RangeError()   创建一个范围错误的实例抛出异常
+        //     if(isNaN(row)) throw new TypeError("请给第一个参数输入正确的数值");
+        //     if(isNaN(col)) throw new TypeError("请给第二个参数输入正确的数值");
+        //     if(row<1) throw new RangeError("请给第一个参数输入大于1的数值");
+        //     if(col<1) throw new RangeError("请给第二个参数输入大于1的数值");
+        //     var str="<table>";
+        //     for(var i=0;i<row;i++){
+        //         str+="<tr>";
+        //         for(var j=0;j<col;j++){
+        //             str+="<td>1</td>";
+        //         }
+        //         str+="</tr>";
+        //     }
+        //     str+="</table>";
+        //     return str;
+        // }
+        //
+        // // 函数名.length  形参数量
+        // console.log(createTable.length);
+
+
+
+        // 抽象函数的作用
+
+    //     function fn1(a,b){
+    //         return a+b;
+    //     }
+
+    //     function fn2(a,b){
+    //         return a-b;
+    //     }
+
+    //     function fn3(a,b){
+    //         return a*b;
+    //     }
+
+    //     function fn4(a,b){
+    //         return a/b;
+    //     }
+
+    //     // 3+4+5*2+8/2-6+7;
+
+    //     var s=fn1(3,4);
+    //    var s1=fn3(5,2)
+    //    var s2=fn3(6,7);
+    //    s=fn1(s,s1);
+    // //    s=fn1(s,s2);
+    //    s=fn1(s,fn4(8,2));
+    //    s=fn2(s,6);
+    //    s=fn1(s,7);
+
+
+
+    // 如果出现不定量参数
+        // function fn(a,b){
+
+        // }
+
+        // fn(1,2,3);
+
+
+        //     iterator 迭代器 在属性中有iterator表示该对象是迭代器对象
+        // ES5  不给形参
+        // function fn(){
+        //     console.log(arguments);//只能出现在函数内，不是数组，是一种迭代器对象，是一个列表
+        //     // 可以通过下标获取到对应的值,下标从0开始，使用arguments[下标] 可以获取到对应的值
+        //     console.log(arguments[2]);
+        //     console.log(arguments.length);  //实参的数量
+        //     // 函数.length  形参的数量。指函数定义时，形参定义了几个
+        //     // arguments.length  实参的数量，指函数执行时，传入了多少个参数
+        //     console.log(arguments.callee);//当前函数
+        //     console.log(arguments.callee.caller);//执行当前函数所在的上下文环境中的函数
+        //
+        // }
+
+        // fn(1,2,3);
+        // fn(2,3,4,5,6,7,8);
+
+
+
+
+
+        // function sum(){
+        //     var s=0;
+        //     for(var i=0;i<arguments.length;i++){
+        //         if(typeof arguments[i]!=="number") throw new TypeError("第"+i+"个参数类型错误")
+        //         s+= arguments[i];
+        //     }
+        //     return s;
+        // }
+
+        // var s=sum(1,4,2,4,"6",8);
+        // console.log(s);
+
+
+// arguments.callee   arguments.callee.caller
+        // function fn1(){
+        //     console.log(arguments.callee);//fn1
+        //     console.log(arguments.callee.caller);//fn2
+        //     console.log(fn1.caller);//fn2
+        // }
+
+        // function fn2(){
+        //     fn1();
+        // }
+
+        // fn2();
+
+        // console.log(fn1.caller);//null
+
+
+
+
+// arguments.callee.caller的作用
+        // var i=0;
+        // function fn1(){
+        //     i++;
+        //     if(i>2) return;
+        //     console.log("a");
+        //     fn2();
+        // }
+
+
+        // function fn2(){
+        //     console.log("b");
+        //     arguments.callee.caller(); //谁调用当前函数，继续重新执行谁
+        // }
+
+        // function fn3(){
+        //     i++;
+        //     if(i>2) return;
+        //     console.log("c");
+        //     fn2();
+        // }
+
+        // fn1();
+        // fn3();
+
+
+        // arguments.callee  的作用
+            // 在使用匿名函数时，arguments.callee可以获取到当前函数
+        // var i=0;
+        // (function(){
+        //     i++;
+        //     if(i>2) return;
+        //     console.log("aaa");
+        //     arguments.callee();
+        // })();
+
+
+
+        // 在ES6 不定量参数  使用...arg  这个arg就是数组，数组放入了所有传入的实参
+        // function fn(...arg){
+        //     console.log(arg);
+        // }
+        //
+        // function fn(a,b,...arg){
+        //     console.log(a,b,arg);
+        // }
+        // fn(1,2,3);
+
+
+
+        // ES5中大量使用arguments,ES6使用...arg ,最好不要再使用arguments
+
+
+
+        // 必填参数和可选参数
+        // ES5 对于这个概念使用并不好，无法进行参数处理。只能在函数内部处理
+
+        // ES5
+        // function fn(a,b,c){
+        //     if(a===undefined) throw new TypeError("请输入a参数");//必填参数
+        //     if(b===undefined) throw new TypeError("请输入b参数");
+        //     if(c===undefined) c=10;//可选参数默认值
+        // }
+
+
+        // ES6  c=10在参数中做默认值
+        function fn(a,b,c=10){
+            if(a===undefined) throw new TypeError("请输入a参数");//必填参数
+            if(b===undefined) throw new TypeError("请输入b参数");
+            return a+b+c;
+        }
+        fn();
+
+        // 有默认值可选参数不要写在前面，尽量把必填参数写在前面
+        // 必填参数 ---》有默认值的可选参数---》无默认值的可选参数
+        // function fn(a=10,b,c){
+
+        // }
+        // 对象解构赋值中解决参数可以混写情况，不按照严格的顺序填入
+
+    </script>
+</body>
+</html>

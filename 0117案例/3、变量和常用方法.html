@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    //  console.log(a)
+    //  a=1;
+    //  console.log(a)
+        // console.log(window.a);
+
+    //  var 可以做预解析,在执行script开始，会将所有的script标签中的var定义的变量预解析
+    // 在script标签的任意位置都可以获取到这个变量，但是在没有赋值前这个变量仍然是undefined
+    // 使用var 也会把变量放在window对象的属性下
+
+    // 如果没有var定义变量，这个变量会被存储在window对象的属性上，并且不会做预解析，也就是
+    // 在没有赋值前调用该变量时，会报错
+
+    // 变量的作用是用来存储数据的，变量在栈中开辟一个空间，将变量名作为这个空间的名称，将值
+    // 存储在这个空间中，当获取变量，就是获取这个空间中存储的值，这个空间中的值是可以做修改
+    // 改变的，不能删除变量的值
+
+    /*
+         变量的命名 var
+         只能使用字符数字下划线$起名，并且起头不使用数字
+         变量使用驼峰式命名 getSum
+         变量在使用时如果使用下划线作为起头，一般认为这个变量是一个临时变量，参数，局部变量  _sum
+         变量虽然可以使用中文，但是习惯上禁止使用中文
+         变量不能使用关键词和保留字
+         变量尽量不要使用window的属性
+
+    */
+    // var a=3;
+
+    // var status=10;
+    // console.log(status+1);
+
+
+    /*
+        常量
+        const
+        在栈中开辟一个空间，将常量名作为这个空间的名称，将值
+        存储在这个空间中，并且将空间锁定，不能修改这个值了
+        所有的字符需要大写，单词之间使用下划线连接
+
+        EVENT_ID
+        一般存储一些不想让值改变的内容，并且大多数应该是代码的配置内容
+
+
+    */
+
+        // 弹出OK对话框，代码在这个位置暂停，直到点击确定后才会继续运行
+    // alert("你好")
+        // 弹出确定取消选择框，当点击确定返回true，点击取消返回false
+    //    var b=confirm("请问是否继续？")
+    //    console.log(b)
+        // 弹出输入框，允许用户输入内容，默认可以设置一个值，当点击确定时，返回输入值(字符串)
+        // 点击取消返回null
+    //   var a=prompt("请输入你的年龄","20");
+        // console.log(a)
+
+
+
+        // document.body  body标签
+        // document.title  title标签
+        // document.head  head标签
+        // document.documentElement  html标签
+        // document.getElementById("")  根据id获取DOM元素
+        // document.getElementsByClassName() 根据class名称获取元素列表
+        // document.getElementsByTagName()  根据标签名获取元素列表
+
+        // document.write("aaa");
+        // 点击事件，当点击执行下面的函数内容
+        // document.onclick=function(){
+
+        // }
+
+
+        // document.write("<div></div>");
+        // document.write("<ul>")
+        // document.write("<li>1</li>")
+        // document.write("<li>2</li>")
+        // document.write("<li>3</li>")
+        // document.write("</ul>")
+
+        // document.write在第一次回流之前是可以多次处理，
+        // 当第一次回流后再执行这个方法就会把body所有内容清空加入
+        // document.onclick=function(){
+        //     document.write("aaa")
+        // }
+
+            // 在某个元素的里面添加html内容
+        // document.body.innerHTML="<div>1</div>"
+
+
+        // 在1000毫秒后执行这个回调函数里面的内容
+        // setTimeout(function(){
+
+        // },1000);
+
+        // 没间隔1000毫秒执行一次这个函数，会一直执行下去
+        // setInterval(function(){
+
+        // },1000);
+    </script>
+</body>
+</html>

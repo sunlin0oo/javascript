@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 桶排序----不能重复，重复的话就会被覆盖；
+        // var arr=[1,5,2,7,4,11,16,25,36,79];
+        // var obj={};
+        // for(var i=0;i<arr.length;i++){
+        //     obj[arr[i]]=arr[i];
+        // }
+
+        // var arr1=Object.values(obj);
+        // console.log(arr1);
+
+
+        // 冒泡排序
+        var arr = [1, 2, 4, 1, 5, 7, 3, 6, 1, 11, 43, 23, 5, 6, 23, 23, 12, 5, 6, 16, 14, 17];
+        // var s=0;
+        // for(var i=0;i<arr.length-1;i++){
+        //     if(arr[i]===arr[i+1]) continue;
+        //     for(var j=0;j<arr.length-i;j++){
+        //         if(arr[j]>arr[j+1]){
+        //             var temp=arr[j];
+        //             arr[j]=arr[j+1];
+        //             arr[j+1]=temp;
+        //         }
+        //         s++;
+        //     }
+        // }
+        // console.log(arr,s);
+
+        // 选择排序
+        // var minIndex;
+        // for(var i=0;i<arr.length-1;i++){
+        //     minIndex=i;
+        //     for(var j=i+1;j<arr.length;j++){
+        //         if(arr[j]<arr[minIndex]){
+        //             minIndex=j;
+        //         }
+        //     }
+        //     if(minIndex!==i){
+        //         var temp=arr[i];
+        //         arr[i]=arr[minIndex];
+        //         arr[minIndex]=temp;
+        //     }
+        // }
+        // console.log(arr)
+
+        function quickSort(arr){
+            if(arr.length<=1) return arr;
+            var middleIndex = ~~(arr.length/2);
+            var middleValue = arr[middleIndex];
+            var left = [];
+            var right = [];
+            for(var i=0;i<arr.length;i++){
+                if(i === middleIndex) continue;
+                if(arr[i] < middleValue){
+                    left.push(arr[i]);
+                }else{
+                    right.push(arr[i]);
+                }
+            }
+            return quickSort(left).concat(middleValue,quickSort(right));
+        }
+
+
+        //     function quickSort(arr){
+        //         if(arr.length<=1) return arr;
+        //         var middleIndex=~~(arr.length/2);
+        //         var middleValue=arr[middleIndex];
+        //         var left=[];
+        //         var right=[];
+        //         for(var i=0;i<arr.length;i++){
+        //             if(i===middleIndex) continue;
+        //             if(arr[i]<middleValue){
+        //                 left.push(arr[i]);
+        //             }else{
+        //                 right.push(arr[i]);
+        //             }
+        //         } 
+        //         return quickSort(left).concat(middleValue,quickSort(right));
+        //     }
+
+
+        //   var arr1=quickSort(arr);
+        //   console.log(arr1,num)
+
+
+        // var i=0;
+        // function fn(){
+        //     i++;
+        //    if(i<10909) fn();
+        // }
+        // fn();
+
+
+
+        // function arraySort(array, fn) {
+        //     if (!array || array.constructor !== Array) throw new TypeError("当前的array不是一个数组!");
+        //     for (var i = 0; i < array.length - 1; i++) {
+        //         if (array[i] === array[i + 1]) continue;
+        //         for (var j = 0; j < array.length - i; j++) {
+        //             if (fn(array[j],array[j+1]) > 0) {
+        //                 var temp = array[j];
+        //                 array[j] = array[j + 1];
+        //                 array[j + 1] = temp;
+        //             }
+        //         }
+        //     }
+        //     return arr;
+        // }
+
+
+        // arraySort(arr, function (a, b) {
+        //     return a-b;
+        // })
+        // console.log(arr)
+
+
+        // var arr=[
+        //     {id:1001,name:"电风扇",price:230,num:1},
+        //     {id:1002,name:"空调",price:6400,num:1},
+        //     {id:1003,name:"电视机",price:3200,num:1},
+        //     {id:1004,name:"冰箱",price:4500,num:1},
+        //     {id:1005,name:"洗衣机",price:2200,num:1},
+        // ]
+
+        // arr.sort(function(a,b){
+        //     return a.price-b.price;
+        // })
+        // console.log(arr)
+
+
+        // var arr=["你","好","欢","迎","来","到","北","京"];
+        var arr=["a","ab","anc","abc","acc","ad","bd"];
+        // var str="abc";
+            
+        arr.sort(function(a,b){
+            var value;
+            for(var i=0;i<a.length;i++){
+                value=a.charCodeAt(i)-b.charCodeAt(i);
+                if(value!==0)  return value;
+            }
+            return value;
+        })
+        // console.log(arr)
+
+        //fill 填充1  ； map 遍历所有数组，并返回数组数据 
+        var arr=Array(100).fill(1).map(function(t,i){
+            return i+1;
+        }).sort(function(){
+            return Math.random()-0.5;
+        });
+        console.log(arr)
+    //    Math.random()   0-1
+        // 轮盘赌算法
+
+    </script>
+</body>
+
+</html>

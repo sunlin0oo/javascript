@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr=[1,4,2,4,1,2,3,5,1,2,3,5,6,3,1,3,4,2,4,5,1];
+        var arr1=[1,5,2,9,8];
+
+        // 原数组
+        // for(var i=0;i<arr.length;i++){
+        //     for(var j=i+1;j<arr.length;){
+        //         if(arr[j]===arr[i]) arr.splice(j,1);
+        //         else j++;
+        //     }
+        // }
+        // console.log(arr)
+
+      /*   var arr1=[];
+        for(var i=0;i<arr.length;i++){
+            var bool=true;
+            for(var j=0;j<arr1.length;j++){
+                if(arr1[j]===arr[i]){
+                    bool=false;
+                    break;
+                }
+            }
+           if(bool) arr1.push(arr[i]);
+        } */
+
+
+    //     var arr1=[];
+    //    xt:for(var i=0;i<arr.length;i++){      //xt 是label名，continue 返回到xt层
+    //         for(var j=0;j<arr1.length;j++){
+    //             if(arr1[j]===arr[i]) continue xt;
+    //         }
+    //        arr1.push(arr[i]);
+    //     }
+    //     console.log(arr1)
+
+
+        // var arr1=[];
+        // for(var i=0;i<arr.length;i++){
+        //     // if(!~arr1.indexOf(arr[i])) arr1.push(arr[i]);
+        //     if(arr1.indexOf(arr[i])<0) arr1.push(arr[i]);
+        // }
+        // console.log(arr1)
+
+        //reduce去重
+        // var arr1=arr.reduce(function(v,t){
+        //     if(v.indexOf(t)<0) v.push(t);
+        //     return v;
+        // },[])
+        // console.log(arr1)
+
+        // 不是按照开始顺序的
+        //filter去重
+        // var arr1=arr.filter(function(t,i,arr){
+        //   return  arr.slice(i+1).indexOf(t)<0
+        // })
+        // console.log(arr1)
+
+
+       //将相同的数组放在数组中
+        // var arr2=arr.reduce(function(v,t){
+        //     if(v.indexOf(t)>-1) return v;
+        //     if(arr1.indexOf(t)>-1) v.push(t);
+        //     return v;
+        // },[]);
+        // console.log(arr2)
+
+        var arr=[1,4,2,4,1,2,3,5,1,2,3,5,6,3,1,3,4,2,4,5,1];
+        var arr1=[1,5,2,9,8];
+
+        //取出arr中与arr1不一样值，但是arr1中不同值未取出
+        //将两个数组不同值放到数组中（待解）v-->值空数组  t--->遍历arr数组  
+         var arr2=arr.reduce(function(v,t){
+            if(v.indexOf(t)>-1) return v; //判断当前数组对象中是否有，有则返回，进行下一个，无则继续。
+            if(arr1.indexOf(t) < 0 ) v.push(t);//判断arr1中是否有当前数组对象，无则添加，有则返回。
+            return v;
+        },[]);
+        console.log(arr2)
+
+        var arr3=arr1.reduce(function(v,t){
+            if(v.indexOf(t)>-1) return v; //判断当前数组对象中是否有，有则返回，进行下一个，无则继续。
+            if(arr.indexOf(t) < 0 ) v.push(t);//判断arr1中是否有当前数组对象，无则添加，有则返回。
+            return v;
+        },[]);
+        console.log(arr3)
+
+        arr3= arr3.concat(arr2);
+        console.log(arr3)
+
+    //   var arr=[[1,2,3],[4,5,6]];
+    //   arr[1][1]
+
+
+    // var arr=[];
+    // for(var i=0;i<10;i++){
+    //     arr[i]=[];
+    //     for(var j=0;j<10;j++){
+    //         arr[i][j]=i*10+j;
+    //     }
+    // }
+    // console.log(arr[3][4])
+
+    
+    </script>
+</body>
+</html>

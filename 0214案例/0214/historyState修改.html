@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .menuul>li{
+            padding: 10px 30px;
+            background-color: skyblue;
+            float: left;
+            border: 1px solid #000;
+            border-left: none;
+        }
+       
+        .menuul>li:first-child{
+            border-left: 1px solid #000;
+        }
+       
+        .clear::after
+        {
+            content: "";
+            display: block;
+            visibility: hidden;
+            height: 0;
+            overflow: hidden;
+            clear: both;
+        }
+        div{
+            width: 500px;
+            height: 300px;
+            border: 1px solid #000;
+            margin-top: 50px;
+            float: left;
+        }
+      
+    </style>
+</head>
+<body>
+    <ul class="clear menuul">
+        <li id="vegetable" class="menu">蔬菜</li>
+        <li id="fruits" class="menu">水果</li>
+        <li id="meat" class="menu">禽肉</li>
+        <li id="grainOil" class="menu">粮油</li>
+    </ul>
+    <div></div>
+ 
+    <script>
+        var list={
+            vegetable:["青菜","白菜","西红柿","黄瓜","玉米","土豆","藕"],
+            fruits:["西瓜","榴莲","猕猴桃","哈密瓜","香蕉","苹果","梨","草莓"],
+            meat:["鸡","鸭","鱼","牛肉","羊肉","猪肉","驴肉","狗肉"],
+            grainOil:["大米","小米","糯米","黑米","薏米","橄榄油","色拉油","豆油","花生油"]
+        }
+
+        var lis,div,menuPrev;
+
+        init();
+        function init(){
+            // 侦听popstate事件，事件触发时执行popStateHandler函数，当点击历史回退和前进时会触发
+            window.onpopstate=popStateHandler;
+            lis=Array.from(document.getElementsByClassName("menu"));
+            div=document.getElementsByTagName("div")[0];
+            // 给每个li按钮增加点击事件，当点击时执行clickHandler；
+            lis.forEach(function(item) {
+                item.onclick=clickHandler
+            })
+            // history.state 如果历史记录中已经存有state，刷新页面时，这个值不为空
+            // 当以前有了历史记录，现在刷新，当不为空时，执行popStateHandler函数
+            // 如果以前没有历史记录，现在刷新，当前是state是null，这是选择第0项li的数据替换当前的历史记录，然后
+            // 再执行popStateHandler函数
+            if(!history.state){
+                history.replaceState(lis[0].id,lis[0].id);
+            }
+            popStateHandler();
+        }
+
+        function prevChange(li){
+            // 切换当前点击的li的色彩，重设menuPrev
+            menuPrev=switchPrev(menuPrev,li,"skyblue","steelblue")
+            // 根据当前点击元素的id，更新对于的div显示的数据内容
+            div.innerHTML=list[li.id].reduce(function(v,t){
+                return v+t+"<br>";
+            },"");
+        }
+
+        // prev 上一次选中的li
+        // li当前选中的li，
+        // defaultColor 默认没有选中的色彩
+        // currentColor 选中时的色彩
+        function switchPrev(prev,li,defaultColor,currentColor){
+            // 如果上次选中的li有，不是undefined，设置的它的颜色恢复没有选中的默认颜色
+            if(prev){
+                prev.style.backgroundColor=defaultColor;
+            }
+            // 将当前li设置给prev这个变量
+            prev=li;
+            // 并且设置它的颜色为选中的颜色
+            prev.style.backgroundColor=currentColor;
+            // 返回这个prev
+            return prev;
+        }
+
+       
+        function clickHandler(e){
+             // 当点击某个li时，调用prevChange函数切换当前的li并且更新div里面的数据
+            prevChange(this);
+            // 向历史记录中添加当前点击的li的数据
+            history.pushState(this.id,this.id);
+        }
+
+        // 当历史记录的切换时，点击前进后退时
+        function popStateHandler(){
+            // history.state当时存储的就是li的id
+            // 根据历史中数据获取对应的li
+            var li=document.getElementById(history.state);
+            // 切换li选中的显示和数据的更新
+            prevChange(li);
+        }
+
+      
+    </script>
+</body>
+</html> 

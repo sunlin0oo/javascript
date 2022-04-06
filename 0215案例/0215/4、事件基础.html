@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <div></div> -->
+    <!-- <button>按钮</button> -->
+    <script>
+        // 系统事件  自定义事件
+        // 事件驱动性语言
+
+        // 所有的HTML标签来源于HTMLElement
+        // 事件的侦听   事件的抛发
+
+        // 只有一种类型也可以接收事件  EventTarget  事件目标
+        // var div = document.querySelector("div")
+        // console.dir(div)
+        // console.log(div.constructor===HTMLDivElement)
+        // div ---> HTMLDivElement-->HTMLElement-->Element-->Node-->EventTarget-->Object
+        //document-->HTMLDocument-->Doucment-->Node-->EventTarget-->Object
+        //window--->Window-->WindowProperties-->EventTarget-->Object
+
+        
+        // 事件侦听
+        // div.addEventListener(事件类型,事件回调函数,是否捕获阶段触发|事件设置对象);
+        // div.addEventListener(type,listener,boolean|options)
+
+        // 事件删除
+        // div.removeEventListener(事件类型,要删除的事件回调函数)
+
+        // 抛发事件  派发事件
+        // div.dispatchEvent(事件对象);
+
+        // 创建一个新事件  事件类型，事件初始化设置对象
+        // var evt=new Event(type, eventInitDict)
+
+        // 谁侦听，就需要朝谁抛发,先侦听后抛发,给侦听对象添加一个耳朵
+        // div.addEventListener("chilemanin",handler);
+        // 侦听时间的对象必须要和抛发事件对象一致
+
+        // 侦听chilemain,绑定一个事件evt,设置一个函数handler，抛发后触发函数
+
+        // var evt=new Event("chilemanin");
+        // evt.a=10;
+        // div.dispatchEvent(evt);
+        // div.dispatchEvent(evt);
+
+        // 事件回调函数中有且仅有一个参数，并且这个参数就是事件抛发的事件对象
+        // function handler(e){
+        //     // console.log(e===evt);
+        //     console.log(e.a);
+        //     div.removeEventListener("chilemanin",handler);
+        // }
+
+        // 事件侦听会在堆中添加一个引用，如果使用完成后的事件以后再也不需要使用了，就需要删除这个事件，否则会造成内存泄漏
+
+        /*Event  是所有事件类型的基础，所有事件的基类
+          MouseEvent 鼠标事件类型，基于Event创建出来
+        */
+
+        // document.addEventListener("click",clickHandler);
+        // // var evt = new MouseEvent("click",{clientX:10,clientY:20});
+        // // // evt.clientX = 10;
+        // // // evt.clientY = 20;
+        // // document.dispatchEvent(evt);
+
+        // function clickHandler(e){
+        //     // console.log(e.clientX,e.clientY);  //鼠标点击相对于视口位置
+        //     // console.log(e.x,e.y);
+        //     ce("div",{
+        //         width:"50px",
+        //         height:"50px",
+        //         backgroundColor:"red",
+        //         position:"absolute",
+        //         left:e.clientX+"px",
+        //         top:e.clientY+"px"
+        //     },"body");
+        // }
+
+        // function ce(type,style,parent){
+        //     var elem=document.createElement(type);
+            
+        //     if(style) Object.assign(elem.style,style);
+        //     if(typeof parent==="string") parent=document.querySelector(parent);
+        //     if(parent) parent.appendChild(elem);
+        //     return elem;
+        // }
+
+        // var list = Array(30).fill(1).map(function(){
+        //     return {x:~~(Math.random()*document.documentElement.clientWidth),y:~~(Math.random()*document.documentElement.clientHeight)}
+        // });
+
+        // setInterval(function(){
+        //     if(list.length === 0) return;
+        //     var item = list.pop();
+        //     var evt = new MouseEvent("click",{clientX:item.x,clientY:item.y});
+        //     document.dispatchEvent(evt);
+        // },1000)
+
+        // var bn=document.querySelector("button");
+        // bn.addEventListener("click",clickhandler);
+
+
+
+        // var  evt=new PointerEvent("click",{clientX:400,clientY:400});
+        // bn.dispatchEvent(evt);
+
+        // function clickhandler(e){
+        //     console.log(e)
+        // }
+
+
+        // 事件的目的是为了解耦
+
+        // var o1={
+        //     value:1,
+        //     a:function(v){
+        //         console.log(v);
+        //         o2.b(this.value);
+        //     },
+        //     b:function(){
+
+        //     }
+        // }
+
+        // var o2={
+        //     value:2,
+        //     a:function(){
+        //         o1.a(this.value);
+        //     },
+        //     b:function(v){
+        //         console.log(v);
+        //     }
+        // }
+
+
+        // o2.a();
+
+        /*没有在obj1中调用obj2，也没有在obj2中调用obj1，这样不管删除哪一个都不会影响另一个
+        对象的错误触发
+        利用document作为中介，为两个对象中的数据进行传递
+        利用事件的抛发侦听机制（先侦听再抛发）*/
+
+        var obj1={
+            a:function(){
+                var abc=10;
+                var evt = new Event("elema");
+                evt.abc = abc;
+                document.dispatchEvent(evt);
+            }
+        }
+
+        var obj2 = {
+            a:function(){
+                document.addEventListener("elema",this.b);
+            },
+            b:function(e){
+                console.log(e.abc);
+            }
+        }
+        obj2.a();
+        obj1.a();
+
+        // var o1 = {
+        //     value: 1,
+        //     a: function () {
+        //         document.addEventListener("o1", this.b);
+        //     },
+        //     b: function (e) {
+        //         console.log(e.v);
+        //         var evt = new Event("o2");
+        //         evt.v = o1.value;
+        //         document.dispatchEvent(evt);
+        //     }
+        // }
+
+        // var o2 = {
+        //     value: 2,
+        //     a: function () {
+        //         document.addEventListener("o2", this.b);
+        //         var evt = new Event("o1");
+        //         evt.v = this.value;
+        //         document.dispatchEvent(evt);
+        //     },
+        //     b: function (e) {
+        //         console.log(e.v);
+        //     }
+        // }
+
+        // o1.a();
+        // o2.a();
+    </script>
+</body>
+
+</html>

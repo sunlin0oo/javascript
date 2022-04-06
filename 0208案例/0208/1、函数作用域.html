@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div>div{
+            width: 100px;
+            height: 30px;
+            background-color: rgb(238, 197, 122);
+            float: left;
+            border: 1px solid #000;
+            border-left: none;
+            text-align: center;
+            line-height: 30px;
+        }
+        div>div:first-child{
+            border-left: 1px solid #000;
+        }
+        /*清除浮动*/
+        .clear::after{
+            content:"";
+            display: block;
+            height: 0;
+            visibility: hidden;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+   <div class="clear">
+    <div class="div1 divs">1</div>
+    <div class="div1 divs">2</div>
+    <div class="div1 divs">3</div>
+   </div>
+   <p></p>
+   <div class="clear">
+    <div class="div2 divs">4</div>
+    <div class="div2 divs">5</div>
+    <div class="div2 divs">6</div>
+   </div>
+    <script>
+
+        // 全局变量定义时都会设定到window对象的属性上
+        // var a=2;
+        // function fn(){
+        //     var a=1;
+        //     console.log(a+window.a);
+        //     console.log(a+this.a);//ES5
+        // }
+        // fn();
+
+
+
+    /*
+        var a;
+        a();
+        a=2;
+        function a(){
+            var a=3;
+            console.log(a);
+        } */
+
+        // 形参也是局部变量
+        // var a=3;
+        // function fn(a){
+        //     a++;
+        //     console.log(a);
+        // }
+
+        // fn(1);
+
+
+        // var a=3;
+        // function fn(a){
+        //     if(!a)a=10;
+        //     else a=6;
+        //     console.log(a);
+        // }
+
+        // fn();
+
+
+
+
+
+        // var divs=document.getElementsByTagName("div");
+        //  for(var i=0;i<divs.length;i++){
+        //      divs[i].onclick=function(){
+        //          for(var j=0;j<divs.length;j++){
+        //              if(divs[j]===this) divs[j].style.backgroundColor="#FF9900";
+        //              else divs[j].style.backgroundColor="rgb(238, 197, 122)"
+        //          }
+        //      }
+        //  }
+
+        // var divs ,prev
+        //
+        // init();
+        // function init(){
+        //      divs = document.getElementsByTagName("div");
+        //     for (var i =0;i<divs.length;i++){
+        //             divs[i].onclick = clickHandler;
+        //     }
+        // }
+        //
+        // function clickHandler(){
+        //     changePrev(this);
+        // }
+        //
+        // function changePrev(target){
+        //     if(prev){
+        //         prev.style.background = "rgb(238, 197, 122)";
+        //     }
+        //     prev = target;
+        //     prev.style.background = "#ff9900";
+        // }
+
+
+
+/*
+        var o={a:1,b:2};
+        function fn(){
+            o.a=10;
+        }
+
+        fn();
+        console.log(o); */
+
+
+        // var o={a:1,b:2};
+        // function fn(o){  //修改o.a---o与全局变量o引用地址相同，把全局变量地址给了局部变量o, 所以可以修改到o
+        //     o.a=10;
+        // }
+
+        // fn(o);
+        // console.log(o);
+
+
+        // 局部变量重新赋值意味着与全局变量没有引用关系了
+
+        // var o={a:1,b:2};
+        // function fn(o){
+        //    o={a:10}   //局部变量中o赋值了新的引用变量，故原来的没有修改
+        // }
+
+        // fn(o);
+        // console.log(o);
+
+        //函数中处理全局变量
+
+        // var divs,topPrev,bottomPrev;
+        // init();
+        // function init(){
+        //     divs = document.getElementsByClassName("divs");
+        //     for(var i=0;i<divs.length ; i++){
+        //         divs[i].onclick = clickHandler;
+        //     };
+        // };
+        //
+        // function clickHandler(){
+        //     if (this.className == "div1 divs"){
+        //         topPrev = changePrev(this,topPrev);--->改变topPrev的值
+        //     }else{
+        //         bottomPrev = changePrev(this,bottomPrev);
+        //     }
+        // }
+        // //这里的prev局部变量不具备积累性。
+        // function changePrev(target,prev){
+        //     if(prev){
+        //         prev.style.background = "rgb(238, 197, 122)";
+        //     }
+        //     prev= target;
+        //     prev.style.background = "#FF9900";
+        //     return prev; //通过这里修改全局变量
+        // }
+
+
+        // 尽可能的定义局部变量，尽可能的减少全局变量的定义
+        // var a = {n: 1}
+        // var b = a
+        // a.x = a = {n: 2}
+        // ||           ||
+        // ||           ||
+        // a          b
+        // {n:1}     {n:1}
+
+
+        // a.x={n:2}  b.x={n:2}
+        // a   {n:2}
+
+        // a            b
+        // {n:2}      {n:1,x:{n:2}}
+
+
+
+        // for(var i=0;i<10;i++){
+        //     setTimeout(function(){
+        //         console.log(i);
+        //     })
+        // }
+
+
+        // for(var i=0;i<10;i++){
+        //     (function(i){
+        //         setTimeout(function(){
+        //             console.log(i);
+        //         })
+        //     })(i);
+        // }
+
+
+        // for(var i=0;i<10;i++){
+        //     setTimeout(function(i){
+        //         console.log(i);
+        //     },0,i)
+        // }
+
+    </script>
+</body>
+</html>

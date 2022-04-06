@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 全局变量
+        // 局部变量
+        // 私有变量（以后讲）
+        // var a=1;
+        // console.log(a);
+        // var a=3;
+    </script>
+    <script>
+        // var a=2;
+        // function fn(){
+        //     console.log(a);
+        //     var a =3;
+        // }
+        // fn();
+
+        // 定义在函数外的变量叫做全局变量
+        // var a=1;
+
+        // function fn(){
+        //     // 在函数内使用var定义的变量叫做局部变量，参数也是局部变量
+        //     var b=2;
+        // }
+
+        // 全局变量，在任何位置都可以调用，
+        // 局部变量只能在函数中调用，并且函数运行完成后，局部变量会自动被销毁（非私有变量时）
+
+
+      /*   var a=1;
+        a++;
+
+        fn();
+        fn();
+        console.log(a);
+
+        function fn(){
+            a++;
+        } */
+
+
+/*
+        function fn(){
+            var a=1;
+            a++;
+            console.log(a);
+        }
+
+        fn();
+        fn(); */
+
+        // 全局变量根据程序的执行会累积计算的结果，
+        // 但是局部变量因为每次函数执行完成都会被销毁，所以时独立的值，不会累积
+
+
+// 全局变量会污染，局部变量因为独立所有不会被污染
+        // var a=1;
+
+        // var a=3;
+
+
+        // (function(){
+        //     var b=2;
+        // })();
+
+        // (function(){
+        //     var b=3;
+        // })();
+
+
+        //
+        // var s=1;
+        // function fn1(){
+        //     var s=2;
+        //     fn2();
+        // }
+
+        // function fn2(){
+        //     console.log(s);
+        // }
+
+        // fn1();
+
+
+        // 在函数中只有使用var定义的变量都叫做局部变量，那么调用该变量永远也不可能调用全局变量
+        // var a=1;
+        // function fn(){
+        //     var a=3;
+        //     console.log(a);
+        // }
+        // fn();
+        // console.log(a);
+
+
+        // var a=1;
+        // function fn(){
+        //     // 当执行函数时，首先先把当前函数中所有var定义的局部变量做预解析
+        //     // 变量作用域提升
+        //     console.log(a);
+        //     var a=3;
+        // }
+        // fn();
+        // console.log(a);
+
+
+// 只有在函数中使用var定义的变量都是局部变量，意味着在函数刚开始，
+// 已经做了预解析，这个局部变量在刚开始的时候值是undefined
+        // var a=1;
+        // function fn(){
+        //     if(a===undefined){
+        //         a=3;
+        //     }else{
+        //         var a="abc";
+        //     }
+        //     console.log(a);
+        // }
+        // fn();
+
+
+
+        // function fn(){
+        //     console.log(a);
+        //     function a(){
+
+        //     }
+        //     var a=2;
+        // }
+
+        // fn();
+    </script>
+</body>
+</html>

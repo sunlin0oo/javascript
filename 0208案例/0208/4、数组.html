@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 数组就是一些元素的无序列表，并且这些元素可以重复
+        // 存储的位置叫做下标，数组与下标 arr[0] 下标变量
+        // 存储的值叫做元素，元
+        // 紧密结构 如果删除了其中一个元素，或者在数组中插入了一个元素，都会将其后的所有元素位置挪动
+        // 紧密结构，可以通过这个找到下一个，找到相邻的元素
+        // 紧密结构，可以造成数据整理，比如排序
+        // 紧密结构 查找需要逐个遍历查找，插入和删除会造成元素的挪动，效率低下
+        // var arr=[3,1,2];
+
+        // var a=1;
+        // var b=2;
+        // var c=3;
+
+
+        // var arr=[1,2,3];
+
+        // var arr1=new Array(1,2,3);
+
+        // var arr2=Array(1,2,3);
+
+        // var arr3=new Object([1,2,3]);
+
+
+// 如果数组的key是非数值类型，隐式转换为数值后会是数值，这时候，
+// 这个元素就会按照数组的这个数值下标来存储
+//         var arr=[1,2,3];
+//         arr["1"]=10;
+//         arr[1]=20;
+//         arr["a"]=100;
+//         console.log(arr);
+
+
+        // var arr=[1,2,3];
+        // var arr=[1,2,,3];
+        // var arr1=[1,2,undefined,3]
+
+
+        // 实例化Array时，仅放入一个数值，这个数值不能是非正整数，如果是非正整数，就会报错
+        // 这个数值就是数组的长度，并且在数组开辟这个长度的空间，里面都是空元素
+        // 如果给入不是数值，这个元素将会被设置为数组的第0位元素
+        // var arr=new Array("3")
+        // console.log(arr);
+
+        // 与实例化对象相同
+        // var arr=Array(5)
+        // console.log(arr);
+
+
+        // var arr=new Array(2,3,4,5,6)
+        // console.log(arr);
+
+
+        // var arr=[1,2,3];
+        // arr.length; //长度  可读可写  仅指数组元素的数量
+        // console.log(arr.length);
+        // arr["a"]=10;
+        // console.log(arr);
+
+        // delete arr[1];//使用delete删除数组元素时，不会引起length改变，也不会引起后续元素紧密挪位
+        // arr.shift();
+        // console.log(arr);
+
+
+        // 最大下标就是数组长度-1
+        // var arr=[1,2,3,4];
+        // arr[arr.length-1]=10;
+        // arr[arr.length]=100;
+
+        // 数组元素的添加和删除，都会引起数组长度的改变，这里添加一次，arr,length就会+1,这里会添加100次；
+        // 所以一定要注意，当使用arr.length作为循环条件时，搞明白是否添加或者删除元素
+        var arr=[];
+        for(var i=0;i<100;i++){
+            arr[arr.length]=i;
+        }
+
+        // console.log(arr);
+
+
+        // var arr=[1,2,3,4,5];
+        // arr.length=100;
+        // arr.length=2;
+        // arr.length=1;
+        // arr.length=0;//清空数组
+        // console.log(arr);
+
+
+        // var arr=[1,2,3,4];
+        // arr=[];//不允许
+        // arr.length=0;
+
+        // arr.length--;//删除数组的最尾部元素
+        console.log(arr);
+    </script>
+</body>
+</html>

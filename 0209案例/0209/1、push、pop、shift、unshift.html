@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         var arr=[1,2,3,4];
+
+        // push 向数组尾部添加一个或多个新元素，并且返回数组的新长度,在原数组中操作
+        // arr.push()
+        // var len=arr.push(5,6);
+        // console.log(arr,len);
+
+        // while(arr.push(1)<10);
+        // console.log(arr);
+
+        // unshift 向数组头部添加一个或多个新元素，并且返回数组的新长度，在原数组中操作
+    //    var len=arr.unshift(5,6);
+    //     console.log(arr,len);
+
+
+        // pop删除数组最尾部的元素，并且将删除的元素返回，只能删除一个，在原数组中操作
+    //    var item=arr.pop()
+    //    console.log(arr,item);
+
+    // shift删除数组最头部的元素，并且将删除的元素返回，只能删除一个，在原数组中操作
+        // var item=arr.shift()
+        // console.log(arr,item);
+
+
+        // 判断是不是数组
+        // console.log( Object.prototype.toString.call(arr)==="[object Array]");
+        // console.log(array && array.constructor===Array);
+
+
+        // push
+       //
+       //  function arrayPush(array){
+       //    if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+       //     for(var i=1;i<arguments.length;i++){
+       //          array[array.length]=arguments[i];
+       //     }
+       //     return array.length;
+       //  }
+       //
+       //
+       // var arr=[1,2,3];
+       //
+       // var len=arrayPush(arr,4,5,6);
+       // console.log(arr,len);
+
+
+         // pop  --------- > 疑问：为什么改变的数组能够保存到函数外
+      /*   function arrayPop(array){
+            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+            if(array.length===0) return;
+            var item=array[array.length-1];
+            array.length--;
+            return item;
+        }
+         var arr1=[1,2,3,4];
+        var arr=[];
+        var item=arrayPop(arr);
+        console.log(item,arr); */
+
+
+        /* function arrayUnshift(array){
+            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+            for(var i=arguments.length-1+array.length-1;i>=0;i--){
+               if(i-(arguments.length-1)>=0) array[i]=array[i-(arguments.length-1)];
+               else arr[i]=arguments[i+1];
+            }
+            return array.length;
+        }
+
+        var arr=[1,2,3];
+       var len=arrayUnshift(arr,3,4,5,6,7,8);
+        console.log(arr,len); */
+
+
+        /*
+        shift
+        function arrayShift(array){
+            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+            if(array.length===0) return;
+            var item=array[0];
+            for(var i=0;i<array.length-1;i++){
+                array[i]=array[i+1];
+            }
+            array.length--;
+            return item;
+        }
+
+
+        var arr=[1,2,3,4,5];
+        var item=arrayShift(arr);
+        console.log(item,arr); */
+    </script>
+</body>
+</html>

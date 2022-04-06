@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div name="ab"></div>
+    <div name="ab"></div>
+    <div id="div1">
+        <span class="span1"></span>
+        <span></span>
+        <span class="span1"></span>
+        <span class="span1"></span>
+    </div>
+    <div></div>
+    <span class="span1"></span>
+    <span class="span1"></span>
+    <script>
+        // 每个标签叫做节点,节点包括 文本，注释，标签，document
+        // console.log(document.body.childNodes)
+
+        // nodeName  节点名称  标签的节点名就是标签名（大写）
+        // nodeType  节点类型
+        // nodeValue  节点值
+
+
+        // document.getElementById()//根据id获取元素
+
+        // HTMLCollection
+    // document.getElementsByTagName();//根据标签名获取列表
+    // var divs=document.getElementsByTagName("div")
+    // console.log(divs.item(1),divs[0])
+    // console.log(divs.namedItem("ab"));//根据name在列表找到对应的元素
+    // console.log(divs)
+
+    // var div1=document.getElementById("div1");
+    // 可以利用父元素查找所有后代元素中tagName的元素列表
+        // var spans=div1.getElementsByTagName("span");
+        // console.log(spans)
+
+
+        // document.getElementsByClassName() 通过class查找所有元素
+        // var spans=document.getElementsByClassName("span1")
+        // console.log(spans)
+
+        // var div1=document.getElementById("div1");
+        // var spans=div1.getElementsByClassName("span1");
+        // console.log(spans)
+
+        // NodeList  有forEach方法
+        // document.getElementsByName() 根据name获取元素的列表,一般用于获取表单
+        //    var divs= document.getElementsByName("ab")
+        //    console.log(divs)
+        // divs.forEach(function(item){
+        //     console.log(item)
+        // })
+
+            // 根据选择器获取元素列表 NodeList
+        //   var span1=document.querySelectorAll("#div1>.span1")
+        //     console.log(span1)
+
+            // 只能获取唯一一个元素，如果是一个列表的话，就会获取这列表的第0项元素
+        // var span1=document.querySelector("#div1>.span1");
+        // console.log(span1)
+
+
+
+        // 节点包括 元素，文本，注释，document
+        // 元素就是标签
+        // var div1=document.querySelector("#div1");
+        // console.log(div1.childNodes);//所有子节点
+        // console.log(div1.children);//所有子元素
+
+        // console.log(div1.firstChild) //第一个子节点
+        // console.log(div1.firstElementChild)//第一个子元素
+
+        // console.log(div1.lastChild);//最后一个子节点
+        // console.log(div1.lastElementChild)//最后一个子元素
+
+        // console.log(div1.previousSibling);//上一个兄弟节点
+        // console.log(div1.previousElementSibling)//上一个兄弟元素
+
+        // console.log(div1.nextSibling);//下一个兄弟节点
+        // console.log(div1.nextElementSibling);//下一个兄弟元素
+
+
+        // console.log(div1.parentNode);//父节点
+        // console.log(div1.parentElement)//父元素
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  var arr=[
+        //     {id:1001,name:"电风扇",price:230,num:1},
+        //     {id:1002,name:"空调",price:6400,num:1},
+        //     {id:1003,name:"电视机",price:3200,num:2},
+        //     {id:1004,name:"冰箱",price:4500,num:1},
+        //     {id:1005,name:"洗衣机",price:2200,num:1},
+        // ]
+        //当前对象的引用地址赋值给了item
+        // var item=arr.find(function(t){
+        //     return t.id===1003;
+        // });
+        // item.total=item.price*item.num;
+        // console.log(arr)
+
+
+
+        // indexOf 查找元素的索引    findIndex() 查找对象的索引
+
+
+
+        var arr=[2,1,3,5,4,6];
+    //    var sum=arr.reduce(function(value,item){ 
+    //         return value+item;
+    //     })
+    //     console.log(sum)
+
+        // map  
+      /*   var arr1=arr.reduce(function(v,t,i){   //初始值可以是数组，对象，值。i是下标,t是元素,v是空数组。
+             v[i]=t+10;
+             return v;
+        },[]); */
+
+        // some
+        // var bool=arr.reduce(function(v,t){
+        //     if(t>3) v=true;
+        //     return v;
+        // },false)
+
+        // every
+        // var bool=arr.reduce(function(v,t){
+        //     if(t<=3) v=false;
+        //     return v;
+        // },true)
+
+
+        // filter
+        // var arr1=arr.reduce(function(v,t){
+        //      if(t>3) v.push(t);
+        //      return v;
+        // },[]);
+
+        // find
+        // var item=arr.reduce(function(v,t){
+        //     if(!v && t===3) v=t;
+        //     return v;
+        // },null);
+
+        // findLast
+        // var item=arr.reduce(function(v,t){
+        //     if(t===3) v=t;
+        //     return v;
+        // },null);
+
+        // findIndex
+        // var item=arr.reduce(function(v,t,i){
+        //     if(v===null && t===3) v=i;
+        //     return v;
+        // },null);
+
+        // findLastIndex
+        // var item=arr.reduce(function(v,t,i){
+        //     if(t===3) v=i;
+        //     return v;
+        // },null);
+
+
+        // flatMap
+        // var arr=[[1,2],[3,4],5,6];
+        // var arr1=arr.reduce(function(v,t){
+        //    v=v.concat(t);
+        //    return v;
+        // },[]);
+
+
+
+        // sort 选择排序
+        // var arr1=arr.reduce(function(v,t,i,arr){
+        //     var minIndex=i;
+        //     for(var j=i+1;j<arr.length;j++){
+        //        if(arr[j]<t) minIndex=j;
+        //     }
+        //     v.push(arr[minIndex]);
+        //     arr[minIndex]=t;
+        //     return v;
+        // },[]);
+
+        // console.log(arr1)
+
+     /*    var str="asdasjhdqwuhdasjdbaskjcbasjhbdasudauwasd";
+     var obj=str.split("").reduce(function(v,t){  //split--切割成数组；
+        if(!v[t])v[t]=0;
+        v[t]++;
+        return v;
+     },{});
+
+     console.log(obj) */
+
+
+
+     
+    </script>
+</body>
+</html>

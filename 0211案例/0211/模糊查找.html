@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="text" id="input">
+    </form>
+    <ul id="ul"></ul>
+    <script>
+        var arr=[
+            {id:10001,name:"计算器",price:3000},
+            {id:10002,name:"计算机",price:3000},
+            {id:10003,name:"机器人",price:3000},
+            {id:10004,name:"电视机",price:3000},
+            {id:10005,name:"电冰箱",price:3000},
+            {id:10006,name:"冰柜",price:3000},
+            {id:10007,name:"电脑柜",price:3000},
+            {id:10008,name:"电脑椅",price:3000},
+            {id:10009,name:"躺椅",price:3000},
+            {id:10010,name:"无人机",price:3000},
+            {id:10011,name:"洗衣机",price:3000},
+        ]
+        init();
+        function init(){
+            input = document.getElementById("input");
+            ul = document.getElementById("ul");
+            input.oninput = inputHandler;
+        }
+
+        function inputHandler(){
+            //  var arr1 = arr.filter(function(item){
+            //      return item.name.indexOf(input.value)>-1
+            //  });
+            //  ul.innerHTML = arr1.reduce(function(v,t){
+            //      return v+"<li>"+JSON.stringify(t)+"</li>";
+            //  },"")
+            
+                //字符串+数组方法
+             ul.innerHTML = arr.filter(function(item){
+                 return item.name.indexOf(input.value)>-1
+             }).reduce(function(v,t){
+                 return v+"<li>"+JSON.stringify(t)+"</li>";
+             },"") 
+
+        }
+    </script>
+</body>
+</html>

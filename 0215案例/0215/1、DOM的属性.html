@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [tag-data|=a]{
+            color: red;
+        }
+        ul{
+            max-height: 24px;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+        [open]{
+            max-height: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" title="ab" name="cds" class="div divs" tag-data="a-b">1</div>
+    <div id="div1" tag-data="a">2</div>
+    <div id="div1" tag-data="ab">3</div>
+    <input type="checkbox" name="user" checked>
+    <ul open>+
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        // document.body
+        // document.title
+        // document.head
+        // document.URL
+        // document.domain
+
+        // var str="";
+        // setInterval(function(){
+        //     if(str.length===0) str="欢迎来到千锋好程序员!";
+        //    document.title=str=str.slice(1);
+        // },500);
+
+        // 标签属性和对象属性   部分互通
+        // 标签属性的命名使用-连接单词，值也是使用-连接单词，因为标签中不区分大小写,值必须是字符串不能存储其他类型数据
+        // 对象属性，就是把DOM当成一个对象，可以添加对应的属性和方法
+        var div=document.querySelector("div");
+        // div.abc=1;
+        // div["a-b"]=2;
+        // console.log(div)
+        // // 标签的系统属性一般都是互通
+        // console.log(div.id);
+        // console.log(div.title)
+        // console.log(div.name)
+
+        // var input=document.querySelector("input");
+        // console.log(input.type)
+        // console.log(input.name)
+        // input.value="abcde"
+
+        // class标签属性在DOM对象属性中对应的是 className
+        // console.log(div.className)
+        
+        // 所有的单属性，标签的属性名和属性值相同的属性，在DOM中使用时值都是布尔值
+        // 单属性实际上不互通,单属性是标签属性会影响对象属性，但是对象属性不会影响标签属性
+        // input.checked=true
+        // input.checked=false;
+        // console.log(input.checked)
+
+        // 标签属性修改
+        // 设置属性
+        div.setAttribute("abc","123");
+        div.setAttribute("abc","");
+        // 删除属性
+        // div.removeAttribute("abc")
+        // 获取属性
+        // div.getAttribute("abc")
+        // 获取元素的所有标签属性名
+         let all = div.getAttributeNames();
+         console.log(all);
+
+
+        // var bool=false;
+        // var ul=document.querySelector("ul");
+        // ul.onclick=clickHandler;
+
+
+        // function clickHandler(){
+        //     // bool=!bool;
+        //    ul.getAttribute("open")!==null ? ul.removeAttribute("open") : ul.setAttribute("open","");
+        //    console.log(ul.getAttribute("open"));
+        // }
+    </script>
+</body>
+</html>

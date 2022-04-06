@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./a.css"> -->
+    <style title="ab">
+        /* div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        } */
+    </style>
+    <style>
+        /* .div1{
+            color: red;
+        } */
+    </style>
+</head>
+<body>
+    <!-- <div style="width: 50px;height: 50px;background-color: blue;"></div> -->
+    <!-- <div id="div1" data-a="abc"></div>
+    <div id="div3">11</div> -->
+    <div class="div4">22</div>
+    <script>
+        // 行内样式和CSS样式
+        // 行内样式是针对某一个DOM设置的，它只能影响这一个DOM元素，权重很高
+        // CSS样式是针对多个元素设置，它能影响的很多DOM元素
+
+
+        var div=document.querySelector("div");
+        // console.log(div.style.width);//指的仅仅是行内样式
+
+        // 获取元素计算后的样式，也就是CSS样式和行内样式合并后计算的结果 仅兼容谷歌和火狐和IE8以上浏览器
+    //    var style=getComputedStyle(div)
+    //    console.log(style.width)
+        
+        // IE8及以下
+        // console.log(div.currentStyle.width);
+
+        // 直接给style设置字符串的样式值时，样式必须遵从css设置方式，使用-连接
+        // div.style="width:50px;height:50px;background-color:green;"
+
+        // 设置style的对象属性值，这时候样式名称因为是对象属性，必须去掉-，-后的第一个字母大写
+        // div.style.width="50px";
+        // div.style.height="50px";
+        // div.style.backgroundColor="red";
+
+
+        // console.log(div.style);//CSSStyleDeclaration对象
+
+        // var div1=document.createElement(div.nodeName)
+        // console.log()
+        // div.getAttributeNames().forEach(function(key){
+        //     div1.setAttribute(key,div.getAttribute(key));
+        // })
+        // document.body.appendChild(div1);
+
+        // var div1=document.createElement("div");
+            // console.log(div.style);//CSSStyleDeclaration
+            // console.log(getComputedStyle(div))//CSSStyleDeclaration
+
+            // 复制CSSStyleDeclaration 可以复制行内样式，也可以复制css样式
+            // 复制行内样式
+            // for(var i=0;i<div.style.length;i++){
+            //     var key=div.style[i];
+            //     div1.style[key]=div.style[key];
+            // }
+            // 将css样式复制到当前div的行内样式
+            // for(var i=0;i<getComputedStyle(div).length;i++){
+            //     var key=getComputedStyle(div)[i];
+            //     div1.style[key]=getComputedStyle(div)[key];
+            // }
+            // console.log(div1)
+
+                // 行内样式文本
+            // div1.style=div.style.cssText;
+            // console.log(div1)
+            // console.log(getComputedStyle(div).cssText)
+
+                // StyleSheetList styleSheetList是当前页面中css的style的列表还包括用link引入的css
+            // console.log(document.styleSheets)
+
+                // CSSStyleSheet
+            // console.log(document.styleSheets[0]) 
+            // 在这个样式中设置所有选择器样式的列表
+            // console.log(document.styleSheets[0].cssRules)
+            // console.log(document.styleSheets[0].cssRules[0])
+            // 当前这个css选择器css设置文本
+            // console.log(document.styleSheets[0].cssRules[0].cssText)
+            // 当前这个css选择器
+            // console.log(document.styleSheets[0].cssRules[0].selectorText)
+            // 获取当前css选择的css样式列表
+            // console.log(document.styleSheets[0].cssRules[0].style);//CSSStyleDeclaration
+
+            // console.log(document.styleSheets[1])
+            // 设置是否这个css列表禁用
+            // document.styleSheets[1].disabled=true;
+
+            // document.styleSheets[0].addRule(选择器,"CSS样式",当前插入索引项)
+            // document.styleSheets[0].insertRule("选择器 {CSS样式}",当前插入索引项)
+            // document.styleSheets[1].addRule("#div3","color:skyblue;width:50px;",document.styleSheets[1].cssRules.length);
+            // document.styleSheets[1].insertRule("#div3 {color:skyblue;width:50px;height:50px}",document.styleSheets[1].cssRules.length)
+                
+                // 删除对应索引项css样式
+            // document.styleSheets[1].deleteRule(0)
+            // document.styleSheets[1].removeRule(0)
+
+
+            var obj={
+                width:"50px",
+                height:"50px",
+                lineHeight:"30px",
+                border:"1px solid #000",
+                textAlign:"center",
+                color:"red",
+                backgroundColor:"green"
+            }
+
+
+            function addCSS(selector,styleObj){
+              var styleSheet=Array.from(document.styleSheets).find(function(item){
+                    return item.title==="insert";
+                })
+                if(!styleSheet){
+                    var style=document.createElement("style");
+                    style.title="insert";
+                    document.head.appendChild(style);
+                    styleSheet=document.styleSheets[document.styleSheets.length-1];
+                }
+                var str=Object.keys(styleObj).reduce(function(v,key){
+                      return v+key.replace(/[A-Z]/g,function(t){
+                          return "-"+t.toLowerCase();
+                      })+":"+styleObj[key]+";"
+                },"");
+                styleSheet.addRule(selector,str,styleSheet.cssRules.length);
+                console.log(styleSheet)
+            }
+
+            addCSS(".div4",obj);
+            console.log(document.styleSheets)
+    </script>
+</body>
+</html>

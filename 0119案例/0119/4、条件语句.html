@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1"></div>
+    <script>
+        // if(条件表达式){
+        //     满足条件执行该语句块
+        // }
+
+        // if(条件表达式){
+        //     满足条件执行该语句块
+        // }else{
+        //     不满足条件执行该语句块
+        // }
+
+
+        // if(条件表达式1){
+        //     满足条件表达式1执行该语句块
+        // }else if(条件表达式2){
+        //     满足条件表达式2执行该语句块
+        // }else if(条件表达式3){
+        //     满足条件表达式3执行该语句块
+        // }else{
+        //     不满足条件执行该语句块
+        // }
+
+
+        // 所有条件表达式都会隐式转换为布尔值
+
+        // var a=3;
+        // if(a){
+
+        // }
+
+        // if(!a){
+        //     console.log("6个");
+
+        // }
+
+        // if(a==undefined){
+        //     console.log("2个");
+
+        // }
+        // if(a===null){
+        //     console.log("1个");
+
+        // }
+        // if(a==false){
+        //     console.log("3个");
+
+        // }
+
+        // var a;
+        // if(a==null){
+
+        // }
+
+        // var a={a:1};
+        // if(a){
+
+        // }
+
+
+        // var a=1;
+        // if(a--){
+        //     console.log("aa");  
+        // }
+        // if(a>0 ? 1 : 0){
+        //     console.log("aa");
+
+        // }
+
+
+        // if(a>1) a=5;
+
+        // if(a>1) 
+        // a=5;
+        // b=10;//不管条件是否成立都会执行第二句
+
+        // if(a>0){
+
+        // }else if(a>-5){
+
+        // }else if(a>-10){
+
+        // }else{
+
+        // }
+
+
+        // if(a>0){
+
+        // }
+        // if(a>-5){
+
+        // }
+        // if(a>-10){
+
+        // }else{
+
+        // }
+
+
+
+        // var a = 5;
+        //    switch(表达式){
+        //        case 值1:
+        //         //    如果表达式绝对等于值1执行这里的语句
+        //            break;
+        //         case 值2:
+        //             //    如果表达式绝对等于值2执行这里的语句
+        //             break;
+        //         case 值3:
+        //             //    如果表达式绝对等于值3执行这里的语句
+        //             break;
+        //         case 值4:
+        //             //    如果表达式绝对等于值4执行这里的语句
+        //             break;
+        //         case 值5:
+        //             //    如果表达式绝对等于值5执行这里的语句
+        //             break;
+        //         default:
+        //    }
+
+        // a=3
+        // switch (a) {
+        //     case 1:
+        //         console.log(1);
+
+        //     case 2:
+        //     case 3:
+        //         console.log(2);
+                
+        //         break;
+        //     case 4:
+        //         break;
+        //     case 5:
+        //         console.log("aa"); 
+        //         break;
+        //     default:
+
+        // }
+
+
+        // if(a===3 || a===4 || a===5){
+
+        // }
+
+        // var state=""
+        // switch(state){
+        //     case 状态1:
+        //         执行状态1的内容;
+        //     case 状态2:
+        //         执行状态2的内容;
+        //     case 状态3:
+        //         执行状态3的内容;
+        //         break;
+
+        // }
+        // 如果state是状态1，就向下执行状态1--》状态2--》状态3
+        // 如果state是状态2，就向下执行状态2--》状态3
+        // 如果state是状态3，状态3
+        // 
+
+
+
+
+        var div1=document.getElementById("div1");
+        const LEFT="left",RIGHT="right",TOP="top",BOTTOM="bottom";
+        var x=0,
+            y=0,
+            state=RIGHT;
+        // setInterval(function(){
+        //     x++;
+        //     div1.style.left=x+"px"
+        //     if(x>100){
+        //         y++;
+        //         x=100
+        //         div1.style.top=y+"px"
+        //         if(y>100){
+        //             x--;
+        //             y=100;
+        //             div1.style.left=x+"px"
+        //         }
+        //     }
+           
+        // },16);
+
+
+        // setInterval(function(){
+        //     switch(state){
+        //         case LEFT:
+        //             x--;
+        //             if(x<=0) state=TOP;
+        //             break;
+        //         case RIGHT:
+        //             x++;
+        //             if(x>=300) state=BOTTOM;
+        //             break;
+        //         case TOP:
+        //             y--;
+        //             if(y<=0) state=RIGHT;
+        //             break;
+        //         case BOTTOM:
+        //             y++;
+        //             if(y>=300) state=LEFT;
+        //             break;
+        //     }
+        //     div1.style.left=x+"px";
+        //     div1.style.top=y+"px";
+        // },16);
+
+
+        // var a=90;
+        // switch(true){
+        //     case a>90 && a<=100:
+        //         break;
+        //     case a>80:
+        //         break;
+        //     case a>70:
+        //         break;
+        //     case a>60:
+        //         break;
+        //     default:
+        // }
+    </script>
+</body>
+
+</html>

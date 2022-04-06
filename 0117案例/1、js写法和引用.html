@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- http file -->
+    <!-- 同步，上一步执行完成后才可以执行下一步 -->
+    <!-- async 异步 -->
+    <!-- defer 所有内容加载完成后执行 -->
+    <script src="./js/a.js" async defer></script>
+</head>
+<body>
+    <script>
+        // 编译型
+        //  javascript  弱类型解释性脚本语言
+        // console.log(a);//报错
+    </script>
+    <script>
+        // console.log(a,b,fn) undefined
+        // 预解析  函数 变量
+        // 变量生成就会长期驻扎在网页中，直到关闭网页
+
+        // var 定义变量
+        // function 定义函数
+        // console.log(要显示的内容)   控制台打印要显示的内容
+
+        // 当网页中重新修改DOM结构，添加删除或者修改了DOM的大小位置等内容时，会造成回流
+        // 界面中修改的部分不会影响到其他元素，这时候就使用的是重绘
+
+        var a=1;
+
+
+        var b=2;
+
+
+        function fn(){
+            console.log("aaa")
+        }
+    </script>
+    <script>
+        console.log(a)
+    console.log(o);
+    </script>
+    <div></div>
+    <script src="./js/a.js"></script>
+
+    <script type="module">
+        import Box from "./js/b.js";
+
+        var b=new Box();
+
+    </script>
+
+    <button onclick="console.log('你好')">按钮</button>
+    <a href="javascript:void(0);">超链接</a>
+    <a href="javascript:console.log('你好');">超链接</a>
+    <button onclick="fn()">按钮1</button>
+    <button onclick="fns()">按钮2</button>
+
+   <script>
+
+       function fns(){
+           console.log("bbb")
+       }
+    //    TODO:这里的功能明年实现
+   </script>
+
+</body>
+</html>
+<script src="./js/a.js"></script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 关系运算符  >   >=   <  <=   ==  ===  !=  !==
+        // 关系运算符返回一个布尔值
+
+        // 如果隐式转换后都是数值，遵从数值大于小于比较，NaN与任何数值比较都是false
+        // console.log(5>4);
+        // console.log("5">4)
+        // console.log("5">"4")
+        // console.log("a">=3)
+
+        // 如果两端都是字符，并且转换为数值后会变为NaN，则转换为默认编码，比较编码大小
+        // console.log("a"<"b");
+
+
+        // ASCII GB2312 BIG5   Unicode（万国码）  
+
+        // 隐式转换为数值
+        // console.log(true>false)
+        // console.log(true>null)
+        // console.log(true>undefined);
+
+        // ==  != 会隐式转换为相同类型，然后比较
+        // ===  !== 先比较类型，再比较值
+
+        // console.log("a"==NaN)
+        // console.log("2"==2);
+        // console.log(0=="");
+        // console.log(""==false);
+        // console.log(0==false);
+
+        // console.log(0==null);//false
+        // console.log(false==null);//false
+        // console.log(undefined==null);//true
+
+        // var a;
+        // if(a==null){
+        //     // a是undefined或者null
+        // }
+
+        // var a;
+        // if(a==0){
+        //     // a是false，0，“” 可以进入条件
+        // }
+
+        // if(a===undefined){
+        //     // a是undefined
+        // }
+
+            // 所有引用类型 都是比较引用地址，而不直接转换为字符串
+        // console.log({}=={})
+        // console.log([]==[]);
+        // console.log([]==0);
+        // console.log([]=="");
+        // 强制转换为布尔值时，[]是true
+        // console.log([]==![]);//true
+        // console.log([[],[]]==",");
+       
+
+    
+
+        // var o={a:1};
+        // var o1={a:1};
+        // var o1=o;
+        // console.log(o1===o);
+    </script>
+</body>
+</html>

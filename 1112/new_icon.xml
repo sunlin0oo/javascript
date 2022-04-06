@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="new_icon.png" width="256" height="256">
+    <human sex='男' age='30'>张三</human>
+    <sprite n="bar" x="1" y="1" w="10" h="250"/>
+    <sprite n="f-btn" x="13" y="33" w="70" h="30"/>
+    <sprite n="f-checkbox-active" x="128" y="126" w="14" h="14"/>
+    <sprite n="f-checkbox" x="238" y="37" w="14" h="14"/>
+    <sprite n="f-close-btn" x="104" y="108" w="25" h="16"/>
+    <sprite n="f-close" x="238" y="19" w="16" h="16"/>
+    <sprite n="f-direction" x="196" y="1" w="40" h="40"/>
+    <sprite n="f-enlarge-active" x="37" y="140" w="22" h="22"/>
+    <sprite n="f-enlarge" x="13" y="140" w="22" h="22"/>
+    <sprite n="f-modify-btn-gray" x="185" y="77" w="62" h="25"/>
+    <sprite n="f-modify-btn" x="13" y="89" w="62" h="25"/>
+    <sprite n="f-narrow-active" x="77" y="135" w="22" h="22"/>
+    <sprite n="f-narrow" x="37" y="116" w="22" h="22"/>
+    <sprite n="f-overview" x="77" y="108" w="25" h="25"/>
+    <sprite n="f-radio" x="195" y="104" w="18" h="18"/>
+    <sprite n="f-screen-active" x="185" y="53" w="66" h="22"/>
+    <sprite n="f-screen-close-active" x="13" y="65" w="66" h="22"/>
+    <sprite n="f-screen-close" x="85" y="57" w="66" h="22"/>
+    <sprite n="f-screen" x="85" y="33" w="66" h="22"/>
+    <sprite n="f-seat-all-active" x="13" y="116" w="22" h="22"/>
+    <sprite n="f-seat-all" x="104" y="126" w="22" h="22"/>
+    <sprite n="f-seat-btn1" x="61" y="146" w="14" h="13"/>
+    <sprite n="f-seat-btn2" x="61" y="131" w="14" h="13"/>
+    <sprite n="f-seat-btn3" x="61" y="116" w="14" h="13"/>
+    <sprite n="f-seat-new" x="145" y="97" w="28" h="29"/>
+    <sprite n="f-settlement-btn" x="13" y="1" w="181" h="30"/>
+    <sprite n="fnew-close" x="238" y="1" w="16" h="16"/>
+    <sprite n="fnew-modify-btn" x="81" y="81" w="62" h="25"/>
+    <sprite n="fnew-radio-check" x="175" y="104" w="18" h="18"/>
+    <sprite n="fnew2-close" x="238" y="19" w="16" h="16"/>
+    <sprite n="seats-t" x="153" y="65" w="30" h="30"/>
+    <sprite n="seats" x="153" y="33" w="30" h="30"/>
+</TextureAtlas>

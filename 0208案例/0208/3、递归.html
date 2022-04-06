@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div></div>
+        <div id="div0">1</div>
+        <div>
+            <ul>
+                <li id="li0">2</li>
+                <li></li>
+                <li id="li1">
+                    <ul>
+                        <li></li>
+                        <li id="li2">3</li>
+                        <li></li>
+                        <li>
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li id="li3">4</li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li id="li4">5</li>
+                        <li></li>
+                    </ul>
+                </li>
+                <li></li>
+                <li id="li5">6</li>
+                <li></li>
+            </ul>
+        </div>
+        <div></div>
+        <div id="div1">6</div>
+    </div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li id="li6">7</li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+
+        // 递归
+        // function fn(){
+        //     fn();
+        //     console.log(1);
+        // }
+        // fn();
+
+
+
+        // var i=0;
+        // function fn(){
+        //     i++;
+        //     if(i>3) return;
+        //     fn();
+        //     console.log(1);
+        // }
+        // fn();
+
+
+
+        // var i=0;
+        // var s=0;
+        // function fn(){
+        //     i++;
+        //     if(i>100) return;
+        //     s+=i;
+        //     fn();
+        //     console.log(i)
+        // }
+        // fn();
+
+
+        // 尾递归
+
+
+        // function fn(){
+        //   console.log(1);
+        //    fn();
+        // }
+
+
+
+
+        // var i=0;
+        // var s=0;
+        //什么时候不执行
+        // function fn(){
+        //     if(i>100) return;
+        //     i++;
+        //     s+=i;
+        //     fn();
+        // }
+        // fn();
+        // console.log(s);
+
+
+        // var i=0;
+        // var s=0;
+        //什么时候执行
+        // function fn(){
+        //     i++;
+        //     s+=i;
+        //     if(i<=100) fn();
+        // }
+        // fn();
+        // console.log(s);
+
+
+        // function fn(i,s){
+        //     if(i===undefined) i=0;
+        //     if(s===undefined) s=0;
+        //     i++;
+        //     s+=i;
+        //     if (i<100) return fn(i,s);
+        //     return s;
+        // }
+
+        //分步执行步骤：：
+
+        //  function fn(i,s){
+        //     if(i===undefined)i=0;
+        //     if(s===undefined) s=0;
+        //      i++;//1
+        //      s+=i;//1
+        //     if(i<3) return fn1(i,s);
+        //     return s;
+        //  }
+
+        //  function fn1(i,s){
+        //     if(i===undefined)i=0;
+        //     if(s===undefined) s=0;
+        //      i++;//2
+        //      s+=i;//3
+        //     if(i<3) return fn2(i,s); // 可以都打出来，看是否有代码接收。
+        //     return s;
+        //  }
+
+        //  function fn2(i,s){
+        //     if(i===undefined)i=0;
+        //     if(s===undefined) s=0;
+        //      i++;//3
+        //      s+=i;//6
+        //     if(i<3) return fn(i,s);
+        //     return s;
+        //  }
+
+
+    //     function fn(i,s){
+    //         if(i>99) return s;
+    //         if(i===undefined)i=0;
+    //         if(s===undefined) s=0;
+    //          i++;
+    //          s+=i;
+    //         return fn(i,s);
+    //      }
+
+    //    var s=fn();
+    //      console.log(s);
+
+
+
+    // var  obj={
+    //     a:1,
+    //     b:2,
+    //     aa:null,
+    //     c:{
+    //         d:3,
+    //         e:4,
+    //         f:{
+    //             g:5,
+    //             h:6,
+    //         },
+    //         i:{
+    //             j:7,
+    //             k:8
+    //         }
+    //     }
+    // }
+
+
+    // 深复制
+    // function cloneObj(source,target){
+    //     if(target === undefined) target={};
+    //     for(var key in source){
+    // 不为空 && 是对象--->为了判断是否是对象
+    //         if(source[key] && typeof source[key] === "object"){
+    //             console.log(key,1);//无引用关系
+    //         }else{
+    //             console.log(key,2);//有引用关系
+    //         }
+    //     }
+    // }
+
+   //  function cloneObj(source,target){
+   //      if(target===undefined) target={};
+   //      for(var key in source){
+   //          if(source[key] && typeof source[key]==="object"){
+   //            target[key]=cloneObj(source[key])
+   //          }else{
+   //             target[key]=source[key];
+   //          }
+   //      }
+   //      return target;
+   //  }
+   //
+   // var target = cloneObj(obj)
+   // obj.c.f.h = 10;
+   //  console.log(target);
+//   obj.c.f.h=10;
+//   console.log(target);
+
+
+    // document.body.children  列表 子元素的列表
+    // document.body.children.length  长度
+    // document.body.children[0]  长度
+
+    function getDict(list,elem){
+        if (list===undefined) list={};
+        if (elem===undefined) elem=document.body;
+        if (elem.id){
+            list[elem.id] = elem;
+        }
+        for(var i=0;i<elem.children.length;i++){
+            getDict(list,elem.children[i]);
+        }
+        return list;
+    }
+
+    var list = getDict();
+    console.log(list);
+
+
+    // var tree={
+    //     left:{
+    //         value:2,
+    //         left:{
+    //             value:4,
+    //             left:{
+    //                 value:8,
+    //                 left:null,
+    //                 right:null
+    //             },
+    //             right:{
+    //                 value:9,
+    //                 left:null,
+    //                 right:null
+    //             }
+    //         },
+    //         right:{
+    //             value:5,
+    //             left:{
+    //                 value:10,
+    //                 left:null,
+    //                 right:null
+    //             },
+    //             right:{
+    //                 value:11,
+    //                 left:null,
+    //                 right:null
+    //             }
+    //         }
+    //     },
+    //     right:{
+    //         value:3,
+    //         left:{
+    //             value:6,
+    //             left:{
+    //                 value:12,
+    //                 left:null,
+    //                 right:null
+    //             },
+    //             right:{
+    //                 value:13,
+    //                 left:null,
+    //                 right:null
+    //             }
+    //         },
+    //         right:{
+    //             value:7,
+    //             left:{
+    //                 value:14,
+    //                 left:null,
+    //                 right:null
+    //             },
+    //             right:{
+    //                 value:15,
+    //                 left:null,
+    //                 right:null
+    //             }
+    //         }
+    //     },
+    //     value:1
+    // }
+    //
+    //
+    // //后序遍历
+    // function showTree(tree){
+    //     if(!tree) return;
+    //     showTree(tree.left);
+    //     showTree(tree.right);
+    //     console.log(tree.value);
+    // }
+    //
+    // showTree(tree);
+    </script>
+</body>
+</html>

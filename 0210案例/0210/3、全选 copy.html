@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="checkbox" id="all" name="hobby"><label for="all">全选</label> <button type="button">反选</button><br>
+        <input type="checkbox" name="hobby"><br>
+        <input type="checkbox" name="hobby"><br>
+        <input type="checkbox" name="hobby"><br>
+        <input type="checkbox" name="hobby"><br>
+        <input type="checkbox" name="hobby"><br>
+        <input type="checkbox" name="hobby"><br>
+        <input type="checkbox" name="hobby"><br>
+        <input type="checkbox" name="hobby"><br>
+        <input type="checkbox" name="hobby"><br>
+    </form>
+    <script>
+        //数据驱动显示
+        var all,hobbys;
+        var arr=[];
+        init();
+        function init(){
+            hobbys = Array.from(document.getElementsByName("hobby"));
+            button = document.getElementsByTagName("button")[0];
+            for(var i=0;i<hobbys.length;i++){
+                hobbys[i].onclick = clickhandler;
+                if(i>0) arr.push({checked:false});//给所有的hooby赋值checked:fasle
+            }
+            all = hobbys.shift();//先赋值all
+            button.onclick=reverseHandler;
+        }
+
+        function clickhandler(){
+            if(this === all){  // this指点击谁
+                arr.forEach(function(item){ //arr中的item是对象
+                    item.checked = all.checked; 
+                })
+                for(var i =0;i<hobbys.length;i++){
+                    hobbys[i].checked = arr[i].checked;
+                }
+            }else{
+                var index = hobbys.indexOf(this);
+                arr[index].checked = this.checked;
+                all.checked = arr.every(function(item){
+                    return item.checked;
+                })
+            }
+        }
+    
+        function reverseHandler(){
+            if(this === button){
+                arr.forEach(function(item){ //arr中的item是对象
+                    item.checked = !item.checked; 
+                })
+                for(var i=0;i<hobbys.length;i++){
+                    hobbys[i].checked = arr[i].checked;
+                }
+                all.checked = arr.every(function(item){
+                    return item.checked;
+                })
+            }
+        }
+    </script>
+</body>
+</html>

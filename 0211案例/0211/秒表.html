@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="div0">00:00:00</div>
+    <button id="bn1">开始</button><button id="bn2">停止</button>
+
+    <script>
+        var div,bn1,bn2,startTime;
+        var bool=false,lastTime=0;
+
+        init();
+        function init(){
+            div=document.getElementById("div0");
+            bn1=document.getElementById("bn1");
+            bn2=document.getElementById("bn2");
+
+            bn1.onclick=bn1Clickhandler;
+            bn2.onclick=bn2Clickhandler;
+            setInterval(anmiation,16);
+        }
+
+        function bn1Clickhandler(){
+            bool = !bool;
+            bn1.innerHTML=bool ? "暂停" : "开始";
+            if(bool){
+                startTime=new Date();
+            }else{
+                lastTime+=new Date()-startTime;
+            }
+        }
+
+        function bn2Clickhandler(){
+            bool=false;
+            startTime=null;
+            lastTime=0;
+            bn1.innerHTML="开始";
+            div.innerHTML="00:00:00";
+        }
+
+        function anmiation(){
+            if(!bool) return;
+            var time=(new Date()-startTime)+lastTime;
+            var minutes=~~(time/1000/60);
+            var seconds=~~((time-minutes*1000*60)/1000);
+            var ms=~~((time-minutes*1000*60-seconds*1000)/10);
+            div.innerHTML=getZero(minutes)+":"+getZero(seconds)+":"+getZero(ms);
+        }
+
+        function getZero(n){
+            return n<10 ? "0"+n : n;
+        }
+
+
+        // 二零二二年二月十一日 星期五  十四时四十八分五十六秒
+    </script>
+</body>
+</html>

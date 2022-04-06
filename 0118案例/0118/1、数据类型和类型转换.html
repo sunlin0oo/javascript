@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <script>
+        // js是一种弱类型语言
+        // var a=5;
+        // a="a";
+        // 蓝青色是有构造函数的，是可以实例化的 可以通过构造函数创建出该类型的值
+        // 蓝色没有类型，所以它不能通过构造函数创建该类型的值，它只属于一种值
+        // 基础类型 简单类型  简单类型存放在栈中，但是简单类型对应的构造函数创建对象型存储在堆中
+        // String
+        // "" 
+        // "abc"
+        // 'abc'
+        // `abc`
+        // 'a"b"c'
+        // "a'bvd'e"
+
+
+        // Number
+        // 1
+        // 1.2
+        // -3
+        // -3.5
+        // 3.5e+2
+        // 3.5e-3
+        // 047  //8进制
+        // 0xFF65  //16进制
+
+
+        // Boolean
+        // true   //真
+        // false  //假
+
+        // undefined  //未定义
+
+        // null   //空值
+
+
+        // // 复杂类型  复合类型
+        // Object   //对象
+        // // {a:1,b:2}
+
+
+
+        // var a="a";
+        // console.log(typeof a);
+        // var b=1;
+        // console.log(typeof b);
+        // var c=true;
+        // console.log(typeof c);
+        // var d=undefined;
+        // console.log(typeof d);
+        // var e=null;
+        // console.log(typeof e);//object
+
+        // var f={a:1,b:2};
+        // console.log(typeof f);
+       
+        // console.log(typeof f==="undefined")
+         // bigint  大整型
+        //  function 函数
+        // symbol  唯一值
+
+        // var fn=function(){
+
+        // }
+        // console.log(typeof fn);
+
+        // var g;
+        // var h=undefined;
+        // console.log(g,h)
+        // console.log(g===h);
+        // console.log(typeof g)
+        // console.log(typeof h)
+
+
+        /* 
+        1、类型中存在栈中类型和存在堆中的相同类型有什么关系，有什么不同
+        2、为什么null使用typeof判断时是object
+        3、为什么var g;  var h=undefined;虽然值和类型相同但是其含义不同
+        4、symbol是什么东西，有什么用
+        
+        */
+
+
+
+        // 数据类型转换
+
+        // 强制构造函数转换
+        // 方法转换
+        // 蓝色的是数值或者布尔值，黑色的是字符
+
+        // 构造函数转换法
+    //     var a=1;
+    //    var b=String(a)
+
+    //    var a1="56";
+    //    var b1=Number(a1);
+
+        // var a2="a";
+        // var b2=Boolean(a2);
+        
+        // js中使用的是点语法 某个对象下的某个内容  obj.a.b 只有对象才可以使用.
+        // 方法转换
+        // var a=1;
+    //    1.toString()
+    // a.toString()
+
+    // var b="a";
+    // console.log(b.toString());
+    // console.log("a".toString());
+        
+    // console.log(true.valueOf())
+
+    // 数值不能直接调用方法，原因是起头是数字不是字符，无法进行关联其属性类型
+    // 当放在栈中存储的变量里时，变量会对其类型做引用关联，所以该类型变量可以调用方法
+    // 除了数值外的其他的类型值，是可以直接调用方法的
+        
+
+
+    // 数值转换为字符串
+    // var a=12000.45;
+    // var b=String(a);  任何类型都可以直接使用构造函数强制转换
+    // a=String(a);
+
+    // console.log(a.toString())
+    // console.log(a.toString(2))   //可以将数值按照指定进制转换成对应的进制字符串，默认转换为10进制字符
+    // 参数只能是2-36
+
+    // console.log(a.toFixed(2)); //保留小数后2位  5舍6入 转换为字符串
+    // console.log(a.toExponential(2)); //保留科学计数法后两位
+    // console.log(a.toPrecision(4));//保留一共整数和小数的一共几位，如果整数为的数值大于设定的总位数，就会变为科学计数法
+
+
+    // 其他类型转换为字符串
+    // var a=true;
+
+    // 因为这两个是值，不是类型，没有在堆中对应的引用类型，因此无法使用toString方法
+    // var b=undefined;
+    // var c=null;
+    // var d={a:1,b:2};
+    // var e={}
+//    console.log(e.toString());//  任何对象转换为字符串都会变成 [object Object]  原型类型
+
+
+
+    // console.log(Object.prototype.toString.call(5))//[object Number]
+    // console.log(Object.prototype.toString.call("a"))//[object String]
+    // console.log(Object.prototype.toString.call(true))//[object Boolean]
+    // console.log(Object.prototype.toString.call(undefined))//[object Undefined]
+    // console.log(Object.prototype.toString.call(null))//[object Null]
+    // console.log(Object.prototype.toString.call([1,2,3]))//[object Array]
+
+    // console.log(Object.prototype.toString.call(5)==="[object Number]")
+    // console.log({}.toString.call(null)==="[object Null]")
+
+
+    // console.log(String([]));//“”空字符
+    // console.log(String([5]))//字符5
+    // console.log(String([1,2]))//1,2
+
+
+
+    // 字符串类型转换为数值
+
+    var a="5a";
+    // 构造函数转换法中如果字符串中出现一个非数值，就会自动转换为NaN 非数值 类型是数值
+    // 非数值不能进行运算，有非数值参与运算的结果一定是非数值
+    // a=Number(a);
+    // console.log(a)
+    // 非数值不能使用==或者===判断比较
+    // console.log(Number(a)===NaN) 这种写法是错误
+
+
+
+
+    // 判断是否是NaN
+    // 1、Object.is
+//    var b= Object.is(Number(a),NaN);//意味着这个强制转换后是NaN
+//    console.log(b)
+        // 2  isNaN
+        // console.log(isNaN(Number(a))); //如果是NaN返回true
+        // 3 Number.isNaN
+        // console.log(Number.isNaN(Number(a)));//如果是NaN返回true
+
+        // 所有的隐式转换都是自动调用了强制构造函数转换
+        // 先会自动隐式转换为数值类型，然后判断是否是NaN
+        // console.log(isNaN(a))
+        // 不会自动隐式转换为数值，只判断这个值是否与NaN相等
+        // console.log(Number.isNaN(a));
+
+
+        // 转换为整型,按照指定的进制转为数值，默认是10进制  2-36
+        // var str="2";
+        // console.log( parseInt(str,36))
+
+        // 转换为浮点数
+        // var str="2.35"
+        // console.log(parseFloat(str))
+
+        // 空字符串转换为数值是0
+        // console.log(Number(""));//0
+
+
+        // 其他类型转换为数值
+        // 布尔值  true转换为数值是1，false转换为数值是0
+        // var a=true;
+        // console.log(Number(a));
+
+        // console.log(Number(undefined))//NaN
+        // console.log(Number(null));//0
+
+        // 所有对象强制转换为数值 NaN
+        // console.log(Number({}));
+        // console.log(Number({a:1,b:2}));
+        // console.log(+{});//强制转换为数值
+
+        // console.log(Number([]))  []转为数值是0
+        // console.log(+[]);+[]转为数值是0
+        // console.log(Number([5]))  如果数组中有且仅有一个元素，就会隐式转换为数值
+        // console.log(Number([1,2]))  NaN
+
+
+        // 所有的数组在强制转换为数值前，都会隐式转换为字符串
+
+
+        // 任何类型转换为布尔值
+        // true，false
+        // 强制转换为布尔值是false
+        // "" 0  undefined  null  NaN  false(boolean)
+
+        // console.log(Boolean(" "))
+        // console.log(Boolean("false"))
+
+
+        // 任何类型转换为对象
+        // console.log(Object(5));//将栈中的数值转换为堆中对象数值
+        // console.log(Object(5)+5);
+        // console.log(Object(5)==5); 单比较值他们是相等的，但是类型是不等的
+        // console.log(Object("a"))
+        // console.log(Object(true))
+
+        // 都会变成{}
+        // console.log(Object(undefined))
+        // console.log(Object(null))
+
+        // 对象强制转换为数组无意义
+        // console.log(Object([1,2]))
+            
+
+   
+    
+    </script>
+</body>
+</html>

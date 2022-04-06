@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .con {
+            border: 1px solid #000000;
+            width: 500px;
+            height: 600px;
+            text-align: center;
+            position: relative;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .con>div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000000;
+            box-shadow: 2px 2px 2px #cccccc;
+            float: left;
+            margin: 11px;
+            text-align: center;
+            font-size: 40px;
+            line-height: 100px;
+            user-select: none;
+        }
+
+        .con>input {
+            width: 90%;
+            height: 30px;
+            line-height: 30px;
+            font-size: 25px;
+            text-align: right;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 3px 3px 3px #cccccc;
+            outline: none;
+            padding: 5px 10px;
+            background-color: white;
+            border: 1px solid #000000;
+        }
+
+        .clear::after {
+            content: "";
+            clear: both;
+            display: block;
+            height: 0;
+            visibility: hidden;
+            overflow: hidden;
+        }
+
+        .clear {
+            zoom: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="con clear">
+        <input type="text" id="input" value="0" disabled />
+        <div class="divs" id="div1">7</div>
+        <div class="divs" id="div2">8</div>
+        <div class="divs" id="div3">9</div>
+        <div class="divs" id="div4">-</div>
+        <div class="divs" id="div5">4</div>
+        <div class="divs" id="div6">5</div>
+        <div class="divs" id="div7">6</div>
+        <div class="divs" id="div8">+</div>
+        <div class="divs" id="div9">1</div>
+        <div class="divs" id="div10">2</div>
+        <div class="divs" id="div11">3</div>
+        <div class="divs" id="div12">*</div>
+        <div class="divs" id="div13">C</div>
+        <div class="divs" id="div14">0</div>
+        <div class="divs" id="div15">=</div>
+        <div class="divs" id="div16">/</div>
+    </div>
+    <script>
+
+        var input,divs,first,second,symol,result;
+        var bool=false;
+        init();
+        function init(){
+            input=document.getElementById("input");
+            divs=Array.from(document.getElementsByClassName("divs"));
+            divs.forEach(function(item){
+                item.onclick=clickHandler;
+            })
+        }
+
+        function clickHandler(){
+           if(["+","-","*","/"].includes(this.innerHTML)) return changePerform(this.innerHTML)  //加减乘除执行函数
+           if(this.innerHTML==="=") return calculate(); //计算执行函数
+           if(this.innerHTML==="C") return clearValue(); //清除执行函数
+           changeValue(this.innerHTML)//点数字执行函数
+        }
+
+        function changeValue(value){
+            // 如果上一次运算已经完成 执行clear清除input当中内容和所有数据
+            if(bool) clear("");
+            // 当没有输入运算符号的时候，也就是first输入时累加文本内容
+           if(!symol)  input.value=Number(input.value+value);
+           else{
+            //    如果已经输入了运算符，该输入第二个数值时，
+            // 如果第二个数值时空，赋值为“”
+              if(!second && second!==0)second="";
+            //   将第二个数值和当前点击的字符累加
+              second=Number(second+value);
+            //   将第一个数值与符号还有第二个数值联合一起显示
+              input.value=first+symol+second;
+           }
+        }
+
+        function clearValue(){
+            // 当点击C，清空所有的数据，显示0
+            clear("0");
+        }
+
+        function clear(res){
+            // 将传入的参数赋值给input
+                input.value=res;
+                // 清空所有数据
+                first="";
+                second="";
+                symol="";
+                result="";
+                bool=false;
+        }
+
+        function calculate(){
+            // 如果第二个值没有，就跳出
+            if(!second && second!==0) return;
+            switch(symol){
+                case "+": 
+                result=Number(first)+Number(second);
+                break;
+                case "-":
+                result=first-second;
+                break;
+                case "*":
+                result=first*second;
+                break;
+                case "/":
+                result=first/second;
+                break;
+            }
+            // 将input中显示第一个值，符号，第二个值，=和结果显示出来
+            input.value=first+symol+second+"="+result;
+            // 因为有了运算结果，设置bool是true，这样在后续点击数值和符号时用于清除使用
+            bool=true;
+        }
+
+        function changePerform(perform){
+            //  如果上一次运算已经完成 ，清除所有数据内容，并且将当前的运算结果显示input中，然后进行后续符号添加
+            if(bool) clear(result);
+            // 如果已经有了符号，跳出
+            if(symol) return
+            // 将input中数据存储在first当中
+            // 并且将input后面累加符号
+                first=input.value;
+                input.value+=perform;
+                // 将符号设置给symbol变量
+                symol=perform;  // 存储符号
+        }
+    </script>
+</body>
+</html>
