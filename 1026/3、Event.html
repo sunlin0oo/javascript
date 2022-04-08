@@ -18,6 +18,19 @@
             height: 2rem;
             background-color: coral;
         }
+         /* .div1{
+            font-size: 100px;
+        }
+         /* em相对于父容器font-size的大小
+                若修改font-size则是相对于当前容器的大小
+
+             .div>div{
+            font-size:16px;
+            width: 1em;  
+            height: 1em;
+        }
+            */
+
     </style>
 </head>
 <body>
@@ -52,7 +65,7 @@
         form.addEventListener("change",formChangeHandler);//---在这里操作 修改表单元素，冒泡到form触发事件侦听
         form.addEventListener("submit",submitHandler);
         form.addEventListener("reset",resetHandler);
-        input.addEventListener("select",selectHandler);
+        input.addEventListener("select",selectHandler);//表单select事件-->输入框中文本被选中时，我们触发
         
 
         function changeHandler(e){
@@ -90,6 +103,7 @@
 
         function selectHandler(e){
             console.log(e)
+            //                      开始            结束，           朝哪个方向进行选择
             console.log(input.selectionStart,input.selectionEnd,input.selectionDirection);
         }
 
@@ -107,7 +121,7 @@
         }
 
         function clickhandler2(e){
-            e.stopImmediatePropagation();
+            e.stopImmediatePropagation(); //阻止后续相同事件的触发
             console.log("bbb")
         }
 
@@ -125,7 +139,7 @@
         }
 
 
-        document.addEventListener("scroll",scrollHandler);
+        document.addEventListener("scroll",scrollHandler);//滚动条
 
         function scrollHandler(e){
             console.log(document.documentElement.scrollTop);

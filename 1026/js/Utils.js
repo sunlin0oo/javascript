@@ -1,7 +1,7 @@
 var Utils=(function(){
     return {
         IMG_FINISH_EVENT:"img_finish_event",
-        /* 
+        /*
             预加载图片
             1、可以加载一张图，也可以加载多张图片
             2、如果需要设定全部基础路径，可以设置参数basePath
@@ -13,7 +13,7 @@ var Utils=(function(){
 
             参数：
             sourceArr  Array或者String   加载的图片地址列表或者一张图片地址
-                       Array 加载多张图片地址  
+                       Array 加载多张图片地址
                        String 加载一张图片，为了后续使用，我们统一使用数组，所以如果这个是String，
                        将设置sourceArr是空数组，并且这个字符串放在这个数组中，成为数组的唯一元素
             finishHandler  Function 或者 undefined  完成执行回调函数
@@ -27,7 +27,7 @@ var Utils=(function(){
             统一所有的给入地址都是数组，方便调用
             2、判断basePath是否是字符串，判断当前这个basePath尾部是不是/结束，如果不是/结束，增加/
                 然后遍历地址数组，将basePath添加在地址数组的前面,如果传入的地址前面有/，就将原来的/去掉
-            3、判断suffix是否是字符串，然后判断suffix的第一位是否是.，如果不是.，在前面增加.
+            3、判断suffix是否是字符串，然后判断suffix的第一位是否是‘ . ’，如果不是.，在前面增加.
                 然后遍历地址数组，判断地址数组中每个地址是否在倒数第4位或者倒数5是否是.如果是，就不需要加
                 suffix，如果不是在地址后增加suffix
             4、创建一个新图片元素，并且设置这个图片元素的地址为sourceArr的第0项开始加载，并且侦听事件load和error
@@ -35,18 +35,18 @@ var Utils=(function(){
             不断更改其地址，使其不断加载新的图片，去激活load事件执行对应的方法，因此，这个图片载体上存储一些数据
             这些数据包括当前加载图片的为n，当前加载完图片存储的数组finishList，当前需要加载图片地址数组，加载完成
             后需要执行的回调函数finishHandler，全部存储在这个图片对象中
-                        
+
         */
         loadImage:function(sourceArr,finishHandler,basePath,suffix){
-            if(typeof sourceArr==="string") sourceArr=[sourceArr];
+            if(typeof sourceArr==="string") sourceArr=[sourceArr]; //设置成数组，放在数组的第一个元素中------去尝试变成数组
             if(basePath && typeof basePath==="string"){
-                basePath=basePath.endsWith("/") ? basePath : basePath+"/";
+                basePath=basePath.endsWith("/") ? basePath : basePath+"/"; //endsWith判断字符串最后一个字符是什么
                 sourceArr=sourceArr.map(function(item){
                     item=String(item);
                     return basePath+(item.startsWith("/") ? item.slice(1) : item);
                 })
             }
-          
+
             if(suffix && typeof suffix==="string"){
                 suffix=suffix.startsWith(".")? suffix : "."+suffix;
                 sourceArr=sourceArr.map(function(item){
@@ -56,43 +56,43 @@ var Utils=(function(){
                     return item;
                 })
             }
-           
-            var img=new Image();
-            img.src=sourceArr[0];
-            img.n=0;
-            img.finishList=[];
-            img.sourceArr=sourceArr;
-            img.finishHandler=finishHandler;
-            img.addEventListener("load",this.loadHandler);
-            img.addEventListener("error",this.errorHandler);
+
+            var img=new Image(); //创建图片节点
+            img.src=sourceArr[0]; //src属性存储图片路径
+            img.n=0;//n属性记录图片索引
+            img.finishList=[];//当前加载完图片存储的数组
+            img.sourceArr=sourceArr;//所有路径数组
+            img.finishHandler=finishHandler;//
+            img.addEventListener("load",this.loadHandler);//预加载成功函数
+            img.addEventListener("error",this.errorHandler);//预加载错误函数
         },
-        /* 
+        /*
             加载完成执行的函数
             参数
                e 加载完成的事件对象event load
                这个函数中的this是加载图片的侦听对象，就是上一个函数中img
              1、当加载完成后，将当前图片克隆复制的新图片放入到当前图片的载体属性finishList（完成后图片数组）中
              2、判断加载下一张图片是否完成，如果完成了，返回true就直接跳出
-        
+
         */
         loadHandler:function(e){
             this.finishList.push(this.cloneNode(false));
             if(Utils.nextImg(this)) return;
         },
-          /* 
+          /*
             加载失败执行的函数
             参数
                e 加载完成的事件对象event error
                这个函数中的this是加载图片的侦听对象，就是上一个函数中img
              1、先判断加载下一张图片是否完成，如果加载完成直接跳出
              2、如果没有完成，把null添加在图片数组中
-        
+
         */
         errorHandler:function(e){
            if(Utils.nextImg(this)) return;
            this.finishList.push(null);
         },
-        /* 
+        /*
             加载下一张图片，传入参数当前图片
             img  就是loadImage函数中img，这个加载完成和失败事件函数中this
             1、增加img的需要加载第几张图片n
@@ -106,16 +106,14 @@ var Utils=(function(){
                 抛发事件的对象是针对document，因为在页面中document用存在并且唯一
                 如果全部加载完成返回true，以方便判断是否继续加载下一张图
             如果没有加载完成，重新设置这个图片的地址为下一个地址，并且返回false
-        
-        
         */
         nextImg:function(img){
             img.n++;
             if(img.n>img.sourceArr.length){
-                img.removeEventListener("load",Utils.loadHandler)
-                img.removeEventListener("error",Utils.errorHandler)
+                img.removeEventListener("load",Utils.loadHandler)//预加载函数
+                img.removeEventListener("error",Utils.errorHandler)//错误函数
                 if(typeof img.finishHandler==="function") img.finishHandler(img.sourceArr.length===1 ?img.finishList[0] : img.finishList);
-                else{
+                else{   //不填写finishHandler的情况
                     var evt=new Event(Utils.IMG_FINISH_EVENT);
                     evt.finishList=img.sourceArr.length===1 ?img.finishList[0] : img.finishList;
                     document.dispatchEvent(evt);

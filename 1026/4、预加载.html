@@ -11,13 +11,21 @@
 
 <body>
 
+    <!-- <img src="./img/1.jpg">;
     <script>
-        // var img=new Image();
-        // img.addEventListener("load",loadHandler);
-        // img.src="./img/1.jpg";
-       
+        var img = document.querySelector("img");//img相当于是图片容器，当图片塞到容器中才会撑大---获取不到宽度
+    </script> -->
 
-        // function loadHandler(e){
+    <script>
+
+
+        // var img=new Image();//先创建一张图片对象
+        // img.addEventListener("load",loadHandler);
+        // img.src="./img/1.jpg";//src：设置或返回图像的 URL
+        //直接获取到图片的宽度（高度）是缓存的信息
+
+
+        // function loadHandler(e){  // 预加载
         //     console.log(this)
         //     img.src="./img/2.jpg"
         // }
@@ -25,10 +33,11 @@
 
         // var sum = 0;
         // var img = new Image();
-        // img.src = "./img/1.jpg";
+        // img.src = "./img/1.jpg";  //全局变量
         // img.onload = function () {
+        //
         //     sum += this.width
-        //     var img = new Image();
+        //     var img = new Image(); //局部变量
         //     img.src = "./img/2.jpg";
         //     img.onload = function () {
         //         sum += this.width
@@ -70,7 +79,7 @@
     //         img.src="./img/"+n+".jpg";
     //         img.addEventListener("load",loadHandler);
     //     }
-        
+
 
     //     function loadHandler(e){
     //         arr.push(this);
@@ -87,7 +96,7 @@
     //             console.log(item.src,item.width);
     //         })
     //     }
-       
+
 
         // loadImage();
 
@@ -99,7 +108,7 @@
     //         img.src="./img/"+n+".jpg";
     //         img.addEventListener("load",loadHandler);
     //     }
-        
+
 
     //     function loadHandler(e){
     //         arr.push(this);
@@ -129,10 +138,12 @@
     //         img.src="./img/"+n+".jpg";
     //         img.addEventListener("load",loadHandler);
     //     }
-        
+
+    //第一次加载,进入后输入第一张图片，然后修改了img.src,图片的src重新加载，然后激活load事件，再修改再激活，直至最后一个没修改，进行输出。
 
     //     function loadHandler(e){
-    //         arr.push(this.cloneNode(false));
+                //arr.push(this); //this指代的都是当前的照片节点，push进arr中的都是this，会根据this改变而改变
+    //         arr.push(this.cloneNode(false)); //而进行克隆之后，会将当前节点进行复制到arr中，不再是this，而是节点，随后this改变不会影响前面
     //         // console.log(this.src)
     //         n++;
     //         if(n>12){
@@ -148,6 +159,7 @@
     //             console.log(item.src,item.width);
     //         })
     //     }
+        //封装函数写成纯函数--->不会引起外部变量和内部改变的函数
 
         // var arr=["./img/1.jpg","./img/2.jpg","./img/3.jpg","./img/4.jpg","5"]
         var arr=["1.jpeg","2","3","4","5.jpeg","6"]
@@ -169,7 +181,7 @@
     // console.log(str.slice(-4,-3))
 
 
-   
+
     </script>
 </body>
 
