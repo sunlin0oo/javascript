@@ -47,7 +47,7 @@
         } */
 
 
-        // // 工厂模式
+        // // 工厂模式 
         // function createTable(row,col){
         //     // throw 抛出异常 终止执行后续代码
         //     //  new TypeError()   创建一个类型错误的实例抛出异常
@@ -105,24 +105,25 @@
 
 
     // 如果出现不定量参数
-        // function fn(a,b){
+        // function fn1(a,b){
 
         // }
 
         // fn(1,2,3);
 
 
-        //     iterator 迭代器 在属性中有iterator表示该对象是迭代器对象
-        // ES5  不给形参
+        // iterator 迭代器 在属性中有iterator表示该对象是迭代器对象
+        // ES5  不给形参，严格遵守禁止同名参数
         // function fn(){
-        //     console.log(arguments);//只能出现在函数内，不是数组，是一种迭代器对象，是一个列表
+        //     console.log(arguments);//只能出现在函数内，不是数组，是一种迭代器对象，是一个列表型对象
         //     // 可以通过下标获取到对应的值,下标从0开始，使用arguments[下标] 可以获取到对应的值
         //     console.log(arguments[2]);
         //     console.log(arguments.length);  //实参的数量
+        //     console.log(fn.length)  //形参长度
         //     // 函数.length  形参的数量。指函数定义时，形参定义了几个
         //     // arguments.length  实参的数量，指函数执行时，传入了多少个参数
-        //     console.log(arguments.callee);//当前函数
-        //     console.log(arguments.callee.caller);//执行当前函数所在的上下文环境中的函数
+        //     console.log(arguments.callee);//当前函数---->fn()
+        //     console.log(arguments.callee.caller);//执行当前函数所在的上下文环境中的函数----->fn1();
         //
         // }
 
@@ -208,7 +209,7 @@
         // }
         //
         // function fn(a,b,...arg){
-        //     console.log(a,b,arg);
+        //     console.log(a,b,arg); //arg = [1,2,3]
         // }
         // fn(1,2,3);
 
@@ -244,6 +245,41 @@
         // }
         // 对象解构赋值中解决参数可以混写情况，不按照严格的顺序填入
 
+        //arguments and this 的问题
+        //回调函数中执行后，执行的回调函数中this指向window
+        function fn(f){
+            f();
+        };
+
+        function fn1(){
+            console.log(this);//--->window
+        }
+
+        fn(fn1);
+        //回调函数如果使用的是arguments调用回调，在执行的回调函数中this指向调用当前函数的上下文环境中的arguments
+        var obj = {
+            a:1,
+            b:function(){
+                function fn(f){
+                    // f();
+                    arguments[0]();//arguments[0] === fn
+                };
+                //fn1在谁中被回调，this就是谁中的arguments 
+                function fn1(){
+                    console.log(this);//--->window
+                }
+
+                // fn(fn1);
+                fn(fn1,3,5,6);//---->打印的this包含fn1,3,5,6
+                console.log(this);//---->obj
+                function fn(){
+                    console.log(this);//---->window;ES5中直接执行的命名函数中this是window
+                }
+                fn();
+            }
+        }
+        
+        obj.b();
     </script>
 </body>
 </html>
