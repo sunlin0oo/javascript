@@ -217,7 +217,63 @@
         //         console.log(i);
         //     },0,i)
         // }
+        
+        // 函数在哪里，属于谁里面
+        // var x =10;
+        
+        // function fn(){
+        //     console.log(x)
+        // };
+        // function show(f){
+        //     var x = 20; //局部变量 
+        //     f();
+        // };
+        // show(fn);
+        /**
+         * 结果是10。因为fn和show命名函数都在window作用域中，fn不属于show作用域中
+         * 故show的20不会赋值给fn中的x，fn的x会从全局变量中取得。
+        */
+        
+    // var obj = {
+    //     fn2:function(){
+    //         // console.log(fn2);//报错
+    //         console.log(this.fn2);//函数本身
+    //     }
+    // }
 
+    //关于对象中的this
+    /*在对象没有创建完成时，c:this.a中this指的是当前对象外的this而不是obj，故出错*/
+    // var a = 10;//在window中创建a变量，则c:this.a  === 10;
+    // var obj = {
+    //     a:2,
+    //     b:2,
+    //     c:this.a, //this指的是当前对象外的this
+    //     d:function(){
+    //         console.log(this.b);//this指向当前对象，谁调用d函数，this就是谁
+
+    //         var o = {
+    //             e:this.a,//this指的是当前对象外的this---->o是当前对象，o之外最近的就是obj.a = 1;
+    //         }
+    //         console.log(o);//打印1
+    //     }
+    // }
+
+    // console.log(obj);
+    // obj.d();//在obj创建完对象后执行
+
+
+    // var obj = {
+    //     a:1,
+    //     b:function(){
+    //         console.log(obj.a);//打印2
+    //     }
+    // }
+
+    // var o = obj;
+    // obj = {a:2};
+    // o.b();
+
+    
     </script>
 </body>
 </html>

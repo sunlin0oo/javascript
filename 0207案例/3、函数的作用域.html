@@ -14,6 +14,28 @@
         // var a=1;
         // console.log(a);
         // var a=3;
+
+        // var fn = function(){}
+        // var fn ;
+        // console.log(fn);//是function
+
+        // var fn = function(){}
+        // var fn = 1 ;
+        // console.log(fn);//是1
+
+        // var fn = 1 ;
+        // var fn = function(){}         
+        // console.log(fn);//是function
+
+        // var c;        
+        // function c(c){
+        //     console.log(c);
+        //     var c = 3;
+        // };
+        // c = 1;
+        // console.log(c);//1
+        // c(2);//报错
+
     </script>
     <script>
         // var a=2;
@@ -99,11 +121,16 @@
         // fn();
         // console.log(a);
 
-
+    
         // var a=1;
         // function fn(){
         //     // 当执行函数时，首先先把当前函数中所有var定义的局部变量做预解析
         //     // 变量作用域提升
+                //想要获取外部的a
+                /* console.log|(window.a);
+                //ES5中直接执行的命名函数中this是window
+                // console.log(this.a);
+                */
         //     console.log(a);
         //     var a=3;
         // }
@@ -111,21 +138,31 @@
         // console.log(a);
 
 
+        // var a = 1;
+        // function fn(){
+        //     console.log(a); //没有局部变量a,去找全局变量a 故打印a =1;
+        //     a=3;
+        // }
+
+        // fn();
+
+
 // 只有在函数中使用var定义的变量都是局部变量，意味着在函数刚开始，
 // 已经做了预解析，这个局部变量在刚开始的时候值是undefined
-        // var a=1;
+        // var name="world";
         // function fn(){
-        //     if(a===undefined){
-        //         a=3;
+        //  console.log(name);//undefined
+        //     if(typeof name === 'undefined'){
+        //         var name = 'Jack';//预解析，开辟局部变量name
+        //          console.log(name);
         //     }else{
-        //         var a="abc";
+        //         console.log(name);
         //     }
-        //     console.log(a);
         // }
         // fn();
 
 
-
+        
         // function fn(){
         //     console.log(a);
         //     function a(){
@@ -135,6 +172,48 @@
         // }
 
         // fn();
+
+
+        //更改原对象的属性
+        //局部变量引用全局变量，把引用地址赋值给o，所有o.a = 10;所以更改了o的引用地址的a的结果--->导致obj.a发生改变
+        // function fn(o){
+        //     o.a = 10;
+        // }
+
+        // var obj = {a:1};
+        // fn(obj);//obj.a = 10
+
+        //o重新创建一个新对象，和obj没有引用关系，所以obj不改变
+        // function fn(o){
+        //     o = {b:1};
+        // }
+
+        // var obj = {a:1};
+        // fn(obj);//obj.a = 1
+
+        /**
+         * 1.命名函数预解析时，不单纯开辟了空间，还将函数赋值给了这个变量，
+         * 因此，命名函数定义在任何位置都等同于在开始就定义完成。
+         * 2.只要在函数内部使用了var 定义变量或者参数传入的变量，都是局部变量，一旦有局部变量
+         * 则不能再调用到外部同名变量，那么这个变量也是预解析了。定义前获取就是undefined，
+         * 定义后获取就是这个变量值
+         * 3.变量调用只能调用到当前作用域及当前作用域所有父代作用域范围的非同名变量
+         * ，不能调用到当前作用域中子代的作用域范围变量
+        */
+        
+        var a = 1;
+        var b = 10;
+        function fn(){
+            var b = 2;//同名调用局部这里
+            //作用域能调用到b，a,调用不到c,d            
+            function fn1(){
+                var c = 3;
+                function fn2(){
+                        var d = 10;
+                }
+            }
+        }
+
     </script>
 </body>
 </html>
