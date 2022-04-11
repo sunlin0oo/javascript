@@ -36,11 +36,13 @@
         <div class="div1">1</div>
     </div>
     <script>
-        var div1=document.querySelector(".div1");
-
+        // var div1=document.querySelector(".div1");
+        
         // div1.onmousedown=function(e){
+        //     // e指的是onmousedown按下时的鼠标
         //     document.onmousemove=function(e1){
-        //         div1.style.left=e1.clientX-e.offsetX+"px"
+        //     // e1指的是onmousemove移动时的鼠标
+        //         div1.style.left=e1.clientX-e.offsetX+"px"  //e是指按下target
         //         div1.style.top=e1.clientY-e.offsetY+"px"
         //     }
         //     document.onmouseup=function(){
@@ -95,8 +97,8 @@
 
 
 
-
-
+                
+        //拖拽多个
         // var divs=document.querySelectorAll(".div1");
         // divs.forEach(function(item){
         //     item.addEventListener("mousedown",mouseHandler);
@@ -104,16 +106,18 @@
        
         // function mouseHandler(e){
         //     if(e.type==="mousedown"){
+            //this:按下谁就是谁
         //         document.offsetX=e.offsetX;
         //         document.offsetY=e.offsetY;
         //         document.div=e.target;
         //         document.addEventListener("mousemove",mouseHandler);
         //         document.addEventListener("mouseup",mouseHandler);
         //     }else if(e.type==="mousemove"){
-        //         // console.log(this)
+        //         // console.log(this)----->doucument
         //         this.div.style.left=e.clientX-this.offsetX+"px";
         //         this.div.style.top=e.clientY-this.offsetY+"px";
         //     }else if(e.type==="mouseup"){
+            //this:document
         //         this.removeEventListener("mousemove",mouseHandler);
         //         this.removeEventListener("mouseup",mouseHandler);
         //     }
@@ -147,6 +151,7 @@
             if(e.type==="mousedown"){
                 document.offsetX=e.offsetX;
                 document.offsetY=e.offsetY;
+                //侦听事件的函数是谁this就是谁
                 document.div=this;
                 document.addEventListener("mousemove",mouseHandler);
                 document.addEventListener("mouseup",mouseHandler);
@@ -183,10 +188,10 @@
                 var rect=this.div.parentElement.getBoundingClientRect();
                 var x=e.clientX-this.offsetX-rect.x;
                 var y=e.clientY-this.offsetY-rect.y;
-                if(x<=0) x=0;
-                if(y<=0) y=0;
-                if(x>=rect.width-this.div.offsetWidth)x=rect.width-this.div.offsetWidth;
-                if(y>=rect.height-this.div.offsetHeight)y=rect.height-this.div.offsetHeight;
+                if(x<=0) x=0;//限制左边框
+                if(y<=0) y=0;//限制上边框
+                if(x>=rect.width-this.div.offsetWidth)x=rect.width-this.div.offsetWidth;//右边框  父元素边框的offset-div的offset
+                if(y>=rect.height-this.div.offsetHeight)y=rect.height-this.div.offsetHeight;//下边框
                 this.div.style.left=x+"px";
                 this.div.style.top=y+"px";
             }else if(e.type==="mouseup"){

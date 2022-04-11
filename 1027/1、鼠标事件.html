@@ -33,26 +33,32 @@
     <div class="div1">
         <div class="div2"></div>
     </div>
-    <!-- <form>
+    <form>
         <input type="text">
         <input type="password">
-    </form> -->
+    </form>
     <script>
-        // MouseEvent    鼠标事件
-        // PointerEvent  点事件
+        // MouseEvent    鼠标事件---->父类
+        // PointerEvent  点事件----->子类
 
         /* 
             click  单击左键
             dblclick 双击左键
             mousedown  按下键
             mouseup  释放键
-            mouseover 鼠标经过   会冒泡，e.target的事件会委托当前元素
-            mouseout  鼠标滑开  会冒泡，e.target的事件会委托当前元素
-            mouseenter  鼠标进入  不会冒泡 ，子元素不会委托事件给父容器
-            mouseleave  鼠标离开   不会冒泡 ，子元素不会委托事件给父容器
+            mouseover 鼠标经过   会冒泡，e.target的事件会委托当前元素----->子元素
+            mouseout  鼠标滑开  会冒泡，e.target的事件会委托当前元素----->子元素
+            mouseenter  鼠标进入  不会冒泡 ，子元素不会委托事件给父容器---->当前侦听元素
+            mouseleave  鼠标离开   不会冒泡 ，子元素不会委托事件给父容器---->当前侦听元素
             mousemove  鼠标移动
             contextmenu  单击右键(右键菜单)
          */
+
+        //  document.addEventListener("click",clickHandler);
+
+        // function clickHandler(e){
+        //     console.log(e);//PointEvent
+        // }
 
          /* 
           按着键盘上的ctrl，alt，shift   command（mac）鼠标操作
@@ -60,12 +66,12 @@
             ctrlKey: false
             shiftKey: false
             metaKey: false   command（mac）
-                  左键  右键  判断鼠标按的左中右哪个键 mousedown
+                  左键 中键 右键  判断鼠标按的左中右哪个键 mousedown
             button: 0   2   1
             buttons: 1  2   4
             which: 1   3   2
 
-            相对视口位置
+            相对视口位置---->当前窗口
             clientX: 192
             clientY: 88
             x: 192
@@ -82,6 +88,7 @@
             在父容器定位时 相对目标对象（e.target)
             layerX: 192
             layerY: 88
+            常使用以下两个：
             offsetX: 192
             offsetY: 88
             如果目标元素没有定位
@@ -104,6 +111,8 @@
             fromElement: null   
             主要针对 mouseover   mouseout  从什么元素进入或者滑出
 
+            var input = document.querySelector("input");
+            input.addEventListener("focus",clickHandler);       
             relatedTarget: null
             主要用于聚焦，切换聚焦对象时，指代离开上次聚焦的对象
 
@@ -119,18 +128,28 @@
             
          
          */
-      
-        // var div1=document.querySelector(".div1");
-        // div1.addEventListener("mouseover",clickHandler);
-        // div1.addEventListener("mouseout",clickHandler);
-        // div1.addEventListener("mouseenter",clickHandler);
-        // div1.addEventListener("mouseleave",clickHandler);
+
+        //  var div2  = document.querySelector( ".div2" );
+        //  var input = document.querySelector("input");
+        //  div2.addEventListener("mouseover",clickHandler);
+        //  input.addEventListener("focus",clickHandler);
+        //  div2.addEventListener("mousedown",clickHandler);
 
         //  function clickHandler(e){
-        //      console.log(e.type,e.target)
+        //      console.log(e);
         //  }
+      
+        var div1=document.querySelector(".div1");
+        div1.addEventListener("mouseover",clickHandler);
+        div1.addEventListener("mouseout",clickHandler);
+        div1.addEventListener("mouseenter",clickHandler);
+        div1.addEventListener("mouseleave",clickHandler);
 
+         function clickHandler(e){
+             console.log(e.type,e.target)
+         }
 
+        //屏蔽右键菜单
         // document.addEventListener("contextmenu",contextHandler);
         // function contextHandler(e){
         //     e.preventDefault();

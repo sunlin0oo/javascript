@@ -66,17 +66,17 @@
 
         function clickHandler(e) {
             if (e.target.nodeName !== "LI") return;
-            switch (arr.indexOf(e.target.textContent)) {
-                case 0:
+            switch (arr.indexOf(e.target.textContent)) { //元素的文本内容
+                case 0: //新建
                     createElem(e.x, e.y);
                     break;
-                case 3:
+                case 3: // 粘贴
                     pasteElem();
                     break;
                 case 1:
-                case 2:
+                case 2://剪贴
                    if(copyElem(e.target)) return;
-                case 4:
+                case 4://删除
                     deleteElem()
                     break;
             }
@@ -106,7 +106,7 @@
             Utils.dragOff(prevElem);
             prevElem.removeEventListener("click", clickSelectHandler);
             var elem = prevElem;
-            if (prevElem.previousElementSibling && prevElem.previousElementSibling.nodeName === "DIV") selectElem(
+            if (prevElem.previousElementSibling && prevElem.previousElementSibling.nodeName === "DIV") selectElem(   // previousElementSibling上一个兄弟节点
                 prevElem.previousElementSibling);
             else if (prevElem.nextElementSibling && prevElem.nextElementSibling.nodeName === "DIV") selectElem(prevElem
                 .nextElementSibling);

@@ -127,8 +127,9 @@ var Utils=(function(){
              return false;
         },
         dragOn:function(elem,rect){
+            //this--->Utils
             elem.addEventListener("mousedown",this.mouseHandler);
-            elem.self=this;
+            elem.self=this;//div增添self属性this
             elem.rect=rect;
         },
         dragOff:function(elem){
@@ -136,17 +137,17 @@ var Utils=(function(){
         },
         mouseHandler:function(e){
             if(e.type==="mousedown"){
-                // this div
+                // this---->div
                 e.preventDefault();
                 document.offsetX=e.offsetX;
                 document.offsetY=e.offsetY;
                 document.div=this;
-                document.addEventListener("mousemove",this.self.mouseHandler);
-                document.addEventListener("mouseup",this.self.mouseHandler);
+                document.addEventListener("mousemove",this.self.mouseHandler);//this.self == Utils
+                document.addEventListener("mouseup",this.self.mouseHandler);//谁侦听的this就是谁
             }else if(e.type==="mousemove"){
-                // console.log(this)document
-                var bool=true;
-                if(this.div.rect){
+                // console.log(this)--->document
+                var bool=true;//默认限制处理
+                if(this.div.rect){ // 判断是否有外框
                     rect=this.div.rect;
                     if(!rect.width)rect.width=0;
                     if(!rect.height)rect.height=0;
@@ -157,16 +158,18 @@ var Utils=(function(){
                             rect.y=this.div.parentElement.getBoundingClientRect().y;
                     }
                     bool=!(!rect.width && !rect.height)
-                }else{
+                }else{//否则寻找父元素的外框
                     rect=this.div.parentElement.getBoundingClientRect();
                     if(this.div.parentElement===document.body){
                         bool=false;
                     }
-                    if(this.div.parentElement.clientLeft) rect.width-=this.div.parentElement.clientLeft*2;
+                    if(this.div.parentElement.clientLeft) rect.width-=this.div.parentElement.clientLeft*2; //.clientLeft--->边线的粗细
                     if(this.div.parentElement.clientTop) rect.height-=this.div.parentElement.clientTop*2;
                 }
+
                 var x=e.clientX-this.offsetX-rect.x;
                 var y=e.clientY-this.offsetY-rect.y;
+
                 if(bool){
                     if(x<=0) x=0;
                     if(y<=0) y=0;
@@ -178,11 +181,12 @@ var Utils=(function(){
                 this.div.style.left=x+"px";
                 this.div.style.top=y+"px";
             }else if(e.type==="mouseup"){
-                // this document
-                this.removeEventListener("mousemove",this.div.self.mouseHandler);
+                // this---->document
+                this.removeEventListener("mousemove",this.div.self.mouseHandler);//this.div.self--->document.div.self
                 this.removeEventListener("mouseup",this.div.self.mouseHandler);
             }
         },
+        //随机色
         randomColor:function(a,r,g,b){
             if(a===undefined) a=1;
             var color="rgba(";

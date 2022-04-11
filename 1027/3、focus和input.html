@@ -33,6 +33,10 @@
 
             var id;
             input.addEventListener("input",inputHandler);
+            /**
+             * 节流：在第一次触发事件时，不立即执行函数，一段时间后再执行
+             * 防抖：在函数执行一次之后，该函数在指定的事件期限内不再工作，过一段事件再工作
+            */
 
             function inputHandler(e){
                 // console.log(input.value)
@@ -45,7 +49,7 @@
                 id=setTimeout(function(){
                     setvalue(input.value);
                     clearTimeout(id);
-                    id=undefined;
+                    id=undefined;//为了能够使id能够进入达到节流的效果
                 },500);
             }
 
