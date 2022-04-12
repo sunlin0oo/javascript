@@ -18,7 +18,7 @@
         // console.log(reg.test("cdade"));
 
         // ES5后期
-        "use strict";
+        "use strict";//严格模式
 
         // 未定义不能使用
         //  a=3;
@@ -46,14 +46,15 @@
         //     b=20;
         //     c=30;
         // }
-        // console.log(obj,c);
+        // console.log(obj,c); // obj = {a:10,b:20} , c = 30;
 
 
 
         // 只读属性
         // var str="aasd"
         // str.length=3;
-
+        
+        //设置只读属性
         // var obj={a:1,b:2};
         // Object.defineProperty(obj,"c",{
         //     writable:false,
@@ -76,7 +77,7 @@
 
 
         // 反射  将字符串反射为表达式或者变量
-        // console.log(eval("10+20"));
+        // console.log(eval("10+20"));//30
 
 
         // eval=10;
@@ -86,12 +87,12 @@
         // console.log(this)
 
         // function fn(){
-        //     console.log(this)
+        //     console.log(this) // undefined
         // }
         // fn();
 
         // setTimeout(function(){
-        //     console.log(this)
+        //     console.log(this) // window
         // },100)
 
         // var a=10;
@@ -105,7 +106,7 @@
         // }
 
         // function fn(){
-        //     console.log(this)
+        //     console.log(this)// undefined
         // }
         // obj.c(fn);
 
@@ -115,14 +116,14 @@
         // }
 
         // function fn2(){
-        //     console.log(this)
+        //     console.log(this)// undefined
         // }
         // fn1(fn2);
 
 
         // var arr=[1,2,3];
         // arr.forEach(function(){
-        //     console.log(this);
+        //     console.log(this);// undefined
         // })
 
 

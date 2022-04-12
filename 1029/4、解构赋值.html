@@ -14,6 +14,8 @@
     <div></div>
     <div></div>
     <script>
+//看到数组直接按序结构，看到对象直接属性名
+
         // 数组解构
         // var a=1;
         // var b=2;
@@ -28,7 +30,7 @@
         // 交换
         // var a=3,b=4;
         // [a,b]=[b,a];
-        // console.log(a,b)
+        // console.log(a,b)//4，3
 
 
         // var arr=[1,2,3];
@@ -58,9 +60,11 @@
         // function fn([a,b=0]=[1,2]){
         //     console.log(a,b);
         // }
-        // fn([3,4]);
-        // fn([3]);
-        // fn(); 
+        // fn([3,4]); //3，4
+        //b缺省，所以默认值0
+        // fn([3]); //3，0
+        //如果这一个参数[a,b=0]缺省，则把后面的赋值给前面
+        // fn(); //1，2
 
 
 
@@ -70,30 +74,30 @@
 
         // var obj={a:1,b:2};
         // var {b,a}=obj;
-        // console.log(a,b);
+        // console.log(a,b);//1,2
 
 
         // function fn({a=0,b=0}){
         //     console.log(a,b);
         // }
 
-        // fn({b:10});
-        // fn({a:5});
+        // fn({b:10});//0,10
+        // fn({a:5});//5,0
 
 
         // function fn({a,b,c=0}={c:10,b:20,a:5}){
         //     console.log(a,b,c);
         // }
 
-        // fn({a:6});
-        // fn({b:10});
-        // fn({});
-        // fn();
+        // fn({a:6});//6,undefined,0
+        // fn({b:10});//undefined,10,0
+        // fn({});undefined,undefined,0
+        // fn();5,20,10
 
 
         // var obj={a:1,b:2,c:{d:20}};
         // var {a,b,c:{d}}=obj;
-        // console.log(a,b,d)
+        // console.log(a,b,d)//1,2,20
 
 
         // var obj={a:1,b:2,c:{a:10,b:20}};
@@ -113,19 +117,19 @@
     //             }
     //         ]
     //     };
-
+    // 解构赋值：
     //    var {p:[a,{y}]}=obj;
     //    console.log(a,y);
 
-        // var obj={
-        //     x:{x:[3,6],y:[7,9],x1:{x:{x:10,y:"string"}}}
-        // }
+    // var obj={
+    //     x:{x:[3,6],y:[7,9],x1:{x:{x:10,y:"string"}}}
+    // }
+    // 解构赋值：
+    // var {x:{x:[a,b],y:[c,d],x1:{x:{x,y:{length:len}}}}}=obj;
+    // console.log(a,b,c,d,x,len)
 
-        // var {x:{x:[a,b],y:[c,d],x1:{x:{x,y:{length:len}}}}}=obj;
-        // console.log(a,b,c,d,x,len)
 
-
-
+        //实例对象拆解
         // var {min,max,random:r}=Math;
 
         // console.log(min(1,2,3,4,5,6))
@@ -150,25 +154,36 @@
         // var obj={a:1,b:2,c:3};
         // var o={...obj};
         // obj.a=10;//复制对象
-        // console.log(o)
+        // console.log(o)//a变换o是不会进行变化的
 
         // var obj={a:1,b:2,c:{a:10,b:20}};
         // var o={...obj};
         // obj.c.a=100;//浅复制
         // console.log(o);
 
-
         // function fn(a,b,...arr){
-        //     console.log(a,b,arr);
+        //     console.log(arr);// 数组： [{a:1,b:2}]
         // }  
+        // fn(3,4,5,6,7,8);//3,4,[5,6,7,8]
+
+        // function fn(...arg){
+        //     console.log(arg);//相当于arguments
+        // }
+        // fn(3,4,5,6,7,8);//[3,4,5,6,7,8]
+
+        // function fn(...arr){
+        //     console.log(arr);// 数组： [{a:1,b:2}]
+        // }  
+        // fn({a:1,b:2})
+        
         // function fn(...[{a,b}]){
-        //     console.log(a,b);
+        //     console.log(a,b);//1,2
         // }  
-
-
-
+        // fn({a:1,b:2})
+        
+        //函数参数的解构
         // function fn(...[a,b]){
-        //     console.log(a,b)
+        //     console.log(a,b)//3,4
         // }
         // fn(3,4);
 

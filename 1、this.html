@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // *****
+        // "use strict";
+
+        // 1、全局中的this  
+        // console.log(this);//window
+
+
+
+        // 2、普通函数中的this
+        // 1）、非严格模式指向window
+        // 2）、严格模式是undefined
+        // function fn(){
+        //     console.log(this)
+        // }
+
+        // var fn=function(){
+        //     console.log(this);
+        // }
+
+        // fn();
+
+
+
+        // 3、对象中的this
+        // 1)、对象属性上的this，是当前对象外上下文环境中的this指向
+        // 2）、对象方法中的this，是当前对象
+        // var a=1;
+        // var b=10;
+        // var ff=5;
+ 
+        // var obj={
+        //     a:2,
+        //     b:this.a,//1
+        //     c:function(){
+        //         console.log(this);//obj
+        //     },
+        //     d(){
+        //         console.log(this);//obj
+        //     },
+        //     e:{
+        //         aa:this.b,//1  10
+        //         bb:function(){
+        //             console.log(this)
+        //             var ff=2;
+        //             var o={
+        //                 ff:1,
+        //                 hh:this.ff
+        //             }
+        //             console.log(o.hh);//1    2   undefined
+        //         }
+        //     }
+        // }
+   
+        // console.log(obj)
+        // obj.c();
+        // obj.d();
+        // console.log(obj.e.aa);
+        // obj.e.bb();
+
+
+
+
+        // 4、回调函数中的this
+        // 1）、除了对象的方法以外的函数中默认函数执行时，this指向window，严格模式时指向undefined
+        // 2）、在函数中调用另外一个函数时，另外一个函数中this指向window，严格模式时指向undefined
+        // 3）、任何普通回调函数中this指向window，严格模式指向undefined
+        // 4）、递归函数中this指向window，严格模式指向undefined,对象方法中的递归指向调用当前方法的对象
+        // 5)、部分方法中可以重新带入this指向，例如forEach,map,filter等等(不含reduce)，这时候this指向被重新带入对象
+        // 6）、回调函数中，如果回调时使用arguments[n]() （根据参数的位置n不同） 回调函数中this指向回调该函数的函数中arguments对象
+       
+    //     var obj={
+    //        a:function(){
+    //         function fn1(){
+    //              fn2();
+    //         }
+
+    //         function fn2(){
+    //             console.log(this)
+    //         }
+    //          fn1();
+
+    //             function fn(){
+    //                 console.log(this)
+    //             }
+    //             fn();
+
+    //             function fn1(f){
+    //                 f();
+    //             }
+    //             function fn2(){
+    //                 console.log(this)
+    //             }
+    //             fn1(fn2);
+
+    //             var i=1;
+    //             function fn(){
+    //                 console.log(this)
+    //                 i++;
+    //                 if(i>3)return;
+    //                 fn();
+    //             }
+    //             fn();
+
+    //             setTimeout(function(){
+    //                 console.log(this);
+    //             },1000)
+
+    //             var arr=[1,2,3,4];
+    //             arr.forEach(function(){
+    //                 console.log(this)
+    //             })
+
+    //             var arr=[1,2,3,4];
+    //             arr.forEach(function(){
+    //                 console.log(this)
+    //             },{a:1})
+
+
+    //             function fn1(){
+    //                 arguments[0]();//执行回调函数的函数
+    //             }
+    //             function fn2(){
+    //                 console.log(this);//执行的回调函数 ，这里的this指向fn1中arguments对象
+    //             }
+
+    //             fn1(fn2)
+                
+    //        },
+    //        i:1,
+    //        b:function(){
+    //            console.log(this)
+    //             this.i++;
+    //             if(this.i>3) return;
+    //             this.b();
+    //        }
+    //    }
+
+    //    obj.b();
+    // obj.a();
+
+
+    
+        // function fn1(){
+        //     console.log(this)//window  undefined
+        //     function fn2(){
+        //         console.log(this)//window  undefined
+        //         var obj={
+        //             a:1,
+        //             b:function(){
+        //                 console.log(this)//obj 
+        //                 fn3();
+        //                 arguments[0]();
+        //             }
+        //         }
+        //         obj.b(fn3);
+        //     }
+        //     function fn3(){
+        //         console.log(this)//window  arguments   undefined  arguments
+        //         var arr=[1,2,3,4,5];
+        //         arr.flatMap(function(){
+        //             console.log(this)//{a:10}// 2个5次
+        //         },{a:10})
+        //     }
+        //     fn2(fn3)
+            
+        // }
+        // fn1();
+
+
+
+
+
+        // 5、事件中this
+        // 谁侦听事件，事件函数中this就是指向谁
+        // document.addEventListener("click",function(){
+        //     console.log(this)
+        // })
+
+
+
+        // 6、call和apply、bind
+        // 如果填入第一个参数是非undefined和null，执行这个函数后，this指向这个传入的参数
+        // 如果填入的参数时非引用类型的数据时，执行函数中，this指向这个传入的参数的对象类型
+        // 如果没有填入第一个参数，或者第一个参数时null时，this执行window，
+        // 如果严格模式时，没有传入参数指向undefined，传入的参数是什么this就指向什么，并不做对象转换
+       
+        // var obj={
+        //     a:function(){
+        //         function fn(){
+        //             console.log(this)
+        //         }
+
+        //         fn.call({a:1});
+        //         fn.call();
+        //         fn.call(null);
+        //     }
+        // }
+
+        // obj.a();
+
+
+
+        // 7、ES6面向对象中this的指向
+        // 1）、普通实例化方法中和构造函数中this指向实例化的对象
+        // 2）、当出现call，apply，bind，箭头函数、回调函数，事件函数等特殊使用时，遵照特殊使用的this
+        // 3）、静态方法中的this指向当前类，或者构造函数
+        // class Box{
+        //     constructor(){
+        //         console.log(this)//实例化的对象
+        //         this.play();
+        //     }
+        //     play(){
+        //         console.log(this)//实例化的对象
+        //     }
+        //     static run(){
+        //         console.log(this)//Box类
+        //     }
+        // }
+
+        // var b=new Box();
+        // Box.run();
+
+
+        // 8、ES5中面向对象
+
+        // 1、函数作为普通函数执行时，this，仍然指向window和undefined
+        // 2、通过new 把函数作为构造函数使用时，返回一个实例化对象，构造函数中this执行当前返回实例化对象
+        // 3、原型prototype上的方法中this指向调用当前方法的实例化对象
+        // 4、函数作为对象定义的方法，中this指向当前函数，也就是构造函数
+        // function Box(){
+        //     console.log(this)
+        // }
+
+        // Box.prototype.a=1;
+        // Box.prototype.play=function(){
+        //     console.log(this)
+        // }
+
+        // Box.run=function(){
+        //     console.log(this)
+        // }
+    
+        // var b=new Box();
+        // b.play();
+        // Box();
+
+
+
+        // 9、箭头函数
+        // 任何地方的箭头函数执行箭头函数外上下文环境中this指向
+
+        // var fn=()=>{
+        //     console.log(this);//window
+        // }
+        // fn();
+
+
+        // function fn(){
+        //     (()=>{
+        //         console.log(this)//window,undefined
+        //     })();
+        // }
+        // fn();
+
+        // var obj={
+        //     a:1,
+        //     b:function(){
+        //         console.log(this)
+        //         var fn=()=>{
+        //             console.log(this);//obj
+        //         }
+        //         fn();
+        //     },
+        //     c:()=>{
+        //         console.log(this);//window
+        //     }
+        // }
+
+        // obj.b();
+        // obj.c();
+
+
+        var obj={
+            a:function(){
+                document.addEventListener("click",e=>this.clickhandler(e));
+            },
+            clickhandler:function(e){
+                console.log(this);//obj
+            }
+        }
+    </script>
+</body>
+</html>

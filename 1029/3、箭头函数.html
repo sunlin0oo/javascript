@@ -39,14 +39,14 @@
 
             // 如果函数内只有一句话，并且是retrun返回一个表达式或者这句话什么也没有返回，则可以省略花括号
         // var fn=(a,b)=>a+b;
-
+        //上下两句相同
         // var fn=function(a,b){
         //     return a+b;
         // }
 
 
     //     var arr=[1,2,3];
-    //     arr.sort((a,b)=>b-a);
+    //     arr.sort((a,b)=>b-a); // 降序
     //    var s=arr.reduce((value,item)=>value+item);
     //    if(arr.some(item=>item>2)){
 
@@ -55,14 +55,14 @@
         
         var obj={
             a:function(){
-                console.log(this);
+                console.log(this);//obj
 
                 function abc(){
-                    console.log(this)
+                    console.log(this) // window
                 }
                 // abc();
                 this.c();
-                // document.addEventListener("click",this.b);
+                // document.addEventListener("click",this.b);//document
                 // document.addEventListener("click",function(e){
                 //     console.log(this);//document
                 //     obj.b();
@@ -70,7 +70,7 @@
 
                 // console.log(this)
                 // document.addEventListener("click",e=>{
-                //     console.log(this);//指向当前箭头函数外this的指向
+                //     console.log(this);//指向当前箭头函数外this的指向----obj
                 //     this.b(e);
                 // })
 
@@ -79,8 +79,10 @@
                 // document.addEventListener("click",e=>this.b(e,arguments.callee));、
 
                 // this.clickhandler=e=>this.b(e);
-                // 如果需要删除这个侦听，必须把箭头函数存储在一个属性上，然后后面调用删除
+                // 如果需要删除这个侦听，必须把箭头函数存储在一个属性上，然后后面调用删除!!!!
                 // document.addEventListener("click",this.clickhandler);
+
+
                 document.addEventListener("click",function(e){
                     console.log(this)//docuement
                 //    this.b();//因为document上面没有b函数
@@ -99,7 +101,7 @@
                 document.removeEventListener("click",this.clickhandler);
             },
             c:function(){
-                console.log(this);
+                console.log(this); // obj
             }
         }
 
@@ -124,12 +126,12 @@
         // document.addEventListener("click",clickhandler(10))
 
         // function clickhandler(a){
-        //     console.log(this)
+        //     console.log(this)//window
         //     // return function(e){
-        //     //     console.log(this);
+        //     //     console.log(this);//document
         //     // }
         //     return (e)=>{
-        //         console.log(this);
+        //         console.log(this);//window
         //     }
         // }
 
@@ -142,6 +144,7 @@
             b:()=>{
                 console.log(this);
             },
+            //这种写法等同于a函数的写法
             c(){
                 console.log(this);
             }
