@@ -11,13 +11,13 @@
 <body>
     <script>
         // fn();
-        // 命名函数
+        // 命名函数-->可以进行预先的封装，在需要使用的地方通过调用函数名运行。
         // function fn(){
 
         // }
 
 
-        // 匿名函数
+        // 匿名函数-->可以被保护
         // var fn=function(){
 
         // }
@@ -31,7 +31,6 @@
         // function fn(){
         //     console.log("a");
         // }
-
 
 
         /*  var a=3;
@@ -109,6 +108,7 @@
          function b(){
 
          }
+
          function c(){
 
          }
@@ -122,9 +122,6 @@
              c();
              console.log(4);
          } */
-
-
-
 
       /*   function a() {
             // 很多代码
@@ -146,8 +143,6 @@
             a();
             console.log(2);
         } */
-
-
 
 
         // function init(){
@@ -189,21 +184,20 @@
         // }
 
 
-        var b=10;
-        var obj={
-            b:2,
-            a:this.b,//当前对象外上下文环境中的this
-            c:function(){
-                console.log(this.a);
-                // 在对象的方法中this指当前的对象，也指谁调用当前这个方法，this就是谁
-            }
-        }
+        // var b=10;
+        // var obj={
+        //     b:2,
+        //     a:this.b,//当前对象外上下文环境中的this---->window
+        //     c:function(){
+        //         console.log(this.a);//10----指向obj
+        //         // 在对象的方法中this指当前的对象，也指谁调用当前这个方法，this就是谁
+        //     }
+        // }
+        // var o=obj;
+        // obj={z:10};
 
-        var o=obj;
-        obj={z:10};
-
-        o.c();
-        console.log(o);
+        // o.c();
+        // console.log(o);
 
 
 
@@ -212,16 +206,15 @@
         // var o={
         //     a:100,
         //     b:function(){
-        //            上下文环境，this，谁调用o调用，o环境下的a
-        //         console.log(this);
+        // //上下文环境，this，谁调用o调用，o环境下的a
+        //         console.log(this);//----->指向o
         //         var obj1={
         //             a:1,
-        //             b:this.a
+        //             b:this.a//---->this指向o
         //         }
         //         console.log(obj1.b);
         //     }
         // }
-
         // o.b();
     </script>
 
