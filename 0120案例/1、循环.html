@@ -138,6 +138,132 @@
 //     }
 
 
+// var arr = [
+//     { name:'nick', age:18 },
+//     { name:'freddy', age:24 },
+//     { name:'mike', age:26 },
+//     { name:'james', age:34 }
+// ];
+// for(var item of arr){	
+//     console.log(item.name,item.age);
+// }
+/*  nick 18 
+    freddy 24 
+    namemike 26 
+    namejames 34
+*/
+
+// var arr = ['nick','freddy','mike','james'];
+// var userMsg = {
+//     nick: {
+//         name: 'nick',
+//         age: 18,
+//         sex: '男'	
+//     },
+//     freddy: {
+//         name: 'freddy',
+//         age: 24,
+//         sex: '男'
+//     }	
+// };
+ 
+// for(var index in arr){	
+//     console.log(index +'. ' + arr[index]);
+// }
+// /* 0. nick 
+//    1. freddy  
+//    2. namemike 
+//    3. namejames
+// */
+// console.log('-----------分割线-----------');
+
+// for(var key1 in userMsg){
+//     console.log(key1);	
+//     for(var key2 in userMsg[key1]){
+// 	console.log(key2 +': ' + userMsg[key1][key2]);
+//     }
+// }
+
+/*
+nick
+    name: nick
+    age: 18
+    sex: 男
+freddy
+    name: freddy
+    age: 24
+    sex: 男*/
+
+/*for in 与 for of 两者区别*/
+/*区别①：for of无法循环遍历对象*/
+// var userMsg = {
+//     0: 'nick',
+//     1: 'freddy',
+//     2: 'mike',	
+//     3: 'james'
+// };
+ 
+// for(var key in userMsg){
+//     console.log(key, userMsg[key]);	
+// }/*
+// 0 nick
+// 1 freddy
+// 2 mike
+// 3 james*/
+// console.log('-----------分割线-----------');
+// for(var item of userMsg){	
+//     console.log(item);//报错
+// }
+
+
+/*区别②：遍历输出结果不同
+for in循环遍历的是数组的键值(索引)，
+而for of循环遍历的是数组的值。*/
+// var arr = ['nick','freddy','mike','james'];
+// for(var key in arr){
+//     console.log(key);	
+// }
+/*
+0
+1
+2
+3*/
+// console.log('-----------分割线-----------');
+// for(var item of arr){	
+//     console.log(item);
+// }
+/*
+nick 
+freddy
+mike
+james
+ */
+
+
+ /*区别③：for in 会遍历自定义属性，for of不会*/
+//  var arr = ['nick','freddy','mike','james'];
+// arr.name = "数组";
+ 
+// for(var key in arr){
+//     console.log(key+': '+arr[key]);	
+// }
+// /*
+// 0: nick
+// 1: freddy
+// 2: mike
+// 3: james
+// 4: "数组"
+// */
+// console.log('-----------分割线-----------');
+// for(var item of arr){	
+//     console.log(item);
+// }
+// /*
+// nick 
+// freddy
+// mike
+// james
+//  */
 
     </script>
 </body>
