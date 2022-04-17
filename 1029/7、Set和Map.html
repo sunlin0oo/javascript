@@ -78,7 +78,7 @@
         // }
 
 
-        /*给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false * /
+        /*给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false */
         // var containsDuplicate = function(nums) {
         //     let s = new Set();
         //     for(var item of nums){
@@ -93,7 +93,6 @@
 
         // Map 类型  键值对   有键值对的数量 key可以是任意类型！！！！
 
-
         var m=new Map()
         var o={a:1};
         var o1={a:2};
@@ -101,10 +100,10 @@
         m.set("a",1);
         m.set(o,o1);//o作为key，存储了o1对象
         m.set(o1,o2);
-
-    //     console.log(m.get("a"));//1
-    //     console.log(m.get(o));//{a:1}
-    //     console.log(m.get(o1));
+        //map.get 可以获取到value
+        console.log(m.get("a"));//1
+        console.log(m.get(o));//{a:1}
+        console.log(m.get(o1));
 
     //    console.log( m.has("a"))
     //    console.log( m.has(o1))
