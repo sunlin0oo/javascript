@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*给定一个字符串 s 表示一个整数嵌套列表，实现一个解析它的语法分析器并返回解析的结果 NestedInteger 。列表中的每个元素只可能是整数或整数嵌套列表*/
+        // var deserialize = function(s) {
+        //     let index = 0;
+        //     const dfs = (s) => {
+        //         if (s[index] === '[') {
+        //             index++;
+        //             const ni = new NestedInteger();
+        //             while (s[index] !== ']') {
+        //                 ni.add(dfs(s));
+        //                 if (s[index] === ',') {
+        //                     index++;
+        //                 }
+        //             }
+        //             index++;
+        //             return ni;
+        //         } else {
+        //             let negative = false;
+        //             if (s[index] === '-') {
+        //                 negative = true;
+        //                 index++;
+        //             }
+        //             let num = 0;
+        //             while (index < s.length && isDigit(s[index])) {
+        //             //charCodeAt() 方法可返回指定位置的字符的 Unicode 编码
+        //                 num = num * 10 + s[index].charCodeAt() - '0'.charCodeAt();
+        //                 index++;
+        //             }
+        //             if (negative) {
+        //                 num *= -1;
+        //             }
+        //             return new NestedInteger(num);
+        //         }
+        //     }
+        //     return dfs(s);
+        // };
+
+        // const isDigit = (ch) => { 
+        //     //parseFloat(ch)该函数指定字符串中的首个字符是否是数字--->如果字符串的第一个字符不能被转换为数字，那么 parseFloat() 会返回 NaN。
+        //     return parseFloat(ch).toString() === "NaN" ? false : true;
+        // }
+
+
+        /*给定一个整数 n ，返回 *可表示为两个 `n` 位整数乘积的 **最大回文整数*** 。因为答案可能非常大，所以返回它对 `1337` **取余** 。*/
+        // var largestPalindrome = function(n) {
+        //     if(n === 1){
+        //         return 9
+        //     };
+        //     let max = 10**n - 1;
+        //     for(let left = max ; left>max/10; left--){
+        //         let right = String(left).split('').reverse().join('');
+        //         let p = BigInt(String(left)+right);
+        //         let x = BigInt(max);
+        //         while((x*x)>=p){
+        //             if(p % x === BigInt(0)){
+        //                 return p % BigInt(1337);
+        //             }
+        //             x--;
+        //         }
+        //     }
+        // };
+
+
+        // const isletter= (i)=>{
+        //     return(i >= "a" && i<="z") || (i >= "A" && i<="Z");
+        // }
+
+        // var mostCommonWord = function(paragraph, banned) {
+        //     const bannedSet = new Set();
+        //     //将禁用单词放入Set集合中
+        //     for (const word of banned) {
+        //         bannedSet.add(word);
+        //     }
+
+        //     let maxFrequency = 0;//记录当前最大次序
+        //     const frequencies = new Map();//建立HashMap
+        //     let sb = '';
+        //     const length = paragraph.length;//不计算分号
+        //     for(let i = 0;i <= length;i++){
+        //         if(i<length && isletter(paragraph[i])){
+        //             sb = sb + paragraph[i].toLowerCase();//拼接单词
+        //         }else if(sb.length >0){//判断之前的单词是否拼接，避免""," 和 " "连续出现情况
+        //             if(!bannedSet.has(sb)){ //一个单词判断是否为禁用单词
+        //                 let frequency = (frequencies.get(sb) || 0) + 1;//哈希表加入，若没有则输入，有的话则value+1,
+        //                 frequencies.set(sb, frequency);//重新计数，加入哈希表中
+        //                 maxFrequency = Math.max(maxFrequency,frequency);//求出当前最多的选中次序
+        //             }
+        //             sb = '';//重置单词
+        //         }
+        //     }
+        //     let  mostCommon = '';
+        //     // entries() 返回一个新的Array Iterator对象，该对象包含数组中每个索引的键/值对。
+        //     for (const [word,frequency] of frequencies.entries()){
+        //         if (frequency === maxFrequency) { //与之前的最多选中进行匹配key
+        //             mostCommon = word;
+        //             break;
+        //         }
+        //     }
+        //     console.log(mostCommon);
+        //     return  mostCommon;
+        // };  
+
+        /*给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标   */
+        // var twoSum = function(nums, target) {
+        //     let map = new Map();
+        //     for(let i = 0,len = nums.length;i<len ; i++){
+        //         if(map.has(target - nums[i])){
+        //             return [map.get(target - nums[i]),i]
+        //         }else{
+        //             map.set(nums[i],i);
+        //         }
+        //     }
+        //     return null;
+        // };
+
+        /*给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。
+        请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。*/
+
+        // var merge = function(nums1, m, nums2, n) {
+        //     let p1=0,p2=0;
+        //     let sort =new Array(m+n).fill(0);
+        //     var cur;
+        //     while(p1 < m || p2 <n){
+        //         if(p1 === m){
+        //             cur = nums2[p2];
+        //             p2++;
+        //         }else if(p2 === n){
+        //             cur = nums1[p1];
+        //             p1++;
+        //         }else if(nums1[p1]<=nums2[p2]){
+        //             cur = nums1[p1];
+        //             p1++;
+        //         }else {
+        //             cur = nums2[p2];
+        //             p2++;
+        //         }
+        //         sort[p1 + p2 - 1] = cur;
+        //     }
+        //     for(let i = 0 ; i<m+n;i++){
+        //         nums1[i] = sort[i];
+        //     }
+        // };
+
+        /*给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。
+        返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。可以不考虑输出结果的顺序。*/
+
+        // var intersect = function(nums1, nums2) {
+        //     let intersectArray = new Map();
+        //     let arr1 = [];
+        //     let len1 =nums1.length,len2 =nums2.length;
+        //     for(let i = 0;i<len1;i++){
+        //         if(!intersectArray.get(nums1[i])){
+        //             intersectArray.set(nums1[i],1)
+        //         }else{
+        //             let nums = intersectArray.get(nums1[i]) + 1;
+        //             intersectArray.set(nums1[i],nums);
+        //         }
+        //     }
+        //     for(let i = 0;i < len2;i++){
+        //         if(intersectArray.get(nums2[i])>0){
+        //             let nums = intersectArray.get(nums2[i]) - 1;
+        //             intersectArray.set(nums2[i],nums);
+        //             arr1.push(nums2[i]);
+        //         }
+        //     }
+        //     return arr1;
+        // };
+
+        /*给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。
+        你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
+         返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
+         */
+
+        var maxProfit = function(prices) {
+            let minprice = prices[0], maxmoney = -prices[0];
+            let index = 0
+            for(let i = 0,len = prices.length;i<len;i++){
+                if(prices[i] - minprice > maxmoney){
+                    maxmoney = prices[i] - minprice;
+                    index = i+1;
+                };
+                if(prices[i] < minprice){
+                    minprice = prices[i];
+                };
+            };
+            if(maxmoney<=0){
+                return 0;
+            }
+            return maxmoney;
+        };
+
+        init();
+        function init(){
+            let nums1 = [7,6,4,3,1];
+
+            let arr = maxProfit(nums1);
+            console.log(arr);
+
+        }
+     
+        
+    </script>
+</body>
+</html>
