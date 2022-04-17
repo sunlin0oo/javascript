@@ -251,24 +251,6 @@
     // var arr1=arr.flat(1)
     // console.log(arr1);
 
-    function arrayFlatMap(array,fn){
-        if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
-        var arr=[];
-        for(var i=0;i<array.length;i++){
-            var item = fn(array[i],i,array);
-            if(item && item.constructor==Array){
-                for(var j=0;j<item.length;j++){
-                    arr[arr.length] = item[j];
-                }
-            }else{
-                arr[arr.length] = item;
-            }
-        }
-        return arr;
-    }
-
-
-
     // function arrayFlatMap(array,fn){
     //     if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
     //     var arr=[];
@@ -312,8 +294,6 @@
 
     //    var arr1= arrayFlat(arr);
     //    console.log(arr1);
-
-
 
 
     //    function arrayFlat(array,num,arr,n){
