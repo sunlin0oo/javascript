@@ -19,8 +19,8 @@ export default class Ball {
         Ball.list.push(this);
     }
     randomProperty() {
-        this.rect = this.elem.parentElement.getBoundingClientRect();
-        this.w = Utils.random(40, 80);
+        this.rect = this.elem.parentElement.getBoundingClientRect();//获取到父容器的宽高
+        this.w = Utils.random(40, 80);//设置球的大小
         this.x = Utils.random(0, this.rect.width - this.w);
         this.y = Utils.random(0, this.rect.height - this.w);
         this.speedX = Utils.random(-6, 6)

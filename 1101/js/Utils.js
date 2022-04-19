@@ -132,7 +132,7 @@ export default class Utils {
         }
         var styleSheet=document.styleSheets[document.styleSheets.length-1];
         str.replace(/\n/g,"").replace(/(.*?)\{(.*?)\}/g,function(t,$1,$2){
-            styleSheet.addRule($1,$2,styleSheet.cssRules.length);
+            styleSheet.addRule($1,$2,styleSheet.cssRules.length); //听完正则表达式回来看
         })
     }
 }

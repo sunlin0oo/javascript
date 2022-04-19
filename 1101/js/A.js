@@ -1,4 +1,4 @@
-// 导出默认的 导出一个
+// 导出默认的 导出一个 --->export default
 export default class A{
     constructor(name){
         this.name=name;

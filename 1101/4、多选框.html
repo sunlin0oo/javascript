@@ -5,6 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- 将这里放到CheckBox1中
+    <style>
+        /* 这是每一个div的css格式 */
+        .checkbox_css{
+            padding: 5px 5px;
+            /* 这里也要进行浮动，否则不会上去整体 */
+            float: left;
+        }
+        /* 清除浮动 */
+        .checkbox_box.clear::after{
+            content: "";
+            display: block;
+            visibility: hidden;
+            clear: both;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /* 这是每一个div下div_box的css格式 未被选中时的状态*/
+        .checkbox_css>.checkbox_box{
+            /* 用background-position裁剪图片
+            width,height 是裁剪图片的宽高
+            background-position-x: 
+            background-position-y: 
+            这俩是指图片位于大图中的位置，都用负数表示。
+            */
+            width: 14px;
+            height: 14px;
+            background-image: url(./img/new_icon.png);
+            background-position-x: -238px;
+            background-position-y: -37px;
+            float: left;
+
+        }
+        /* 被选中时的状态 */
+        .checkbox_css>.checkbox_box[active]{
+            background-position-x: -128px;
+            background-position-y: -126px;
+        }
+        /* 这是每一个div下span的css格式 */
+        .checkbox_css>.checkbox_label{
+            float: left;
+            margin-left: 5px;
+            user-select: none;
+        }
+    </style> -->
     <style>
         .clear::after
         {

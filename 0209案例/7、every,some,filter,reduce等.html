@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        var arr=[1,2,3,4,5,6];
+        // var arr=[1,2,3,4,5,6];
         // 循环数组判断数组中每一个是否满足条件，如果有一个不满足条件的直接返回false
         // var bool=arr.every(function(item,index,arr){
         //     return item>1;
@@ -23,14 +23,14 @@
 
 
 
-        // every
-        function arrayEvery(array,fn){
-            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
-            for(var i=0;i<array.length;i++){
-              if(i in array && !fn(array[i],i,array))  return false;
-            }
-            return true;
-        }
+        // // every
+        // function arrayEvery(array,fn){
+        //     if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+        //     for(var i=0;i<array.length;i++){
+        //       if(i in array && !fn(array[i],i,array))  return false;
+        //     }
+        //     return true;
+        // }
 
         // var bool=arrayEvery(arr,function(item,index,arr){
         //     return item>2;
@@ -39,13 +39,13 @@
 
 
         // some
-        function arraySome(array,fn){
-            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
-            for(var i=0;i<array.length;i++){
-              if(i in array && fn(array[i],i,array))  return true;
-            }
-            return false;
-        }
+        // function arraySome(array,fn){
+        //     if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+        //     for(var i=0;i<array.length;i++){
+        //       if(i in array && fn(array[i],i,array))  return true;
+        //     }
+        //     return false;
+        // }
 
         // var bool=arraySome(arr,function(item,index,arr){
         //     return item>2;
@@ -57,14 +57,14 @@
 
         // filter 筛选  将数组中每个元素判断是否满足条件，如果满足则筛选出来放在新数组中返回
 
-        function arrayFilter(array,fn){
-            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
-            var arr=[];
-            for(var i=0;i<array.length;i++){
-              if(i in array && fn(array[i],i,array)) arr[arr.length]=array[i];
-            }
-            return arr;
-        }
+        // function arrayFilter(array,fn){
+        //     if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+        //     var arr=[];
+        //     for(var i=0;i<array.length;i++){
+        //       if(i in array && fn(array[i],i,array)) arr[arr.length]=array[i];
+        //     }
+        //     return arr;
+        // }
 
     //     var arr=[1,2,3,4,5,6];
     //     // var arr1=arr.filter(function(item,index,arr){
@@ -81,7 +81,7 @@
 
 
         // reduce 归并
-        var arr=[1,2,3,4,5,6];
+        // var arr=[1,2,3,4,5,6];
         //value是每次value+item的返回值
     //    var sum=arr.reduce(function(value,item,index,arr){
     //        console.log(value,item,index);
@@ -165,20 +165,20 @@
 
 
     // find
-//     var arr=[,,,6,,1];
-//    var value=arr.find(function(item,index,arr){
-//        console.log(item);
-//         return item>1
-//     })
-//     console.log(value);
+    var arr=[,2,3,6,,1];
+        var value=arr.find(function(item,index,arr){
+            // console.log(item);
+                return item>1
+    })
+    console.log(value);
 
 
-        function arrayFind(array,fn){
-            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
-            for(var i=0;i<array.length;i++){
-              if(fn(array[i],i,array)) return array[i];
-            }
-        }
+        // function arrayFind(array,fn){
+        //     if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+        //     for(var i=0;i<array.length;i++){
+        //       if(fn(array[i],i,array)) return array[i];
+        //     }
+        // }
 
 
         // findIndex
@@ -241,7 +241,7 @@
 
 
 
-       var arr=[[1,2],[3,4,[-1,-2]],5,6];
+    //    var arr=[[1,2],[3,4,[-1,-2]],5,6];
     //    flatMap 扁平化数组
     //   var arr1=arr.flatMap(function(item){
     //        return item;

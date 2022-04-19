@@ -237,13 +237,100 @@
         //     return all;
         // };
 
+        /**给你一个字符串 s 和一个字符 c ，且 c 是 s 中出现过的字符。
+         * 返回一个整数数组 answer ，其中 answer.length == s.length 且 answer[i] 是 s 中从下标 i 到离它 最近 的字符 c 的 距离 。
+         * 两个下标 i 和 j 之间的 距离 为 abs(i - j) ，其中 abs 是绝对值函数。
+         * 
+        */
+
+        // var shortestToChar = function(s, c) {
+        //     console.log(subboxes);
+        //     let arr = Array.from(s);
+        //     let answer = [];
+        //     let answerIndex = [];
+        //     for(let i = 0,len = arr.length;i<len;i++){
+        //         if(arr[i] === c){
+        //             answerIndex.push(i);
+        //         }
+        //     }
+        //     for(let i = 0,len = answerIndex.length;i<len;i++){
+        //         for(let j = 0,len = answerIndex[i] ;j<=len;j++){
+        //             if(answerIndex[i-1] === undefined){
+        //                 answer.push( Math.abs(answerIndex[i] - j));
+        //             }else if(j >answerIndex[i-1]){
+        //                 answer.push(Math.min( Math.abs(answerIndex[i] - j),Math.abs(answerIndex[i-1] - j)));
+        //             }
+        //             else{
+        //                 continue;
+        //             }
+        //         }
+        //     }
+        //     if(answerIndex[answerIndex.length-1] < arr.length){
+        //         for(let i = answerIndex[answerIndex.length-1]+1,len = arr.length;i<len;i++){
+        //             answer.push( Math.abs(answerIndex[answerIndex.length-1] - i));
+        //         }
+        //     }
+        //     return answer;
+        // };
+
+        /**请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。
+        数字 1-9 在每一行只能出现一次。
+        数字 1-9 在每一列只能出现一次。
+        数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。----->可以采用坐标的方法
+        */  
+
+        var isValidSudoku = function(board) {
+            for(let i = 0;i<9;i++){
+                let map1 = new Map();
+                let map2 = new Map();
+                for(let j = 0;j<9;j++){
+                    if(board[i][j]!=='.'){
+                        if(map1.has(board[i][j])) return false; 
+                        map1.set(board[i][j],[i][j]);
+                    };
+                    if(board[j][i]!=='.'){
+                        if(map2.has(board[j][i])) return false;           
+                        map2.set(board[j][i],[j][i]);
+                    };
+                };
+            };
+            for(let i = 0;i<9;i+=3){
+                let map3 = new Map();
+                for(let j = 0;j<9;j++){
+                    if(Math.floor(j%3) === 0){
+                        map3 = new Map();
+                    };
+                    if(board[i][j]!=='.'){
+                        if(map3.has(board[i][j])) return false;
+                        map3.set(board[i][j]);
+                    }
+                    if(board[i+1][j]!=='.'){
+                        if(map3.has(board[i+1][j])) return false;                
+                        map3.set(board[i+1][j]);
+                    }
+                    if(board[i+2][j]!=='.'){
+                        if(map3.has(board[i+2][j])) return false;
+                        map3.set(board[i+2][j]); 
+                    }
+                }   
+            };
+            return true;
+        };
+
         init();
         function init(){
-            let mat = [[1,2],[3,4]], r = 1, c = 4;
-
-            let arr = matrixReshape(mat, r, c);
+            let board = 
+            [[".",".",".",".","5",".",".","1","."],
+            [".","4",".","3",".",".",".",".","."],
+            [".",".",".",".",".","3",".",".","1"],
+            ["8",".",".",".",".",".",".","2","."],
+            [".",".","2",".","7",".",".",".","."],
+            [".","1","5",".",".",".",".",".","."],
+            [".",".",".",".",".","2",".",".","."],
+            [".","2",".","9",".",".",".",".","."],
+            [".",".","4",".",".",".",".",".","."]]
+            let arr = isValidSudoku(board);
             console.log(arr);
-
         }
      
         
