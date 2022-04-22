@@ -109,9 +109,9 @@
         //map.get 可以获取到value
         console.log(m.get("a"));//1
         console.log(m.get(o));//{a:1}
-        console.log(m.get(1).max_tri_index);//可以直接编辑MapHash的属性
-        m.get(1).max_tri_index = 1000;
         console.log(m.get(1).max_tri_index);
+        m.get(1).max_tri_index = 1000;
+        console.log(m.get(1).max_tri_index);//可以直接编辑MapHash的属性
         console.log(m.get(1));
 
     //    console.log( m.has("a"))
