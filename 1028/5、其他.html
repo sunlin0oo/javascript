@@ -8,14 +8,16 @@
 </head>
 <body>
     <script>
+        // ^ ==> 写在开头 是表示起始
         // console.log(/^a.*/.test("abced"));
+        // $ ==> 写在开头 是表示结束
         // console.log(/a.*d$/.test("abced"));
 
-        // console.log(/^\w{6}$/.test("abcdef"))
+        // console.log(/^\w{6}$/.test("abcdef"))//false
 
         // 首字不能是数字和下划线，整个必须是字母数字下划线 8-32
         // /^[a-zA-Z]\w{7,31}$/
-        // /\w+@\w+\.\w{2,4}/
+        // /^\w+@\w+\.\w{2,4}$/ //判断邮箱
 
         // |   或者
 
@@ -29,6 +31,8 @@
         // console.log("abasde".match(/|ab|as/g))
 
 
+
+
         // ()组
 
         // 1、可以让很多或者部分作为一整块，还可以将多个部分作为整块做重复
@@ -38,14 +42,15 @@
 
 
         // console.log("1234567890".match(/^(\d{3})(\d{4})(\d{3})$/).slice(1))
-        // console.log("15[abc]".match(/(\d+)\[([a-zA-Z]+)\]/).slice(1))
-        // console.log("《西游记》,《三国演义》,《水浒》,《红楼梦》".match(/《(.*?)》/))
+        console.log("15[abc]".match(/(\d+)\[([a-zA-Z]+)\]/).slice(1))//['15', 'abc']
+        // console.log("《西游记》,《三国演义》,《水浒》,《红楼梦》".match(/《(.*?)》/)) //分组筛选不能用/g
 
-        // var arr=[];
-        // var str="《西游记》,《三国演义》,《水浒》,《红楼梦》".replace(/《(.*?)》/g,function(item,$1){
-        //     // arr.push($1);
-        //     return $1;
-        // })
+        var arr=[];
+        var str="《西游记》,《三国演义》,《水浒》,《红楼梦》".replace(/《(.*?)》/g,function(item,$1){
+            // arr.push($1);
+            return $1;
+        })//西游记,三国演义,水浒,红楼梦
+        
         // var str="《西游记》,《三国演义》,《水浒》,《红楼梦》".replace(/《(.*?)》/g,"$1")
 
 
