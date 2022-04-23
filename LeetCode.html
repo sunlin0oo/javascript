@@ -494,24 +494,68 @@
         //     }
         // };
 
-        var firstUniqChar = function(s) {
-            /*_.countBy(collection, [iteratee=_.identity])：
-            _.countBy方法创建一个由键组成的对象，这些键是通过运行iteratee的collection的每个元素的结果生成的。每个 key 的对应值是iteratee返回 key 的次数。
-            */
-            const frequency = _.countBy(s);//安装库lodash才能使用
-            console.log(frequency);
-            for (const [i, ch] of Array.from(s).entries()) {
-                if (frequency[ch] === 1) {
-                    return i;
-                }
-            }
-            return -1;
-        };
+        // var firstUniqChar = function(s) {
+        //     /*_.countBy(collection, [iteratee=_.identity])：
+        //     _.countBy方法创建一个由键组成的对象，这些键是通过运行iteratee的collection的每个元素的结果生成的。每个 key 的对应值是iteratee返回 key 的次数。
+        //     */
+        //     const frequency = _.countBy(s);//安装库lodash才能使用
+        //     console.log(frequency);
+        //     for (const [i, ch] of Array.from(s).entries()) {
+        //         if (frequency[ch] === 1) {
+        //             return i;
+        //         }
+        //     }
+        //     return -1;
+        // };
+
+        /**给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。注意：若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。*/
+
+        // var isAnagram = function(s, t) {
+        //     if (s.length !== t.length) {
+        //         return false;
+        //     }
+        //     const table = new Array(26).fill(0);
+        //     for (let i = 0; i < s.length; ++i) {
+        //         /**ES6 提供了codePointAt()方法，能够正确处理 4 个字节储存的字符，返回一个字符的码点。
+        //          * 'a'.codePointAt(0)
+        //         */
+        //         console.log("'a'.codePointAt(0)::",'a'.codePointAt(0))//97
+        //         table[s.codePointAt(i) - 'a'.codePointAt(0)]++;
+        //     }
+        //     for (let i = 0; i < t.length; ++i) {
+        //         table[t.codePointAt(i) - 'a'.codePointAt(0)]--;
+        //         if (table[t.codePointAt(i) - 'a'.codePointAt(0)] < 0) {
+        //             return false;
+        //         }
+        //     }
+        //     return true;
+        // };
+
+        
+        /**给你两个字符串：ransomNote 和 magazine ，判断 ransomNote 能不能由 magazine 里面的字符构成。
+         * 如果可以，返回 true ；否则返回 false 。magazine 中的每个字符只能在 ransomNote 中使用一次。*/
+        // var canConstruct = function(ransomNote, magazine) {
+        //     const table = new Array(26).fill(0);
+        //     for(let i = 0,len = ransomNote.length;i<len ;i++){
+        //         table[ransomNote.codePointAt(i)-'a'.codePointAt(0)]++
+        //     }
+        //     for(let i = 0,len = magazine.length;i<len ;i++){
+        //         if(table[magazine.codePointAt(i)-'a'.codePointAt(0)] === 0){
+        //             continue;
+        //         }else{
+        //             table[magazine.codePointAt(i)-'a'.codePointAt(0)]--;
+        //         }
+        //     }
+        //     for(let i = 0,len = table.length;i<len ; i++){
+        //         if(table[i]>0) return false;
+        //     }
+        //     return true;
+        // };
 
         init();
         function init(){
-            let   s = "leetcode";
-            let arr = firstUniqChar(s);
+            let ransomNote = "bg", magazine = "efjbdfbdgfjhhaiigfhbaejahgfbbgbjagbddfgdiaigdadhcfcj";
+            let arr = canConstruct(ransomNote, magazine);
             console.log(arr);
         }
 
