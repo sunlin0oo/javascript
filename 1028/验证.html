@@ -33,14 +33,13 @@
 
         function inputHandler(e){
             if(id) return;
-            // this==>input
+            // this input
             id=setTimeout(function(input){
                 clearTimeout(id);
                 id=undefined;
-                // this==>window
-                // regExpString(e.currentTarget.value);//会导致参数丢失
+                // this window
                 regExpString(input.value);
-            },500,this)//this==>传参进来
+            },500,this)
         }
 
         function regExpString(value){

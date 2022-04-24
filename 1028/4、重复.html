@@ -9,71 +9,65 @@
 <body>
     <script>
         // /\d\d\d\d-\d\d-\d\d/
+        //{数值重复数量}
 
         // /\d{4}-\d{2}-\d{2}/
+        //再简化
         // /\d{4}(-\d{2}){2}/
 
         // var tel="18617564321"
-        // console.log(/\d{11}/.test(tel))
+        // console.log(/\d{11}/.test(tel))//测试tel是否符合11位数字
 
 
-        // console.log("asdkjaskjhdabb".match(/.{3}/g));
+        // console.log("asdkjaskjhdabb".match(/.{3}/g));//切割三个字符--出现问题，剩余两个字符就不会被切割
 
-        // 表示匹配""--空字符
-        console.log("asdasd".match(/a{0}/g));
+        // {0}表示匹配""字符，不在乎前面的东西
+        console.log("asdasd".match(/a{0}/g));//7个元素的空字符
 
         // /z.{7}z/
         // /[aeiou]{6}/
         // /[b-df-hj-np-tv-z]{10}/
 
-        // 贪婪匹配
-        // console.log("asdkjaskjhdabb".match(/.{1,5}/g));
-        // console.log("asdkjaskjhdabb".match(/.{0,5}/g));
-        // console.log("color".match(/colou{0,1}r/))
-        // 当,后面没有值，匹配最大，无穷
-        // console.log("asdasdasd".match(/.{1,}/g));//匹配1到无穷多个字符
+        // 贪婪匹配==>先匹配最大的再往小的匹配
+        // console.log("asdkjaskjhdabb".match(/.{1,5}/g));//["asdkj","askjh","dabb"]
+        // console.log("asdkjaskjhdabb".match(/.{0,5}/g));//['asdkj', 'askjh', 'dabb', '']
+        // console.log("color".match(/colou{0,1}r/))//匹配u有或没有
+        // 当,后面没有值，匹配最大===>无穷
         // console.log("asdasdasd".match(/.{1,}/g));
 
         // console.log(/^.{0}$/.test(str.trim())
 
-        // console.log("asdasdasd".match(/a.{0,}d/g));
+        // console.log("asdasdasd".match(/a.{0,}d/g));//匹配任意字符
 
         // {0,}     *
         // {1,}     +
         // {0,1}    ?
 
 
-        // console.log("colour".match(/colou?r/));//等价于console.log("color".match(/colou{0,1}r/))
+        // console.log("colour".match(/colou?r/));
 
-        // console.log('"西游记","三国演义","水浒","红楼梦"'.match(/".*"/g));//匹配一个
-        // console.log('"西游记","三国演义","水浒","红楼梦"'.match(/"[^"]*"/g));//匹配4个===>/"[^"]*"/g==>全局匹配"任意多个不是双引号的字符"
+        // console.log('"西游记","三国演义","水浒","红楼梦"'.match(/".*"/g));
+        // console.log('"西游记","三国演义","水浒","红楼梦"'.match(/"[^"]*"/g));
 
 
-        // /[^"]*/         
+        // /[^"]*/
         // /x{0,3}/
         // /y*/
         // /z{4,}/ 
-        // [^a-zA-Z]==>非字母字符
         // "".split(/[^a-zA-Z]{6}/)
 
 
         //    .*?    .+? 非贪婪匹配
-        // console.log("《西游记》,《三国演义》,《水浒》,《红楼梦》".match(/《.*?》/g))//匹配最近的《》
-        // console.log("adaadvdvdfswwdasaasdasdasdasa".match(/a.*?d/g))// ['ad', 'aad', 'asaasd', 'asd', 'asd']；
-        // console.log("adaadvdvdfswwdasaasdasdasdasa".match(/a.+?d/g))// ['adaad', 'asaasd', 'asd', 'asd']； .+? ==>至少多一个
-        // console.log("aadaadvdvdfswwdasaasdasdasdasa".match(/a.+?d/g))// ['aad', 'aad', 'asaasd', 'asd', 'asd']； .+? ==>至少多一个
+        // console.log("《西游记》,《三国演义》,《水浒》,《红楼梦》".match(/《.*?》/g))
+        // console.log("aadaadvdvdfswwdasaasdasdasdasa".match(/a.*?d/g))
 
-        //  console.log("<div></div><span></span>".match(/<.*?>/g))//<.*?> 从< 开始==>查找到离它最近 >
+        // console.log("<div></div><span></span>".match(/<.*?>/g))
         // var str="<div></div><span></span>".replace(/<.*?>/g,function(item){
         //      return '"'+item.slice(1,-1)+'"';
         // })
-        // console.log(str);//"div""/div""span""/span"
+        // console.log(str);
 
-        // console.log("3[ab]4[cd]".match(/\d\[.+?\]/g));
-
-        // 处理字符串
-        // 判断密码中必须包含小写字母，大写字母，数字，并且起始字符不能数字，并且长度是8-16的0-9a-zA-Z
-        // /^(?=\D+\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,16}$/
+        // console.log("3[ab]4[cd]".match(/\d\[.+?\]/g))
     </script>
 </body>
 </html>

@@ -9,36 +9,36 @@
 <body>
     <script>
         // var str="abcdef";
-        // console.log(str.match(/cd/));
+        // console.log(str.match(/cd/));//查找cd字符串
 
 
         // console.log("colors".match(/color/));
 
         // console.log("catcotcdt".match(/cot/g))
 
-        // .  通配符  匹配任意一个字符
+        // .  通配符  一个 . 匹配任意一个字符
         // console.log("catcotcdt".match(/c.t/g));
         // console.log("caatcotcdt".match(/c..t/g));
         // console.log("caatcotcdt".match(/c........t/g));
 
         // 使用\转义含有其他含义字符
-        // console.log("catc.tcot".match(/c\.t/g))
+        // console.log("catc.tcot".match(/c\.t/g)) // 查找c.t
 
 
-        // []代表其中任意一个字符
-        // console.log("catcbtcdt".match(/c[ab]t/g))
+        // []代表其中任意一个字符==>[]写入限制的内容
+        // console.log("catcbtcdt".match(/c[ab]t/g)) //匹配cat||cbt
         // 匹配一个a或者一个b 相同字符无意义
         // console.log("catcbtcdt".match(/[aba]/g))
 
         // . 到了[]内，就是字符 . ，不再是通配符
         // console.log("abndekja".match(/a[.c]n/))
-        // []内在匹配 [ ]都需要使用\转义  （） {}
+        // []内在匹配 匹配[  ( {或者}  ) ] 都需要使用\转义
         // console.log("abndekja".match(/a[\[\]]n/))
 
         // console.log('abskdsd'.match(/[a-z]/))
-        // console.log('abskdsd'.match(/[a-zA-Z]/))
+        // console.log('abskdsd'.match(/[a-zA-Z]/))//a-z,A-Z
         // console.log('abskdsd'.match(/[a-zA-Z0-9]/))
-        // console.log("aaaaddsdfsdf".match(/[a-Z]/));
+        // console.log("aaaaddsdfsdf".match(/[a-Z]/));//报错!不能倒着找
         // console.log("aaaaddsdfsdf".match(/[A-z]/));//会包含90-97之间的非字母字符
 
         // console.log("31".match(/[1-31]/));//不能匹配1-31
@@ -46,24 +46,24 @@
         // /[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 
 
-        // 反义字符  ^写在[]的最前面表示[]内的内容都不要，但是如果^在[]内不是最前面，表示^字符
-        // console.log("catcotcdt".match(/c[^o]t/g));
-        // console.log("catcotcdtc^t".match(/c[a^]t/g));
+        // 反义字符  ^写在[]的最！！！前面表示[]内的内容都不要，但是如果^在[]内不是最前面，表示^字符
+        // console.log("catcotcdt".match(/c[^o]t/g));//["cat","cdt"];
+        // console.log("catcotcdtc^t".match(/c[a^]t/g));//["cat","c^t"];
 
-        // console.log("catcotcdtc^t".match(/c[^\^]t/g))
+        // console.log("catcotcdtc^t".match(/c[^\^]t/g))//["cat","cot","cdt"];不要 ^
         // console.log("catcotcdtc^t".match(/c[^^]t/g))
 
         // /[a-zA-Z0-9_]/   \w
         // console.log("abcd123ABe_f.*?".match(/\w/g))
 
-        // /[^a-zA-Z0-9_]/   \W
+        // /[^a-zA-Z0-9_]/ ==被替代==> \W
 
-        // [0-9]    \d
+        // [0-9]  ==被替代==>   \d
 
-        // [^0-9]    \D
+        // [^0-9]  ==被替代==>   \D
 
-        // 空白字符   \s
-        // 非空白字符  \S
+        // 空白字符 ==被替代==>   \s
+        // 非空白字符 ==被替代==> \S
 
         // console.log("ab  cd".match(/\s/g));
         // console.log("  asd asdasd asdklasd  asda dssa asd ".replace(/\s/g,""));

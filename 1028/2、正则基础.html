@@ -29,14 +29,13 @@
         // var reg=new RegExp("a","g");  //  new RegExp("正则内容","修饰符")
 
 
-
-        var  reg=/a/g;
+        // var  reg=/a/g; //查找全局a
         // reg.exec();
         // reg.test();
-        // console.log(reg.exec("abcdae"));//在字符串查找字符
-        // console.log(reg.test("abcdef"));//表示在字符串中是否有正则表达式的字符
+        // console.log(reg.exec("abcdae"));//在字符串查找字符--多个字符查找第一个
+        // console.log(reg.test("abcdef"));//表示在字符串中是否有正则表达式的字符--布尔值
 
-        // console.log(/ab|cd/g.test("aaccef"))
+        // console.log(/ab|cd/g.test("aaccef"))//查找是否有ab或cd==>false;
 
 
         /* 
@@ -48,11 +47,12 @@
         */
 
 
-        // console.log("abcdaef".match(/a/g))//最主要
+        // console.log("abcdaef".match(/a/g))//最主要;==>['a','a'] 等同 exec
         // console.log("cbcdecf".search(/a|b/g));//查找下标
        
 
-        //  var str="abcdaef".replace(/a/g,"0");
+        //  var str="abcdaef".replace(/a/g,"0");//将全局a替换成0
+                                            // item, index,string
         // var str="abcdaef".replace(/a/g,function(a,index,c){
         //      if(index===0) return "0";
         //      return "z";
@@ -74,8 +74,8 @@
 
 
 
-       var arr= "akdsakjds,akjdsaksjd.aksjdaskd,alkdsjewodjgwffiweof.".split(/\.|,/);//用.或者，进行分割
-       console.log(arr)
+    //    var arr= "akdsakjds,akjdsaksjd.aksjdaskd,alkdsjewodjgwffiweof.".split(/\.|,/);
+    //    console.log(arr)
     </script>
 </body>
 </html>
