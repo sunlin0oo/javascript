@@ -93,11 +93,11 @@
 
     //     // 3+4+5*2+8/2-6+7;
 
-    //     var s=fn1(3,4);
+    //    var s=fn1(3,4);
     //    var s1=fn3(5,2)
     //    var s2=fn3(6,7);
     //    s=fn1(s,s1);
-    // //    s=fn1(s,s2);
+    //    s=fn1(s,s2);
     //    s=fn1(s,fn4(8,2));
     //    s=fn2(s,6);
     //    s=fn1(s,7);
@@ -122,16 +122,12 @@
         //     console.log(fn.length)  //形参长度
         //     // 函数.length  形参的数量。指函数定义时，形参定义了几个
         //     // arguments.length  实参的数量，指函数执行时，传入了多少个参数
-        //     console.log(arguments.callee);//当前函数---->fn()
-        //     console.log(arguments.callee.caller);//执行当前函数所在的上下文环境中的函数----->fn1();
-        //
+        //     console.log(arguments.callee);//当前函数==>fn()
+        //     console.log(arguments.callee.caller);//执行当前函数所在的上下文环境中的函数==>fn1();
         // }
 
         // fn(1,2,3);
         // fn(2,3,4,5,6,7,8);
-
-
-
 
 
         // function sum(){
@@ -205,11 +201,11 @@
 
         // 在ES6 不定量参数  使用...arg  这个arg就是数组，数组放入了所有传入的实参
         // function fn(...arg){
-        //     console.log(arg);
+        //     console.log(arg);//arg = [1,2,3]
         // }
         //
         // function fn(a,b,...arg){
-        //     console.log(a,b,arg); //arg = [1,2,3]
+        //     console.log(a,b,arg); //a = 1;b = 2;arg = [3]
         // }
         // fn(1,2,3);
 
@@ -231,55 +227,61 @@
 
 
         // ES6  c=10在参数中做默认值
-        function fn(a,b,c=10){
-            if(a===undefined) throw new TypeError("请输入a参数");//必填参数
-            if(b===undefined) throw new TypeError("请输入b参数");
-            return a+b+c;
-        }
-        fn();
+        // function fn(a,b,c=10){
+        //     if(a===undefined) throw new TypeError("请输入a参数");//必填参数
+        //     if(b===undefined) throw new TypeError("请输入b参数");
+        //     return a+b+c;
+        // }
+        // fn();
 
         // 有默认值可选参数不要写在前面，尽量把必填参数写在前面
-        // 必填参数 ---》有默认值的可选参数---》无默认值的可选参数
+        // 必填参数===>有默认值的可选参数===>无默认值的可选参数
         // function fn(a=10,b,c){
 
         // }
         // 对象解构赋值中解决参数可以混写情况，不按照严格的顺序填入
 
         //arguments and this 的问题
+
         //回调函数中执行后，执行的回调函数中this指向window
-        function fn(f){
-            f();
-        };
 
-        function fn1(){
-            console.log(this);//--->window
-        }
+        // function fn(f){
+        //     f();
+        // };
 
-        fn(fn1);
+        // function fn1(){
+        //     console.log(this);//==>window
+        // }
+
+        // fn(fn1);
+
         //回调函数如果使用的是arguments调用回调，在执行的回调函数中this指向调用当前函数的上下文环境中的arguments
-        var obj = {
-            a:1,
-            b:function(){
-                function fn(f){
-                    // f();
-                    arguments[0]();//arguments[0] === fn
-                };
+        // var obj = {
+        //     a:1,
+        //     b:function(){
+                // function fn(f){
+                //     // f();
+                //     arguments[0]();//arguments[0] === fn
+                // };
+
                 //fn1在谁中被回调，this就是谁中的arguments 
-                function fn1(){
-                    console.log(this);//--->window
-                }
+                // function fn1(){
+                //     console.log("fn1:::",this);//==>window
+                // }
 
                 // fn(fn1);
-                fn(fn1,3,5,6);//---->打印的this包含fn1,3,5,6
-                console.log(this);//---->obj
-                function fn(){
-                    console.log(this);//---->window;ES5中直接执行的命名函数中this是window
-                }
-                fn();
-            }
-        }
+                // fn(fn1,3,5,6);//==>打印的this包含fn1,3,5,6
+
+        //         console.log("obj.b():::",this);//===>obj
+
+        //         function fn(){
+        //             console.log("fn:::",this);//==>window;ES5中直接执行的命名函数中this是window
+        //         }
+        //         fn();
+        //     }
+        // }
         
-        obj.b();
+        // obj.b();
     </script>
 </body>
 </html>
