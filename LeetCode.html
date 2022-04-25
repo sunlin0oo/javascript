@@ -587,28 +587,86 @@
         //     return maxLength;
         // };
 
-        var mergeTwoLists = function(l1, l2) {
-            if (l1 === null) {
-                console.log(l2);
-                return l2;
-            } else if (l2 === null) {
-                console.log(l1);
-                return l1;
-            } else if (l1.val < l2.val) { //l1当前值大于l2当前值      
-                l1.next = mergeTwoLists(l1.next, l2);
-                console.log(l1);
-                return l1;
-            } else {
-                l2.next = mergeTwoLists(l1, l2.next);
-                console.log(l2);
-                return l2;
+        // var mergeTwoLists = function(l1, l2) {
+        //     if (l1 === null) {
+        //         console.log(l2);
+        //         return l2;
+        //     } else if (l2 === null) {
+        //         console.log(l1);
+        //         return l1;
+        //     } else if (l1.val < l2.val) { //l1当前值大于l2当前值      
+        //         l1.next = mergeTwoLists(l1.next, l2);
+        //         console.log(l1);
+        //         return l1;
+        //     } else {
+        //         l2.next = mergeTwoLists(l1, l2.next);
+        //         console.log(l2);
+        //         return l2;
+        //     }
+        // };
+
+
+        /**给定一个可能含有重复元素的整数数组，要求随机输出给定的数字的索引。 您可以假设给定的数字一定存在于数组中。*/
+        // var Solution = function(nums) {
+        //     this.pos = new Map();
+        //     for(let i = 0,len = nums.length;i<len;i++){
+        //         if(!this.pos.has(nums[i])) this.pos.set(nums[i],[]);
+        //         this.pos.get(nums[i]).push(i);
+        //     }
+        // };
+
+        // Solution.prototype.pick = function(target) {
+        //     const indeies = this.pos.get(target);
+        //     return indeies[Math.floor(Math.random() * indeies .length)];
+        // };
+        
+        /**给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点 。*/
+        // function ListNode(val, next) {
+        //     this.val = (val===undefined ? 0 : val)
+        //     this.next = (next===undefined ? null : next)
+        // }
+
+        // var removeElements = function(head, val) {
+        //     if(head === null){
+        //         return head;
+        //     }
+        //     head.next = removeElements(head.next,val);
+        //     return head.val === val? head.next : head;
+        // };
+
+        /**给你一个可能含有 重复元素 的整数数组 nums ，请你随机输出给定的目标数字 target 的索引。你可以假设给定的数字一定存在于数组中。实现 Solution 类：
+            Solution(int[] nums) 用数组 nums 初始化对象。
+            int pick(int target) 从 nums 中选出一个满足 nums[i] == target 的随机索引 i 。如果存在多个有效的索引，则每个索引的返回概率应当相等。*/
+        /**
+         * @param {number[]} nums
+         */
+        var Solution = function(nums) {
+            this.pos = new Map();
+            for(let i = 0,len = nums.length;i<len;i++){
+                if(!this.pos.has(nums[i])) this.pos.set(nums[i],[]);
+                this.pos.get(nums[i]).push(i);
             }
         };
 
+        /** 
+         * @param {number} target
+         * @return {number}
+         */
+        Solution.prototype.pick = function(target) {
+            const indeies = this.pos.get(target);
+            return indeies[Math.floor(Math.random() * indeies .length)];
+        };
+
+        /**
+         * Your Solution object will be instantiated and called as such:
+         * var obj = new Solution(nums)
+         * var param_1 = obj.pick(target)
+         */
+
         init();
         function init(){
-            let l1 = [1,2,4], l2 = [1,3,4];
-            let arr = mergeTwoLists(l1, l2);
+            let head = [1,2,6,3,4,5,6], val = 6;
+            let arr = removeElements(head, val);
             console.log(arr);
         }
 
