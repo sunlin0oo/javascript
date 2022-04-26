@@ -640,28 +640,42 @@
         /**
          * @param {number[]} nums
          */
-        var Solution = function(nums) {
-            this.pos = new Map();
-            for(let i = 0,len = nums.length;i<len;i++){
-                if(!this.pos.has(nums[i])) this.pos.set(nums[i],[]);
-                this.pos.get(nums[i]).push(i);
-            }
-        };
+        // var Solution = function(nums) {
+        //     this.pos = new Map();
+        //     for(let i = 0,len = nums.length;i<len;i++){
+        //         if(!this.pos.has(nums[i])) this.pos.set(nums[i],[]);
+        //         this.pos.get(nums[i]).push(i);
+        //     }
+        // };
 
-        /** 
-         * @param {number} target
-         * @return {number}
-         */
-        Solution.prototype.pick = function(target) {
-            const indeies = this.pos.get(target);
-            return indeies[Math.floor(Math.random() * indeies .length)];
-        };
+        // /** 
+        //  * @param {number} target
+        //  * @return {number}
+        //  */
+        // Solution.prototype.pick = function(target) {
+        //     const indeies = this.pos.get(target);
+        //     return indeies[Math.floor(Math.random() * indeies .length)];
+        // };
 
-        /**
-         * Your Solution object will be instantiated and called as such:
-         * var obj = new Solution(nums)
-         * var param_1 = obj.pick(target)
-         */
+        // /**
+        //  * Your Solution object will be instantiated and called as such:
+        //  * var obj = new Solution(nums)
+        //  * var param_1 = obj.pick(target)
+        //  */
+
+
+        /**给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。*/
+        // var reverseList = function(head) {
+        //     let curr = head;
+        //     let prev = null;
+        //     while(curr){
+        //         let next = curr.next;
+        //         curr.next = prev;
+        //         prev = curr;
+        //         curr = next;
+        //     }
+        //     return prev;
+        // };
 
         init();
         function init(){

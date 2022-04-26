@@ -80,7 +80,7 @@
         fn(); */
 
         // 全局变量根据程序的执行会累积计算的结果，
-        // 但是局部变量因为每次函数执行完成都会被销毁，所以时独立的值，不会累积
+        // 但是局部变量因为每次函数执行完成都会被销毁，所以是独立的值，不会累积
 
 
 // 全局变量会污染，局部变量因为独立所有不会被污染
@@ -98,7 +98,7 @@
         // })();
 
 
-        //
+        
         // var s=1;
         // function fn1(){
         //     var s=2;
@@ -106,7 +106,7 @@
         // }
 
         // function fn2(){
-        //     console.log(s);
+        //     console.log(s);//==>window==>s = 1;
         // }
 
         // fn1();
@@ -116,10 +116,10 @@
         // var a=1;
         // function fn(){
         //     var a=3;
-        //     console.log(a);
+        //     console.log(a);//3
         // }
         // fn();
-        // console.log(a);
+        // console.log(a);//1
 
     
         // var a=1;
@@ -131,7 +131,7 @@
                 //ES5中直接执行的命名函数中this是window
                 // console.log(this.a);
                 */
-        //     console.log(a);
+        //     console.log(a);//undefined
         //     var a=3;
         // }
         // fn();
@@ -175,7 +175,7 @@
 
 
         //更改原对象的属性
-        //局部变量引用全局变量，把引用地址赋值给o，所有o.a = 10;所以更改了o的引用地址的a的结果--->导致obj.a发生改变
+        //局部变量引用全局变量，把引用地址赋值给o，所有o.a = 10;所以更改了o的引用地址的a的结果===>导致obj.a发生改变
         // function fn(o){
         //     o.a = 10;
         // }
@@ -201,18 +201,18 @@
          * ，不能调用到当前作用域中子代的作用域范围变量
         */
         
-        var a = 1;
-        var b = 10;
-        function fn(){
-            var b = 2;//同名调用局部这里
-            //作用域能调用到b，a,调用不到c,d            
-            function fn1(){
-                var c = 3;
-                function fn2(){
-                        var d = 10;
-                }
-            }
-        }
+        // var a = 1;
+        // var b = 10;
+        // function fn(){
+        //     var b = 2;//同名调用局部这里
+        //     //作用域能调用到b，a,调用不到c,d            
+        //     function fn1(){
+        //         var c = 3;
+        //         function fn2(){
+        //                 var d = 10;
+        //         }
+        //     }
+        // }
 
     </script>
 </body>
