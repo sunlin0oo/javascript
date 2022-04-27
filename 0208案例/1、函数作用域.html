@@ -31,15 +31,15 @@
 </head>
 <body>
    <div class="clear">
-    <div class="div1 divs">1</div>
-    <div class="div1 divs">2</div>
-    <div class="div1 divs">3</div>
+        <div class="div1 divs">1</div>
+        <div class="div1 divs">2</div>
+        <div class="div1 divs">3</div>
    </div>
    <p></p>
    <div class="clear">
-    <div class="div2 divs">4</div>
-    <div class="div2 divs">5</div>
-    <div class="div2 divs">6</div>
+        <div class="div2 divs">4</div>
+        <div class="div2 divs">5</div>
+        <div class="div2 divs">6</div>
    </div>
     <script>
 
@@ -86,7 +86,7 @@
 
 
 
-        // var divs=document.getElementsByTagName("div");
+        // var divs=document.getElementsByClassName("divs");
         //  for(var i=0;i<divs.length;i++){
         //      divs[i].onclick=function(){
         //          for(var j=0;j<divs.length;j++){
@@ -97,19 +97,19 @@
         //  }
 
         // var divs ,prev
-        //
+        
         // init();
         // function init(){
-        //      divs = document.getElementsByTagName("div");
+        //      divs = document.getElementsByClassName("divs");
         //     for (var i =0;i<divs.length;i++){
         //             divs[i].onclick = clickHandler;
         //     }
         // }
-        //
+        
         // function clickHandler(){
         //     changePrev(this);
         // }
-        //
+        
         // function changePrev(target){
         //     if(prev){
         //         prev.style.background = "rgb(238, 197, 122)";
@@ -126,20 +126,20 @@
         // var obj = {a:1};
         // fn(obj);
         // /*
-        // o.a = 10;---->obj = {a:10}
-        // o = {a:1}---->obj = {a:1}
+        // o.a = 10;//==>obj = {a:10}
+        // o = {a:1}//==>obj = {a:1}
         // */
-        // console.log(obj);
+        // console.log(obj);//obj = {a:10}
 
 
-/*
-        var o={a:1,b:2};
-        function fn(){
-            o.a=10;
-        }
 
-        fn();
-        console.log(o); */
+        // var o={a:1,b:2};
+        // function fn(){
+        //     o.a=10;
+        // }
+
+        // fn();
+        // console.log(o);// o={a:10,b:2};
 
 
         // var o={a:1,b:2};
@@ -148,7 +148,7 @@
         // }
 
         // fn(o);
-        // console.log(o);
+        // console.log(o);// o={a:10,b:2};
 
 
         // 局部变量重新赋值意味着与全局变量没有引用关系了
@@ -159,26 +159,27 @@
         // }
 
         // fn(o);
-        // console.log(o);
+        // console.log(o);//o={a:1,b:2}
 
         //函数中处理全局变量
 
         // var divs,topPrev,bottomPrev;
         // init();
         // function init(){
-        //     divs = document.getElementsByClassName("divs");
+        //     divs = document.getElementsByClassName("divs");//获取到Class为divs的列表
         //     for(var i=0;i<divs.length ; i++){
-        //         divs[i].onclick = clickHandler;
+        //         divs[i].onclick = clickHandler;//点击触发
         //     };
         // };
-        //
-        // function clickHandler(){
+        
+        // function clickHandler(){ //使得上下两个列表进行分割
         //     if (this.className == "div1 divs"){
-        //         topPrev = changePrev(this,topPrev);--->改变topPrev的值
+        //         topPrev = changePrev(this,topPrev);//==>改变topPrev的值
         //     }else{
         //         bottomPrev = changePrev(this,bottomPrev);
         //     }
         // }
+
         // //这里的prev局部变量不具备积累性。
         // function changePrev(target,prev){
         //     if(prev){
@@ -191,9 +192,9 @@
 
 
         // 尽可能的定义局部变量，尽可能的减少全局变量的定义
-        // var a = {n: 1}
+        //  var a = {n: 1}
         // var b = a
-        // a.x = a = {n: 2}
+        // a.x = a = {n: 2}//先执行a.x = a再执行a = {n: 2};
         // ||           ||
         // ||           ||
         // a          b
@@ -205,7 +206,6 @@
 
         // a            b
         // {n:2}      {n:1,x:{n:2}}
-
 
 
         // for(var i=0;i<10;i++){
@@ -236,6 +236,7 @@
         // function fn(){
         //     console.log(x)
         // };
+
         // function show(f){
         //     var x = 20; //局部变量 
         //     f();
@@ -255,6 +256,7 @@
 
     //关于对象中的this
     /*在对象没有创建完成时，c:this.a中this指的是当前对象外的this而不是obj，故出错*/
+    
     // var a = 10;//在window中创建a变量，则c:this.a  === 10;
     // var obj = {
     //     a:2,
@@ -264,7 +266,7 @@
     //         console.log(this.b);//this指向当前对象，谁调用d函数，this就是谁
 
     //         var o = {
-    //             e:this.a,//this指的是当前对象外的this---->o是当前对象，o之外最近的就是obj.a = 1;
+    //             e:this.a,//this指的是当前对象外的this==>o是当前对象，o之外最近的就是obj.a = 1;
     //         }
     //         console.log(o);//打印1
     //     }

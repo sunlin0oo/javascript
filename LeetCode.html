@@ -587,6 +587,7 @@
         //     return maxLength;
         // };
 
+        // 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
         // var mergeTwoLists = function(l1, l2) {
         //     if (l1 === null) {
         //         console.log(l2);
@@ -676,6 +677,21 @@
         //     }
         //     return prev;
         // };
+        /**给定一个已排序的链表的头 head ， 删除所有重复的元素，使每个元素只出现一次 。返回 已排序的链表 */
+        var deleteDuplicates = function(head) {
+            if(!head) return head;
+            let curr = head;
+            console.log(curr);
+            while(curr.next){
+                if(curr.val === curr.next.val){
+                    curr.next = curr.next.next;
+                }else{
+                    curr = curr.next;
+                }
+                console.log(head);
+            }
+            return head;
+        };
 
         init();
         function init(){

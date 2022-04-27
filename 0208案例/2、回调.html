@@ -13,13 +13,12 @@
         // function fn1(f){
         //     f();
         // }
+
         // function fn2(){
         //     console.log("aa");
         // }
 
         // fn1(fn2);
-
-
 
         // 回调函数中this指向问题
 
@@ -47,8 +46,8 @@
             }
         }
 
-        obj.a(obj.b);//若用arguments执行回调函数时：指向回调当前函数的上下文环境中arguments对象
-        // obj.a(obj.b,1,2,3);
+        // obj.a(obj.b);//若用arguments执行回调函数时：指向回调当前函数的上下文环境中arguments对象==>[ƒ(b), callee: ƒ, Symbol(Symbol.iterator): ƒ]
+        // obj.a(obj.b,1,2,3);//[ƒ(b), 1, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
 
 
 
@@ -109,7 +108,7 @@
             showRed(showYellow,showGreen) */
 
 
-            // 回调函数如何改变传参--->再添加一个return函数
+            // 回调函数如何改变传参==>再添加一个return函数
 
             // function fn1(f){
             //     f();

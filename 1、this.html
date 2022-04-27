@@ -75,7 +75,7 @@
         // 2）、在函数中调用另外一个函数时，另外一个函数中this指向window，严格模式时指向undefined
         // 3）、任何普通回调函数中this指向window，严格模式指向undefined
         // 4）、递归函数中this指向window，严格模式指向undefined,对象方法中的递归指向调用当前方法的对象
-        // 5)、部分方法中可以重新带入this指向，例如forEach,map,filter等等(不含reduce)，这时候this指向被重新带入对象
+        // 5）、部分方法中可以重新带入this指向，例如forEach,map,filter等等(不含reduce)，这时候this指向被重新带入对象
         // 6）、回调函数中，如果回调时使用arguments[n]() （根据参数的位置n不同） 回调函数中this指向回调该函数的函数中arguments对象
        
     //     var obj={
