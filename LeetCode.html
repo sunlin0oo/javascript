@@ -678,21 +678,64 @@
         //     return prev;
         // };
         /**给定一个已排序的链表的头 head ， 删除所有重复的元素，使每个元素只出现一次 。返回 已排序的链表 */
-        var deleteDuplicates = function(head) {
-            if(!head) return head;
-            let curr = head;
-            console.log(curr);
-            while(curr.next){
-                if(curr.val === curr.next.val){
-                    curr.next = curr.next.next;
-                }else{
-                    curr = curr.next;
-                }
-                console.log(head);
-            }
-            return head;
-        };
+        // var deleteDuplicates = function(head) {
+        //     if(!head) return head;
+        //     let curr = head;
+        //     console.log(curr);
+        //     while(curr.next){
+        //         if(curr.val === curr.next.val){
+        //             curr.next = curr.next.next;
+        //         }else{
+        //             curr = curr.next;
+        //         }
+        //         console.log(head);
+        //     }
+        //     return head;
+        // };
 
+
+        // 给你一个整数数组 nums，将 nums 中的的所有偶数元素移动到数组的前面，后跟所有奇数元素。==>优化方法：原地交换/双指针+一次遍历
+        // var sortArrayByParity = function(nums) {
+        //     // nums.sort((a,b)=>a-b);
+        //     let array1 = [];
+        //     let array2 = [];
+        //     for(let i = 0,len = nums.length; i < len ;i++){
+        //         if(nums[i] % 2 !==0){
+        //         array1.push(nums[i])
+        //         }else{
+        //             array2.push(nums[i])
+        //         }
+        //     }
+        //     array2.push.apply(array2,array1);
+        //     return array2
+        // };
+
+      /**给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
+        有效字符串需满足：左括号必须用相同类型的右括号闭合。左括号必须以正确的顺序闭合。*/
+
+        var isValid = function(s) {
+            const n = s.length;
+            if(n%2 === 1){
+                return false
+            }
+            const pairs = new Map([
+                [')', '('],
+                [']', '['],
+                ['}', '{']
+            ]);
+            const stk = [];
+            for(let ch of s){
+                if(pairs.has(ch)){
+                    if(!stk.length || stk[stk.length-1] !== pairs.get(ch)){
+                        return false;
+                    }
+                    stk.pop();
+                }else{
+                    stk.push(ch);
+                };
+            };
+            return !stk.length;
+        };
         init();
         function init(){
             let head = [1,2,6,3,4,5,6], val = 6;
