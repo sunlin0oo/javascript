@@ -9,8 +9,9 @@
 <body>
     <script>
         var arr=[1,2,3,4];
-
+        
         // concat 数组连接新的元素或者新的数组，并且返回一个连接好的新数组，原数组不改变
+        // arr.push.apply(arr,arr1);//==>将arr1接到arr后面
       // var arr1=arr.concat(1,2,3,[3,4,5])
       // console.log(arr1,arr);
 
@@ -57,13 +58,8 @@
 
       var arr2=arr .concat(-1,[0,undefined,,[-1,-2]],-2);
       console.log(arr2);
-
-
-
-    //   join
-
  */
-
+//   join
     function arrayJoin(array,separator){
         if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
         if(array.length===0) return "";
@@ -78,8 +74,8 @@
 
     // arrayJoin(arr);
 
-   var str=arr.join([1])
-   var str1=arrayJoin(arr,[1]);
+   var str=arr.join("[1]");//String
+   var str1=arrayJoin(arr,"[1]");//String
    console.log(str,str1);
 
 

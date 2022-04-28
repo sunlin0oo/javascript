@@ -9,46 +9,45 @@
 <body>
     <script>
         var arr=[1,2,3,4,5,6];
-        // 从数组中指定的开始位置到结束位置，返回获取所有的元素组成的新数组，原数组不改变
-        // 包括起始位置到结束位置之前，不包括结束位置
-    //    var arr1=arr.slice(1,4)
-        // var arr1=arr.slice();//复制数组
-        // var arr1=arr.slice(1);
-        // var arr1=arr.slice(1,-1);//负数是倒数
-        // var arr1=arr.slice("a","b");
+    // 从数组中指定的开始位置到结束位置，返回获取所有的元素组成的新数组，原数组不改变
+    // 包括起始位置到结束位置之前，不包括结束位置
+    // var arr1=arr.slice(1,4)
+    // var arr1=arr.slice();//复制数组
+    // var arr1=arr.slice(1);
+    // var arr1=arr.slice(1,-1);//负数是倒数
+    // var arr1=arr.slice("a","b");
+    // console.log(arr1,arr);
 
-    //    console.log(arr1,arr);
 
-
-        /*
-        slice
-        function arraySlice(array,,end){
-            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
-            if(array.length===0) return [];
-            if(start===undefined) start=0;
-            if(end===undefined) end=array.length;
-            start=~~start;
-            end=~~end;
-            if(start<0) start=(array.length+start<0 ? 0 : array.length+start);
-            if(end<0) end=(array.length+end<0 ? 0 : array.length+end);
-            if(end>array.length) end=array.length;
-            var arr=[];
-            for(var i=start;i<end;i++){
-                arr[arr.length]=array[i];
-            }
-            return arr;
+    /*
+    slice
+    function arraySlice(array,,end){
+        if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+        if(array.length===0) return [];
+        if(start===undefined) start=0;
+        if(end===undefined) end=array.length;
+        start=~~start;
+        end=~~end;
+        if(start<0) start=(array.length+start<0 ? 0 : array.length+start);
+        if(end<0) end=(array.length+end<0 ? 0 : array.length+end);
+        if(end>array.length) end=array.length;
+        var arr=[];
+        for(var i=start;i<end;i++){
+            arr[arr.length]=array[i];
         }
+        return arr;
+    }
 
-       var arr1=arraySlice(arr,1,-10);
-       var arr2=arr.slice(1,-10)
-       console.log(arr1,arr2); */
+    var arr1=arraySlice(arr,1,-10);
+    var arr2=arr.slice(1,-10)
+    console.log(arr1,arr2); */
 
 
 
-        // splice  插入，删除，替换数组中的元素，并且返回被删除的元素组成的新数组，原数组发生改变
-        // arr.splice()
+    // splice  插入，删除，替换数组中的元素，并且返回被删除的元素组成的新数组，原数组发生改变
+    // arr.splice()
 
-    //    var arr1=arr.splice();
+    // var arr1=arr.splice();
     // var arr1=arr.splice(1)
     // var arr1=arr.splice(1,2)
     // var arr1=arr.splice(-3,2);
@@ -57,7 +56,7 @@
     // var arr1=arr.splice(1,2,-1,-2);
     // var arr1=arr.splice(1,1,-1,-2);
 
-        console.log(arr1,arr);
+        // console.log(arr1,arr);
 
         // splice
 
@@ -65,7 +64,7 @@
 
         function arraySplice(array,start,countDelete){
             if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
-            if(start===undefined) return [];
+            if(start===undefined) return [];//无删除元素
             start=~~start;
             //负数处理
             if(start<0) start=(array.length+start<0 ? 0 : array.length+start);
@@ -82,21 +81,21 @@
 
             array.length-=len-start;
             if(arguments.length<=3) return delArr;//判断功能，arguments.length<=3  函数参数小于3时，进行删除功能
-                                    //start---->1   
-            len=arguments.length-3;//添加个数------len=1    array.length--->3    i--->3
+                                    //start===>1   
+            len=arguments.length-3;//添加个数==>len=1    array.length==>3    i===>3
             for(var i=array.length+len-1;i>=start;i--){  //从前往后添加
-               if(i>=start+len) array[i]=array[i-len]//len 是插入项---挪到start+len
+               if(i>=start+len) array[i]=array[i-len]//len 是插入项===>挪到start+len
                else array[i]=arguments[arguments.length-len+(i-start)]
             }
             return delArr;
         }
        
-       var arr1= arraySplice(arr,2,1,-1)
+    //    var arr1= arraySplice(arr,2,1,-1)
        
-       console.log(arr1,arr);
+    //    console.log(arr1,arr);
 
-       var arr2=arr.splice(1);
-       console.log(arr2,arr);
+    //    var arr2=arr.splice(1);
+    //    console.log(arr2,arr);
     </script>
 </body>
 </html>
