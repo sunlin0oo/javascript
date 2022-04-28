@@ -25,27 +25,28 @@
         var arr=[];
         init();
         function init(){
-            hobbys = Array.from(document.getElementsByName("hobby"));
-            button = document.getElementsByTagName("button")[0];
+            hobbys = Array.from(document.getElementsByName("hobby"));//获取name：hobby的列表
+            button = document.getElementsByTagName("button")[0];//绑定选定反选按钮
             for(var i=0;i<hobbys.length;i++){
-                hobbys[i].onclick = clickhandler;
+                hobbys[i].onclick = clickhandler;//点击相应按钮
                 if(i>0) arr.push({checked:false});//给所有的hooby赋值checked:fasle
             }
-            all = hobbys.shift();//先赋值all
-            button.onclick=reverseHandler;
+            all = hobbys.shift();//先赋值all--全选
+            button.onclick=reverseHandler;//反选
         }
 
         function clickhandler(){
             if(this === all){  // this指点击谁
                 arr.forEach(function(item){ //arr中的item是对象
-                    item.checked = all.checked; 
+                    item.checked = all.checked; //与全选按钮checked同步
                 })
                 for(var i =0;i<hobbys.length;i++){
                     hobbys[i].checked = arr[i].checked;
                 }
             }else{
-                var index = hobbys.indexOf(this);
-                arr[index].checked = this.checked;
+                var index = hobbys.indexOf(this);//找到相应的索引
+                arr[index].checked = this.checked;//给所有的hobby按钮同步
+                //检查all按钮是否全选状态
                 all.checked = arr.every(function(item){
                     return item.checked;
                 })
