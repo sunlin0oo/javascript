@@ -88,7 +88,7 @@
         // var s=str.slice(1);
         // var s=str.slice(-1);
         // var s=str.slice(0,-1);//去除最后一个字符
-        // console.log(s)
+        // console.log(s,str);
 
         // 从from位置开始截取一个长度的字符串
         // str.substr(from,length); 
@@ -133,10 +133,10 @@
         // '{"a":1,"b":2}'
 
         // function queryParse(url){
-        //     var index = url.indexOf("?");
-        //     var end = url.indexOf("#");
+        //     var index = url.indexOf("?");//搜索?的索引坐标
+        //     var end = url.indexOf("#");//搜索#的索引坐标
         //     var str = url.slice(index+1,end);
-        //     var arr = str.split("&");
+        //     var arr = str.split("&");//使用&分割数组
         //     var obj={};
         //     for(var i=0;i<arr.length;i++){
         //         var arr1 = arr[i].split("=");
@@ -149,9 +149,9 @@
 
         
     //     function queryParse(url){ 
-        //url.split("?")[1]--->切割取后半部分pid=1011123&s=123&name=xie#a
-        //.split("#")[0]--->取前半部分pid=1011123&s=123&name=xie
-        //.split("&")--->用&进行分割三部分pid=1011123，s=123，name=xie
+        //url.split("?")[1]==>切割取后半部分pid=1011123&s=123&name=xie#a
+        //.split("#")[0]==>取前半部分pid=1011123&s=123&name=xie
+        //.split("&")==>用&进行分割三部分pid=1011123，s=123，name=xie
     //       return url.split("?")[1].split("#")[0].split("&").reduce(function(v,t){
     //         var arr=t.split("=");
     //         v[arr[0]]=isNaN(arr[1]) ? arr[1] : Number(arr[1]);
@@ -172,7 +172,7 @@
     // str=str.slice(0,-1);
     // console.log(str)
 
-        // Object.keys(o)--->获取所有的key    key每一个key
+        // Object.keys(o)==>获取所有的key    key每一个key
         var str=Object.keys(o).reduce(function(v,key,i){
          //i是key的索引
             return v+(i===0 ? "" : "&")+key+"="+o[key]

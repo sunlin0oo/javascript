@@ -32,7 +32,7 @@
             if(bool){
                 startTime=new Date();
             }else{
-                lastTime+=new Date()-startTime;
+                lastTime+=new Date()-startTime;//走过时间
             }
         }
 
@@ -46,7 +46,7 @@
 
         function anmiation(){
             if(!bool) return;
-            var time=(new Date()-startTime)+lastTime;
+            var time=(new Date()-startTime)+lastTime; //(new Date()-startTime)经历时间
             var minutes=~~(time/1000/60);
             var seconds=~~((time-minutes*1000*60)/1000);
             var ms=~~((time-minutes*1000*60-seconds*1000)/10);

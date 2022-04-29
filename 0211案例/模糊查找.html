@@ -29,7 +29,12 @@
         function init(){
             input = document.getElementById("input");
             ul = document.getElementById("ul");
+            /**oninput事件是在输入框中输入时就会触发
+             * onchange事件是在输入框输入完内容后，输入框失焦后触发
+                onchange事件兼容性好，主流浏览器都支持
+            */
             input.oninput = inputHandler;
+            input.onchange = inputHandler;//input元素上绑定事件
         }
 
         function inputHandler(){
@@ -40,11 +45,11 @@
             //      return v+"<li>"+JSON.stringify(t)+"</li>";
             //  },"")
             
-                //字符串+数组方法
+                //字符串+数组方法==>从左向右进行
              ul.innerHTML = arr.filter(function(item){
                  return item.name.indexOf(input.value)>-1
              }).reduce(function(v,t){
-                 return v+"<li>"+JSON.stringify(t)+"</li>";
+                 return v+"<li>"+JSON.stringify(t)+"</li>";//JavaScript 值转换为 JSON 字符串
              },"") 
 
         }
