@@ -22,9 +22,9 @@
         // var div = document.querySelector("div")
         // console.dir(div)
         // console.log(div.constructor===HTMLDivElement)
-        // div ---> HTMLDivElement-->HTMLElement-->Element-->Node-->EventTarget-->Object
-        //document-->HTMLDocument-->Doucment-->Node-->EventTarget-->Object
-        //window--->Window-->WindowProperties-->EventTarget-->Object
+        // div ==> HTMLDivElement==>HTMLElement==>Element==>Node==>EventTarget==>Object
+        //document==>HTMLDocument==>Doucment==>Node==>EventTarget==>Object
+        //window==->Window==>WindowProperties==>EventTarget==>Object
 
         
         // 事件侦听
@@ -42,7 +42,7 @@
 
         // 谁侦听，就需要朝谁抛发,先侦听后抛发,给侦听对象添加一个耳朵
         // div.addEventListener("chilemanin",handler);
-        // 侦听时间的对象必须要和抛发事件对象一致
+        // 侦听事件的对象必须要和抛发事件对象一致
 
         // 侦听chilemain,绑定一个事件evt,设置一个函数handler，抛发后触发函数
 
@@ -65,10 +65,10 @@
         */
 
         // document.addEventListener("click",clickHandler);
-        // // var evt = new MouseEvent("click",{clientX:10,clientY:20});
-        // // // evt.clientX = 10;
-        // // // evt.clientY = 20;
-        // // document.dispatchEvent(evt);
+        // var evt = new MouseEvent("click",{clientX:10,clientY:20});
+        // evt.clientX = 10;
+        // evt.clientY = 20;
+        // document.dispatchEvent(evt);
 
         // function clickHandler(e){
         //     // console.log(e.clientX,e.clientY);  //鼠标点击相对于视口位置
@@ -147,25 +147,25 @@
         利用document作为中介，为两个对象中的数据进行传递
         利用事件的抛发侦听机制（先侦听再抛发）*/
 
-        var obj1={
-            a:function(){
-                var abc=10;
-                var evt = new Event("elema");
-                evt.abc = abc;
-                document.dispatchEvent(evt);
-            }
-        }
+        // var obj1={
+        //     a:function(){
+        //         var abc=10;
+        //         var evt = new Event("elema");
+        //         evt.abc = abc;
+        //         document.dispatchEvent(evt);
+        //     }
+        // }
 
-        var obj2 = {
-            a:function(){
-                document.addEventListener("elema",this.b);
-            },
-            b:function(e){
-                console.log(e.abc);
-            }
-        }
-        obj2.a();
-        obj1.a();
+        // var obj2 = {
+        //     a:function(){
+        //         document.addEventListener("elema",this.b);
+        //     },
+        //     b:function(e){
+        //         console.log(e.abc);
+        //     }
+        // }
+        // obj2.a();
+        // obj1.a();
 
         // var o1 = {
         //     value: 1,

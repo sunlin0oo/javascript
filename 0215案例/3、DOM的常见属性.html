@@ -83,11 +83,11 @@
         // 获取宽高  
         // 元素宽高
         // var div1=document.querySelector(".div1");
-        // console.log(div1.clientWidth,div1.clientHeight);//width+padding-滚动条宽高--103,103
+        // console.log(div1.clientWidth,div1.clientHeight);//width + padding - 滚动条宽高--103,103
 
-        // console.log(div1.offsetWidth,div1.offsetHeight);//width+padding+border  实际占位的大小--124,124
-        // // 获取指定标签内容层的真实宽度（可视区域宽度+被隐藏区域宽度）
-        // console.log(div1.scrollWidth,div1.scrollHeight);//实际内容的宽度+padding(LeftPadding) 内容宽度--1010,1020
+        // console.log(div1.offsetWidth,div1.offsetHeight);//width+padding+border  实际占位的大小--124,124==>水平方向 width + 左右padding + 左右border-width
+        // 获取指定标签内容层的真实宽度（可视区域宽度+被隐藏区域宽度）
+        // console.log(div1.scrollWidth,div1.scrollHeight);//实际内容的宽度 (div2 1000)+padding(LeftPadding) 内容宽度--1010,1020
 
         // // html宽高和body宽高
         // //窗口宽-滚动条宽（可视区域宽度），高度是可视区域高度---1535 754 
@@ -95,7 +95,7 @@
         // //窗口宽度-滚动条-body的margin*2，高度是实际内容的高度---1519 124
         // console.log(document.body.clientWidth,document.body.clientHeight)
 
-        // //窗口宽-滚动条宽  高度是实际内容高度---1535 224
+        // //窗口宽 - 滚动条宽  高度是实际内容高度---1535 224
         // console.log(document.documentElement.offsetWidth,document.documentElement.offsetHeight)
         // //html的offset宽高-body的margin*2---1519 124
         // console.log(document.body.offsetWidth,document.body.offsetHeight);

@@ -38,18 +38,18 @@
         <input type="password">
     </form>
     <script>
-        // MouseEvent    鼠标事件---->父类
-        // PointerEvent  点事件----->子类
+        // MouseEvent    鼠标事件==>父类
+        // PointerEvent  点事件==>子类
 
         /* 
             click  单击左键
             dblclick 双击左键
             mousedown  按下键
             mouseup  释放键
-            mouseover 鼠标经过   会冒泡，e.target的事件会委托当前元素----->子元素
-            mouseout  鼠标滑开  会冒泡，e.target的事件会委托当前元素----->子元素
-            mouseenter  鼠标进入  不会冒泡 ，子元素不会委托事件给父容器---->当前侦听元素
-            mouseleave  鼠标离开   不会冒泡 ，子元素不会委托事件给父容器---->当前侦听元素
+            mouseover 鼠标经过   会冒泡，e.target的事件会委托当前元素==>子元素
+            mouseout  鼠标滑开  会冒泡，e.target的事件会委托当前元素==>子元素
+            mouseenter  鼠标进入  不会冒泡 ，子元素不会委托事件给父容器==>当前侦听元素
+            mouseleave  鼠标离开   不会冒泡 ，子元素不会委托事件给父容器==>当前侦听元素
             mousemove  鼠标移动
             contextmenu  单击右键(右键菜单)
          */
@@ -71,7 +71,7 @@
             buttons: 1  2   4
             which: 1   3   2
 
-            相对视口位置---->当前窗口
+            相对视口位置==>当前窗口
             clientX: 192
             clientY: 88
             x: 192
@@ -85,7 +85,7 @@
             screenX: 192
             screenY: 167
 
-            在父容器定位时 相对目标对象（e.target)
+            在父容器定位时 相对目标对象(e.target)
             layerX: 192
             layerY: 88
             常使用以下两个：

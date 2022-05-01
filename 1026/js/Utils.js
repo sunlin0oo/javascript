@@ -35,7 +35,6 @@ var Utils=(function(){
             不断更改其地址，使其不断加载新的图片，去激活load事件执行对应的方法，因此，这个图片载体上存储一些数据
             这些数据包括当前加载图片的为n，当前加载完图片存储的数组finishList，当前需要加载图片地址数组，加载完成
             后需要执行的回调函数finishHandler，全部存储在这个图片对象中
-
         */
         loadImage:function(sourceArr,finishHandler,basePath,suffix){
             if(typeof sourceArr==="string") sourceArr=[sourceArr]; //设置成数组，放在数组的第一个元素中------去尝试变成数组

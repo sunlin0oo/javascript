@@ -45,7 +45,7 @@
         <div></div>
     </div>
     <script>
-        // change  修改  主要用于表单元素，及表单--->冒泡给表单
+        // change  修改  主要用于表单元素，及表单==>冒泡给表单
         // submit 表单的事件 提交表单;用表单进行侦听，不能使用button
         // reset  表单的事件 重置表单
         // select  输入框或者textarea
@@ -65,7 +65,7 @@
         form.addEventListener("change",formChangeHandler);//---在这里操作 修改表单元素，冒泡到form触发事件侦听
         form.addEventListener("submit",submitHandler);
         form.addEventListener("reset",resetHandler);
-        input.addEventListener("select",selectHandler);//表单select事件-->输入框中文本被选中时，我们触发
+        input.addEventListener("select",selectHandler);//表单select事件==>输入框中文本被选中时，我们触发
         
 
         function changeHandler(e){
@@ -75,7 +75,7 @@
             // e.cancelable 只读  如果是false  这个事件不能被e.preventDefault()取消其默认行为，如果是true，可以被取消--判断是否可以使用e.preventDefault();
             // e.currentTarget 只读 当前事件侦听的对象 与this相同
             // e.defaultPrevented 只读  是否调用了e.preventDefault();
-            // e.eventPhase  只读 当前事件流处于第几个阶段 0无事件  1 捕获  2 目标  3 冒泡
+            // e.eventPhase  只读 当前事件流处于第几个阶段 0 无事件  1 捕获  2 目标  3 冒泡
             // e.isTrusted 只读  true 系统派发事件 false 是通过dispatchEvent 自定义派发事件
             // e.path  冒泡经过所有DOM对象的列表数组
             // e.returnValue  可写可读 true 允许默认行为  false 不允许执行默认行为，等同于e.preventDefault()
@@ -110,7 +110,6 @@
         var evt=new Event("change");
         form.dispatchEvent(evt);
 
-
         var bn1=document.querySelector("#bn1");
         bn1.addEventListener("click",clickhandler1);
         bn1.addEventListener("click",clickhandler2);
@@ -128,8 +127,6 @@
         function clickhandler3(e){
             console.log("ccc")
         }
-
-
 
         window.addEventListener("resize",resizeHandler);
         console.log(document.documentElement.clientWidth/screen.width)

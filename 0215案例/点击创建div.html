@@ -18,13 +18,13 @@
                 return {clientX:~~(Math.random()*1390),clientY:~~(Math.random()*(document.documentElement.clientHeight-50))}
             })
             document.addEventListener("click",clickHandler);
-           ids=setInterval(animation,16);
+            ids=setInterval(animation,16);
         }
 
 
         function createElem(type,style,parent){
             var elem=document.createElement(type);
-            if(style && typeof style==="object") Object.assign(elem.style,style);
+            if(style && typeof style==="object") Object.assign(elem.style,style);//复制对象
             if(typeof parent==="string") parent=document.querySelector(parent);
             if(parent) parent.appendChild(elem);
             return elem;
@@ -35,7 +35,7 @@
             createElem("div",{
                 width:"50px",
                 height:"50px",
-                backgroundColor:Array(6).fill(1).reduce(function(v,t){return v+(~~(Math.random()*16)).toString(16)},"#"),
+                backgroundColor:Array(6).fill(1).reduce(function(v,t){return v+(~~(Math.random()*16)).toString(16)},"#"),//随机颜色
                 position:"absolute",
                 borderRadius:"50px",
                 left:e.clientX-25+"px",
@@ -53,7 +53,6 @@
             var evt=new PointerEvent("click",o);
             document.dispatchEvent(evt);
         }
-
 
     </script>
 </body>
