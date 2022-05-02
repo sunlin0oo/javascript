@@ -891,19 +891,59 @@
     
     /**给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，
     这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。叶子节点 是指没有子节点的节点。===>深度优先遍历*/
-    var hasPathSum = function(root, targetSum) {
-        if(!root) return false;
-        let res = false;
-        var dfs = function(node,sum){
-        if(sum === targetSum && !node.left && !node.right){
-            res =  true; return
-        }
-        if(node.left)  dfs(node.left,sum+node.left.val);
-        if(node.right) dfs(node.right,sum+node.right.val);
-    }
-        dfs(root,root.val);
-        return res;
-    };
+    // var hasPathSum = function(root, targetSum) {
+    //     if(!root) return false;
+    //     let res = false;
+    //     var dfs = function(node,sum){
+    //     if(sum === targetSum && !node.left && !node.right){
+    //         res =  true; return
+    //     }
+    //     if(node.left)  dfs(node.left,sum+node.left.val);
+    //     if(node.right) dfs(node.right,sum+node.right.val);
+    // }
+    //     dfs(root,root.val);
+    //     return res;
+    // };
+
+
+    /**给定二叉搜索树（BST）的根节点 root 和一个整数值 val。你需要在 BST 中找到节点值等于 val 的节点。 返回以该节点为根的子树。 如果节点不存在，则返回 null 。
+     * 注意二叉树搜索性质：：：若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值； 
+    */
+    // var searchBST = function(root, val) {
+    //     while (root) {
+    //         if (val === root.val) {
+    //             return root;
+    //         }
+    //         root = val < root.val ? root.left : root.right;
+    //     }
+    //     return null;
+    // };
+    /**给定二叉搜索树（BST）的根节点 root 和要插入树中的值 value ，将值插入二叉搜索树。 返回插入后二叉搜索树的根节点。 输入数据 保证 ，新值和原始二叉搜索树中的任意节点值都不同。
+     * 注意，可能存在多种有效的插入方式，只要树在插入后仍保持为二叉搜索树即可。 你可以返回 任意有效的结果 。
+     * 根据性质，先分左右，直到找到空才添加 */
+    // var insertIntoBST = function(root, val) {
+    //     if(root === null) return new TreeNode(val);//重新创建一颗树
+    //     let pos = root;
+    //     while(pos!==null){
+    //         if(val < pos.val){ //左
+    //             if(pos.left === null){
+    //                 pos.left = new TreeNode(val);
+    //                 break;
+    //             }else{
+    //                 pos = pos.left;
+    //             }
+    //         }else{//右
+    //             if(pos.right === null){
+    //                 pos.right = new TreeNode(val);
+    //                 break;
+    //             }else{
+    //                 pos = pos.right;
+    //             }
+
+    //         }
+    //     }
+    //     return root;
+    // };
 
 
         init();
