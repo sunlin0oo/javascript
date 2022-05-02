@@ -5,15 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .div1{
-            width: 800px;
-            
-        }
-        .div2{
-            width:1200px;
-        }
-    </style>
 </head>
 <body>
     <div class="div1"></div>
@@ -22,7 +13,6 @@
     <script type="module">
         import Carousel from "./js/Carousel.js";
         import TimeManager from "./js/TimeManager.js"
-
 
         var list=[
             {img:"./img/a.jpg",date:"2/Nov.2021",info:"食欲拯救计划｜阿一古～是贼拉好吃的延吉啊！"},
@@ -39,20 +29,23 @@
             {date:"09/Jul.2021",info:"念念闽夏｜日子娓娓，一如夏季绵长",img:"./img/d1.jpg"},
             {date:"08/Jul.2021",info:"30天自驾16座城市，从南到北，一万公里重新认识你。（海南-内蒙古-海南）",img:"./img/e1.jpg"},
         ]
-        
-        var carousel=new Carousel(list);// 初始化设定
+
+        var carousel = new Carousel(list);// 初始化设定
         carousel.appendTo(".div1");
+
+        // var bn=document.querySelector("button");/*切换数据*/
+        // bn.addEventListener("click",function(){
+        //     carousel.setData(arr);
+        // })
+       
+        // /*停止轮播*/
+        var bn = document.querySelector("button");
+        bn.addEventListener('click',clickHandler);
         
-        var carousel1=new Carousel(arr);
-        carousel1.appendTo(".div2");
+        function clickHandler(){
+            TimeManager.getInstance().remove(carousel);
+        }
 
-
-        var bn=document.querySelector("button");/*切换数据*/
-        bn.addEventListener("click",function(){
-            carousel.setData(arr);
-        })
-       
-       
     </script>
 </body>
 </html>

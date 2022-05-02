@@ -1,21 +1,22 @@
 import TimeManager from "./TimeManager.js";
 import Utils from "./Utils.js";
 export default class Carousel {
-    static LEFT=Symbol();
-    static RIGHT=Symbol();
-    static cssBool=false;
-    elem;
+    //设置全局变量
+    static LEFT=Symbol();//控制左方向==>静态常量
+    static RIGHT=Symbol();//控制左方向
+    static cssBool=false;//控制CSS格式一次渲染
+    elem;//标签元素
     autoBool = false;
     time = 200;
-    dot;
-    imgCon;
+    dot;//小圆点
+    imgCon;//图片
     list = [];
-    itemList = [];
-    bnList = [];
-    pos=0;
-    x=0;
+    itemList = [];//创建的div
+    bnList = [];//小圆点列表
+    pos=0;//图片位置
+    x=0;//容器位置
     prev;
-    moveBool=false;
+    moveBool=false;//控制轮播
     speed=50;
     direction=Carousel.LEFT;
 
@@ -23,25 +24,26 @@ export default class Carousel {
     constructor(list) {
         this.elem = document.createElement("div");
         this.elem.className = "carousel";
-        if (list) this.setData(list);
+        if (list) this.setData(list);//外界的list存在才执行
         Carousel.setCss();
         this.elem.addEventListener("mouseenter", e => this.mouseHandler(e));
         this.elem.addEventListener("mouseleave", e => this.mouseHandler(e));
+        //TimeManager.getInstance()单例实例化 new TimeManager()
         TimeManager.getInstance().add(this);
     }
     appendTo(parent) {
         if (typeof parent === "string") parent = document.querySelector(parent);
-        if (parent) {
+        if (parent) {//根据给出的容器进行变换高度
             parent.appendChild(this.elem);
             this.elem.style.height=parent.offsetWidth/3+"px";
-      
         }
         
     }
+    /*创建新的list==>由外界传进来的数据==>有数据才会去创造Imagecon，Dot等元素标签*/
     setData(list) {
-        this.list = list;
-        this.itemList.length = 0;
-        this.pos=0;
+        this.list = list;//放进新的list，需要清空原来list;
+        this.itemList.length = 0; //放进新的list需要清空原来itemList
+        this.pos=0;//图片位置归零
         this.time=200;
         this.autoBool=false;
         this.createImageCon(this.elem);
@@ -53,6 +55,7 @@ export default class Carousel {
     mouseHandler(e) {
         this.autoBool = e.type === "mouseenter" ? false : (this.time = 200 && true);
     }
+
     createImageCon(carousel) {
         this.imgCon = document.createElement("div");
         this.imgCon.className = "img-con";
@@ -77,6 +80,7 @@ export default class Carousel {
             bn.addEventListener("click", e => this.bnClickHandler(e));
         }
     }
+    
     createBn(left) {
         var canvas = document.createElement("canvas");
         canvas.width = 30;
@@ -117,18 +121,21 @@ export default class Carousel {
         if(this.prev){
             this.prev.style.backgroundColor="rgba(255,0,0,0)";
         }
+        console.log("this.prev:::",this.prev);
         this.prev=this.dot.children[this.pos].firstElementChild;
         this.prev.style.backgroundColor="rgba(255,0,0,1)";
     }
+
     dotClickHandler(e) {
         if(e.target.nodeName!=="A") return;
         var index=Array.from(this.dot.children).indexOf(e.target.parentElement);
-        this.direction=index>this.pos ? Carousel.LEFT : Carousel.RIGHT;
+        this.direction=index > this.pos ? Carousel.LEFT : Carousel.RIGHT;
         this.pos=index;
         this.createNextImg();
     }
+
     bnClickHandler(e) {
-        if(this.className==="left"){
+        if(e.target.className ==="left"){
             this.pos--;
             if(this.pos<0) this.pos=this.list.length-1;
             this.direction=Carousel.RIGHT;
@@ -153,7 +160,7 @@ export default class Carousel {
     }
     moveAnimation(){
         if(!this.moveBool) return;
-        if(this.direction===Carousel.LEFT){
+        if(this.direction === Carousel.LEFT){
             this.x-=this.speed;
             if(this.x<=-this.imgCon.firstElementChild.offsetWidth){
                 this.imgCon.firstElementChild.remove();
@@ -177,11 +184,12 @@ export default class Carousel {
         this.time=200;
         this.bnList[1].dispatchEvent(new MouseEvent("click"));
     }
+    //动画
     update(){
         this.moveAnimation()
         this.autoMove();
     }
-   
+    //设置CSS样式
     static setCss(){
         if(Carousel.cssBool) return;
         Carousel.cssBool=true;

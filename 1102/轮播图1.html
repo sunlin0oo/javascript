@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding:0;
+    }
+    .carousel{
+        width: 100%;
+        height: 33.3vw;
+        min-height: 365px;
+    }
+    /*存储图片ul*/
+    .show-img{
+        list-style: none;
+        margin:0;
+        padding: 0;
+        /* 去除滚动条==>限制宽度==>铺满*/
+        width: 100%;
+        height: 100%;
+        /* 设置最小变化距离 */
+        min-width: 1200px;
+        position: relative;
+    }
+    /*子绝父相==>li标签*/
+    .show-img > li{
+        position: absolute;
+        left: 0;
+        top:0;
+        /*给图片进行定位时需要添加宽度*/
+        width: 100%;
+        /*给li元素设置高度才可变动字体的高度位置*/
+        height: 100%;
+        transition: all 0.5s;
+    }
+    .show-img img{
+        width: 100%;
+        min-width: 1200px;
+        position: absolute;
+    }
+    .show{
+        z-index: 1;
+        /* 可见度 */
+    }
+    /*not选择器:show”表示选择class值为show的元素(即第1个li元素)，因此“.show-img>li:not(.show)”表示选择class值为show-img元素下除了第1个li元素的其他所有li元素。*/
+    /* .show-img>li:not(.show){
+        display: none; ==>导致没有切换的效果==>放到js中
+    } */
+    .show-img>li>div{
+        position: absolute;
+        left: 15%;
+        top:10%;
+        color:white;
+        font-size: 20px;
+    }
+    .show-img>li>div>div>span{
+        font-size: 30px;
+    }
+    .icon-list{
+        z-index: 2;
+        position:absolute;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        right: 50px;
+        /*垂直居中*/
+        /* top: 25%; */
+        /*translate括号里的两个参数是先x后y的*/
+        /* transform: translate(0,-50%); */
+        /* ==>用js去进行解决 */
+        font-size: 0; 
+    }
+    .icon-list >li{
+        margin-top: 10px;
+        /* 图片未加载完，不够，则写死 */
+        height: 67px;
+        border:2px solid transparent;
+    }
+    /* 去除顶部的margin值 */
+    .icon-list>li:first-child{
+        margin-top: 0;
+    }
+</style>
+<body>
+    <div class="carousel">
+        <ul class="show-img">
+            <li class="show"><img src="./img/a.jpg">
+                <div>
+                    <div><span>2</span>/Nov.2021</div>
+                    <span>食欲拯救计划｜阿一古～是贼拉好吃的延吉啊！</span>
+                </div>
+            </li>
+            <li><img src="./img/b.jpg">
+                <div>
+                    <div><span>1</span>/Nov.2021</div>
+                    <span>徽州古村落赏秋自驾9日攻略！给这个秋天一个说走就走的理由！</span>
+                </div>
+            </li>
+            <li><img src="./img/c.jpg">
+                <div>
+                    <div><span>31</span>/Oct.2021</div>
+                    <span>致，荆棘鸟与淘金先驱者——三赴西澳自驾笔记</span>
+                </div>
+            </li>
+            <li><img src="./img/d.jpg">
+                <div>
+                    <div><span>30</span>/Oct.2021</div>
+                    <span>我是你的俘虏【跟新疆私奔】</span>
+                </div>
+            </li>
+            <li><img src="./img/e.jpg">
+                <div>
+                    <div><span>29</span>/Oct.2021</div>
+                    <span>遇见阳朔的光与影，晨与昏，山与水</span>
+                </div>
+            </li>
+        </ul>
+        <ul class="icon-list">
+            <li><a href="#0"><img src="./img/a_icon.png"></a></li>
+            <li><a href="#1"><img src="./img/b_icon.png"></a></li>
+            <li><a href="#2"><img src="./img/c_icon.png"></a></li>
+            <li><a href="#3"><img src="./img/d_icon.png"></a></li>
+            <li><a href="#4"><img src="./img/e_icon.png"></a></li>
+        </ul>
+    </div>
+
+    <script>
+        var iconList,carousel,prevImg,prevIcon;
+        init();
+        function init(){
+            iconList = document.querySelector(".icon-list");
+            carousel = document.querySelector(".carousel");
+            showImg = document.querySelector(".show-img");//获取展示图片的列表
+            // 先将所有的li设置可见度为0
+            Array.from(showImg.children).forEach(item=>{
+                item.style.opacity = 0;
+            })
+            window.addEventListener("resize",resizeHandler);
+            iconList.addEventListener("click",clickHandler);
+            window.addEventListener("hashchange",HashChangeHandler);//可在浏览器上进行回退功能
+            resizeHandler();
+            changePrev(0);
+        }
+
+        function resizeHandler(e){
+            iconList.style.top = (carousel.offsetHeight - iconList.offsetHeight)/2 + "px";
+        }
+        function clickHandler(e){
+            if(e.target.nodeName !== "IMG") return;
+            // iconList.children==>各个li==>Array.from(iconList.children) 将li元素转换成数组
+            // e.path==>指点击事件的元素，由内到外e.path[2]==>li===>与点击事件进行匹配，这样可选取到相对应的li
+            let index = Array.from(iconList.children).indexOf(e.path[2]);
+            changePrev(index);
+        }
+
+        function changePrev(pos){
+            if(prevImg){
+                prevImg.className = "";
+                prevImg.style.opacity = 0;
+            }
+            if(prevIcon){
+                prevIcon.style.borderColor = "transparent";//更换缩略图===>透明上一次的边框
+            }
+            //给缩略图加上边框
+            prevIcon = iconList.children[pos];
+            prevIcon.style.borderColor="#FF9D00";
+            //变换大图片
+            prevImg = showImg.children[pos];
+            prevImg.className = "show";
+            prevImg.style.opacity = 1;
+        }
+
+        function HashChangeHandler(e){
+            var pos = Number(location.hash.slice(1))//返回一个 URL 的主要部分
+            changePrev(pos);
+        }
+    </script>
+</body>
+</html>
