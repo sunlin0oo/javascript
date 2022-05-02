@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .carousel{
+        /* 宽度108*7(图片) + 4 * 7(边框) */
+            width: 784px;
+            /* 高度 = 宽度 /3 + 67(小图) + 4(边框) */
+            height: 332px;
+            border: 1px solid #000;
+            position: relative;
+            margin: auto;
+            left: 0;
+            right: 0;
+            /* 溢出部分隐藏 */
+            overflow: hidden;
+        }
+
+        .img_con{
+            width: 200%;
+            /*  高度 = 宽度 /3 */
+            height: 261px;
+            background-color:pink;
+            position: absolute;
+            left: 0;
+        }
+
+        .img_con>.show_img{
+            width: 784px;
+            height: 261px;
+        }
+
+        .icon_carousel{
+            width: 100%;
+            height: 71px;
+            position: absolute;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .icon_carousel>.icon_con{
+            height: 71px;
+            position: absolute;
+            left: 0;
+            font-size: 0;
+            /* background-color: rgba(0,255,0,0.2); */
+        }
+
+        .left,.right{
+            position: absolute;
+            /* img_con的一半 图片自身高度为60 */
+            top:100.5px;
+        }
+        .left{
+            left:20px;
+        }
+        .right{
+            right: 20px;
+        }
+</style>
+<body>
+    <script>
+        var imgList=[
+            {id:1001,icon:"./img/a1_icon.jpeg",img:"./img/a1.png"},
+            {id:1002,icon:"./img/b1_icon.jpeg",img:"./img/b1.png"},
+            {id:1003,icon:"./img/c1_icon.jpeg",img:"./img/c1.png"},
+            {id:1004,icon:"./img/d1_icon.jpeg",img:"./img/d1.png"},
+            {id:1005,icon:"./img/e1_icon.jpeg",img:"./img/e1.png"},
+            {id:1006,icon:"./img/a_icon.png",img:"./img/a.jpg"},
+            {id:1007,icon:"./img/b_icon.png",img:"./img/b.jpg"},
+            {id:1008,icon:"./img/c_icon.png",img:"./img/c.jpg"},
+            {id:1009,icon:"./img/d_icon.png",img:"./img/d.jpg"},
+            {id:1010,icon:"./img/e_icon.png",img:"./img/e.jpg"},
+            {id:1003,icon:"./img/c1_icon.jpeg",img:"./img/c1.png"},
+        ]
+        var imgCon,iconCon,list = [],prev,pos = 0;
+        //控制图片的移动方向
+        const LEFT = Symbol();
+        const RIGHT = Symbol();
+        const SPEED = 20;
+        var direction = LEFT;
+        var iconDirection = LEFT;
+        var moveBool = false;
+        var first = 0;
+        var iconMoveBool = false;
+        var iconX = 0;//缩略图容器位置
+        var x = 0;//容器的位置
+        init()
+
+        function init(){
+            var carousel = document.createElement("div");
+            carousel.className = "carousel";
+            createImgCon(carousel);
+            createIconList(carousel);
+            createBn(carousel);
+            document.body.appendChild(carousel);
+            changePrev();
+            animation();
+        }
+
+        //放置图片大图
+        function createImgCon(carousel){
+            imgCon = document.createElement("div");
+            imgCon.className = "img_con";
+            imgCon.appendChild(getImage(0));
+            carousel.appendChild(imgCon);
+        }
+
+        //将小图片放进长条中
+        function createIconList(carousel){
+            var iconCarousel = document.createElement("div");
+            iconCarousel.className = "icon_carousel"
+            iconCon = document.createElement("div");
+            iconCon.className = "icon_con"
+            iconCon.style.width=imgList.length*112+"px";//宽度 ：108+4 防止图片的长度
+            imgList.forEach(item=>{
+                /**需要时再写相应的css格式，不要随时写*/
+                var img = new Image();
+                img.src = item.icon;
+                img.style.border = "2px solid transparent";
+                iconCon.appendChild(img);
+            })
+            iconCarousel.appendChild(iconCon);
+            iconCon.addEventListener("click",iconConClickHandler);
+            carousel.appendChild(iconCarousel);
+        }
+
+        function createBn(carousel){
+            for(let i =0;i<2;i++){
+                var img = new Image();
+                img.src = `./img/${i===0 ? "left" : "right"}.png`;
+                img.className = i===0 ? "left" : "right";
+                img.addEventListener("click",bnClickHandler);
+                carousel.appendChild(img);
+            }
+        }
+        /**添加图片，防止图片的重复添加*/
+        function getImage(n){
+            if(list[n]) return list[n];//若之前添加过，则直接返回之前所添加的图片
+            var img = new Image();
+            img.className = "show_img";
+            img.src = imgList[n].img;
+            list[n] = img;
+            return list[n];
+        }
+
+        function changePrev(){
+            if(prev){
+                prev.style.borderColor = "transparent"; // 边框透明
+            }
+            prev = iconCon.children[pos];
+            prev.style.borderColor = "red";
+        }
+
+        function bnClickHandler(e){
+            if(moveBool) return;
+            //点击左键，
+            if(this.className === "left"){
+                direction = RIGHT;
+                if(--pos<0) return  pos=0;
+                // pos--;
+                // if(pos<0) {
+                //     pos = 0
+                //     return;
+                // };
+            }else{
+                direction=LEFT;
+                if(++pos>imgList.length-1) return  pos=imgList.length-1;
+            }
+            createNextImage();
+        }
+
+        function iconConClickHandler(e){
+            if(moveBool) return;
+            //委托给父容器
+            if(e.target.nodeName!=="IMG") return;
+            //this==>iconCon;this.children==>All images
+            var index = Array.from(this.children).indexOf(e.target);
+            if(index>pos) direction = LEFT;
+            else direction = RIGHT;
+            pos = index;
+            createNextImage();
+        }
+        function createNextImage(){
+            /**当图片向左移动时，在当前图片的尾部添加图片
+             * 并且设置容器位置为0，不断减少容器宽度(-784)后，方可呈现下一张图片
+            */
+            if(direction === LEFT){
+                x = 0;
+                imgCon.appendChild(getImage(pos));
+            }else if(direction === RIGHT){
+                /**当图片向右移动时，在当前图片的前部添加图片
+             * 并且设置容器位置为-784，不断增加到容器宽度(0)后，方可呈现下一张图片
+            */
+                x=-784;
+                imgCon.insertBefore(getImage(pos),imgCon.firstElementChild);
+            }
+            imgCon.style.left=x+"px";
+            moveBool=true;
+            changePrev();
+            changeIcon();
+        }
+
+        function changeIcon(){
+            /**first+6 === pos 最后一张照片  
+             * first+6!==imgList.length-1 避免溢出
+             * first==>指缩略图的现在的第一张
+            */
+            if(first+6 === pos && first+6!==imgList.length-1){
+                //整体右移(向左滑动)3个位置;
+                first+=3;
+                if(first+6>=imgList.length-1)first=imgList.length-1-6; //在最后一张图片止住
+                iconDirection=LEFT;
+            }else if(first === pos && first!=0){
+                //整体左移(向右滑动)3个位置;
+                first-=3;
+                if(first<=0) first=0;
+                iconDirection=RIGHT;
+            }else return;
+            iconMoveBool=true;
+        }
+
+        function animation(){
+            requestAnimationFrame(animation);
+            imgMove();
+            iconMove();
+        }
+
+        function iconMove(){
+            if(!iconMoveBool) return;
+            // iconX=first*112; //108+4
+            if(iconDirection ===LEFT){//向左走是负的
+                iconX -=SPEED;
+                if(iconX <= -112 * first){
+                    iconMoveBool = false;
+                    /**iconX指的是第一张图片的位置,first移动3个，iconX=-112*first就要移动相同的距离*/
+                    iconX=-112*first
+                }
+            }else if(iconDirection === RIGHT){
+                iconX+=SPEED;
+                if(iconX >= -112 * first){
+                    iconMoveBool = false;
+                    iconX=-112*first;
+                }
+            }
+            iconCon.style.left=iconX+"px";
+        }
+
+        function imgMove(){
+            if(!moveBool) return;
+            if(direction === LEFT){
+                x -= SPEED;
+                if(x<-784){
+                    /*x<-784时，下一张图片已经完全展示，可以删除前一张图片*/
+                    x = 0;
+                    imgCon.firstElementChild.remove();
+                    moveBool =false;//移动完毕，方可点击下一张
+                }
+            }else if(direction === RIGHT){
+                x+=SPEED;
+                if(x>0){
+                    x = 0;
+                    imgCon.lastElementChild.remove();
+                    moveBool = false;
+                }
+            }
+            imgCon.style.left = x + "px";
+        }
+    </script>
+</body>
+</html>
