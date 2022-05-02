@@ -6,7 +6,9 @@ export default class Carousel {
     static RIGHT=Symbol();//控制左方向
     static cssBool=false;//控制CSS格式一次渲染
     elem;//标签元素
+    id;
     autoBool = false;
+    dotTarget = 0;
     time = 200;
     dot;//小圆点
     imgCon;//图片
@@ -127,11 +129,17 @@ export default class Carousel {
     }
 
     dotClickHandler(e) {
+        // if(this.dotBool) return;
+        // this.dotBool = true;
         if(e.target.nodeName!=="A") return;
         var index=Array.from(this.dot.children).indexOf(e.target.parentElement);
         this.direction=index > this.pos ? Carousel.LEFT : Carousel.RIGHT;
         this.pos=index;
-        this.createNextImg();
+        this.createNextImg(this.pos);
+    }
+
+    waitPos(){
+        console.log("wwwww")
     }
 
     bnClickHandler(e) {
@@ -146,7 +154,12 @@ export default class Carousel {
         }
         this.createNextImg();
     }
-    createNextImg(){
+    createNextImg(pos){
+        /**阻止连续点击*/
+        if(this.dotTarget === pos){
+            return;
+        }
+        this.dotTarget = this.pos;
         if(this.direction===Carousel.LEFT){
             this.x=0;
             this.imgCon.appendChild(this.getImageItem(this.pos));
