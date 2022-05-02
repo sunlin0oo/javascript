@@ -18,11 +18,10 @@
         // var tel="18617564321"
         // console.log(/\d{11}/.test(tel))//测试tel是否符合11位数字
 
-
         // console.log("asdkjaskjhdabb".match(/.{3}/g));//切割三个字符--出现问题，剩余两个字符就不会被切割
 
         // {0}表示匹配""字符，不在乎前面的东西
-        console.log("asdasd".match(/a{0}/g));//7个元素的空字符
+        // console.log("asdasd".match(/a{0}/g));//7个元素的空字符
 
         // /z.{7}z/
         // /[aeiou]{6}/
@@ -35,7 +34,7 @@
         // 当,后面没有值，匹配最大===>无穷
         // console.log("asdasdasd".match(/.{1,}/g));
 
-        // console.log(/^.{0}$/.test(str.trim())
+        // console.log(/^.{0}$/.test(str.trim());
 
         // console.log("asdasdasd".match(/a.{0,}d/g));//匹配任意字符
 
@@ -46,9 +45,9 @@
 
         // console.log("colour".match(/colou?r/));
 
-        // console.log('"西游记","三国演义","水浒","红楼梦"'.match(/".*"/g));
-        // console.log('"西游记","三国演义","水浒","红楼梦"'.match(/"[^"]*"/g));
-
+        // console.log('"西游记","三国演义","水浒","红楼梦"'.match(/".*"/g));//['"西游记","三国演义","水浒","红楼梦"'] ==》一个整体
+        //"[^"]*" ==>选取""==>中不是"的字符
+        // console.log('"西游记","三国演义","水浒","红楼梦"'.match(/"[^"]*"/g));//['"西游记"', '"三国演义"', '"水浒"', '"红楼梦"']==>4个
 
         // /[^"]*/
         // /x{0,3}/
@@ -56,10 +55,9 @@
         // /z{4,}/ 
         // "".split(/[^a-zA-Z]{6}/)
 
-
         //    .*?    .+? 非贪婪匹配
-        // console.log("《西游记》,《三国演义》,《水浒》,《红楼梦》".match(/《.*?》/g))
-        // console.log("aadaadvdvdfswwdasaasdasdasdasa".match(/a.*?d/g))
+        // console.log("《西游记》,《三国演义》,《水浒》,《红楼梦》".match(/《.*?》/g)) //['《西游记》', '《三国演义》', '《水浒》', '《红楼梦》'];
+        // console.log("aadaadvdvdfswwdasaasdasdasdasa".match(/a.*?d/g)) // ['aad', 'aad', 'asaasd', 'asd', 'asd'];
 
         // console.log("<div></div><span></span>".match(/<.*?>/g))
         // var str="<div></div><span></span>".replace(/<.*?>/g,function(item){
