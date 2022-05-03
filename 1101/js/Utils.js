@@ -113,6 +113,7 @@ export default class Utils {
             this.removeEventListener("mouseup", this.div.self.mouseHandler);
         }
     }
+    
     static randomColor(a, r, g, b) {
         if (a === undefined) a = 1;
         var color = "rgba(";

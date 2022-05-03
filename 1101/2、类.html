@@ -21,7 +21,7 @@
 
             // 构造函数等同于类===Human 入口函数
            constructor(name){
-            //  console.log(this)  指实例化的对象---> 下面new Hunman实例化a === this
+            //  console.log(this)  指实例化的对象==> 下面new Hunman实例化a === this
                 this.name=name;//赋值给实例化对象的name属性
            }
 
@@ -112,7 +112,6 @@
         // 继承
         // 基类 父类  子类  超类 === 子类的父类
         // 基类  JS所有基类都是Object
-            
         // 假设A就是基类
         class A{
             name="a";
@@ -128,6 +127,7 @@
                 console.log("run")
             }
         }
+
         // 继承 extends
         class B extends A{
             age=0;
@@ -137,7 +137,7 @@
             constructor(name,age){
                 // this.walk(); 一旦没有执行构造函数，直接使用this就会报错，因为这个时候还没有继承
                 // if(name) this.name=name;
-                super(name);//super就是超类的构造函数---->去执行A的构造函数--->优先进行
+                super(name);//super就是超类的构造函数===>去执行A的构造函数===>优先进行
                 if(age) this.age=age;
             }
             walk(){
@@ -159,16 +159,17 @@
         class D extends C{
 
         }
+
         class E extends C{
 
         }
-
+        
         // A 就是所有类的基类，也是所有类的父类
-        //B 的超类是A
+        // B 的超类是A
         // B 就是C D E的父类
         // D 就是A B  C的子类
-        // C 就是 D的超类
-        // B 就是C的超类
+        // D 的超类是C
+        // C 的超类是B 
 
     //不仅继承了静态属性方法，还继承了实例化属性和方法
     // var b=new B("b",10);//有A的name="a"属性

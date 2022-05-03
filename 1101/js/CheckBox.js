@@ -26,6 +26,7 @@ export default class CheckBox extends EventTarget{  //导出模块
         if(typeof parent === "string") parent = document.querySelector(parent);
         if(parent) parent.appendChild(this.elem);//往父元素里面添加this.elem
     }
+    
     //针对主元素做里面的子元素
     render(label){
         //放入elem元素
@@ -34,6 +35,7 @@ export default class CheckBox extends EventTarget{  //导出模块
             <span class='checkbox_label'>${label}</span>
         `;
     }
+
     clickHandler(e){
         // console.log("clickHandler中",this);--->div框
         this.checked =! this.checked;

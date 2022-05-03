@@ -1,4 +1,4 @@
-import CheckBox from "./CheckBox1.js";
+import CheckBox from "./CheckBox.js";
 
 export default class Radio extends CheckBox{
     static radioList = {}//对象
@@ -17,6 +17,7 @@ export default class Radio extends CheckBox{
 
         this.setChecked(false);//规定初始值,改成了行内样式
     }
+
     setChecked(checked){
        super.setChecked(checked);
        //重写elem元素---继承的话都会拥有，在基础上进行修改
@@ -30,6 +31,7 @@ export default class Radio extends CheckBox{
            marginTop:"2px",
        })
     }
+    
     clickHandler(e){
         if(this.checked) return;
         // Radio.radioList[this.name].forEach(item => {
