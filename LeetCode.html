@@ -944,40 +944,168 @@
     //     }
     //     return root;
     // };
+
+
     /**给你一个二叉树的根节点 root ，判断其是否是一个有效的二叉搜索树。有效 二叉搜索树定义如下：
         节点的左子树只包含 小于 当前节点的数。
         节点的右子树只包含 大于 当前节点的数。
         所有左子树和右子树自身必须也是二叉搜索树。
         中序遍历的时候实时检查当前节点的值是否大于前一个中序遍历到的节点的值即可。如果均大于说明这个序列是升序的，整棵树是二叉搜索树，否则不是，下面的代码我们使用栈来模拟中序遍历的过程。
     */
-    var isValidBST = function(root) {
-        let stack = [];
-        let inorder = -Infinity;
+    // var isValidBST = function(root) {
+    //     let stack = [];
+    //     let inorder = -Infinity;
 
-        while (stack.length || root !== null) {
-            //如果有左子树，则会遍历到底
-            while (root !== null) {
-                stack.push(root);
-                root = root.left;
-            }
-            root = stack.pop();
-            // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
-            if (root.val <= inorder) {
-                return false;
-            }
-            inorder = root.val;
-            root = root.right;
-        }
-        return true;
-    };
+    //     while (stack.length || root !== null) {
+    //         //如果有左子树，则会遍历到底
+    //         while (root !== null) {
+    //             stack.push(root);
+    //             root = root.left;
+    //         }
+    //         root = stack.pop();
+    //         // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+    //         if (root.val <= inorder) {
+    //             return false;
+    //         }
+    //         inorder = root.val;
+    //         root = root.right;
+    //     }
+    //     return true;
+    // };
+    
+    /**给你一个整数数组 nums 和一个整数 k ，请你返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目==>双指针，滑动窗口
+     * 一段乘积小于k的子数组中，所有的子数组都满足答案。仅统计右指针的左指针范围是因为其他子数组已经在前面计算过了。
+     * 以每个数字为右边界所形成的有效子数组的个数
+    */    
+    // var numSubarrayProductLessThanK = function(nums, k) {
+    //     if(k === 0){
+    //         return 0;
+    //     }
+    //     let ans = 0 , left = 0,cur = 1;
+    //     // left :左边界 right:右边界
+    //     for(let right = 0,len = nums.length;right <len;right++){
+    //         //计算滑动窗口内的所有元素乘积
+    //         cur *=nums[right];
+    //         /** 如果不满足条件，缩小窗口，窗口右边不动，左边右移，
+    //         然后重新计算窗口是否满足条件，如果不满足，窗口左边
+    //         继续右移……直到窗口内的元素满足条件，或者窗口为空为止*/
+    //         while(left <= right && cur >= k){
+    //             // 窗口左边右移
+    //             cur /=nums[left++];
+    //         }
+    //         // 结尾的子数组有right - left + 1个
+    //         ans +=right - left +1
+    //     }
+    //     return ans;
+    // };
+
+    /**写一个 RecentCounter 类来计算特定时间范围内最近的请求。
+    请你实现 RecentCounter 类：
+    RecentCounter() 初始化计数器，请求数为 0 。
+    int ping(int t) 在时间 t 添加一个新请求，其中 t 表示以毫秒为单位的某个时间，并返回过去 3000 毫秒内发生的所有请求数（包括新请求）。确切地说，返回在 [t-3000, t] 内发生的请求数。
+    保证 每次对 ping 的调用都使用比之前更大的 t 值。*/
+
+    // var RecentCounter = function() {
+    //     this.quene = []
+    // };
+
+    // /** 
+    //  * @param {number} t
+    //  * @return {number}
+    //  */
+    // RecentCounter.prototype.ping = function(t) {
+    //     this.quene.push(t)
+    //     console.log(JSON.stringify(this.quene));
+    //     while(this.quene[0] < (t-3000)){
+    //         this.quene.shift()
+    //     }
+    //     console.log("shift后",JSON.stringify(this.quene));
+    //     return this.quene.length
+    // }; 
+
+    
+       /**  给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+       任何数和 00 做异或运算，结果仍然是原来的数，即 a ⊕ 0=a。
+       任何数和其自身做异或运算，结果是 00，即 a ⊕ a=0 。
+       异或运算满足交换律和结合律，即 a ⊕ b ⊕ a=b ⊕ a ⊕ a=b ⊕ (a ⊕ a)=b⊕0=b
+
+     * @param {number[]} nums
+     * @return {number}
+     */
+    // var singleNumber = function(nums) {
+    //     let ans = 0;
+    //     for(const num of nums) {
+    //         ans ^= num; // 异或运算
+    //     }
+    //     return ans;
+    // };
+
+    /**给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。
+       你可以假设数组是非空的，并且给定的数组总是存在多数元素。*/
+    // var majorityElement = function(nums) {
+    //     let halfLen = nums.length / 2;
+    //     let len = nums.length;
+    //     let number = new Map();
+    //     for(let i = 0;i<len;i++){
+    //         if(!number.has(nums[i])){
+    //             number.set(nums[i],1)
+    //             if(number.get(nums[i]) > halfLen) return nums[i]
+    //         }else{
+    //             let frequencies = number.get(nums[i]) + 1;
+    //             if(frequencies > halfLen) return nums[i]
+    //             number.set(nums[i],frequencies);
+    //         }
+    //     }
+    // };
 
 
-        init();
-        function init(){
-            let root = [1,null,2,3];
-            let arr = preorderTraversal(root);
-            console.log(arr);
-        }
+/**给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。
+ * 先排序，再双指针。
+*/
+    // var threeSum = function(nums) {
+    //     let all =[]
+    //     if (nums.length < 3 || !nums) return [];
+    //     nums.sort((a,b)=>a-b);//排序
+    //     console.log(nums);
+    //     for(let i = 0,len = nums.length - 2; i<len ;i++){
+    //         if(nums[i]>0) break;
+    //         if(i>0 && nums[i] === nums[i-1]) continue;//去重
+               //双指针
+    //         let left = i + 1;
+    //         let right = nums.length - 1;
+    //         console.log("left",left)
+    //         console.log("right",right);
+    
+    //         while(left < right){
+    //             const sum = nums[i] + nums[left] + nums[right]
+    //             if(sum === 0) {
+    //                     let temp = [];
+    //                     temp.push(nums[i] , nums[left] , nums[right]);
+    //                     while(left < right && nums[right - 1] === nums[right]) right--;//去重
+    //                     while(left < right && nums[left + 1] === nums[left]) left++;//去重
+    //                     console.log(temp);
+    //                     all.push(temp);
+    //                     console.log(all);
+    //                     right --;
+    //                     left ++;
+    //             }else if(sum > 0){
+    //                 right --;
+    //                 console.log("遍历中right",right)
+    //             }else if (sum < 0){
+    //                 left ++;
+    //                 console.log("遍历中left",left);
+    //             };
+    //         }
+    //     }
+    //     return all;
+    // };
+
+    init();
+    function init(){
+        var nums = [-1,0,1,2,-1,-4];
+        param_1 = threeSum(nums);
+        console.log(param_1);
+    }
 
 
     </script>
