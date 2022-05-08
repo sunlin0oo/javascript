@@ -1100,10 +1100,52 @@
     //     return all;
     // };
 
+
+    /**给你一个长度为 n 的整数数组 nums ，其中 nums 的所有整数都在范围 [1, n] 内，且每个整数出现 一次 或 两次 。请你找出所有出现 两次 的整数，并以数组形式返回。
+     * 使用正负号作为标记---空间复杂度O（n）
+    */
+    // var findDuplicates = function(nums) {
+    //     const n = nums.length;
+    //     const ans = [];
+    //     for (let i = 0; i < n; ++i) {
+    //         const x = Math.abs(nums[i]);
+    //         if (nums[x - 1] > 0) {
+    //             nums[x - 1] = -nums[x - 1];
+    //         } else {
+    //             ans.push(x);
+    //         }
+    //     }
+    //     return ans;
+    // }
+
+
+    /**给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。
+     *
+    */
+
+    //自己
+    // var sortColors = function(nums) {
+    //     let len = nums.length;
+    //     for(let i = len; i > 0 ; i--){
+    //         let left = 0;
+    //         let right = 1;
+    //         while(right < i){
+    //             if(nums[left] > nums[right]){
+    //                 let temp = nums[left];
+    //                 nums[left] = nums[right];
+    //                 nums[right] = temp;
+    //             }
+    //             left++;
+    //             right++;
+    //         }
+    //     }
+    //     return nums;
+    // };
+
     init();
     function init(){
-        var nums = [-1,0,1,2,-1,-4];
-        param_1 = threeSum(nums);
+        var nums = [2,0,2,1,1,0];
+        param_1 = sortColors(nums);
         console.log(param_1);
     }
 
