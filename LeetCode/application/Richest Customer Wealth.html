@@ -8,19 +8,23 @@
 </head>
 <body>
     <script>
-        var maximumWealth = function(accounts) {
-            let count = -100;
-            for(let i =0;i<accounts.length;i++){
-                let sum = 0;
-                for(let j = 0;j<accounts[i].length;j++){
-                    sum += accounts[i][j];
+        init();
+        function init(){
+        }
+
+        function maximumWealth(accounts) {
+                let count = -100;
+                for(let i =0;i<accounts.length;i++){
+                    let sum = 0;
+                    for(let j = 0;j<accounts[i].length;j++){
+                        sum += accounts[i][j];
+                    }
+                    if(sum > count){
+                        count = sum;
+                    }
                 }
-                if(sum > count){
-                    count = sum;
-                }
-            }
-            return count;
-        };
+                return count;
+            };
     </script>
 </body>
 </html>

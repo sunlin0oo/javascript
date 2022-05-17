@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+            let n  = 2
+            num = largestPalindrome(n);
+            console.log(num);
+        }
+
+        /**运用枚举法进行操作----最大回文数乘积*/
+        function largestPalindrome(n) {
+                //将一位的最大回文数先进行列举出来
+                if(n === 1){
+                    return 9
+                };
+                //由于两个 n 位整数的乘积至多是个 2n 位数，所以可以从10^n-1开始枚举左半边
+                let max = 10**n - 1;
+                /**大到小枚举回文数，先确定左半部
+                */
+                for(let left = max ; left > max/10; left--){
+                    //确定右半部分==>先将左半部分转换成字符出，再用''进行分割，反转，用转换成字符串;
+                    let right = String(left).split('').reverse().join('');
+                    //BigInt()的参数将自动转换为BigInt
+                    let p = BigInt(String(left)+right);//得到回文数
+                    let x = BigInt(max);//
+                    while((x*x)>=p){
+                        if(p % x === BigInt(0)){// x 是 p 的因子
+                            return p % BigInt(1337);//题目要求进行1337取余
+                        }
+                        x--;
+                    }
+                }
+            };
+    </script>
+</body>
+</html>

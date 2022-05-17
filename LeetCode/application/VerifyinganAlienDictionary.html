@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let words = ["fxasxpc","dfbdrifhp","nwzgs","cmwqriv","ebulyfyve","miracx","sxckdwzv","dtijzluhts","wwbmnge","qmjwymmyox"]
+            let order ="zkgwaverfimqxbnctdplsjyohu";
+            num = isAlienSorted(words, order);
+            console.log(num);
+        }
+
+        /**运用枚举法进行操作----最大回文数乘积
+         * 某种外星语也使用英文小写字母，但可能顺序 order 不同。字母表的顺序（order）是一些小写字母的排列。
+         * 给定一组用外星语书写的单词 words，以及其字母表的顺序 order，只有当给定的单词在这种外星语中按字典序排列时，返回 true；否则，返回 false。
+        */
+        function isAlienSorted(words, order) {
+            let biglen;
+            let map = new Map();
+            //建立Hash表
+            for(let i = 0,len = order.length;i<len;i++){
+                map.set(order[i],i);
+            }
+
+            for(let i = 0,len = words.length;i<len;i++){
+                if((i+1)>=len) break;
+                biglen = ((words[i].length >= words[i+1].length) ? words[i].length : words[i+1].length);
+                console.log(words[i+1].length);
+                console.log(biglen);
+                if(words[i] === words[i+1]) continue;
+                for(let j = 0;j<biglen;j++){    
+                    if(words[i][j] !== words[i+1][j]){
+                        console.log(words[i][j],words[i+1][j]);
+                        //只要这两个之间有一个是false 就直接返回false
+                         if(words[i][j]===null || words[i][j]===undefined) break;
+                        if(words[i+1][j]===null|| words[i+1][j]===undefined) return false;
+                        //在hash表中寻找比较前后位置
+                        if(map.get(words[i][j]) > map.get(words[i+1][j])){
+                            return false;
+                        }else{
+                            break;
+                        }
+                    }
+                }
+            }
+            return true;
+        };
+    </script>
+</body>
+</html>
