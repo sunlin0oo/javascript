@@ -10,6 +10,7 @@
 
 <body>
     <script>
+        //写法：回调函数==>函数名及参数取名固定（建议）
         // var p=new Promise(function(resolve,reject){
         //     resolve();
         // })
@@ -55,9 +56,9 @@
         //     }
         // })
 
-        // p.then(function(){
+        // p.then(function(){ //正确执行==>then方法的第一个参数是resolved状态的回调函数
         //     console.log("aaa");
-        // }).catch(function(){
+        // }).catch(function(){//错误执行
         //     console.log("bbb")
         // })
 
@@ -104,6 +105,7 @@
         // },function(){
 
         // })
+
         // 链式调用
         // var arr=[];
         // loadImage("./img/1.jpg").then(function(img){
@@ -122,14 +124,12 @@
 
 
 
-
-
         // function showLight(light){
         //     return new Promise(function(resolve,reject){
         //         setTimeout(function(){
         //             console.log(light);
         //             resolve();
-        //         },2000);
+        //         },2000);//2000ms后调用函数
         //     })
         // }
 
@@ -145,13 +145,41 @@
         // }
         // fn();
 
+        // class Promise1{
+        //     resolve;
+        //     reject;
+        //     fn;
+        //     constructor(fn){
+        //         this.fn = fn;
+        //     }
+        //     then(f1){
+        //         this.resolve = f1;
+        //         this.fn(this.resolve,this.reject);
+        //     }
+        //     catch(f2){
+        //         this.reject = f2;
+        //     }
+        // }
+
+        //  这整个函数是Promise1中函数是this.fn = fn
+        // var p=new Promise1(function(resolve,reject){
+        //     setTimeout(function(){
+        //         resolve()
+        //     },2000);
+        // })
+        // then里面的函数是fn1==>this.fn(this.resolve,this.reject) 也就是165-169间Promise1中的函数
+        // p.then(function(){
+        //     console.log("aaa");
+        // })
+
+
 
         // class Promise1 {
         //     f1;
         //     f2;
         //     fn;
         //     ids;
-        //     state="pending";
+        //     state="pending";//初始值
         //     constructor(fn) {
         //         this.fn = fn;
 
@@ -187,7 +215,6 @@
         //     }
         // }
 
-
         // var p=new Promise1(function(resolve,reject){
         //     setTimeout(function(){
         //         resolve()
@@ -198,11 +225,12 @@
         // })
 
 
-        // 1\不能连续then
-        // 2、原Promise，then的时候是异步，这样是同步，错误的
-        // 3、出现即执行了then又执行了catch
+        /** 问题：
+         * 1、不能连续then
+         * 2、原Promise，then的时候是异步，这样是同步，错误的
+         * 3、出现即执行了then又执行了catch*/
 
-        // _____________
+        // ------------------查找问题---------
 
         // function showLight1(light) {
         //     return new Promise1(function (resolve, reject) {
@@ -269,13 +297,12 @@
         // //    reject();
         // })
         // console.log(p);
-        // fulfilled  resolve 调用时的状态
-        // 状态机分为3中 pending fulfilled  rejected 
-        // 默认状态是pending,当执行resolve函数时，状态被修改为fulfilled状态，这时候，如果再执行
-        // reject函数时，判断当前状态是否是pending，如果不是pending状态就不在执行reject函数
-        // 如果当前状态是pending状态，执行了reject方法时，状态被修改为rejected状态
-        // 再次执行resolve方法，发现状态不是pending状态，就会跳出不在执行resolve函数
-        // 在promise中，只能执行一次resolve或者一次reject
+        // 状态机分为3中 pending(初始状态) fulfilled(resolve 调用时的状态)  rejected (调用时状态：reject())
+        /**默认状态是pending,当执行resolve函数时，状态被修改为fulfilled状态，这时候，如果再执行
+        reject函数时，判断当前状态是否是pending，如果不是pending状态就不在执行reject函数
+        如果当前状态是pending状态，执行了reject方法时，状态被修改为rejected状态
+        再次执行resolve方法，发现状态不是pending状态，就会跳出不在执行resolve函数
+        在promise中，只能执行一次resolve或者一次reject*/
 
 
 
@@ -297,6 +324,7 @@
         //     resolve();
         // })
 
+        // 默认重新创建一个新的Promise
         // p.then(function(){
         //     console.log("aaa");
         // }).then(function(){
@@ -371,7 +399,7 @@
 
         // 微任务和宏任务
         // console.log("aaaa");
-        // setTimeout(function(){
+        // setTimeout(function(){//异步
         //     console.log("dddd")   
         // })
         // Promise.resolve().then(function(){

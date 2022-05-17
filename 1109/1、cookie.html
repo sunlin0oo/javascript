@@ -1,4 +1,4 @@
-d<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,13 +15,14 @@ d<!DOCTYPE html>
         // console.log(a)
 
 
-        // 本地存储
+        // 本地存储==>本地缓存，文件中
         // cookie  webstorage（localstorage，sessionStroage）;
         // 存储在本地文件中，但是这个本地文件不可以找到
 
-        // document.cookie="a=1";
+        // document.cookie="a=1"; //key = a,value =1;
 
-        // console.log(document.cookie);
+        // console.log(document.cookie);//注释后仍能打印，记录在浏览器上
+        //分解
         // var arr=document.cookie.split("=");
         // var key=arr[0];
         // var value=Number(arr[1]);
@@ -31,7 +32,7 @@ d<!DOCTYPE html>
 
         // cookie中只能存储字符串，如果是对象或者数组，就需要使用JSON.stringify转换字符串存储
         // 清除方式
-        // 1、cookie存储是有时效，当关闭浏览器时，cookie将会自动丢失
+        // 1、cookie存储有时效，当关闭浏览器时，cookie将会自动丢失
         // 2、通过浏览器设置清除cookie
         // 3、可以通过浏览器设置不保留cookie
         // 4、在浏览器的控制面板中应用中的存储项有cookie，可以选择清除或者全部清除
@@ -40,15 +41,16 @@ d<!DOCTYPE html>
 
         // console.log(document.cookie);
         // document.cookie="a=0";
+        // (?<=(;\s)?) 前置肯定断言是否有(;和空字符(空格)){0,1}  arr(?=\=)后置肯定断言 = 
         // if(!/(?<=(;\s)?)arr(?=\=)/.test(document.cookie))document.cookie="arr=[]";
         // var a=document.cookie.split("=");
         // var key=a[0];
         // var value=a[1];
-        // var arr=JSON.parse(value);
+        // var arr=JSON.parse(value);//将value转换成数组
         // arr.push(1);
         // document.cookie=key+"="+JSON.stringify(arr);
 
-        // document.cookie="a=1";
+        // document.cookie="a=1";//key相同时会进行覆盖
         // document.cookie="b=true";
         // document.cookie="c=a";
         // document.cookie="d=4";
@@ -57,33 +59,36 @@ d<!DOCTYPE html>
 
         // console.log(document.cookie)
 
+        // function getCookieObj(){
+        //     var arr = document.cookie.split(";");
+        //     // console.log(arr);
+        //     var obj = {};
+        //     for(let i = 0,len = arr.length;i<len;i++){
+        //         var arr1 = arr[i].split("=");
+        //         console.log(arr1);
+        //         // 去除字符串的头尾空格
+        //         var key = arr1[0].trim();
+        //         // isNaN检查是否是数字
+        //         var value = isNaN(arr[1]) ? arr1[1] :Number(arr1[1]);
+        //         try{
+        //            value=JSON.parse(value);
+        //        }catch(e){
 
-    //     function getCookieObj(){
-    //         var obj={};
-    //         var arr=document.cookie.split(";");
-    //         for(var i=0;i<arr.length;i++){
-    //             var arr1=arr[i].split("=");
-    //            var key=arr1[0].trim();
-    //            var value=isNaN(arr1[1]) ? arr1[1] : Number(arr1[1]);
-    //            try{
-    //                value=JSON.parse(value);
-    //            }catch(e){
-
-    //            }
-    //             obj[key]=value;
-    //         }
-    //        return obj;
-    //     }
-    //   var obj=  getCookieObj();
-    //   console.log(obj)
+        //        }
+        //         obj[key] = value;
+        //     }
+        //     return obj;
+        // }
+        // var obj=  getCookieObj();
+        // console.log(obj)
 
         // console.log(document.cookie)
         // console.log(document.cookie.match(/[^;\s]+=.+?((?=;)|$)/g))
        
-
         // 获取cookie
         // function getCookieObj(){
         //     var obj={};
+        // // ([^;\s]+)匹配不带任何;空格内容  =   (.+?)((?=;)|$)[等号后面的内容,匹配分号或行尾]
         //     document.cookie.replace(/([^;\s]+)=(.+?)((?=;)|$)/g,function(item,$1,$2){
         //         try{$2=JSON.parse($2);}
         //         catch(e){}
@@ -147,23 +152,23 @@ d<!DOCTYPE html>
                 //  document.cookie="aaa=3";
 
 
-            // var use="xietian";
-            // var pass="xie123";
-            // token
-            
-        //    var str=hex_md5(use+pass+"20211201");
-        // var str=hex_md5(use);
-        //    console.log(str)
+        var use="xietian";
+        var pass="xie123";
+        // token
+        
+        var str=hex_md5(use+pass+"20211201");
+        var str=hex_md5(use);
+        console.log(str)
 
-        //    console.log(hex_md5("x"))
-    //   var str= Array(100).fill(1).reduce((v,t)=>{
-    //         return hex_md5(v);
-    //     },use)
+        console.log(hex_md5("x"))
+        var str= Array(100).fill(1).reduce((v,t)=>{
+                return hex_md5(v);
+            },use)
 
-    // for(var i=0;i<1000000;i++){
-    //     use=hex_md5(use);
-    // }
-    // console.log(use)
+        for(var i=0;i<1000000;i++){
+            use=hex_md5(use);
+        }
+        console.log(use)
 
 
     // 精准投放

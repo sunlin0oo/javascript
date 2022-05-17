@@ -7,16 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- <button>red</button>
+    <button>red</button>
     <button>green</button>
-    <button>blue</button> -->
+    <button>blue</button>
     <script>
+        // 当点击a页面时，b页面也触发了事件==>两个页面之间进行通信
         // document.addEventListener("click",clickHandler);
 
 
         // function clickHandler(e){
-        //     if(e.target.nodeName!=="BUTTON") return;
-        //     localStorage.bgc=e.target.textContent;
+        //     if(e.target.nodeName!=="BUTTON") return;//e.target.nodeName==>获取事件触发元素标签名
+        //     localStorage.bgc=e.target.textContent;//e是触发这个事件的本身元素的文本内容（可以看做对象）
         // }
 
 
@@ -27,7 +28,7 @@
 
         function clickHandler(e){
             arr.push(i++);
-            localStorage.list=JSON.stringify(arr);
+            localStorage.list=JSON.stringify(arr);//将arr转换成字符串加入到localStorage.list中
         }
     </script>
 </body>
