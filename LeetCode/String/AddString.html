@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init()
+
+        function init(){
+            let num1 = "11", num2 = "123";
+            num = addStrings(num1, num2);
+            console.log(num);
+        }
+
+        function addStrings(num1, num2) {
+            let num1Index = num1.length-1;
+            let num2Index = num2.length-1;
+            let add= 0;
+            let result = 0;
+            let sum = [];
+            while(num1Index>=0 || num2Index>=0 ||add!=0){
+                // console.log("num1.charAt(num1Index)",typeof(num1.charAt(num1Index)));//String类型.charAt(i)检索第i个位置的字符
+                // console.log("num2.charAt(num2Index)",typeof(num2.charAt(num2Index)));//String类型
+                // console.log("num1.charAt(num1Index) - '0'",typeof(num1.charAt(num1Index) - '0'));//Number类型
+                // console.log("num2.charAt(num2Index) - '0'",typeof(num2.charAt(num2Index) - '0'));//Number类型
+                let x = num1Index>=0 ? num1.charAt(num1Index) - '0' :0;
+                let y = num2Index>=0 ? num2.charAt(num2Index) - '0' :0;
+                result = x + y + add;
+                sum.push(result % 10);
+                add = Math.floor(result/10);
+                num1Index--;
+                num2Index--;
+            }
+            return sum.reverse().join('');
+        };
+    </script>
+</body>
+</html>
