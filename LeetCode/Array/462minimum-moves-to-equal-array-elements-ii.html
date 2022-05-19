@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+        
+        function init(){
+            let nums = [1,0,0,8,6];
+            para = minMoves2(nums);
+            console.log(para);
+        }
+
+        function minMoves2(nums) {
+            let len = nums.length;
+            if(len === 0 ||len === 1) return 0
+            let sum = 0
+            nums.sort((a,b)=>a-b);
+            console.log(nums)
+            mid = nums[Math.floor(len/2)];
+            console.log(mid)
+            for(let i =0;i<len;i++){
+                sum += Math.abs(nums[i] - mid);
+            }
+            return sum;
+        };
+    </script>
+</body>
+</html>

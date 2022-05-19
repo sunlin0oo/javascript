@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let pattern = "abba", s = "dog cat cat dog";
+            para = wordPattern(pattern, s);
+            console.log(para);
+        }
+        /**我们需要判断字符与字符串之间是否恰好一一对应。即任意一个字符都对应着唯一的字符串，任意一个字符串也只被唯一的一个字符对应。在集合论中，这种关系被称为「双射」。*/
+        function wordPattern(pattern, s){
+            const word2ch = new Map();
+            const ch2word = new Map();
+            //将字符串进行分割成数组key：索引;value:字母
+            const words = s.split(' ');
+            //查看字符和字符串是否匹配
+            if(pattern.length!==words.length) return false;
+            //返回的是一个数组，返回一个给定对象自身可枚举属性的键值对数组 i：索引;word:字母
+            for(const [i,word] of words.entries()){
+                const ch = pattern[i];//获得字母
+                if (word2ch.has(word) && word2ch.get(word) != ch || ch2word.has(ch) && ch2word.get(ch) !== word) {
+                    return false;
+                }
+                word2ch.set(word, ch);//单词对字母映射
+                ch2word.set(ch, word);//字母对单词映射
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -27,6 +27,7 @@
                 // console.log("num2.charAt(num2Index)",typeof(num2.charAt(num2Index)));//String类型
                 // console.log("num1.charAt(num1Index) - '0'",typeof(num1.charAt(num1Index) - '0'));//Number类型
                 // console.log("num2.charAt(num2Index) - '0'",typeof(num2.charAt(num2Index) - '0'));//Number类型
+                /**两个数字型的字符串相减，或者其中一个为字符串时，会自动转换为数字类型进行计算*/
                 let x = num1Index>=0 ? num1.charAt(num1Index) - '0' :0;
                 let y = num2Index>=0 ? num2.charAt(num2Index) - '0' :0;
                 result = x + y + add;
