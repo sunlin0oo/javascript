@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function mostCommonWord(paragraph, banned){
+            let maxCommon = 0;
+            //用于控制记录出现频率
+            let frequencies = new Map();
+            let sb = '';
+            let len = paragraph.length;
+            //违禁词
+            let bannedSet = new Set();
+            //将违禁词加入到哈希表中
+            for(let item of banned){
+                bannedSet.add(item);
+            }
+            //遍历字符长度
+            for(let i = 0; i <= len ; i++){
+                if(i<len && isletter(paragraph[i])){
+                    //将字母放到sb中
+                    sb = sb + paragraph[i].toLowerCase();//toLowerCase()把输入字符串中的大写字母全部转换为小写字符
+                    //若不是字母，则就是遇到了空格进行检测是否是违禁词
+                }else if(sb.length > 0){
+                    if(!bannedSet.has(sb)){
+                        let frequency = (frequencies.get(sb) || 0) + 1;
+                        frequencies.set(sb,frequency);
+                        maxCommon = Math.max(maxCommon,frequency);
+                    }
+                    sb = '';
+                }
+            }
+            //寻找最多出现的单词
+            let mostCommon = '';
+            for(const [word,frequency] of frequencies.entries()){
+                if(frequency === maxCommon){
+                    mostCommon = word;
+                    break
+                }
+            }
+            return mostCommon;
+        }
+        //判断是否是字母
+        function isletter(i){
+            return (i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z');
+        }
+    </script>
+</body>
+</html>
