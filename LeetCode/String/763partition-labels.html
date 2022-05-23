@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let S = "ababcbacadefegdehijhklij";
+            a = partitionLabels(S);
+            console.log(a);
+        }
+        /**贪心的思想寻找每个片段可能的最小结束下标，因此可以保证每个片段的长度一定是符合要求的最短长度，如果取更短的片段，则一定会出现同一个字母出现在多个片段中的情况。
+         * 由于每次取的片段都是符合要求的最短的片段，因此得到的片段数也是最多的。*/
+        function partitionLabels(s){
+            const last = new Array(26);
+            const length = s.length;
+            //ES6 提供了codePointAt()方法，能够正确处理 4 个字节储存的字符，返回一个字符的码点。
+            const codePointA = 'a'.codePointAt(0);
+            for (let i = 0; i < length; i++) {
+                //因为都是小写字母，这样操作可以得到每个字母的最后位置
+                last[s.codePointAt(i) - codePointA] = i;
+            }
+            const partition = [];
+            let start = 0, end = 0;
+
+            for (let i = 0; i < length; i++) {
+                //对于每个访问到的字母 cc，得到当前字母的最后一次出现的下标位置end_c;则当前片段的结束下标一定不会小于end_c
+                end = Math.max(end, last[s.codePointAt(i) - codePointA]);
+                //如果遍历到的字母是结束下表，则放入数组中
+                if (i == end) {
+                    //将当前片段的长度添加到返回值
+                    partition.push(end - start + 1);
+                    start = end + 1;
+                }
+            }
+            return partition;
+        }
+    </script>
+</body>
+</html>
