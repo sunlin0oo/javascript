@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
+            // [["bat"],["nat","tan"],["ate","eat","tea"]]
+            a = groupAnagrams(strs);
+            console.log("values::",a);
+        }
+
+        function groupAnagrams(strs){
+            let map = new Map();
+            let pointA = "a".charCodeAt(0);//求出a的Unicode 编码
+            //将每个字母出现的次数使用字符串表示，作为哈希表的键
+            for(let s of strs){
+                const count = new Array(26).fill(0);
+                for(let c of s){
+                    count[c.charCodeAt(0) - pointA]++;
+                }
+                /**每创建一次数组，会分配一次新的引用地址，故每次的Key都不相同  
+                 * if(map.has(count)){
+                    map.get(count).push(s);
+                }else{
+                    map.set(count,[s]);
+                }
+                https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map 会有介绍
+                */
+                map[count] ? map[count].push(s) : map[count] = [s];
+            }
+            console.log("map:::",map);
+            console.log("keys:::",Object.keys(map))
+            return Object.values(map);//返回遍历集合的所有values的数组
+        }
+    </script>
+</body>
+</html>
