@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let num1 = "123456789", num2 = "987654321";
+            a =  multiply(num1, num2);
+            console.log(a);
+        }
+        //循环错位相加
+        function multiply(num1, num2){
+            if (isNaN(num1) || isNaN(num2)) return '';//判断是否为为空
+            if (num1 === '0' || num2 === '0') return '0';//判断是否为零
+
+            let l1 = num1.length,
+                l2 = num2.length;
+
+            let result = [];
+            //num 2 * num 1的顺序进行错位相加;
+            for (let i = l1 -1; i >= 0; i--) {
+                for (let j = l2 - 1; j >= 0; j--) {
+                    let index1 = i + j;//进位
+                    let index2 = i + j + 1;//原位
+                    //自动转换成数字形式--两个数字型的字符串相减，或者其中一个为字符串时，会自动转换为数字类型进行计算 与415案例类似；
+                    let product = num1[i] * num2[j] + (result[index2] || 0);
+                    result[index2] = product % 10;//原位
+                    result[index1] = Math.floor(product / 10) + (result[index1] || 0);//进位
+                }
+            }
+            console.log(result);
+            console.log(result.join(''));
+            return result.join('').replace(/^0*/, '');//将result数组转为字符串，并且去除字符串前面的0
+        }
+    </script>
+</body>
+</html>
