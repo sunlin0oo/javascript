@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function maxProfit(prices){
+            //记录最大最小价格
+            let minprice = prices[0], maxmoney = -prices[0];
+            for(let i = 0,len = prices.length;i<len;i++){
+                //最大利润
+                if(prices[i] - minprice > maxmoney){
+                    maxmoney = prices[i] - minprice;
+                };
+                //最小价格
+                if(prices[i] < minprice){
+                    minprice = prices[i];
+                };
+            };
+            if(maxmoney<=0){
+                return 0;
+            }
+            return maxmoney;
+        }
+    </script>
+</body>
+</html>

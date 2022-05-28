@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let s = "babad";
+            a = longestPalindrome(s);
+            console.log(a);
+        }
+
+        function longestPalindrome(s){
+            var res = "";
+            for (var i=0; i<s.length;i++) {
+                // 奇数情况
+                var left = i;
+                var right = i;
+                //左右扩散
+                while(left >=0 && right < s.length && s[left]===s[right]) {
+                    left--;
+                    right++;
+                }
+                //substr() 方法可在字符串中抽取从开始下标开始的指定数目的字符。
+                if (res.length < right-left-1) {//寻找最长的回文子数组
+                    res = s.substr(left+1, right-left-1);
+                }
+                // 偶数情况
+                left = i;
+                right = i+1;
+                while(left >=0 && right < s.length && s[left]===s[right]) {
+                    left--;
+                    right++;
+                }
+                if (res.length < right-left-1) {
+                    res = s.substr(left+1, right-left-1);
+                }
+            }
+            return res;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let s = "(()())(())";
+            a =  removeOuterParentheses(s);
+            console.log(a);
+        }
+
+        function removeOuterParentheses(s){
+            // 栈一：
+            // let array = [];
+            // let sum = [];
+            // let sub;
+            // let start = 0;
+            // let end = 0;
+            // for(let i = 0,len = s.length;i<len;i++){
+            //     if(s.charAt(i) === ')'){
+            //         array.pop();
+            //         if(array.length === 0) {
+            //             start = end;
+            //             end = i;
+            //             sub = s.slice(start+1,end);
+            //             sum.push(sub);
+            //             end++;
+            //         }
+            //     }else{
+            //         array.push(s.charAt(i));
+            //     }
+            // }
+            // return sum.join('')
+
+            let res = '';
+            const stack = [];
+            for (let i = 0; i < s.length; i++) {
+                const c = s[i];
+                if (c === ')') {
+                    stack.pop();
+                }
+                if (stack.length) {
+                    res += c;
+                }
+                if (c === '(') {
+                    stack.push(c);
+                }
+            }
+            return res;
+        }
+    </script>
+</body>
+</html>
