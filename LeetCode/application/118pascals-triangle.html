@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function generate(numRows){
+            //创建空数组用来存储总和
+            let all = [];
+            for(let i = 0;i<numRows;i++){
+                //先创建好每一行的数组
+                let nowRow = new Array(i+1).fill(1);
+                //遍历上一层的数组进行填充
+                for(let j = 1 ;j < nowRow.length-1;j++){
+                    nowRow[j] = all[i-1][j-1] + all[i-1][j];
+                }
+                all.push(nowRow);
+            }
+            return all;
+        }
+    </script>
+</body>
+</html>

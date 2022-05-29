@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function addTwoNumbers(l1,l2){
+             //定义头
+            let head = null;
+            //定义尾
+            let tail = null;
+            //定义进位值
+            let carry = 0;
+            //判定条件链表l1和l2一个不为0
+            while(l1||l2){
+                //判断当前l1,l2是否为空，若不为空则取当前节点
+                const n1 = l1?l1.val : 0;
+                const n2 = l2?l2.val : 0;
+                const sum = n1 + n2 + carry;
+                if(!head){
+                    //重新创建head链表
+                    head = tail = new ListNode(sum % 10);
+                }else{
+                    //head链表的下一个节点
+                    tail.next = new ListNode(sum % 10);
+                    //过度下一个节点
+                    tail = tail.next;
+                }
+                carry = Math.floor(sum/10);
+                //遍历下一个节点
+                if(l1) l1 = l1.next;
+                if(l2) l2 = l2.next;
+            };
+            //判断最后相加是否还有进位
+            if(carry > 0){
+                tail.next = new ListNode(carry);
+            }
+            return head;
+        }
+    </script>
+</body>
+</html>
