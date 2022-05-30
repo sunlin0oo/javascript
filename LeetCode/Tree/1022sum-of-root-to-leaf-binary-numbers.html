@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function sumRootToLeaf(root){
+            // 后序遍历
+            const dfs = (root, val) => {
+                if (!root) {
+                    return 0;
+                }
+                // 两个位只要有一个为1，那么结果都为1。否则就为0
+                // 累加值左移一位，并加上当前叶子节点的值
+                val = (val << 1) | root.val;
+                // 如果节点是叶子节点，返回它对应的数字 val。
+                if (!root.left&& !root.right) {
+                    return val;
+                }
+                // 如果节点是非叶子节点，返回它的左子树和右子树对应的结果之和。
+                return dfs(root.left, val) + dfs(root.right, val);
+            }
+            return dfs(root, 0);
+        }
+    </script>
+</body>
+</html>
