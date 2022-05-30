@@ -42,6 +42,7 @@
                     }
                 }
             }
+            //针对最后一个索引后面还有字母的情况:loveleetcodesdadsa 
             if(answerIndex[answerIndex.length-1] < arr.length){
                 for(let i = answerIndex[answerIndex.length-1]+1,len = arr.length;i<len;i++){
                     answer.push( Math.abs(answerIndex[answerIndex.length-1] - i));
