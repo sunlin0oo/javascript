@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function isValidSudoku(board){
+            // 检查行列是否有重复
+            for(let i = 0;i<9;i++){
+                let map1 = new Map();
+                let map2 = new Map();
+                for(let j = 0;j<9;j++){
+                    if(board[i][j]!=='.'){
+                        if(map1.has(board[i][j])) return false; 
+                        map1.set(board[i][j],[i][j]);
+                    };
+                    if(board[j][i]!=='.'){
+                        if(map2.has(board[j][i])) return false;           
+                        map2.set(board[j][i],[j][i]);
+                    };
+                };
+            };
+            //检查九宫格是否有重复
+            for(let i = 0;i<9;i+=3){
+                let map3 = new Map();
+                for(let j = 0;j<9;j++){
+                    if(Math.floor(j%3) === 0){
+                        map3 = new Map();
+                    };
+                    if(board[i][j]!=='.'){
+                        if(map3.has(board[i][j])) return false;
+                        map3.set(board[i][j]);
+                    };
+                    if(board[i+1][j]!=='.'){
+                        if(map3.has(board[i+1][j])) return false;                
+                        map3.set(board[i+1][j]);
+                    };
+                    if(board[i+2][j]!=='.'){
+                        if(map3.has(board[i+2][j])) return false;
+                        map3.set(board[i+2][j]); 
+                    };
+                };
+            };
+            return true;
+        }
+    </script>
+</body>
+</html>
