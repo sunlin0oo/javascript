@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let head = [1,2,3,4];
+        }
+        //递归
+        function swapPairs(head){
+            //head表示原始链表的头节点，新的链表的第二个节点
+            console.log("head1",head);
+            if(head === null|| head.next === null) return head;
+            // newHead表示新的链表的头节点,原始链表的第二个节点，则原始链表中的其余节点的头节点是 newHead.next
+            const newHead = head.next;
+            console.log("newHead::",newHead)
+            // 表示将其余节点进行两两交换，交换后的新的头节点为 head 的下一个节点
+            head.next = swapPairs(newHead.next);
+            console.log("head2",head);
+            // 完成了所有节点的交换。最后返回新的链表的头节点 newHead
+            newHead.next = head;
+            console.log("newHead::",newHead)
+            return newHead;
+        }/**
+        第一层递归： head1 [1,2,3,4]
+                    newHead:: [2,3,4]
+        第二层递归：
+                    head1 [3,4]
+                    newHead:: [4]
+        第三层递归：
+                    head1 null(直接返回head)
+        返回到第二层递归:
+                    head.next  = head2 [3]
+                    newHead.next = newHead:: [4,3]
+        返回到第一层递归：
+                    head.next  = head2 [1,4,3]
+                    newHead.next = newHead:: [2,1,4,3]
+
+        */
+    </script>
+</body>
+</html>
