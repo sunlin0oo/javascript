@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function reverseList(head){
+            // 定义两个指针： pre 和 cur ；pre 在前 cur 在后。
+            //  curr 存储的是要翻转的节点
+            let curr = head;
+            // prev指的已经翻转完成的链表
+            let prev = null;
+            while(curr){
+                // next 存储的是下一次要翻转的节点
+                let next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                // 每次让 pre 的 next指向 cur，实现一次局部反转
+                curr = next;
+            }
+            return prev;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+        //题206反转链表
+        function myReverse (head, tail){
+            // prev指向剩余节点
+            let prev = tail.next;
+            // 指的是当前要翻转的节点
+            let p = head;
+            // 因为是组内翻转，所以尾节点就是待翻转组的头节点
+            while (prev !== tail) {
+                // 当前节点的 nex 指针改为指向前一个节点，事先存储其前一个节点
+                const nex = p.next;
+                // 指向尾节点
+                p.next = prev;
+                // 存储翻转完成部分
+                prev = p;
+                //存储后一个节点
+                p = nex;
+            }
+            return [tail, head];
+        }
+
+        function reverseKGroup(head, k){
+            // 定义一个头节点
+            const hair = new ListNode(0);
+            hair.next = head;
+            let pre = hair;
+
+            while (head) {
+                // tail作为计数单位（翻转组的尾部）
+                let tail = pre;
+                // 查看剩余部分长度是否大于等于 k
+                for (let i = 0; i < k; ++i) {
+                    tail = tail.next;
+                    // 证明小于或者等于链表长度
+                    if (!tail) {
+                        return hair.next;
+                    }
+                }
+                // 指的是下一组待翻转节点的头节点
+                const nex = tail.next;
+                [head, tail] = myReverse(head, tail);
+                // 把子链表重新接回原链表
+                pre.next = head;
+                tail.next = nex;
+                pre = tail;
+                // 将head接入到下一个头节点
+                head = tail.next;
+            }
+            return hair.next;
+        }
+    </script>
+</body>
+</html>

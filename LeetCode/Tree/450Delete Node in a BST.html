@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function deleteNode(root, key){
+            // 判断是否为空
+            if(!root) return null;
+            // 判断key在root的左子树还是右子树
+            if(root.val > key){
+                root.left = deleteNode(root.left, key)
+                return root;
+            }else if(root.val < key){
+                root.right = deleteNode(root.right, key)
+                return root;
+            }else if(root.val === key){
+                // 直接删除返回空
+                if(!root.left && !root.right) return null;
+                // 左子树作为新的子树，返回它的左子节点
+                if(!root.right) return root.left;
+                // 右子树作为新的子树，返回它的右子节点
+                if(!root.left) return root.right;
+                // successor是root右子树中最小节点:以successor替换到key节点进行连接key的剩下子树
+                let successor = root.right;//4
+                // 不停的往左子节点寻找，直到找到一个不存在左子节点的节点
+                while(successor.left){
+                    successor = successor.left;
+                }
+                // 是为了删除掉successor
+                root.right = deleteNode(root.right,successor.val);
+                // 用suceessor连接去除掉key的剩下子树
+                successor.right = root.right;
+                successor.left = root.left;
+                return successor;
+            }
+            // 若没有则返回原本
+            return root;
+        }
+    </script>
+</body>
+</html>
