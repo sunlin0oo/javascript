@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var toGoatLatin = function(sentence) {
+                const vowels = new Set();
+                //先将元音字母全部记录下
+                vowels.add('a');
+                vowels.add('e');
+                vowels.add('i');
+                vowels.add('o');
+                vowels.add('u');
+                vowels.add('A');
+                vowels.add('E');
+                vowels.add('I');
+                vowels.add('O');
+                vowels.add('U');
+                const n = sentence.length;
+                let i=0;//指向每个单词的第一个祖母
+                let cnt=1;
+                let ans ='';
+                while(i < n){
+                    let j = i;
+                    while(j<n && sentence[j]!==' '){ //一个单词
+                       j++;
+                    }
+                    cnt++;
+                    //增加单词与单词之间的空格
+                    if(cnt !== 2){
+                        ans+=' ';
+                    }
+                    if(!vowels.has(sentence[i])){//以辅音字母开头则移除第一个字符并将它放到末尾
+                        ans += sentence.slice(i+1,j);//包括起始位置到结束位置之前，不包括结束位置
+                        ans += sentence[i];
+                    }else{
+                        ans += sentence.substring(i,j);//从开始位置截取到end位置
+                    }
+                    ans += 'm';
+                    //添加a的个数
+                    for(let k =0;k<cnt;k++){
+                        ans += 'a';
+                    }
+                    i = j+1;
+                };
+                return ans;
+            };    
+
+    </script>
+</body>
+</html>

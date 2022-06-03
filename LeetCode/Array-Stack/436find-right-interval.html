@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let intervals = [[3,4],[2,3],[1,2]];
+            para = findRightInterval(intervals);
+            console.log(para);
+        }
+        //采用双指针的方法进行操作
+        function findRightInterval(intervals){
+            const n = intervals.length;
+            //基于所有区间的起始点从小到大排序。
+            const startIntervals = new Array(n).fill(0).map(()=>new Array(2).fill(0));
+            //基于所有区间的结束点从小到大排序。
+            const endIntervals = new Array(n).fill(0).map(()=>new Array(2).fill(0));
+            for(let i = 0;i<n;i++){
+                startIntervals[i][0] = intervals[i][0];
+                startIntervals[i][1] = i;
+                endIntervals[i][0] = intervals[i][1];
+                endIntervals[i][1] = i;
+            }
+            startIntervals.sort((a,b)=>a[0]-b[0]);
+            endIntervals.sort((a,b)=>a[0]-b[0]);
+            const ans = new Array(n).fill(0);
+            for(let i = 0,j=0;i<n;i++){
+                /**endIntervals 数组中取出第 i 个区间，就可以从左到右扫描 startIntervals 数组中的区间起点来找到满足右区间条件的区间。
+                因为都是升序状态，所以可以直接从第j个元素进行扫描，前j个肯定是小于现在的endIntervals[i][0]*/
+                while(j<n && startIntervals[j][0] < endIntervals[i][0]){
+                    j++;
+                }
+                if(j<n){
+                    ans[endIntervals[i][1]]=startIntervals[j][1];
+                }else {
+                    ans[endIntervals[i][1]] = -1;
+                }
+            }
+            return ans;
+        }
+    </script>
+</body>
+</html>
