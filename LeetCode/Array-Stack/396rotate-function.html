@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function maxRotateFunction(nums){
+            let numSum = 0;//
+            let maxSum = 0;//保持最大值
+            let temp;
+            let len = nums.length;
+            for(let i = 0;i<len;i++){
+                numSum +=nums[i];
+            }
+            //未旋转时顺序总和
+            for(let i = 0;i<len;i++){
+                maxSum += nums[i] * i;
+            }
+            temp = maxSum;
+            for(let i = nums.length - 1;i>0;i--){
+                //F(k)=F(k−1)+numSum−n×nums[n−k]  推理公式！
+                temp = temp + numSum - len * nums[i];
+                maxSum = Math.max(temp,maxSum);
+            }
+            return maxSum;
+        }
+    </script>
+</body>
+</html>

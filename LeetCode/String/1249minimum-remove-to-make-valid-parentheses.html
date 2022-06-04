@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let s  = "))((";
+            a = minRemoveToMakeValid(s);
+            console.log(a)
+        }
+
+        function minRemoveToMakeValid(s){
+           let len = s.length;
+           let stack = [],unuse = [];
+           let rightString = '';
+           for(let i = 0;i<len;i++){
+               if(s.charAt(i) === "("){
+                   stack.push(i);
+               }else if(s.charAt(i) === ")"){
+                   if(stack.length !== 0){
+                       stack.pop();
+                   }else{
+                        unuse.push(i);
+                   }
+               }
+           }
+           if(!stack.length && !unuse.length )return s;
+           unuse = [...stack, ...unuse].sort((a,b) => a-b);
+           for(let i = 0,j = 0;i < len;i++){
+               if(i !== unuse[j]){
+                rightString = rightString + s[i];
+               }else{
+                   j++;
+               }
+           }
+           return rightString;
+        }
+    </script>
+</body>
+</html>
