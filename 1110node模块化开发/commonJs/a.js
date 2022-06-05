@@ -1,3 +1,4 @@
+// node ./commonJs/a.js 执行 
 var obj={
     a:1,
     b:2,
@@ -5,5 +6,6 @@ var obj={
         console.log(this.a+this.b);
     }
 }
+
 module.exports=obj;
-// 等同于es6 中 export default
+// 导出 等同于es6 中 export default

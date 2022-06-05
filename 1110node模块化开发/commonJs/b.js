@@ -1,3 +1,7 @@
+// module.exports = function fn(){
+//     console.log("aaa");
+// }
+
 exports.fn=function(){
     console.log("aaa");
 }
@@ -8,4 +12,4 @@ exports.obj={
 }
 exports.a=1;
 
-// 相当于 export
+// 相当于ES6中的 export

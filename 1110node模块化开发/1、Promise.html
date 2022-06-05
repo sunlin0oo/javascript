@@ -8,6 +8,7 @@
 </head>
 <body>
     <script>
+        // 异步的使用：
         // load  error 加载都需要时间
         // setTimeout setInterval requestAnimationFrame
 
@@ -31,26 +32,29 @@
             })
         }
 
-
+        //调用方式一：
         // loadImage().then(function(){
 
         // }).catch(function(){
 
         // })
-
+        //调用方式二：    
         // loadImage().then(function(){
-
+        //下面的function是失败调用
         // },function(){
 
         // })
 
-
+        //Promise静态方法：
+        //针对多个Promise进行依次加载
         // Promise.all().then(function(){
 
         // })
+        //谁先执行reslove就先用谁
         // Promise.race().then(function(){
 
         // })
+        //直接执行resolve
         // Promise.resolve()
         // Promise.reject()
 
@@ -72,7 +76,6 @@
         // }
 
         // fn();
-
 
         // function fns(a){
         //     return new Promise(function(resolve,reject){

@@ -1,6 +1,8 @@
 const mysql=require("mysql");
 var db;
+// 建立连接
 init();
+// 要进行异步操作所以写在一个Promise里面
 async function init(){
     db=mysql.createConnection({
         url:"localhost",
