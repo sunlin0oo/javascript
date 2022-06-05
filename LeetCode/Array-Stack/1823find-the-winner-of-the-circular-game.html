@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let n = 5, k = 2;
+            a = findTheWinner(n, k);
+            console.log(a);
+        }
+        // 模拟 + 队列
+        // function findTheWinner(n, k){
+        //     let queue = [];
+        //     for(let i = 0;i<n;i++){
+        //         queue.push(i+1);
+        //     }
+        //     console.log(queue);
+        //     while(queue.length > 1){
+        //         for(let i = 1;i<k;i++){
+        //             queue.push(queue.shift());
+        //         }
+        //         queue.shift();
+        //     }
+        //     return queue[0];
+        // }
+        //约瑟夫环---查询网站https://leetcode.cn/problems/find-the-winner-of-the-circular-game/solution/zhao-chu-you-xi-de-huo-sheng-zhe-by-leet-w2jd/
+        function findTheWinner(n, k){
+            let winner = 1;
+            for (let i = 2; i <= n; i++) {
+                winner = (k + winner - 1) % i + 1;
+            }
+            return winner;
+        }
+    </script>
+</body>
+</html>
