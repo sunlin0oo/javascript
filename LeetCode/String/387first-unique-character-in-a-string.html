@@ -26,7 +26,7 @@
                     map.set(arr[i],i);
                 }
             }
-            // 找重复次数最少的
+            // i指的是索引，找最小的索引
             for(let value of map.values()){
                 if(value !== -1) temp = Math.min(value,temp);
             }

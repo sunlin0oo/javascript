@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function sortedArrayToBST(nums){
+            if(nums.length === 0) return null;
+            const mid = nums.length >> 1;//取中间
+            const root = new TreeNode(nums[mid]);
+            // 由于数组是排序好的，因此一个思路就是将数组分成两半，一半是左子树，另一半是右子树
+            // 然后运用“树的递归性质”递归完成操作即可。
+            root.left = sortedArrayToBST(nums.slice(0,mid));
+            root.right = sortedArrayToBST(nums.slice(mid+1));
+            return root;
+        }
+    </script>
+</body>
+</html>

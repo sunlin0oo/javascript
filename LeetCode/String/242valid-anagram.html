@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function isAnagram(s,t){
+            // 
+            if (s.length !== t.length) {
+                return false;
+            }
+            let map1 = new Map();
+            // 遍历s字符串
+            for (const [i,ch] of Array.from(s).entries()) {
+                if(!map1.has(ch)){
+                    map1.set(ch,1);
+                }else{
+                    let frequency = map1.get(ch) + 1;
+                    map1.set(ch,frequency);
+                }
+            }
+            // 遍历t字符串与哈希表进行比较
+            for (const [i,ch] of Array.from(t).entries()) {
+                if(!map1.has(ch)){
+                    return false;
+                }else{
+                    let frequency = map1.get(ch) - 1;
+                    map1.set(ch,frequency);
+                }
+            }
+
+            for(const values of map1.values()){
+                if(values !==0) return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
