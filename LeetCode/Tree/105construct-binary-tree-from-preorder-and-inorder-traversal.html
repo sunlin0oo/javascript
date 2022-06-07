@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+        // 分治算法：
+        function buildTree(preorder, inorder){
+            if (!preorder.length || !inorder.length) return null;
+            // 根据前序遍历获取到根节点
+            const rootVal = preorder[0];
+            // 建立一棵树
+            const node = new TreeNode(rootVal);
+            // 获取到根节点的索引
+            const i = inorder.indexOf(rootVal);
+            // 构建左子树，进行递归左子树
+            node.left = buildTree(preorder.slice(1,i+1),inorder.slice(0,i));
+            // 构建右子树，进行递归右子树
+            node.right = buildTree(preorder.slice(i+1),inorder.slice(i+1));
+            return node;
+        }
+    </script>
+</body>
+</html>
