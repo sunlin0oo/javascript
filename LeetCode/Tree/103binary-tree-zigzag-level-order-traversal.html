@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function zigzagLevelOrder(root){
+            if(!root) return [];
+            //结果
+            const ans = [];
+            const nodeQueue = [root];
+            // 控制层数
+            let isOrderLeft = true; 
+            /*修改广度优先搜索，对树进行逐层遍历，用队列维护当前层的所有元素，当队列不为空的时候，
+            求得当前队列的长度size，每次从队列中取出size 个元素进行拓展，然后进行下一次迭代。*/
+            while(nodeQueue.length){
+                //双端队列
+                let levelList = [];
+                const size = nodeQueue.length;
+                for(let i = 0;i<size;i++){
+                    const node = nodeQueue.shift();
+                    // console.log("node:::",node)
+                    if(isOrderLeft){
+                        // 从左往右添加
+                        levelList.push(node.val);
+                    }else{
+                        // 向数组的开头添加一个或更多元素,并返回新的长度
+                        // 从右往左添加
+                        levelList.unshift(node.val);
+                    }
+                    if(node.left !== null) nodeQueue.push(node.left);
+                    if(node.right !== null) nodeQueue.push(node.right);
+                    // console.log("nodeQueue::",nodeQueue);
+                }
+                ans.push(levelList);
+                isOrderLeft =!isOrderLeft;
+            }
+            return ans;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+        // 快慢指针
+        function hasCycle(head){
+            let fast = slow = head
+            while(fast && fast.next) {
+                fast = fast.next.next
+                slow = slow.next
+                if (fast == slow) {
+                    return true
+                }
+            }
+            return false
+             // 采用哈希表
+            let index = head;
+            let map = new Map()
+            while(index && index.next) {
+                index = index.next;
+                if(map.has(index)){
+                    return true
+                }else(
+                    map.set(index)
+                )
+            }
+            return false
+        }
+    </script>
+</body>
+</html>
