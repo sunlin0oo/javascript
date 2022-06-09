@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let n = 22;
+            a = binaryGap(n)
+        }
+
+        function binaryGap(n){
+            // let number = Array.from(n.toString(2));
+            // let firstIndex,secondIndex;
+            // // 搜索第一个1
+            // for(let i = 0,len = number.length;i<len;i++){
+            //     if(number[i] === '1'){
+            //         firstIndex = i;
+            //         break;
+            //     }
+            // }
+            // // 搜索第2个1
+            // for(let i = firstIndex+1,len = number.length;i<len;i++){
+            //     if(number[i] === '1'){
+            //         secondIndex = i;
+            //         break;
+            //     }
+            // }
+            // if(secondIndex === undefined) return 0;
+
+            // let absLength;
+            // // 取两个相邻距离之中最大的
+            // let maxLength  = secondIndex -firstIndex ;
+            // for(let i = secondIndex+1,len = number.length;i<len;i++){
+            //     if(number[i] === '1'){
+            //         firstIndex = secondIndex;
+            //         secondIndex = i;
+            //         absLength = secondIndex - firstIndex;
+            //         maxLength = Math.max(maxLength,absLength);
+            //         if(secondIndex === number.length - 1 ){
+            //             absLength = secondIndex - firstIndex;
+            //             maxLength = Math.max(maxLength,absLength);
+            //         }
+            //     }
+            // }
+            // return maxLength;
+
+            // 位运算
+            let last = -1, ans = 0;
+            for (let i = 0; n != 0; ++i) {
+                // n & 1==>获取 nn 的最低位，判断其是否为 1
+                if ((n & 1) === 1) {
+                    if (last !== -1) {
+                        ans = Math.max(ans, i - last);
+                    }
+                    //last 记录上一个找到的1的位置
+                    last = i;
+                }
+                // n 右移一位==>n = n>>1
+                n >>= 1; 
+                // console.log(n);
+            }
+            return ans;
+        }
+    </script>
+</body>
+</html>
