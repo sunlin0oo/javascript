@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+
+        function pathSum(root, targetSum){
+            if(!root) return [];
+            let res = []
+            const dfs = (node, total, nums) => {
+                total += node.val, nums.push(node.val)
+                // 根节点不算，需要根节点加一个路径才可以进行导入(也就是说当此路径走到头了，才能看是否符合定义)
+                if (node.left || node.right) {
+                    node.left && dfs(node.left, total, nums.slice())
+                    node.right && dfs(node.right, total, nums.slice())
+                }else if (total === targetSum) {
+                    res.push(nums)
+                }
+            }
+            return dfs(root, 0, []) || res
+        }
+    </script>
+</body>
+</html>

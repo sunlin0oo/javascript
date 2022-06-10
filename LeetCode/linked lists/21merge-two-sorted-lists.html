@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+        // 返回值：每一层调用都返回排序好的链表头
+        // 如果 l1 的 val 值更小，则将 l1.next 与排序好的链表头相接，l2 同理
+        function mergeTwoLists(list1, list2){
+            // 判断 l1 和 l2 哪一个链表的头节点的值更小，从而递归地决定下一个添加到结果里的节点。如果两个链表有一个为空，递归结束
+            if (l1 === null) {
+                return l2;
+            } else if (l2 === null) {
+                return l1;
+            } else if (l1.val < l2.val) { //l1当前值小于l2当前值      
+                l1.next = mergeTwoLists(l1.next, l2);
+                return l1;
+            } else {
+                l2.next = mergeTwoLists(l1, l2.next);
+                return l2;
+            }
+        }
+    </script>
+</body>
+</html>
