@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+        function kthSmallest(root, k){
+            // 创建一个栈
+            let stack = [];
+            while(root !==null || stack.length ){
+                while(root !== null){
+                    // 记录根节点
+                    stack.push(root);
+                    root = root.left;
+                }
+                // 从下向上开始进行遍历
+                root = stack.pop();
+                // 因为中序遍历是按照键增加的顺序进行的，故每查询一次边k--；
+                k--;
+                if(k === 0) break;
+                root = root.right;
+            }
+            return root.val;
+        }
+    </script>
+</body>
+</html>

@@ -21,11 +21,13 @@
             // prev指的已经翻转完成的链表
             let prev = null;
             while(curr){
-                // next 存储的是下一次要翻转的节点
-                let next = curr.next;
-                curr.next = prev;
+                // next 暂时存储的是下一次要翻转的节点
+                let next = curr.next;//3
+                // 每次让 cur 的 next指向 prev ，实现一次局部反转，进行拼接
+                curr.next = prev;2-1-null
+                 // 记录反转后的链表
                 prev = curr;
-                // 每次让 pre 的 next指向 cur，实现一次局部反转
+                // 记录下次翻转节点
                 curr = next;
             }
             return prev;
