@@ -105,8 +105,9 @@
         // },function(){
 
         // })
-
-        // 链式调用
+        
+        // 可以在then方法中继续写Promise对象并返回，然后继续调用then来进行回调操作
+        // 异步操作执行完后，用链式调用的方式执行回调函数
         // var arr=[];
         // loadImage("./img/1.jpg").then(function(img){
         //     arr.push(img);
@@ -297,6 +298,7 @@
         // //    reject();
         // })
         // console.log(p);
+
         // 状态机分为3中 pending(初始状态) fulfilled(resolve 调用时的状态)  rejected (调用时状态：reject())
         /**默认状态是pending,当执行resolve函数时，状态被修改为fulfilled状态，这时候，如果再执行
         reject函数时，判断当前状态是否是pending，如果不是pending状态就不在执行reject函数
@@ -380,7 +382,7 @@
         //     })
         // })
 
-        // 谁的异步先完成，就先返回谁
+        // 谁的异步先完成，就先返回谁;其余的不会再进入到回调中
         // Promise.race(arr).then(function(img){
         //     console.log(img.src);
         // })
