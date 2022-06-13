@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+        // 由于给定的链表是排好序的，因此重复的元素在链表中出现的位置是连续的
+        function deleteDuplicatesfunction(head){
+            if(!head) return head;
+            let curr = head;
+            console.log(curr);
+            while(curr.next){
+                if(curr.val === curr.next.val){
+                    curr.next = curr.next.next;
+                }else{
+                    curr = curr.next;
+                }
+                console.log(head);
+            }
+            return head;
+        }
+    </script>
+</body>
+</html>
