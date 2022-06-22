@@ -7,7 +7,7 @@ http.createServer(async function(req,res){
     // console.log(req.headers)
     console.log(req.headers["x-name"])
     var type=req.url.split("?")[0];
-    console.log(req.url)
+    console.log("req.url",req.url)
     res.writeHead(200,{
         "Content-Type":"text/html;charset=utf-8",
         // 允许跨域访问发送数据

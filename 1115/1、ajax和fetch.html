@@ -12,25 +12,26 @@
     <script>
         // setData()
         // async function setData(){
-        //     var data=await fetch("http://localhost:4020");
-        //     data=await data.json()
+        //     var data=await fetch("http://localhost:4020?a=1&b=2");
+        // //  data = await data.text() ///对于文本的解析
+        
+        //     data=await data.json()//获得的是属性
         //     console.log(data)
         // }
-
 
         // setData()
         // async function setData() {
         //     var data = await fetch("http://localhost:4020", {
         //         method: "post",
-        //         body: JSON.stringify({
+        //         body: JSON.stringify({ //向服务器发送数据
         //             a: 2,
         //             b: 3
         //         }),
-        //         headers: {
+        //         headers: { //写入自主请求头
         //             "X-Name": "xietian"
         //         }
         //     });
-        //     // 获取响应头
+        //     // 获取响应头==>类似于Map==>迭代器
         //     data.headers.forEach((value,key)=>{
         //         console.log(key,value)
         //     })
@@ -39,45 +40,61 @@
         // }
 
 
+        // 解构赋值和函数赋值  https://blog.csdn.net/weixin_34365635/article/details/93822507
+        // function foo ({x, y = 5}){
+        //     console.log(x, y);
+        // }
+        // foo({});    //undefined 5
+        // foo({x:1}); //1 5
+        // foo({x:1, y:2});    //1 2
+        // foo();  //TypeError: Cannot destructure property `x` of 'undefined' or 'null'.
+        // // 提供对象的解构赋值和函数参数的默认值
+        // function foo ({x, y=2} = {}){
+        //     console.log(x, y);
+        // }
+        // foo();//undefined 2
 
-        function ajax(url,{method="GET",body=null,headers=null}={method:"GET",body:null,headers:null}){
-            return new Promise(function(resolve,reject){
-                var xhr=new XMLHttpRequest();
-                xhr.open(method,url);
-                if(headers) Object.keys(headers).forEach(key=>{
-                    xhr.setRequestHeader(key,headers[key]);
-                });
-                if(typeof body==="object" && body!==null) body=JSON.stringify(body);
-                xhr.send(body);
-                xhr.onreadystatechange=function(e){
-                    if(xhr.readyState===4 && xhr.status===200){
-                        var body
-                        try{
-                            body=JSON.parse(xhr.response);
-                        }catch(e){}
-                        var headers=xhr.getAllResponseHeaders().match(/[^\r\n]+/g).reduce((v,t)=>{
-                            var arr=t.split(/:\s/);
-                            var d=arr[1];
-                            try{
-                                d=JSON.parse(d);
-                            }catch(e){}
-                            v[arr[0]]=d;
-                            return v;
-                        },{})
-                        console.log(headers);
-                        resolve({body,headers,status:xhr.status,readyState:xhr.readyState});
-                    }else if(xhr.readyState===4){
-                        reject(xhr.status);
-                    }
-                }
-                xhr.onerror=function(e){
-                    reject(e)
-                }
-            })
-        }
+        // 第二个参数是一个对象，结合函数参数的默认值，就可以省略第二个参数。这时，就出现了双重默认值。
+    //     function ajax(url,{method="GET",body=null,headers=null}={method:"GET",body:null,headers:null}){
+    //         return new Promise(function(resolve,reject){
+    //             var xhr=new XMLHttpRequest();
+    //             xhr.open(method,url);
+    //             if(headers) Object.keys(headers).forEach(key=>{
+    //                 xhr.setRequestHeader(key,headers[key]);
+    //             });
+    //             if(typeof body==="object" && body!==null) body=JSON.stringify(body);
+    //             xhr.send(body);
+    //             xhr.onreadystatechange=function(e){
+    //                 if(xhr.readyState===4 && xhr.status===200){
+    //                     var body
+    //                     try{
+    //                         body=JSON.parse(xhr.response);
+    //                     }catch(e){}
+    //                     //  match(/[^\r\n]+/g)匹配一个以上不是\r\n的字符串,若是*会出现空字符
+    //                     //  解析头文件
+    //                     var headers=xhr.getAllResponseHeaders().match(/[^\r\n]+/g).reduce((v,t)=>{
+    //                         var arr=t.split(/:\s/);
+    //                         var d=arr[1];
+    //                         try{
+    //                             d=JSON.parse(d);
+    //                         }catch(e){}
+    //                         v[arr[0]]=d;
+    //                         return v;
+    //                     },{})
+    //                     console.log(headers);
+    //                     resolve({body,headers,status:xhr.status,readyState:xhr.readyState});
+    //                 }else if(xhr.readyState===4){
+    //                     reject(xhr.status);
+    //                 }
+    //             }
+    //             xhr.onerror=function(e){
+    //                 reject(e)
+    //             }
+    //         })
+    //     }
 
 
-    //     getData()
+    //    getData()
     //    async function getData(){
     //         var data=await ajax("http://localhost:4020");
     //         console.log(data);
@@ -87,7 +104,7 @@
     //    async function getData(){
     //         var data=await ajax("http://localhost:4020",{method:"post",body:{a:1,b:2},headers:{"X-Name":"xietian"}});
     //         console.log(data);
-    //         var data=await ajax("http://localhost:4020",{method:"post",body:{a:1,b:2},headers:{"X-Name":"xietian"}});
+    //         // var data=await ajax("http://localhost:4020",{method:"post",body:{a:1,b:2},headers:{"X-Name":"xietian"}});
 
     //         console.log(data);
     //     }
