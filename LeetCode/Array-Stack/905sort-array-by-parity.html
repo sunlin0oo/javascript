@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+
+        }
+        
+        function sortArrayByParity(nums){
+        //    两次遍历
+            // let array1 = [];
+            // let array2 = [];
+            // for(let i = 0,len = nums.length; i < len ;i++){
+            //     if(nums[i] % 2 !==0){
+            //         array1.push(nums[i])
+            //     }else{
+            //         array2.push(nums[i])
+            //     }
+            // }
+            // array2.push.apply(array2,array1);//可将两个数组合成一个数组，覆盖原数组
+            // return array2
+         // 优化方法：原地交换/双指针+一次遍历
+            const n = nums.length;
+            const res = new Array(n).fill(0);
+            let left = 0, right = n - 1;
+            for (const num of nums) {
+                if (num % 2 === 0) {
+                    res[left++] = num;
+                } else {
+                    res[right--] = num;
+                }
+            }
+            return res;
+        }
+    </script>
+</body>
+</html>
