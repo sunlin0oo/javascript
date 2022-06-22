@@ -9,13 +9,17 @@
 <body>
     <script>
         // 路由
+        // 第一步：创建一个Ajax
         // var xhr=new XMLHttpRequest();
+        // 第二步：请求信息，分为请求方式和地址
         // xhr.open("GET","http://localhost:4020/news/?type=2&use=xietian&age=30");
+        // 第三步：数据完成加载后执行函数
         // xhr.addEventListener("load",loadHandler);
+        // 第四步：发送信息给服务端，如果使用的是POST的请求方式则需要在这里发送，如果是GET的请求方式，则直接在地址后面携带信息
         // xhr.send();
 
         // function loadHandler(e){
-        //     console.log(xhr.response);
+        //     console.log(xhr.response);//打印从服务端接受的数据
         // }
 
         var xhr=new XMLHttpRequest();

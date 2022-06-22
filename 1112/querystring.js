@@ -1,3 +1,5 @@
+// coommonJS只能用于nodejs
+// 自执行函数
 var QueryString = (function () {
     function hasOwnProperty(obj, prop) {
         return Object.prototype.hasOwnProperty.call(obj, prop);
@@ -18,6 +20,7 @@ var QueryString = (function () {
                 return '';
         }
     };
+    
     return {
         parse: function (qs, sep, eq, options) {
             sep = sep || '&';

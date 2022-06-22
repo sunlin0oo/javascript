@@ -9,6 +9,7 @@
 </head>
 <body>
     aaa
+    <!-- 添加multiple 可进行多文件选择 -->
     <input type="file" multiple>
     <div>
         <span>1</span>
@@ -31,7 +32,7 @@
         GET请求会被浏览器主动cache，而POST不会，除非手动设置。
         GET请求只能进行url编码，而POST支持多种编码方式。
         GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。
-        GET请求在URL中传送的参数是有长度限制的，而POST么有。
+        GET请求在URL中传送的参数是有长度限制的，而POST没有。
         对参数的数据类型，GET只接受ASCII字符，而POST没有限制。
         GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。
         GET参数通过URL传递，POST放在Request body中。
@@ -41,14 +42,11 @@
         // xhr.open("GET","http://localhost:4020")
 
 
-        // decodeURIComponent();
-        // %E4%BD%A0%E5%A5%BD URI编码
-        // console.log(encodeURIComponent("你好"))//把汉字转换为URI编码格式
-        // console.log(decodeURIComponent("%E4%BD%A0%E5%A5%BD"));//
+        // decodeURIComponent(); URI编码模式
+        // console.log(encodeURIComponent("你好"))//把汉字转换为URI编码格式==>%E4%BD%A0%E5%A5%BD
+        // console.log(decodeURIComponent("%E4%BD%A0%E5%A5%BD"));//==>你好
 
-
-
-        // 加载JSON
+        // 加载JSON--配置文件
         // var xhr=new XMLHttpRequest();
         // xhr.addEventListener("load",loadHandler);
         // xhr.open("GET","./config.json");
@@ -56,6 +54,7 @@
 
         // function loadHandler(e){
         //     // console.log()
+                //通过JSON文件来修改参数
         //     document.body.style.color=JSON.parse(xhr.response).bgc
         // }
 
@@ -69,13 +68,14 @@
         function loadHandler(e){
         //    var human=xhr.responseXML.querySelector("human");
         //    console.log(human);
+        // 搜索以f-seat起头的
         var list=xhr.responseXML.querySelectorAll("[n|=f-seat]");
         list.forEach(item=>{
             console.log(item.getAttribute("x"),item.getAttribute("y"));
         })
         } */
 
-        // query字符串
+        // query字符串比json数据会更小，xml解析最方便，但是数据大
         // var str="name=张三&age=30&sex=男|name=张三&age=30&sex=男";
         // console.log(str.length)
 
@@ -91,7 +91,7 @@
 
 
 
-            // 异步
+        // 异步==>发消息给服务器需要时间，加载完成才会执行
         // var xhr=new XMLHttpRequest();
         // xhr.addEventListener("load",loadHandler);
         // xhr.open("GET","http://localhost:4020");
@@ -108,10 +108,11 @@
         // // 第三个参数是否异步，默认true
         // xhr.open("GET","http://localhost:4020",false);
         // xhr.send();
+        // 会进行阻塞，等到服务返回数据之后，才会进行下一步
         // console.log(xhr.response);
         // console.log("b")
 
-
+        // 推送数据==>产生跨域需要服务器允许
         // var xhr=new XMLHttpRequest();
         // // 第四个参数是用户名和密码
         // xhr.addEventListener("load",loadHandler);
@@ -165,17 +166,17 @@
 
         // var arr=new Uint8Array([97,98,99]);
         // ArrayBuffer
-       /*  var str="i love javascript";
-        var arr=str.split("").map(item=>item.charCodeAt(0)^123);
+        // var str="i love javascript";
+        // var arr=str.split("").map(item=>item.charCodeAt(0)^123);//是异或后的数据==>进行加密
         
-       var xhr=new XMLHttpRequest();
-        xhr.addEventListener("load",loadHandler);
-        xhr.open("POST","http://localhost:4020");
-        xhr.send(new Uint8Array(arr));
+    //    var xhr=new XMLHttpRequest();
+    //     xhr.addEventListener("load",loadHandler);
+    //     xhr.open("POST","http://localhost:4020");
+    //     xhr.send(new Uint8Array(arr));
 
-        function loadHandler(e){
-            console.log(xhr.response);
-        } */
+    //     function loadHandler(e){
+    //         console.log(xhr.response);
+    //     }
 
       /*   var str="你好，欢迎来到千锋";
         var arr=str.split("").map(item=>item.charCodeAt(0));
@@ -188,16 +189,13 @@
         function loadHandler(e){
             console.log(xhr.response);
         } */
-
-
-
+        
+        // 文件选择==>二进制大对象
         // var input=document.querySelector("input");
         // input.addEventListener("change",changehandler);
         // function changehandler(e){
         //     console.log(input.files)
         // }
-
-
 
         // var xhr=new XMLHttpRequest();
         // xhr.addEventListener("load",loadHandler);
@@ -207,15 +205,14 @@
         // function loadHandler(e){
         //     console.log(xhr.response);
         // }
-
-
+ 
 
         // var form=document.querySelector("form");
         // form.addEventListener("submit",submitHandler);
 
         // function submitHandler(e){
-        //     e.preventDefault();
-        //     var fd=new FormData(form);
+        //     e.preventDefault();//防止默认事件触发
+        //     var fd=new FormData(form);//将表单放入fd中
         //     var xhr=new XMLHttpRequest();
         //     xhr.addEventListener("load",loadHandler);
         //     xhr.open("POST","http://localhost:4020");
@@ -226,11 +223,11 @@
         //     console.log("aa")
         // }
 
-
-
-       /*  var xhr=new XMLHttpRequest();
+        
+        var xhr=new XMLHttpRequest();
         xhr.addEventListener("load",loadHandler);
         xhr.open("POST","http://localhost:4020");
+        // Http头部修改==>ajax写请求头数据发给服务器，若是自定义请求头必须要服务器跨域允许
         // 必须写在open后面，send前面
         // xhr.setRequestHeader("Content-Type","text/html;charset=utf-8");
         // 在使用ajax的post向php服务端发送消息时，必须写这个请求头
@@ -241,14 +238,14 @@
         function loadHandler(e){
             console.log(xhr.response);
             console.log(xhr.getAllResponseHeaders());
-        }  */
+        }  
 
 
 
 
         // var xhr=new XMLHttpRequest();
         // xhr.addEventListener("load",loadHandler);
-        // xhr.addEventListener("timeout",timeoutHandler);
+        // xhr.addEventListener("timeout",timeoutHandler);//超时
         // xhr.open("POST","http://localhost:4020");
         // xhr.timeout=5;
         // xhr.send("aaa");
@@ -258,43 +255,44 @@
         // }
 
         // function timeoutHandler(e){
+            // 若超时阻塞，则关闭服务器连接
         //     xhr.abort();//主动关闭服务连接
         //     console.log("aaaa")
         // }
 
 
+        //  var xhr=new XMLHttpRequest();
+        // xhr.addEventListener("readystatechange",loadHandler);
+        // xhr.open("POST","http://localhost:4020");
+        // xhr.send("aa");
 
-         var xhr=new XMLHttpRequest();
-        xhr.addEventListener("readystatechange",loadHandler);
-        xhr.open("POST","http://localhost:4020");
-        xhr.send("aa");
-
-        function loadHandler(e){
+        // function loadHandler(e){
             // console.log(xhr.response);
             // xhr.readyState  当前通信的状态码
             // console.log(xhr.status,xhr.readyState)
+            // xhr.status是返回的状态码
             // xhr.readyState===1   open调用时，服务器接受到了url地址
             // if(xhr.readyState===2){
             //     // 调用了send，并且把请求头和请求数据发送给了服务器
             //     // 服务器返回了响应头数据
             //     console.log(xhr.getAllResponseHeaders());
-            //     console.log(xhr.response)
+            //     console.log(xhr.response) //还没有接收到服务器发来的数据
             // }
             // if(xhr.readyState===3){
             //     // 服务器开始向客户端发送数据，接受过程
-            //     console.log(xhr.response)
+            //     console.log(xhr.response)//未接收完所以也不会显示
             // }
             // if(xhr.readyState===4){
             //     // 服务器发送的数据全部接收完成
             //     console.log(xhr.response)
             // }
 
-            if(xhr.readyState===4 && xhr.status===200){
+        //     if(xhr.readyState===4 && xhr.status===200){
 
-            }else if(xhr.readyState===4 && xhr.status!==200){
+        //     }else if(xhr.readyState===4 && xhr.status!==200){
                 
-            }
-        }
+        //     }
+        // }
     </script>
 </body>
 </html>

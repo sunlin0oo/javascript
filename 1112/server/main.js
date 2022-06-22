@@ -17,6 +17,7 @@ http.createServer(async function(req,res){
         "Access-Control-Allow-Headers":"X-Name",
         // 如果需要发送自定义响应头，需要浏览器可以获取必须使用这个来设置需要发送的自定义响应头
         "Access-Control-Expose-Headers":"X-Session-Id",
+        // 在响应头里面加入响应数据
         "X-Session-Id":"1011101"
     })
     // router(type,req,res)
@@ -32,7 +33,7 @@ function getData(req){
         req.on("data",function(chunk){
             data+=chunk;
         //    for(var i=0;i<chunk.length;i++){
-        //         data+=String.fromCharCode(chunk[i]^2345);
+        //         data+=String.fromCharCode(chunk[i]^2345);//解密
         //    }
             // for(var i=0;i<chunk.length;i+=2){
             //     data+=String.fromCharCode(parseInt(chunk[i+1].toString(16).padStart(2,"0")+chunk[i].toString(16).padStart(2,"0"),16))
