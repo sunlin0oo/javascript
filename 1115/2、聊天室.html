@@ -36,46 +36,6 @@
         <button type="submit">提交</button>
     </form>
     <script>
-       var form,textarea;
-
-        init();
-       function init(){
-        form=document.querySelector("form");
-        textarea=document.querySelector("textarea");
-        form.addEventListener("submit",submitHandler);
-        setInterval(getMsg,100);
-       }
-
-       function submitHandler(e){
-           e.preventDefault();
-           var fd=new FormData(form);
-           var data={};
-           for(var [key,value] of fd){
-               if(value.trim().length===0) return;
-               data[key]=value;
-           }
-           sendMsg(JSON.stringify(data));
-           form.children[1].value="";
-       }
-
-      async function getMsg(){
-            var data=await fetch("http://10.9.28.114:4030/");
-            data=await data.json();
-            console.log(data)
-            textarea.value=data.reduce((v,t)=>{
-                return v+t.user+":"+t.msg+"\n";
-            },"");
-       }
-
-     
-
-      async function sendMsg(body){
-           var data=await fetch("http://10.9.28.114:4030/send",{method:"post",body});
-           data=await data.json();
-          if(!data.result){
-              console.log("通信失败")
-          }
-       }
     </script>
 </body>
 </html>

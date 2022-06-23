@@ -14,6 +14,7 @@
         // var p=new Promise(function(resolve,reject){
         //     resolve();
         // })
+        // Promise 实例有一个then方法，用来指定下一步的回调函数。
         // p.then(function(){
 
         // }).catch(function(){
@@ -62,6 +63,53 @@
         //     console.log("bbb")
         // })
 
+          // then() 用法辨析
+        // 写法一:f3回调函数的参数，是f2函数的运行结果
+        // f1().then(function () {
+        //     return f2();
+        // }).then(f3);
+
+        // // 写法二:f3回调函数的参数是undefined
+        // f1().then(function () {
+        //     f2();
+        // }).then(f3);
+
+        // // 写法三:f3回调函数的参数，是f2函数返回的函数的运行结果
+        // f1().then(f2()).then(f3);
+
+        // // 写法四:写法四与写法一只有一个差别，那就是f2会接收到f1()返回的结果。
+        // f1().then(f2).then(f3);
+
+
+        function f1(a){
+            return new Promise(function(resolve,reject){
+                // resolve(a)//如果这里不填写的话 num就是undefined
+                // if(a>2){
+                //     resolve("success")
+                // }else{
+                //     reject("err")
+                // }
+            })
+        }
+        // f1(4).then(res => {
+        //     console.log("res:", res)   // 正常打印 'success'
+        // }, err => {
+        //     console.log("err:", err)   //fulfilled状态，这里不会执行,a<2:err
+        // })
+
+        // f1(1).then(function(num){
+        //     console.log("num1",num)//1
+        //     num ++;//2
+        //     return f1(num);
+        // }).then(function(num){
+        //     console.log("num2",num)//2
+        //     num ++;//3
+        //     return f1(num);
+        // }).then(function(num){
+        //     console.log("num3",num);//3
+        //     num ++;
+        // })
+
 
 
         // var img=new Image();
@@ -73,7 +121,6 @@
         //         var img2=new Image();
         //         img2.src="./img/3.jpg";
         //         img3.onload=function(){
-
         //         }
         //     }
         // }
@@ -90,7 +137,6 @@
         //             reject(err)
         //         }
         //     });
-
         // }
 
 
@@ -110,20 +156,22 @@
         // 异步操作执行完后，用链式调用的方式执行回调函数
         // var arr=[];
         // loadImage("./img/1.jpg").then(function(img){
+        //     console.log("回调函数1",img)//<img src = "./img/1.jpg">
         //     arr.push(img);
-        //     return loadImage("./img/2.jpg")
+        //     return loadImage("./img/2.jpg")//<img src = "./img/2.jpg">
         // }).then(function(img){
+        //     console.log("回调函数2",img)    
         //     arr.push(img);
-        //     return loadImage("./img/3.jpg")
+        //     return loadImage("./img/3.jpg")//<img src = "./img/3.jpg">
         // }).then(function(img){
+        //     console.log("回调函数3",img)        
         //     arr.push(img);
-        //     return loadImage("./img/4.jpg")
+        //     return loadImage("./img/4.jpg")//<img src = "./img/4.jpg">
         // }).then(function(img){
+        //     console.log("回调函数4",img)        
         //     arr.push(img);
         //    console.log(arr);
         // })
-
-
 
         // function showLight(light){
         //     return new Promise(function(resolve,reject){
@@ -300,8 +348,8 @@
         // console.log(p);
 
         // 状态机分为3中 pending(初始状态) fulfilled(resolve 调用时的状态)  rejected (调用时状态：reject())
-        /**默认状态是pending,当执行resolve函数时，状态被修改为fulfilled状态，这时候，如果再执行
-        reject函数时，判断当前状态是否是pending，如果不是pending状态就不在执行reject函数
+        /**默认状态是pending,当执行resolve函数时，状态被修改为fulfilled状态，
+         * 这时候，如果再执行reject函数时，判断当前状态是否是pending，如果不是pending状态就不再执行reject函数
         如果当前状态是pending状态，执行了reject方法时，状态被修改为rejected状态
         再次执行resolve方法，发现状态不是pending状态，就会跳出不在执行resolve函数
         在promise中，只能执行一次resolve或者一次reject*/

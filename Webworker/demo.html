@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>Count numbers: <output id="result"></output></p>
+<button onclick="startWorker()">Start Worker</button>
+<button onclick="stopWorker()">Stop Worker</button>
+<input type="text" value=""/>
+<script>
+var w;
+function startWorker () {
+  if (typeof(Worker) !== "undefined") {
+    if (typeof(w) === "undefined") {
+      //1 创建 web worker
+      w = new Worker("demo_workers.js");
+    }
+     //2 主线程接收子线程的消息，并相应到页面
+    w.onmessage = function (event) {
+      document.getElementById("result").innerHTML = event.data;
+    };
+  } else {
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+  }
+}
+
+function stopWorker () {
+  w.terminate();
+}
+</script>
+</body>
+</html>

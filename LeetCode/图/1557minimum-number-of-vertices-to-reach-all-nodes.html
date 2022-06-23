@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let n = 6, edges = [[0,1],[0,2],[2,5],[3,4],[4,2]];
+            a = findSmallestSetOfVertices(n, edges);
+            console.log(a)
+        }
+        //只需要返回入度为零的节点
+        function findSmallestSetOfVertices(n, edges){
+            let length = n
+            const inDegrees = new Array(length).fill(0);
+            const outDegrees = new Array(length).fill(0);
+            const array = [];
+            for (const edge of edges) {
+                const x = edge[0], y = edge[1];
+                ++inDegrees[y];
+                ++outDegrees[x];
+            }
+            for (let i =0;i<length;i++) {
+                if(inDegrees[i] === 0) array.push(i)
+            }
+            return array;
+        }
+    </script>
+</body>
+</html>
