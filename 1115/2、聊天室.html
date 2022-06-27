@@ -36,6 +36,52 @@
         <button type="submit">提交</button>
     </form>
     <script>
+        var form,textarea;
+
+        init();
+        function init(){
+            form = document.querySelector("form");
+            textarea = document.querySelector("textarea");
+            form.addEventListener("submit",submitHandler);
+            // form.addEventListener("reset",resetHandler);//导致页面的更新,走按钮不能够清空数组
+            setInterval(getMsg,1000);
+        }
+
+        // function resetHandler(e){
+        //     e.preventDefault();
+        // }
+
+        function submitHandler(e){
+            e.preventDefault();
+            // 关于new FormData(form)的讲解:https://blog.csdn.net/WuLex/article/details/94409426
+            var fd = new FormData(form);//将form表单的数据放入其中==>迭代器
+            var data = {};
+            for(let [key,value] of fd){
+                console.log([[key,value]])
+                if(value.trim().length === 0) return;//trim()去除字符串的头尾空格==>用于判断是否为空
+                data[key] = value;
+            }
+            sendMsg(JSON.stringify(data));
+            form.children.value[1] = "";
+        }
+
+        async function getMsg(){
+            let data = await fetch("http://localhost:4030/");
+            data = await data.json();
+            textarea.value = data.reduce((v,t)=>{
+                return v+t.user+":"+t.msg+"\n"
+            },"")
+        }
+
+        async function sendMsg(body){
+            let data = await fetch("http://localhost:4030/send",{method:"post",body});
+            data = await data.json();
+            if(!data.result){
+                console.log("通信失败")
+            }else{
+                console.log("通信成功")
+            }
+        }
     </script>
 </body>
 </html>

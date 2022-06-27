@@ -1,5 +1,5 @@
 const http=require("http");
-const msgList=[];
+const msgList=[];//存储数据
 const querystring=require("querystring");
 http.createServer(async function(req,res){
 
@@ -16,6 +16,9 @@ http.createServer(async function(req,res){
         "Access-Control-Expose-Headers":"X-Session-Id",
         "X-Session-Id":"1011101"
     })
+    // let data =await getData(req)
+    // console.log(data)
+    // 收到Type，执行路由
     router(type,req,res)
 }).listen(4030);
 

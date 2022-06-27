@@ -23,6 +23,7 @@ http.createServer(async function(req,res){
     // router(type,req,res)
     var data=await getData(req);
     console.log(data);
+    // 服务器没有返回则会一直挂起
     res.end(JSON.stringify({a:1,b:2}));
    
 }).listen(4020);

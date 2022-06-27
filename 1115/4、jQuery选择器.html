@@ -28,13 +28,14 @@
         <li></li>
     </ul>
     <script>
+        // jQuery对象:
         // var div=$("div");
         // console.log(div);
 
-        // $("div").text(1);
+        // $("div").text(1);//可以给所有的div都设置成1
 
         // jQuery对象不能使用js的方法 ,jQuery中将js的所有方法重新全部实现了一遍
-        // 获取jQuery对象中其中某一个DOM对象
+        // 获取jQuery对象中其中某一个DOM对象==>下面两种方法
         // $("div")[0].textContent="a"
         // console.log($("div").get(0))
         // 将jQuery对象转换为一个数组列表
@@ -46,19 +47,20 @@
         // console.log($(div))
 
 
-        // $("div")
-        // $(".div1")
-        // $("#div1")
-        // $("div.div1")
-        // $("div .div1")
-        // $("div+.div1")
-        // $("div>.div1")
+        // $("div")//获取div标签
+        // $(".div1")//获取classname
+        // $("#div1")//获取id
+        // $("div.div1")//获取div列表中class是div1的
+        // $("div .div1")//获取div后代中class是div1
+        // $("div~.div1")//获取多个兄弟元素
+        // $("div+.div1")//获取[0,1]个兄弟元素
+        // $("div>.div1")//获取子代
 
-        // $("ul>").text(1)
+        // $("ul>").text(1)//获取自身及所有子代
 
        
-        // $(".div1").find("div");// $(".div1 div");
-        // $("ul").children();//$("ul>");
+        // $(".div1").find("div");// 等同于$(".div1 div");
+        // $("ul").children();//等同于$("ul>");
 
         // $("#div1").next();//$("#div1+*")
         // $("#div1").nextAll();//$("#div1~*")
@@ -66,25 +68,30 @@
         // 选择div1到div2之间的元素
         // console.log($("#div1").nextUntil("#div2"))
 
-        // $("#div1").prev();//上一个
-        // $("#div1").prevAll();//上面所有兄弟
+        // $("#div1").prev();//选择上一个
+        // $("#div1").prevAll();//选择上面所有兄弟
         // $("#div2").prevUntil("#div1");//div2向上到div1直接的所有元素
 
-        // $("#div1").siblings();//所有兄弟元素
+        // $("#div1").siblings();//所有兄弟元素（除自己外）
 
         // $("div").click(function(e){
-        //     $(this).css("backgroundColor","red").siblings("div").css("backgroundColor","green");
+        //     $(this).siblings("div").css("backgroundColor","green")//将点击的模块所有兄弟元素变成绿色
         // })
 
+        $("div").click(function(e){
+            $(this).css("backgroundColor","red").siblings("div").css("backgroundColor","green");
+        })
 
+        // 属性DOM对象
         // $("[id]")
         // $("[data=a]")
-        // $("[data^=a]")
-        // $("[data$=a]")
+        // $("[data^=a]")//以a开头的类型
+        // $("[data$=a]")//以a结尾的类型
         // $("[data|=a]")//以a起头后面紧跟- 或者就是a
         // $("[data~=a]")//以a起头后面紧跟空格，或者就是a
-        // $("[data!=a]")
+        // $("[data!=a]")//不是a的DOM对象
         // $("[data*=a]")//在data属性中包含a字符
+
 
         // $("[class~=li1]").text(1);
     </script>

@@ -35,26 +35,31 @@
        <span class="div1"></span>
     </div>
     <script>
+        // 建议使用方法，而不是过滤器
         // 所有li中第一个元素
         // $("li:first").text(1)
-        // $("li").first()
+        // $("li").first().text(1)
 
-        // 所有li的父元素第一个子元素必须是li的
+        // 所有li父元素的第一个子元素必须是li的,若不是则找不到
         // $("li:first-child").text(1);
 
-         // 所有li的父元素第一个li子元素
+         // 所有li父元素的第一个li子元素
         // $("li:first-of-type").text(1);
+
+
+        // $("li:nth-child(1)").text(111);//拿出ul的第1个子元素
+        // $("li:nth-of-type(1)").text(2323);//选中li元素的父元素（即ul）中的第一个li
+
 
         // $("li:last");
         // $("li").last();
         // $("li:last-child");
         // $("li:last-of-type");
 
-        // $("li:nth-child(1)");
-        // $("li:nth-of-type(1)");
 
-        // $("li:nth-child(odd)")
-        // $("li:nth-child(even)")
+
+        // $("li:nth-child(odd)")//奇数
+        // $("li:nth-child(even)")//偶数
 
 
         // $("li:ony-child")
@@ -66,7 +71,7 @@
         // $("li:even")
         // $("li:odd")
 
-        // $("li:eq(2)");//选择jQuery对象列表中第2个jQuery对象
+        // $("li:eq(2)").text(12121);//选择jQuery对象列表中第2个jQuery对象==>会将class===li0的li标签变成12121
         // $("li").eq(2)
 
         // $("li:gt(2)");//li列表中大于2下标所有jQuery对象
@@ -76,14 +81,15 @@
         // $(":animated");//所有有动画的元素
         // $(":focus");//所有聚焦对象
 
+
         // 空元素
-    //    console.log( $("div:empty"))
+        //    console.log( $("div:empty"))
 
-    // 查看所有div的后代中拥有className是div1的div元素
-//    console.log( $("div:has(.div1)"))
-        // console.log($("div").has(".div1"))
+        // 查看所有div的后代中拥有className是div1的div元素
+        //    console.log( $("div:has(.div1)"))
+                // console.log($("div").has(".div1"))
 
-// 判断该class是div1的元素是否是空元素
+        // 判断该class是div1的元素是否是空元素，获取不是空元素
         // console.log($(".div1:parent"))
 
         // 后代内容中有2字符的li
@@ -98,7 +104,7 @@
 
 
         // 不能连缀，这俩个是布尔值
-        // 判断li中是否有.li0
+        // 判断li中是否有.li0的子元素
     //    console.log( $("li").is(".li0"))
     // 只能判断class
     // console.log($("li").hasClass("li0"));

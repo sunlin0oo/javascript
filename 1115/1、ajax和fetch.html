@@ -122,8 +122,7 @@
     //         console.log(data);
     //     }
 
-
-
+    // 短连接（使用路由）：两次相同的请求，服务器返回一个值，只返回第二次
     // var xhr=new XMLHttpRequest();
     // xhr.open("GET","http://localhost:4020");
     // xhr.send();
@@ -136,6 +135,8 @@
     // xhr.onload=function(){
     //     console.log(xhr.response)
     // }
+    // 长连接（使用type）==>心跳检测(一定时段不断发送请求)==>游戏==>WebSocket
+
     </script>
 </body>
 

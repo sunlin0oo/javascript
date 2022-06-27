@@ -9,6 +9,7 @@
 </head>
 <body>
     <script>
+        // 点击变成绿色方块
         // var div=document.createElement("div");
         // div.style.width="50px";
         // div.style.height="50px";
@@ -19,8 +20,6 @@
         // function clickhandler(e){
         //     div.style.backgroundColor="green";
         // }
-
-
 
         // $("<div></div>")
         // .appendTo("body")
@@ -51,8 +50,27 @@
 
                 // var obj={
                 //     a(){
+                //         console.log("a");
+                //         // return "a";//返回字符串可以连缀字符串的相关方法
+                //     },
+                //     c(){
+                //         console.log("c");
+                //     },
+                //     d(){
+                //         console.log("d");
+                //     }
+                // }
+                
+                // obj.a()如果没有返回结果不可以进行连缀操作
+                // obj.a().trim().split("")
+                // obj.a();
+                // obj.b();
+                // obj.c();
+                
+                // var obj={
+                //     a(){
                 //         console.log("a")
-                //         return this;
+                //         return this;//返回当前的obj
                 //     },
                 //     c(){
                 //         console.log("c");
@@ -64,11 +82,7 @@
                 //     }
                 // }
 
-                // obj.a().trim().split("")
-                // obj.a();
-                // obj.b();
-                // obj.c();
-                // obj.a().c().d();
+                // obj.a().c().d();//return this之后可以进行连缀
     </script>
 </body>
 </html>
