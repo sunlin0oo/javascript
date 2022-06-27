@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let rooms = [[1],[2],[3],[]];
+            a = canVisitAllRooms(rooms);
+            console.log(a);
+        }
+        // 深度优先遍历
+        function canVisitAllRooms(rooms){
+            let length = rooms.length;
+            const room = new Array(length).fill(0);
+            const dfs=(s)=>{
+                if(room[s]) return;
+                room[s] = 1;
+                for(const n of rooms[s]){
+                    dfs(n)
+                }
+            }
+            dfs(0);
+            return Math.min(...room);
+        }
+        // 广度优先遍历
+        function canVisitAllRooms(rooms){
+            let length = rooms.length;
+            const room = new Array(length).fill(0);
+            const q = [0];
+            while(q.length){
+                let l = q.length;
+                while(l){
+                    l--;
+                    const cur = q.shift();
+                    room[cur] = 1;
+                    for(const n of rooms[cur]){
+                        if(!room[n]) q.push(n);
+                    }
+                }
+            }
+            return Math.min(...room);
+        }
+    </script>
+</body>
+</html>

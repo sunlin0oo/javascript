@@ -19,12 +19,13 @@
         function findSmallestSetOfVertices(n, edges){
             let length = n
             const inDegrees = new Array(length).fill(0);
-            const outDegrees = new Array(length).fill(0);
+            // const outDegrees = new Array(length).fill(0);
             const array = [];
             for (const edge of edges) {
-                const x = edge[0], y = edge[1];
+                // const x = edge[0];
+                const y = edge[1];
                 ++inDegrees[y];
-                ++outDegrees[x];
+                // ++outDegrees[x];
             }
             for (let i =0;i<length;i++) {
                 if(inDegrees[i] === 0) array.push(i)
