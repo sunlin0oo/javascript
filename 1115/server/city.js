@@ -7,8 +7,6 @@ http.createServer(async function(req,res){
         "Access-Control-Allow-Origin":"*",
     })
     router(type,req,res)//服务器拿到了路由类型
-
-
 }).listen(4020);
 
 //获取数据
