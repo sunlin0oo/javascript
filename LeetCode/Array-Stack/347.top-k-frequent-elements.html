@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import MinHeap from "./js/347.js";
+        init()
+
+        function init(){
+            let nums = [5,2,5,3,5,3,1,1,3];
+            let k = 2;
+            let res = topKFrequent(nums, k);
+            console.log("res",res);
+        }
+
+        function topKFrequent(nums, k){
+            let arr = new MinHeap();
+            let m = new Map();
+            let length = nums.length;
+            let index = 0
+            for(let i = 0 ; i < length; i++) {
+                if(m.has(nums[i])){
+                    let frequency = m.get(nums[i])
+                    m.set(nums[i],frequency+1)
+                }else{
+                    m.set(nums[i],1)
+                }
+            }
+            if(m.size <= k){
+                return [...m.keys()];
+            }
+            // 返回堆排序结果
+            nums=new Array(m.size);
+            let j=0;
+            for(let [key,value] of m){
+                nums[j++]=[key,value];
+            }
+            // console.log("nums",nums);
+            return heapSort(nums, k)
+        }
+
+        function heapSort(nums, k){
+            let arr = new MinHeap();
+            let res = [];
+            console.log("nums",nums);
+            for(let i = 0 ; i < nums.length; i++) {
+                // 在堆中插入k个值，并进行排序
+                if(i < k) {
+                    arr.insert(nums[i])
+                }else{
+                    console.log("arr",i,JSON.stringify(arr.heap));
+                    console.log(nums[i][1] >= arr.heap[0][1])
+                    // 替换比堆顶大的元素
+                    // 因为堆顶是最小的元素，用当前nums[i],在重新进行排序，栈顶的一直是我们所需要的元素位置
+                    if (nums[i][1] >= arr.heap[0][1]) {
+                        arr.heap[0] = nums[i]
+                        console.log(arr.heap[0])
+                        arr.shitDown(0)
+                    }
+                    console.log("arr",i,JSON.stringify(arr.heap));
+                }
+            }
+            for(let i=0;i<k;++i){
+                res[i] = arr.heap[i][0];
+            }
+            return res;
+        }
+
+        // // 桶排序
+        // function topKFrequent(nums, k){
+        //     let arr = new MinHeap();
+        //     let m = new Map();
+        //     let length = nums.length;
+        //     let index = 0
+        //     for(let i = 0 ; i < length; i++) {
+        //         if(m.has(nums[i])){
+        //             let frequency = m.get(nums[i])
+        //             m.set(nums[i],frequency+1)
+        //         }else{
+        //             m.set(nums[i],1)
+        //         }
+        //     }
+        //     if(m.size <= k){
+        //         return [...m.keys()];
+        //     }
+        //     // 返回桶排序结果
+        //     return bucketSort(map, k)
+        // }
+
+        // function bucketSort(map, k){
+        //     let arr = [];
+        //     let res = [];
+        //     map.foreach((value,key)=>{
+        //         //利用映射关系（出现频率作为下标）将数据分配到各个桶中
+        //         if(!arr[value]) {
+        //             // key的数组 -> 有不同整数，相同频率的情况
+        //             arr[value] = [key]
+        //         } else {
+        //             // 相同频率时
+        //             arr[value].push(key)
+        //         }
+        //     })
+        //     // 倒序遍历获取出现频率最大的前k个数且res数组小于k
+        //     for(let i = arr.length - 1; i >= 0 && res.length < k; i--){
+        //         // 若有数据 -> 放入该数组
+        //         if(arr[i]) {
+        //             res.push(...arr[i])
+        //         }
+        //     }
+        //     return res
+        // }
+    </script>
+</body>
+</html>

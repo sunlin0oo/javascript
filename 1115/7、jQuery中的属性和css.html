@@ -32,6 +32,7 @@
     <script src="./node_modules/jquery/dist/jquery.js"></script>
 </head>
 <body>
+    <!-- <div a = "1"></div>  自定义标签 -->
     <div class="div3">
         <div class="div2" id="1" a="1"></div>
         <div id="2" a="2" class="div1 div2"></div>
@@ -43,24 +44,27 @@
     <input type="checkbox" value="3">
     <input type="checkbox" value="4">
     <script>
-        // attr  prop  data
-        // 获取第一个的标签属性
+        // 三种属性：attr  prop  data
+        // 获取第一个的标签属性(即便有多个)
         // console.log($("div").attr("a"))
-
+        //设置标签属性(每一个div有b = 2 的属性)
         // $("div").attr("b",2);
 
         // 删除所有的标签属性
         // $("div").removeAttr("a");
 
+        //设置标签属性value
         // $("div").attr("a",function(index,value){
         //     return index+10;
         // })
 
+        //设置多个不同的属性
         // $("div").attr({
         //     a:10,
         //     b:20
         // })
-
+        
+        //将每个a,b设置成不同的的值
         // $("div").attr({
         //     a:function(index,item){
         //         return index+10;
@@ -71,10 +75,11 @@
         // })
 
 
-
+        //设置prop属性是10
         // $("div").prop("abc",10);
         // console.log($("div").prop("abc"))
 
+        //引用地址不同，故没法查询到，这两句话获取的div列表是不一样的
         // $("div").abc=10;
         // console.log($("div").abc);
 
@@ -88,36 +93,42 @@
 
         // console.log($1("div").abc)
 
-
+        //这样可以获取到
         // var divs=$("div");
         // divs.abc=10;
         // console.log(divs.abc)
 
         // $("div").prop("abc",10);
         // console.log($("div").prop("abc"))
+
         // 这里直接设置到DOM属性上了
         // $("div").prop("abc",1)
 
         // console.log( $("div"))
 
+        // 设置对象的属性值==>给input标签设置password属性
         // $("input").prop("type","password")
         // $("input").prop("value","1231231")
 
         // $("input").prop("checked",true);
+        // $("input").attr("checked","checked");
+
         // $(document).click(function(){
-        //   if(!$("input").attr("checked"))  $("input").attr("checked","checked")
+        // 未选中状态
+        //   if(!$("input").attr("checked"))  $("input").attr("checked",checked)
         //   else $("input").removeAttr("checked");
         // })
 
 
-
+        //先获取再设置
         // $(document).click(function(){
         //     $("input").prop("checked",!$("input").prop("checked"))
         // });
 
-
+        //设置多个属性
         // $("input").prop({a:1,b:2});
         // console.log($("input"))
+
         // $("input").prop({
         //     a:function(index){
         //         return index
@@ -128,15 +139,17 @@
         // })
         // console.log($("input"))
 
-        // 不能删除标签属性
+        //只能删除对象属性
         // $("div").prop("a",1);
         // console.log($("div").prop("a"));
-        // $("div").removeProp("id");
+        // 不能删除标签属性
+        // $("div").removeProp("id");//错误
         // console.log($("div").prop("a"));
 
 
         // $("input").attr("disabled","")
         // $("input").prop("disabled",true);
+
         // 只设置数据值，并不影响标签的显示和特征
         // $("input").data("disabled",true);
         // console.log($("input").data("disabled"))
@@ -152,12 +165,13 @@
 
         // $("input").removeData("ab");
 
-// CSS 行内样式
+        // CSS 行内样式
         // $("div").css("width","50px");
         // console.log($("div").css("width"))
         // 直接可以获取到DOM的计算后css样式
         // console.log($("div").css("height"))
 
+        //通过覆盖的方式进行覆盖
         // $("div").css("width","")
 
         // $("div").css({
@@ -182,11 +196,11 @@
         // 获取第一个元素的多个css
         // console.log($("div").css(["width","height"]))
 
-
+        //添加className
         // $("div").addClass("div1 div2");
         // $("div").removeClass("div1");
 
-
+        //点击切换div1样式
         // $("div").click(function(){
         //     $(this).toggleClass("div1");
         // })
@@ -195,7 +209,9 @@
 
             // 可以获取到css以及行内样式计算后的宽度，而且是数值，css获取到的宽度是字符串
         // console.log($("div").width())
+        // 设置数值
         // $("div").width(100);
+        // 设置多个数值
         // $("div").width(function(index){
         //     return index*100
         // })
@@ -203,15 +219,17 @@
         // console.log($("div").height())
 
             // 获取内容宽度和padding
-    //    console.log( $("div").innerWidth())
+        //    console.log( $("div").innerWidth())
+        // 也减去了padding
+        // $("div").innerWidth(120);
 
-    // $("div").innerWidth(120);
-// 获取内容宽度和padding+边线
-    // console.log($("div").outerWidth());
-    // $("div").outerWidth(120);
+        // 获取内容宽度和padding+边线
+        // console.log($("div").outerWidth());
+        // 也减去了边线
+        // $("div").outerWidth(120);
 
-    // 获取内容宽度和padding+边线+margin,只能获取不能设置值
-    // console.log($("div").outerWidth(true));
+        // 获取内容宽度和padding+边线+margin,只能获取不能设置值
+        // console.log($("div").outerWidth(true));
 
 
             // console.log($(".div2").offset());//相对页面左上角page，可以修改

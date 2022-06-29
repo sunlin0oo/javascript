@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import MinHeap from "./js/215.js";
+        init();
+
+        function init(){
+            let nums = [3,2,1,5,6,4];
+            let k = 2;
+            let max = findKthLargest(nums, k);
+            console.log(max);
+        }
+
+        //冒泡排序
+        // function findKthLargest(nums, k){
+        //     let length = nums.length;
+        //     for(let i = length;i > length - k - 1;i--){
+        //         for(let j = 0;j<i;j++){
+        //             if(nums[i]<nums[j]){
+        //                 temp = nums[i];
+        //                 nums[i] = nums[j];
+        //                 nums[j] = temp;
+        //             }
+        //         }
+        //     }
+        //     return nums[length - k];
+        // }
+            //堆排序，堆顶就是第K大的数字
+           function findKthLargest(nums, k){
+            let arr = new MinHeap()
+            for(let i = 0 ; i < nums.length; i++) {
+                // 在堆中插入k个值，并进行排序
+                if(i < k) {
+                    arr.insert(nums[i])
+                }else{
+                    // 替换比堆顶大的元素
+                    // 因为堆顶是最小的元素，用当前nums[i],在重新进行排序，栈顶的一直是我们所需要的元素位置
+                    if (nums[i] >= arr.heap[0]) {
+                        arr.heap[0] = nums[i]
+                        arr.shitDown(0)
+                    }
+                }
+            }
+            return arr.heap[0]
+        }
+    </script>
+</body>
+</html>

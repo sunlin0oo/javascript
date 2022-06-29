@@ -43,6 +43,7 @@
               data=await  fetch("http://localhost:4020/county",{method:"post",body:JSON.stringify({cityId:id})});
               router="county";
               break;
+              // 避免死循环
             case "county":
               return;
             default:
@@ -51,7 +52,7 @@
               break;
           }
           data=await data.json();//数据传输过程中转为json对象
-           setMenu(router,data);
+          setMenu(router,data);
       }
 
       function  clickHandler(e){
@@ -70,10 +71,12 @@
         //所以这里data是对象, key是它的键, value是它的值
         //data是传来的citydata里面的数据
         $.each(data,function (key,value){
+          //${}获取变量,添加在字符串中
           str+=`<li><a id="${key}" href="javascript:void(0)">${value}</a></li>`
         });
         $("#"+type+">ul").html(str).on("click",clickHandler);
-        console.log($("#"+type+">ul").html(str));
+        // console.log($("#"+type+">ul").html(str));
+        //抛发事件==>能够让按钮存在初始值，会去触发clickHandler()
         var evt=new Event("click",{bubbles:true});
         $("#"+type+">ul>li:first-child>a")[0].dispatchEvent(evt);
       }
