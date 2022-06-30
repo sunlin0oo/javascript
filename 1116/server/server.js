@@ -6,7 +6,6 @@ http.createServer(async function(req,res){
     // 在这里获取请求头的数据
     // console.log(req.headers)
     // console.log(req.headers["x-name"])
-    console.log(req.url)
     var type=req.url.split("?")[0];
     console.log(req.url)
     res.writeHead(200,{

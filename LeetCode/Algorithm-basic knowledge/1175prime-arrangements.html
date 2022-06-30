@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let n = 5;
+            sum = numPrimeArrangements(n);
+            console.log(sum);
+        }
+        
+        function  numPrimeArrangements(n){
+            const MOD = 1000000007;
+            let numPrimes = 0;
+            for(let i=2;i<n;i++){
+                if(isPrime(i)) numPrimes++
+            }
+            let res = 1;
+            let m = n - numPrimes;
+            //根据「乘法原理」总的放置方案数为a!×b!
+            while (numPrimes > 0) {
+                res = res % MOD;
+                res *= numPrimes;
+                numPrimes--;
+            }
+            while (m > 0) {
+                res = res % MOD;
+                res *= m;
+                m--;
+            }
+            return res;
+        } 
+
+        function isPrime(n){
+            if(n===1) return false;
+            for(let i =2;i*i<=n;i++){
+                if(n % i === 0)return false
+            }
+            return true
+        }
+    </script>
+</body>
+</html>

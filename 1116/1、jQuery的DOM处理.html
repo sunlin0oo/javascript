@@ -15,11 +15,12 @@
     <script src="./node_modules/jquery/dist/jquery.js"></script>
 </head>
 <body>
+    <!-- 使用http-server进行处理 -->
     <!-- <div>
         <span>1</span>
     </div> -->
-
-    <!-- <span>1</span>
+<!-- 
+    <span>1</span>
     <span>2</span>
     <span>3</span>
     <span>4</span>
@@ -33,36 +34,38 @@
 
         // 返回body
         // $("body").append("<div></div>");
+        // $("body").append("<div></div>").css("backgroundColor");//设置body的背景颜色
         // 这里返回前面创建的div
         // $("<div></div>").appendTo("body");
 
+        //把<p></p>插在div子元素的最前面
         // $("div").prepend("<p></p>");
+        // $("<p></p>").prependTo("div");//两者相同的作用
+
         // var p=document.createElement("p");
         // var div= document.querySelector("div");
         //  div.insertBefore(p,div.firstChild)
 
-        // $("<p></p>").prependTo("div");
-
-
+        //插在兄弟元素后面
         // $("div").after("<p></p>")
         // $("<p></p>").insertAfter("div");
 
-
+        //插在兄弟元素前面
         // $("div").before("<p></p>");
         // $("<p></p>").insertBefore("div");
 
-        // $("span").wrap("<div></div>");//包裹
-        // $("span").unwrap();//去掉外部包裹
+        // $("span").wrap("<div></div>");//每一个span做一个div外包裹
+        // $("span").unwrap();//去掉外部包裹(父容器)
 
         // $("span").wrapAll("<div></div>");
 
-        // $("span").wrapInner("<a href='#'></a>")
+        // $("span").wrapInner("<a href='#'></a>")//每一个span做一个a内包裹
 
-        // $("span").clone(true).appendTo("body");
+        // $("span").clone(true).appendTo("body");//深复制
 
-       var divs=$("div").click(function(){
-            $(this).css("backgroundColor","green");
-        });
+        //    var divs=$("div").click(function(){
+        //         $(this).css("backgroundColor","green");
+        //     });
         // $("div").clone(false).appendTo("body");
         // $("div").clone(true).appendTo("body");//true 将事件也复制下来
 

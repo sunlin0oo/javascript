@@ -34,7 +34,7 @@
         // })
 
         // function clickHandler(e){
-        //     $("div").off("click",clickHandler);
+        //     $("div").off("click",clickHandler);//删除事件
         // }
 
 
@@ -48,7 +48,7 @@
         //     console.log("bbb")
         // })
 
-
+        //起别名==>区别匿名函数的点击事件
         // $("div").on("click.a",function(){
         //     $("div").off("click.a");
         //     console.log("aaa")
@@ -58,23 +58,26 @@
         // })
 
 
-
         // $("div").click(function(e){
         //     console.log("aaa")
         //     $("div").off("click");
         // })
-
+        
+        //悬停时为绿色，离开是红色
         // $("div").hover(function(){
         //     $(this).css("backgroundColor","green")
         // },function(){
         //     $(this).css("backgroundColor","red")
         // })
 
+        //DOM树和CSS全部加载完成
         // var img=document.querySelector("img");
         // window.onload=function(){
         //     // console.log("bbb")
         //     console.log(img.width,"bbbb")
         // }
+        
+        //页面中所有的DOM和css形成渲染树，不管图片是否加载完成，DOM加载完毕触发
         // $(document).ready(function(){
         //     // console.log("aaa")
         //     console.log(img.width,"aaa")
@@ -90,7 +93,7 @@
     // })
     // $("div").on("click",function(e){
     //     // e.preventDefault();
-    //     // e.stopPropagation();
+    //     // e.stopPropagation();//阻止触发接下来的相同事件
     //     e.stopImmediatePropagation();
     //     console.log("aaa");
     // })
@@ -103,7 +106,7 @@
     // })
 
 
-    //传参
+    //传参==>带参传递，在e中存在data属性
     // init();
     // function init(){
     //     var obj={a:1};
@@ -129,7 +132,7 @@
 
     // $("div").trigger("click");
 
-
+    //抛发事件传参
     // $("div").on("chilema",function(e,a,b){
     //     console.log(e,a,b)
     // })

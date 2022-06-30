@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let s = "()[]{}";
+            a = isValid(s);
+            console.log(a)
+        }
+
+        function isValid(s){
+            const length = s.length;
+            // 成双成对
+            if(length % 2 === 1) return false;
+            // 将类型举例出来,key,value 
+            let pairs = new Map([[')', '('],
+                                 [']', '['],
+                                 ['}', '{']]);
+            const stack = [];
+            for(let value of s){
+                // 先将左括号放到栈顶，如果遇到右括号，取栈顶
+                if(pairs.has(value)){
+                    // 对号是一定会相邻的==>一个相同类型的左括号闭合。此时，我们可以取出栈顶的左括号并判断它们是否是相同类型的括号。
+                    if(!stack.length && stack[stack.length-1] !== pairs.get(value)){
+                       return false;
+                    }
+                    stack.pop(value);
+                }else{
+                    stack.push(value);
+                }
+            }
+            return !stack.length
+        }
+    </script>
+</body>
+</html>
