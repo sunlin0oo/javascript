@@ -12,10 +12,39 @@
     <script>
       /**函数体预先进行解析，而函数内的东西则在执行的时候才会去解析*/
         /* 
-            微任务==>每个任务流最后执行==>Promise的then或者catch方法中的回调函数，await
-            宏任务==>下一个任务列的最前面执行
+            微任务（micro task）==>每个任务流最后执行==>Promise的then或者catch方法中的回调函数，await
+            process.nextTick(nodejs)，nodejs提供的注册微任务的方法
+            MutationObserver，DOM变动事件，如click监听
+            Promise.then/catch/finally，为Promise注册的回调函数
+
+            宏任务（macro task）==>下一个任务列的最前面执行
+            网络I/O，如ajax事件
+            setTimeout/setInterval/setImmediate(nodejs)等定时器任务
+            requestAnimationFrame，请求动画帧
+
+            因为js引擎只有在微任务队列为空时才会处理宏任务队列
 
         */
+
+        //异步示例
+        // console.log('程序开始!');
+
+        // // 异步任务1
+        // setTimeout(() => { 
+        //   console.log('这是一个定时器任务！');
+        // }, 0);
+        // // 异步任务2
+        // axios.get('xxx').then(res => {
+        //   console.log('这是一个ajax任务！');
+        // });
+        // // 异步任务3
+        // Promise.resolve().then(() => {
+        //   console.log('这是一个promise回调任务！');
+        // });
+
+        // console.log('程序结束！');
+
+        
 
         /** console.log(1);
          console.log(2);
@@ -171,6 +200,8 @@
         // console.log("d")
     </script>
 
+
+<!-- 比如当前js进程已经在处理宏任务队列了，而你又向微任务队列推送了一个函数，那么它将无法在本次循环周期执行，只能在js引擎进入下个循环周期时才会被执行。 -->
 
 <script>
   // 微任务

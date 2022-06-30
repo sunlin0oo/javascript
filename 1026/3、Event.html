@@ -72,7 +72,7 @@
             console.log(e)
             // e.bubbles 触发事件时是否允许冒泡   只读---抛发情况下为false
             // e.cancelBubble=false IE8以下支持  可读可写 等同于e.stopPropagation(); 阻止事件冒泡
-            // e.cancelable 只读  如果是false  这个事件不能被e.preventDefault()取消其默认行为，如果是true，可以被取消--判断是否可以使用e.preventDefault();
+            // e.cancelable 只读  如果是false  这个事件不能被e.preventDefault()取消其默认行为，如果是true，可以被取消--判断是否可以使用e.preventDefault();什么元素有默认行为呢？如链接<a>，提交按钮<input type=”submit”>等
             // e.currentTarget 只读 当前事件侦听的对象 与this相同
             // e.defaultPrevented 只读  是否调用了e.preventDefault();
             // e.eventPhase  只读 当前事件流处于第几个阶段 0 无事件  1 捕获  2 目标  3 冒泡
