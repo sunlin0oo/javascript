@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var root={
+        left:{
+            value:2,
+            left:{
+                value:4,
+                left:{
+                    value:8,
+                    left:null,
+                    right:null
+                },
+                right:{
+                    value:9,
+                    left:null,
+                    right:null
+                }
+            },
+            right:{
+                value:5,
+                left:{
+                    value:10,
+                    left:null,
+                    right:null
+                },
+                right:{
+                    value:11,
+                    left:null,
+                    right:null
+                }
+            }
+        },
+        right:{
+            value:3,
+            left:{
+                value:6,
+                left:{
+                    value:12,
+                    left:null,
+                    right:null
+                },
+                right:{
+                    value:13,
+                    left:null,
+                    right:null
+                }
+            },
+            right:{
+                value:7,
+                left:{
+                    value:14,
+                    left:null,
+                    right:null
+                },
+                right:{
+                    value:15,
+                    left:null,
+                    right:null
+                }
+            }
+        },
+        value:1
+    }
+
+        // 前序遍历
+        var preorderTraversal = function(root) {
+            let result = [];
+            function preorder(node){
+                if(node===null) return
+                result.push(node.value);
+                preorder(node.left);
+                preorder(node.right); 
+            }
+            preorder(root);
+            return result;
+        }
+        // 中序遍历
+        var inorderTraversal = function(root) {
+            let result = [];
+            function inorder(node){
+                if(node===null) return
+                inorder(node.left);
+                result.push(node.value);
+                inorder(node.right); 
+            }
+            inorder(root);
+            return result;
+        }
+        // 后序遍历
+        var postorderTraversal = function(root) {
+            let result = [];
+            function postorder(node){
+                if(node===null) return
+                postorder(node.left);
+                postorder(node.right);
+                result.push(node.value);
+            }
+            postorder(root);
+            return result;
+        }
+    </script>
+</body>
+</html>

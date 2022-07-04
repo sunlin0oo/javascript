@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 广度优先搜索
+        var levelOrder = function(root) {
+            let result = [];
+            if (!root) {
+                return result;
+            }
+            let nodeMap = new Map();
+            // 代表层级
+            let index = 1;
+            helper(nodeMap,index,root);
+            for(var value of nodeMap.values()){
+                result.push(value);
+            }
+            return result;
+        };
+
+        var helper = function(nodeMap,index,node){
+            // index作为层去
+            if(!nodeMap.has(index)){
+                let arrNode = [node.val];
+                nodeMap.set(index,arrNode)
+            }else{
+                nodeMap.get(index).push(node.val);
+            }
+            if(node.left) helper(nodeMap,index+1,node.left);
+            if(node.right) helper(nodeMap,index+1,node.right);
+        }
+
+    </script>
+</body>
+</html>

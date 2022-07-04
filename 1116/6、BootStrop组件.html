@@ -8,24 +8,25 @@
     <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 <body>
-   <!-- <div class="btn-group">
+    <!-- <div class="btn-group">
        <button class="btn btn-default">1</button>
        <button class="btn btn-default">2</button>
        <button class="btn btn-default">3</button>
-   </div>
+   </div> -->
 
-   <ul class="nav nav-tabs">
+   <!-- 导航切换 -->
+   <!-- <ul class="nav nav-tabs">
        <li class="active"><a href="#">Home</a></li>
        <li><a href="#">Shop</a></li>
        <li><a href="#">Contact</a></li>
-   </ul> -->
-   <script>
+   </ul>  -->
+   <!-- <script>
     //    $("ul").click(function (e){
     //        if(e.target.nodeName!=="A")return;
     //        $(".active").removeClass("active");
     //        $(e.target).parent().addClass("active");
     //    })
-   </script>
+   </script> -->
 
    <!-- <ul class="breadcrumb">
        <li><a href="#">A</a></li>
@@ -35,13 +36,15 @@
    </ul> -->
 
 
-<!-- 标签 -->
-   <ul class="breadcrumb">
+<!-- 标签 路径地址-->
+   <!-- <ul class="breadcrumb">
 
    </ul>
+
 <script>
        var str="C:/game/box/boom.exe";
        createMenu(str);
+       console.log(str.split("/"));
       function createMenu(str){
           $(".breadcrumb").html(str.split("/").reduce((v,t,i,arr)=>{
               if(i<arr.length-1) v+=`<li><a href="#">${t}</a></li>`;
@@ -54,10 +57,10 @@
           var s=str.split("/").slice(0,index+1).join("/");
           createMenu(s);
       }
-</script>
+</script> -->
 
 
-<nav>
+<!-- <nav>
    <ul class="pagination">
        <li><a href="#" class="left">&laquo;</a></li>
        <li class="active"><a href="#">1</a></li>
@@ -77,6 +80,9 @@
        function  clickHandler(e){
            if(e.target.nodeName!=="A") return;
            if(e.target.className==="left"){
+            // $(".active").prev()[0]是DOM对象
+            // console.log("prev()[0]",$(".active").prev());ClassName=active的前一个兄弟元素
+            // console.log("e.target.parentElement",e.target.parentElement);
                if(e.target.parentElement===$(".active").prev()[0]) return;
                $(".active").removeClass("active").prev().addClass("active");
            }else if(e.target.className==="right"){
@@ -89,11 +95,9 @@
            var num=$(".active").text();
            console.log(num);
        }
-</script>
+</script> -->
 
-
-
-<div class="btn-group">
+<!-- <div class="btn-group">
    <button class="btn btn-default">15</button>
    <button class="btn btn-default">20</button>
    <button class="btn btn-default">30</button>
@@ -125,6 +129,7 @@
 </div>
 <script>
        var arr=[];
+       //每页显示的数据
        var pageNum=20;
        for(var i=0;i<300;i++){
            arr.push({id:1000+i,name:"商品"+i,price:2000+i,num:1})
@@ -169,18 +174,21 @@
 
        function createTable(pos){
           var list= arr.slice((pos-1)*pageNum,pos*pageNum);
+          // t这里指的是每一条数据信息
+            // console.log(Object.keys(t)) 获取到每一个数组中的每一个key
            $("table>tbody").html(list.reduce((v,t)=>{
                return v+`<tr>${Object.keys(t).reduce((value,item)=>{
                    return value+`<td>${t[item]}</td>`;
                },"")}</tr>`
            },""))
        }
-</script>
+</script> -->
 
 
 
-<button class="btn btn-default" data-toggle="modal" data-target="#my-modal">open</button>
-<div class="modal fade" id="my-modal">
+<!-- <button class="btn btn-default" data-toggle="modal" data-target="#my-modal">open</button> -->
+<!-- data-target="#my-modal" 对应下面的id="my-modal" -->
+<!-- <div class="modal fade" id="my-modal">
    <div class="modal-dialog">
        <div class="modal-content">
            <div class="modal-header">
@@ -193,6 +201,7 @@
                    <br>
                    <br>
                    <br>
+
                    <form id="formA" action="#" class="form-horizontal">
                        <div class="form-group has-feedback">
                            <label class="control-label col-xs-3">用户名:</label>
@@ -217,6 +226,7 @@
 
            </div>
            <div class="modal-footer">
+               //按钮提交对应上面的表单formA
                <button class="btn btn-success" data-dismiss="modal" form="formA">关闭</button>
                <button class="btn btn-danger">注册</button>
            </div>
@@ -244,7 +254,7 @@
            }
        }
 
-   </script>
+   </script> -->
 
 
 
