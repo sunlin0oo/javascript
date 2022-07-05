@@ -10,13 +10,13 @@
 <body>
     <script>
 
-     var d = Symbol();
-      var e = Symbol();
-      var ss = { a: 1 };
-      var date = new Date();
-      var divs=document.createElement("div");
-      divs.setAttribute("a","3");
-      date.setFullYear(2022);
+    var d = Symbol();
+    var e = Symbol();
+    var ss = { a: 1 };
+    var date = new Date();
+    var divs=document.createElement("div");
+    divs.setAttribute("a","3");
+    date.setFullYear(2022);
 
        
       var obj = {
@@ -171,9 +171,13 @@
     // var o=fn(0);
     // console.log(o)
 
-
-   /*  function cloneObject(source,target){
+    //if(target===undefined) target=new source.constructor();类似于
+    // var a = new [12,3].constructor();//实例了一个新数组，若是对象则实例了一个新对象
+   /**source是源对象，target目标对象
+    *   function cloneObject(source,target){
+        //source的构造函数
         if(target===undefined) target=new source.constructor();
+        //获取到所有的Names属性==>key
         var names=Object.getOwnPropertyNames(source).concat(Object.getOwnPropertySymbols(source));
         for(var i=0;i<names.length;i++){
             switch(typeof source[names[i]]){
@@ -201,17 +205,25 @@
 // var date1=new Date(date);
 // console.log(date1);
     // console.log(obj);
+
  function cloneObject(source,target){
+  // 判断source类型
         if(target===undefined){
+          // HTMLELEMENT继承于element继承于node
+          // 判断标签类
             if(Node.prototype.isPrototypeOf(source)){
                 target=document.createElement(source.nodeName);
+                // 样式的复制
                 target.style=source.style.cssText;
             }else if(source.constructor===Uint8Array){
                 target=new source.constructor(Array.from(source));
             }else if(source.constructor===Date || source.constructor===RegExp || source.constructor===Set || source.constructor===Map){
                 target=new source.constructor(source);
             }else if(source.constructor===Function){
+                // 取小括号中的第一个==>arg参数
                 var arg=source.toString().match(/\((.*?)\)/)[1];
+                // content语句内容
+                // replace(/\n|\r/g,"")换行处理
                 var content=source.toString().replace(/\n|\r/g,"").match(/\{(.*)\}/)[1];
                 target=new Function(arg,content)
             }else {
@@ -221,6 +233,7 @@
         var names=Object.getOwnPropertyNames(source).concat(Object.getOwnPropertySymbols(source));
         for(var i=0;i<names.length;i++){
             if(names[i]==="prototype") continue;
+            // 获取属性的描述对象==>找到value
             var desc=Object.getOwnPropertyDescriptor(source,names[i]);
            if((typeof desc.value==="object" && desc.value!==null) || typeof desc.value==="function"){
               var o=cloneObject(desc.value)

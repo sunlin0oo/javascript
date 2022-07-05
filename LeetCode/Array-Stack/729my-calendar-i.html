@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        // var MyCalendar = function() {
+        //     this.books = []
+        // };
+
+        // /** 
+        //  * @param {number} start 
+        //  * @param {number} end
+        //  * @return {boolean}
+        //  */
+        // MyCalendar.prototype.book = function(start, end) {
+        //     for(let arr of this.books){
+        //         let l = arr[0],r = arr[1];
+        //         if(start < r && end > l){
+        //             return false
+        //         }
+        //     }
+        //     this.books.push([start, end])
+        //     return true;
+        // };
+        // let start = 10;
+        // let end = 20;
+        // var obj = new MyCalendar();
+        // var param1 = obj.book(start,end);
+        // console.log(param1);
+        // let start1 = 15;
+        // let end1 = 30;
+        // var param2 = obj.book(start1,end1);
+        // console.log(param2);
+
+        import MyCalendar from "./js/729.js"
+        let start = 10;
+        let end = 20;
+        var obj = new MyCalendar();
+        var param1 = obj.book(start,end);
+        console.log(param1);
+        let start1 = 15;
+        let end1 = 30;
+        var param2 = obj.book(start1,end1);
+        console.log(param2);    
+
+    </script>
+</body>
+</html>

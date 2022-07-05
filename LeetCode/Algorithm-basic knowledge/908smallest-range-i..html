@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let nums = [1], k = 0;
+            let num = smallestRangeI(nums, k);
+            console.log(num);
+        }
+
+        function smallestRangeI(nums, k){
+            let max = 0,min = 10001;
+            nums.forEach(item=>{
+                if(max<item)max = item;
+                if(min>item)min = item;
+            })
+            // 如果maxNum-minNum≤2k，那么我们总可以将整数数组nums的所有元素都改为同一个整数，因此更改后的整数数组nums 的最低分数为 0。
+            // 如果maxNum-minNum>2k，那么更改后的整数数组nums 的最低分数为maxNum-minNum-2k
+            return ((max - min -2 * k)>=0)? max - min -2 * k : 0 ;
+        }
+    </script>
+</body>
+</html>
