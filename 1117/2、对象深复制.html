@@ -209,7 +209,7 @@
  function cloneObject(source,target){
   // 判断source类型
         if(target===undefined){
-          // HTMLELEMENT继承于element继承于node
+          // HTMLELEMENT继承于Document对象和Element对象继承于node
           // 判断标签类
             if(Node.prototype.isPrototypeOf(source)){
                 target=document.createElement(source.nodeName);

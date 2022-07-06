@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var maxDepth = function(root) {
+            if(!root) return 0;
+            let level = 1;
+            let maxlevel = helper(root,level);
+            return maxlevel;
+        };
+
+        var helper = function(node,level){
+            let maxDepth = 0;
+            let leftlevel =level;
+            let rightlevel =level;
+            if(!node) return 0;
+            // console.log("node.left::",node.left)
+            // console.log("node.right::",node.right)
+
+            if(node.left) leftlevel = helper(node.left,level+1);
+
+            // console.log("leftlevel:::",leftlevel);
+
+            if(node.right) rightlevel = helper(node.right,level+1);
+
+            // console.log("rightlevel:::",rightlevel);
+            maxDepth = Math.max(leftlevel,rightlevel);
+            return maxDepth;
+        }
+    </script>
+</body>
+</html>
