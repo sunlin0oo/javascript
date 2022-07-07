@@ -386,11 +386,12 @@
         //     console.log(arr[i],obj[arr[i]]);
         // }
 
-        // for(var i=0;i<arr.length;i++){
-        //     // 获取属性的描述对象
-        //     var disc=Object.getOwnPropertyDescriptor(obj,arr[i]);
-        //     console.log(arr[i],disc);
-        // }
+        for(var i=0;i<arr.length;i++){
+            // 获取属性的描述对象
+            var disc=Object.getOwnPropertyDescriptor(obj,arr[i]);
+            console.log(arr[i],disc);
+            console.log("disc.value",disc.value);
+        }
 
         //  w只能获取到所有字符串属性的描述对象
         // console.log(Object.getOwnPropertyDescriptors(obj))

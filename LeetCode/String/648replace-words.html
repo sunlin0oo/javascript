@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        init();
+
+        function init(){
+            let dictionary = ["cat","bat","rat"], sentence = "the cattle was rattled by the battery";
+            a = replaceWords(dictionary, sentence);
+            console.log(a);
+        }
+        // 哈希集合
+        // function replaceWords(dictionary, sentence){
+        //     array = sentence.split(" ");
+        //     const dictionarySet = new Set();
+        //     for(let root of dictionary){
+        //         dictionarySet.add(root);
+        //     }
+        //     let length = array.length;
+        //     for(let i =0;i<length;i++){
+        //         let word = array[i];
+        //         let wordLength = array[i].length;
+        //         for(let j=0;j<wordLength;j++){  
+        //             if(dictionarySet.has(word.substring(0,j+1))){
+        //                 array[i] = word.substring(0,j+1);
+        //                 break;
+        //             }
+        //         }
+        //     }
+        //     return array.join(" ")
+        // }
+
+//-----------------------------------------------------------------------
+        class Trie {
+                constructor(){
+                    this.children = new Map();
+                }
+        }
+        //字典树
+        function replaceWords(dictionary, sentence) {
+            const trie = new Trie();
+            // 构建前缀树
+            for(const word of dictionary){
+                // 词根插入前缀树
+                let cur = trie;
+                for(let i = 0;i<word.length;i++){
+                    const c = word[i];
+                    // console.log(c);
+                    if(!cur.children.has(c)){
+                        cur.children.set(c,new Trie());
+                        console.log("1::::",cur.children)
+                    }
+                    // 获取哈希表==>hash表叠加value.children.value.children
+                    cur = cur.children.get(c);
+                    // console.log("cur",cur)
+                }
+                // 特殊符号标记结尾
+                cur.children.set("#",new Trie());
+                console.log("2::::",cur.children)
+            }
+
+            const words = sentence.split(" ");
+            console.log(trie.children);
+            for(let i =0;i<words.length;i++){
+                words[i] = findRoot(words[i],trie);
+            }
+            return words.join(" ");
+        };
+
+        function findRoot(word, trie){
+            let root = '';
+            let cur = trie;
+            // console.log(cur.children);
+            for (let i = 0; i < word.length; i++) {
+                const c = word[i];
+                // 遇到结尾符号，返回此前遍历的词根
+                if (cur.children.has('#')) {
+                    return root;
+                }
+                //若不是则返回原来的单词
+                if (!cur.children.has(c)) {
+                    return word;
+                }
+                root += c;
+                cur = cur.children.get(c);
+                // console.log("findRoot::::",cur.children);
+            }
+            return root;
+        }
+    </script>
+</body>
+</html>

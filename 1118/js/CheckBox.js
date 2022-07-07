@@ -40,6 +40,7 @@ export default class CheckBox extends EventTarget{
         evt.label=this.label;
         this.dispatchEvent(evt);
     }
+    
     set checked(value){
         this._checked=value;
         if(value){
@@ -51,6 +52,7 @@ export default class CheckBox extends EventTarget{
     get checked(){
         return this._checked;
     }
+
     static setCss() {
         Utils.setCss(`
         .checkbox_css{

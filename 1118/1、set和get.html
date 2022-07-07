@@ -19,13 +19,15 @@
 <body>
     <div></div>
     <script>
+        // set get 设置值，改变效果，内容，条件等
         // var obj={
+        // set get需要有临时变量，来存储传入和传出的值
         //     _c:0,
         //     a:1,
         //     b:function(a){
         //         return a+1;
         //     },
-        //     // set 方法中有且仅有一个参数
+        //     // set 方法中有且仅有一个参数（必须要有）==>可以执行其他的语句
         //     set c(value){
         //         console.log("aaaa")
         //         this._c=value;
@@ -49,7 +51,7 @@
 
         // 希望通过赋值，并且存储数据，然后执行多条语句
 
-        // obj.c=10;//就是执行了obj中set c这个方法
+        // obj.c=10;//若有set get方法时:就是执行了obj中set c这个方法
 
         // console.log(obj.c);//就会调用get c这个方法
 
@@ -83,35 +85,53 @@
         // }
 
 
-        // 对已有的对象添加set和get 方法
-    //     var div=document.querySelector("div");
+    // 对已有的对象添加set和get 方法
+        // var div=document.querySelector("div");
 
+        // Object.defineProperty(div,"x",{
+        //     enumerable:true,
+        //     configurable:true,
+        //     // 写法1：
+        //     set(value){
+        //         // 去掉px==>parseInt:用于解析一个字符串，并返回一个整数。
+        //         this._x=parseInt(value);
+        //         this.style.left=/px/.test(String(value)) ? value : value+"px";
+
+        //     },
+        //     get(){
+        //         if(this._x===undefined) this._x=this.offsetLeft;
+        //         return this._x;
+        //     }
+        // })
+
+    //div对象添加x属性
     //    Object.defineProperty(div,"x",{
     //        enumerable:true,
     //        configurable:true,
+    //// 写法2：
     //         set:function(value){
     //             this._x=parseInt(value);
     //             this.style.left=/px/.test(String(value)) ? value : value+"px";
     //         },
     //         get:function(){
-    //            if(this._x===undefined) this._x=this.offsetLeft;
+    //             if(this._x===undefined) this._x=this.offsetLeft;
     //             return this._x;
     //         }
     //    })
       
     //    setInterval(function(){
+        // 等号右边先get，然后再set
+        // div.x = div.x + 1
     //         div.x++;
     //    },16);
 
 
 
     // 数据驱动显示
-
-    // 1、需要有一个临时变量来存储set赋值的结果，get返回的结果
-    //   临时变量不要被可枚举，也不能删除
-    // 2、set 和 get两个方法都需要成对出现，如果只写一个set，这个属性就是只写属性
+    // 1、set 和 get两个方法都需要成对出现，如果只写一个set，这个属性就是只写属性
     // 如果只写一个get，这个属性是只读属性
-    var obj={}
+
+    // var obj={}
     // Object.defineProperties(obj,{
     //     _a:{
     //         writable:true,
@@ -125,6 +145,8 @@
            
     //     }
     // })
+
+    
     // Object.defineProperties(obj,{
     //     _a:{
     //         writable:true,
@@ -138,14 +160,33 @@
     //     }
     // })
 
+    // 2、需要有一个临时变量来存储set赋值的结果，get返回的结果
+    //   临时变量不要被可枚举，也不能删除
+    // 设置临时的中间变量 
+    // var obj={}
+    // Object.defineProperties(obj,{
+    //     _a:{
+    //         writable:true,
+    //         value:0
+    //     },
+    //     a:{
+    //         enumerable:true,
+    //         set(value){
+    //             this._a=value;
+    //          get(){
+    //              return this._a;
+    //          }
+    //         },
+    //     }
+    // })
 
+    //临时变量不要被可枚举，也不能删除，故遍历不到，不暴露
     // for(var key in obj){
     //     console.log(key)
     // }
 
     // obj.a=10;
     // console.log(obj.a);
-
 
     // class Box{
     //     _num=0;
