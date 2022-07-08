@@ -21,10 +21,11 @@
     <script>
 
         var obj={}
-
+        //创建一个对象的代理，从而实现基本操作的拦截和自定义
         var p=new Proxy(obj,{
             set:function(o,key,value){
                 // o-->obj   key 设置属性  value设置的属性值
+                // 值变成正整数
                 value=~~value;
                 value=Math.abs(value);
                 o[key]=value;
@@ -40,14 +41,14 @@
         // obj就是源对象，p就是代理对象
         // obj有什么，p就有什么
         // p有什么，obj不一定有
-        p.a=1;
-        p.b=10;
-        obj.c=10;
-        p.d=100;
-        console.log(p,obj);
+        // p.a=1;
+        // p.b=10;
+        // obj.c=10;
+        // p.d=100;
+        // console.log(p,obj);
 
 
-        // p.a=10;//调用了代理的set方法  a就是key  10就是value
+        // p.a=10;//调用了代理的set方法  a就是key  10就是value，会针对所有属性
         // obj.a=10;//不会调用代理的set方法
         
         // p.a="a";
@@ -55,6 +56,7 @@
         // p.a=true;
         // p.b="s";
         // obj.c="f"
+        // 对某对象的属性需要处理某种事情时，则需要代理，
         // console.log(obj);
         // console.log(p.c);
         // console.log(obj.c);
@@ -102,7 +104,25 @@
         //     }
         // });
 
+        // var div = document.querySelector("div");
+        // var p = new Proxy(div,{
+        //     set:function(o,key,value){
+        //         if(!/^x$|^y$/.test(key)) return;
+        //         if(typeof value ==="number" || value.slice(-2) !=="px") value +="px";
+        //         if(key === "x"){
+        //             o.style.left = value
+        //         }else if(key === "y"){
+        //             o.style.right = value
+        //         }
 
+
+        //     },
+        //     get:function(o,key){
+        //         if(!/^x$|^y$/.test(key)) return;
+        //         if(key === "x") return o.offsetLeft;
+        //         if(key === "y") return o.offsetTop;
+        //     },
+        // })
         // p.x=200;
         // div的left就变成200
         // p.y=200;
@@ -114,7 +134,7 @@
         // p.x++;  p.x=p.x+1;
         // p.x++;
 
-
+        //删除属性
         // deleteProperty
         // var obj={a:1,b:2};
         // var p=new Proxy(obj,{
@@ -136,6 +156,7 @@
         // o1.d=10;23456
         // var p=new Proxy(o1,{
         //    getPrototypeOf:function(o){
+            // 原型链 
         //        var o2=Object.getPrototypeOf(o)
         //        o2.e=10;
         //         return o2;
