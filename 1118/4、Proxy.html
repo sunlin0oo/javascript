@@ -181,10 +181,13 @@
             // var obj={a:1,b:2};
 
             // var p=new Proxy(obj,{
+            // 是否可以扩展
             //     isExtensible(obj){
             //         return Object.isExtensible(obj);
             //     },
+            // 禁止扩展
             //     preventExtensions(obj){
+                // Object.seal()方法用于密封一个对象，即将对象设置为不可扩展，同时将对象的所有自有属性都设置为不可配置（包括Symbol值的属性）。 冰冻！
             //         Object.seal(obj);
             //         return true;
             //     }
@@ -212,7 +215,7 @@
             //     }
             // });
 
-
+            //对于拿到值及逆行修改
             // var p=new Proxy(obj,{
             //     getOwnPropertyDescriptor(o,key){
             //         var desc=Object.getOwnPropertyDescriptor(o,key);
@@ -220,7 +223,7 @@
             //         return desc;
             //     }
             // });
-
+            ////两个结果不同，代理结果与原结果不同
             // var desc=Object.getOwnPropertyDescriptor(p,"a");
             // var desc1=Object.getOwnPropertyDescriptor(obj,"a");
             // console.log(desc1)
@@ -229,9 +232,11 @@
 
             // defineProperty
             // var obj={};
+            // //只能做是否定义的操作
             // var p=new Proxy(obj,{
             //     defineProperty(o,key,desc){
             //         if(key==="a") return true;
+            // //不要设置
             //         Object.defineProperty(o,key,desc);
             //         return true;
             //     }
@@ -250,7 +255,7 @@
 
 
             // var obj={a:1,b:2,c:3};
-            // Object.defineProperty(obj,"d",{
+            // Object.defineProperty(obj,"d",{ 
             //     value:10
             // })
             // var p=new Proxy(obj,{
@@ -259,7 +264,16 @@
             //         return key in o
             //     }
             // })
+             // console.log("a" in p);//检查a是否是p的属性 true
 
+
+            // var p=new Proxy(obj,{
+            //     has(o,key){
+            //         console.log(key)
+            //     }
+            // })
+            
+            // console.log("a" in p);//检查a是否是p的属性 false
 
 
             // ownKeys
@@ -268,16 +282,17 @@
             // var obj={a:1,b:2,c:3,[s]:10};
             // var p=new Proxy(obj,{
             //     ownKeys(o){
+            //// return Object.getOwnPropertyNames(o)
             //         return Reflect.ownKeys(o);
             //     }
             // })
 
         //    var names=Object.getOwnPropertyNames(p)
-        // var names=Object.getOwnPropertySymbols(p);
+        //    var names=Object.getOwnPropertySymbols(p);
         //    console.log(names)
+ 
 
-
-        // 获取对象所有的属性
+        //   获取对象所有的属性
         //   var names=Reflect.ownKeys(obj)
         //   console.log(names)
             
@@ -295,11 +310,14 @@
         // }
 
         // var p=new Proxy(fn,{
+            // //f:fn,this.Arg: 替换this,参数对象
         //     apply(f,thisArg,argArray){
         //         // if(thisArg===null) thisArg={a:1,b:2};
+        ////f.length === 形参的数量
         //         if(!argArray || argArray.length<f.length){
         //             var len=argArray.length;
         //             argArray.length=f.length;
+        // //           填充
         //             argArray.fill(0,len);
         //         }
         //         fn1();

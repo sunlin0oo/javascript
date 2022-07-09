@@ -6,6 +6,7 @@ export default class CheckBox extends EventTarget{  //导出模块
     label;
     static cssBool = false;
     static CHECKED_CHANGE_EVENT="checked_change_event";
+    // 创造构造函数必须要有的参数
     constructor(label,name){
         super()
         this.name = name;
@@ -17,6 +18,7 @@ export default class CheckBox extends EventTarget{  //导出模块
         //
         //侦听主元素
         this.elem.addEventListener("click",e=>this.clickHandler(e));
+        // 控制CSS格式创建一次
         if(CheckBox.cssBool) return;
         CheckBox.setCss();
         CheckBox.cssBool = true;

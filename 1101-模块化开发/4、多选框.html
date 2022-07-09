@@ -81,6 +81,7 @@
         var hobby=["游泳","跑步","电影","音乐","舞蹈"];
         hobby.forEach(item=>{
             let ck=new CheckBox(item,"hobby");
+            // 侦听事件
             ck.addEventListener(CheckBox.CHECKED_CHANGE_EVENT,checkedHandler);
             ck.appendTo(".div1");
         })

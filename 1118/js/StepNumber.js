@@ -2,6 +2,7 @@ import Component from "./Component.js";
 
 export default class StepNumber extends Component{
     input;
+    // 暂存变量
     _step=1;
     ids;
     // static STEP_CHANGE_EVENT="step_change_event";

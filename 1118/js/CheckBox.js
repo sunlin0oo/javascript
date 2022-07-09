@@ -2,6 +2,7 @@ import Utils from "./Utils.js";
 export default class CheckBox extends EventTarget{
     elem;
     name;
+    // 变更_checked作为中间变量
     _checked=false;
     label;
     static cssBool = false;
@@ -14,6 +15,7 @@ export default class CheckBox extends EventTarget{
         this.elem.className = "checkbox_css clear";
         this.elem.setAttribute("name",name);
         this.render(label);
+        // 侦听主元素
         this.elem.addEventListener("click",e=>this.clickHandler(e));
         if (CheckBox.cssBool) return;
         CheckBox.setCss();
@@ -30,14 +32,19 @@ export default class CheckBox extends EventTarget{
         `;
     }
     clickHandler(e){
+        // 这里先获取this.checked，然后!this.checked去执行set
         this.checked=!this.checked;
         this.dispatch();
     }
+    // 抛发事件：触发事件处可以接收到数据，从而进行改变
     dispatch(){
+        // console.log("this",this)
         var evt=new Event(CheckBox.CHECKED_CHANGE_EVENT);
+        // console.log("赋值前",JSON.stringify(evt));
         evt.checked=this.checked;
         evt.name=this.name;
         evt.label=this.label;
+        // console.log("赋值后",JSON.stringify(evt));
         this.dispatchEvent(evt);
     }
     

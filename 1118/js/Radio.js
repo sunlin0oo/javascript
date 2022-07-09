@@ -7,6 +7,7 @@ export default class Radio extends CheckBox{
         this.checked=false;
     }
     set checked(value){
+        // 执行超类的set get方法
         super.checked=value;
        Object.assign(this.elem.firstElementChild.style,{
            width:"18px",

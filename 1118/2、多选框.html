@@ -8,32 +8,36 @@
 </head>
 <body>
     <script type="module">
-        // import CheckBox from "./js/CheckBox.js";
+        import CheckBox from "./js/CheckBox.js";
 
-        // var ck=new CheckBox("全选");
-        // ck.appendTo("body");
-        // ck.addEventListener(CheckBox.CHECKED_CHANGE_EVENT,checkChangeHandler);
+        var ck=new CheckBox("全选");
+        ck.appendTo("body");
+        ck.addEventListener(CheckBox.CHECKED_CHANGE_EVENT,checkChangeHandler);
         
-        // var arr=["游戏","游泳","看书","听音乐","旅行"];
-        // var list=[];
-        // arr.forEach(item=>{
-        //     var ck1=new CheckBox(item);
-        //     ck1.appendTo("body");
-        //     ck1.addEventListener(CheckBox.CHECKED_CHANGE_EVENT,checkChangeHandler)
-        //     list.push(ck1);
-        // })
+        var arr=["游戏","游泳","看书","听音乐","旅行"];
+        // 存放ck1
+        var list=[];
+        arr.forEach(item=>{
+            var ck1=new CheckBox(item);
+            ck1.appendTo("body");
+            ck1.addEventListener(CheckBox.CHECKED_CHANGE_EVENT,checkChangeHandler)
+            list.push(ck1);
+        })
 
-        // function checkChangeHandler(e){
-        //     if(this===ck){
-        //         list.forEach(function(ck1){
-        //             ck1.checked=ck.checked;
-        //         });
-        //     }else{
-        //         ck.checked=list.every(t=>t.checked);
-        //     }
-        // }
+        function checkChangeHandler(e){
+            // 点击全选按钮
+            if(this===ck){
+                list.forEach(function(ck1){
+                    // 通过set get来改变事件状态
+                    ck1.checked=ck.checked;
+                });
+            }else{
+                // 当每一个都选中为真时，全选按钮会触发
+                ck.checked=list.every(t=>t.checked);
+            }
+        }
 
-
+        //单选框
         // import Radio from "./js/Radio.js";
 
         // var arr=["游戏","游泳","看书","听音乐","旅行"];
