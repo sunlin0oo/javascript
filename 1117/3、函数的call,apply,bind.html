@@ -37,10 +37,9 @@
             第一个参数如果传入的是undefined或者null，
             非严格模式时，this指向window
             严格模式时，传入什么this指向什么
-            
+
             bind 给函数内部绑定this的指向，并且返回新函数
             执行合格新函数后，里面的this都是指向绑定的元素
-
 
             call,apply区别==>替换函数中的this指向
             在于执行函数时，传入原函数的参数方式不同
@@ -57,13 +56,36 @@
 
         // fn.apply(10,document.querySelectorAll("div"));
 
+    //     function test(m, n, p, q) { 
+	//       var arg = Array.prototype.slice.call(arguments, 1); 
+	//       // var arg = [].slice.call(arguments, 1); 
+	      
+	//       // apply() 与 call() 是一样的，区别只是传参的形式（即第二个参数不同）
+	//       // 前者需要把传给 slice() 的参数以数组或类数组的形式传入，如下：
+	//       // var arg = Array.prototype.slice.apply(arguments, [1]); 
+	//       alert(arg); 
+	//  } 
+	//  test("a","b","c","d");	// b,c,d
 
-    //   var divs=Array.prototype.slice.apply(document.querySelectorAll("div"));
-    //   console.log(divs)
-        var arr=[10,20,29,42,11]
-        arr1=Array.prototype.slice.apply(arr)
-        arr.push(1,2)
-        console.dir(Array);
+    //  	// 有 length 属性，修改成功
+	// var obj = {0:'hello', 1:'world', length:2};
+	// console.log(Array.prototype.slice.call(obj, 0));//["hello", "world"]
+	
+	// // 没有 length 属性，修改失败
+	// var obj = {0:'hello',1:'world'};
+	// console.log(Array.prototype.slice.call(obj, 0));//[]
+
+
+
+    ////Array.prototype.slice.apply它能将函数的参数对象转化为一个真正的数组     
+    //     var divs=Array.prototype.slice.apply(document.querySelectorAll("div"));
+    //     console.log(divs)
+    //     var arr=[10,20,29,42,11]
+    //     // Array.prototype 属性表示 Array 构造函数的原型
+    //     arr1=Array.prototype.slice.apply(arr)
+    //     arr.push(1,2)
+    //     console.dir(Array);
+
     // var max=Math.max.apply(null,arr);
      
     // console.log(max);

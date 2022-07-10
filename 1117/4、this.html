@@ -51,36 +51,36 @@
             // var obj={
             //     a:1,
             //     b:()=>{
-            //         // this--->window
+            //         // this==>window
             //         console.log(this)
             //     }
             // }
 
 
-
+            // "use strict"
             // var o={
             //     a:1,
             //     b:function(){
-            //         console.log(this)
+            //         console.log("1",this)
             //         var fn=()=>{
-            //             // 遵从3-->箭头函数
-            //             console.log(this);
+            //             // 遵从3==>箭头函数
+            //             console.log("2",this);
             //         }
             //         fn();
 
             //         function fns(){
-            //             // 遵从2-->函数指向
-            //             console.log(this);
+            //             // 遵从2==>函数指向
+            //             console.log("3",this);
             //         }
             //         fns();
             //         this.d();//this指向o
             //     },
             //     c:()=>{
             //          // 遵从3-->箭头函数
-            //         console.log(this);
+            //         console.log("4",this);
             //     },
             //     d:function(){
-            //         console.log(this)
+            //         console.log("5",this)
             //     }
             // }
             
@@ -113,7 +113,7 @@
 
        
         
-      // 2）、这种通过别函数内执行当前回调函数中 2-->函数
+      // 2）、这种通过别函数内执行当前回调函数中 2==>函数
             // function fn(){
             //     console.log(this)
             // }
@@ -130,7 +130,7 @@
         //     console.log(this);
         // }
 
-        // 递归函数  遵从2->函数
+        // 递归函数  遵从2==>函数
         // var i=0;
         // function fn(){
         //     console.log(this)
@@ -153,8 +153,8 @@
         // obj.c(obj.b);
 
 
-        // 3）、默认状态数组部分遍历方法中回调函数中this 2-->函数
-        // 数组的部分遍历方法中如果在最后一个参数中给入内容，那么这个函数中this将会被指向这个给入的内容(有thisArg参数)
+        // 3）、默认状态数组部分遍历方法中回调函数中this 2===>函数
+        // 数组的部分遍历方法中如果在最后一个参数中给入内容，那么这个函数中this将会被指向这个给入的内容(有带thisArg参数)
         // var arr=[1,2,3,4];
         // arr.forEach(function(){
         //     console.log(this);
@@ -242,11 +242,11 @@
         // 构造函数中的this指向实例当前类所产生的新的实例对象
         class Box{
            constructor(){
-               console.log(this)
+               console.log("constructor",this)
            }
             // 类中实例化方法中this指向,谁执行该方法，this指向谁
            play(){
-               console.log(this)
+               console.log("play",this)
            }
            // 类中静态方法中this执行该类或者该类的构造函数
            static run(){
