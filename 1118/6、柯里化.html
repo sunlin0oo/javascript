@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        // currying
+        // currying==>分步分时，得出结果。
         
 
         // function getSum(){
@@ -29,12 +29,13 @@
     //    console.log(s)
 
 
-
+            // ES6
             // function currying(fn){
             //     var arr=[];
             //     return function(){
             //         if(arguments.length!==0){
             //             arr=arr.concat(Array.from(arguments));
+            //              返回函数
             //             return arguments.callee;
             //         }else{
             //             var value=fn(...arr);
@@ -44,11 +45,17 @@
             //     }
             // }
 
+            // ES5
+            function currying(fn){
+
+            }
+
 
             // function currying(fn){
             //     var arr=[];
             //     return function(){
             //         if(arguments.length!==0){
+            // 记住！用于连接两个或多个数组
             //             arr=[].concat.apply(arr,arguments);
             //             return arguments.callee;
             //         }else{
@@ -61,8 +68,9 @@
 
 
 
-
+            //将currying里面的函数返回给getSum
             // var getSum=currying(function(){
+            // 求和 
             //     var s=Array.from(arguments).reduce((v,t)=>v+t);
             //     return s;
             // });

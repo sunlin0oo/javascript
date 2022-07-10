@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var hasPathSum = function(root, targetSum) {
+            if(!root)return;
+            let res = false;
+            var dfs = function(node,sum){
+                if(sum === targetSum && !node.left && !node.right){
+                    res = true;
+                    return;
+                }
+                if(node.left) dfs(node.left,sum+node.right.val);
+                if(node.right) dfs(node.right,sum+node.left.val);
+            }
+            def(root,root.val);
+            return res;
+        }
+    </script>
+</body>
+</html>

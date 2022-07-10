@@ -16,7 +16,7 @@ export default class CheckBox extends EventTarget{  //导出模块
         this.elem.className  =  "checkbox_css clear";
         this.render(label);
         //
-        //侦听主元素
+        //侦听主元素==>触发点击事件==>再进行点击元素事件的抛发==>抛发的数据传给点击处进行改变
         this.elem.addEventListener("click",e=>this.clickHandler(e));
         // 控制CSS格式创建一次
         if(CheckBox.cssBool) return;
