@@ -20,36 +20,38 @@
     <div></div>
     <script>
 
-        var obj={}
-        //创建一个对象的代理，从而实现基本操作的拦截和自定义
-        var p=new Proxy(obj,{
-            set:function(o,key,value){
-                // o-->obj   key 设置属性  value设置的属性值
-                // 值变成正整数
-                value=~~value;
-                value=Math.abs(value);
-                o[key]=value;
-            },
-            get:function(o,key){
-                var value=o[key];
-                value=~~value;
-                value=Math.abs(value);
-                return value;
-            }
-        });
+        // var obj={}
+        // //创建一个对象的代理，从而实现基本操作的拦截和自定义
+        // var p=new Proxy(obj,{
+        //     set:function(o,key,value){
+        //         // if(key === "a") return //阻断设置
+        //         // o==>obj   key 设置属性  value设置的属性值
+        //         // 值变成正整数
+        //         value=~~value;
+        //         value=Math.abs(value);
+        //         o[key]=value;
+        //     },
+        //     get:function(o,key){
+        //         var value=o[key];
+        //         value=~~value;
+        //         value=Math.abs(value);
+        //         return value;
+        //     }
+        // });
 
         // obj就是源对象，p就是代理对象
         // obj有什么，p就有什么
-        // p有什么，obj不一定有
+        // p有什么，obj不一定有==>默认设置回去
         // p.a=1;
         // p.b=10;
         // obj.c=10;
         // p.d=100;
-        // console.log(p,obj);
 
 
         // p.a=10;//调用了代理的set方法  a就是key  10就是value，会针对所有属性
         // obj.a=10;//不会调用代理的set方法
+        // console.log(p);
+        // console.log(obj.d);
         
         // p.a="a";
         // p.a=-100;
@@ -84,25 +86,6 @@
 
         // 不能在div中增加x,y属性，使用代理设置x++和y++，
         // 或者设置x的值是某个数字，这个div的left和top发生变化
-
-
-        // var div=document.querySelector("div");
-        // var p=new Proxy(div,{
-        //     set:function(o,key,value){
-        //         if(!/^x$|^y$/.test(key))return;
-        //         if(typeof value==="number" || value.slice(-2)!=="px") value+="px";
-        //         if(key==="x"){
-        //             o.style.left=value;
-        //         }else if(key==="y"){
-        //             o.style.top=value;
-        //         }
-        //     },
-        //     get:function(o,key){
-        //         if(!/^x$|^y$/.test(key))return o[key];
-        //         if(key==="x") return o.offsetLeft;
-        //         if(key==="y") return o.offsetTop;
-        //     }
-        // });
 
         // var div = document.querySelector("div");
         // var p = new Proxy(div,{
@@ -156,7 +139,7 @@
         // o1.d=10;23456
         // var p=new Proxy(o1,{
         //    getPrototypeOf:function(o){
-            // 原型链 
+        //// 原型链
         //        var o2=Object.getPrototypeOf(o)
         //        o2.e=10;
         //         return o2;
@@ -176,7 +159,7 @@
     // console.log(o1);
 
 
-            
+
     // 是否可以扩展和设置不扩展
             // var obj={a:1,b:2};
 
@@ -200,9 +183,6 @@
             // console.log(Object.isExtensible(p))
           
 
-      
-
-
             // getOwnPropertyDescriptor
             // var obj={};
             // Object.defineProperties(obj,{
@@ -223,6 +203,7 @@
             //         return desc;
             //     }
             // });
+            
             ////两个结果不同，代理结果与原结果不同
             // var desc=Object.getOwnPropertyDescriptor(p,"a");
             // var desc1=Object.getOwnPropertyDescriptor(obj,"a");

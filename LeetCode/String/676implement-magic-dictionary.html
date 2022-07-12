@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var MagicDictionary = function() {
+        };
+
+        /** 
+         * @param {string[]} dictionary
+         * @return {void}
+         */
+        MagicDictionary.prototype.buildDict = function(dictionary) {
+            this.words = dictionary;
+        };
+
+        /** 
+         * @param {string} searchWord
+         * @return {boolean}
+         */
+        MagicDictionary.prototype.search = function(searchWord) {
+            wordsLength = this.words.length;
+            searchLength = searchWord.length;
+            for(let i = 0;i<wordsLength;i++){
+                console.log(searchLength === this.words[i].length)
+                let target = 0;
+                if(searchLength === this.words[i].length){
+                    word = this.words[i].split("")
+                    console.log(word);
+                    let index = 0;
+                    for(let val of searchWord){
+                        console.log(word[index],val);
+                        if(word[index] !== val){
+                            target++
+                        }
+                        index++;
+                    }
+                    
+                }
+                if(target === 1) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        /**
+         * Your MagicDictionary object will be instantiated and called as such:
+         * var obj = new MagicDictionary()
+         * obj.buildDict(dictionary)
+         * var param_2 = obj.search(searchWord)
+         */
+         let dictionary = ["hello", "leetcode"];
+         let searchWord = "hello";
+         var obj = new MagicDictionary()
+         obj.buildDict(dictionary);
+         var param_2 = obj.search(searchWord)
+         console.log(param_2);
+    </script>
+</body>
+</html>

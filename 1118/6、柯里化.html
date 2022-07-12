@@ -20,73 +20,72 @@
         // setTimeout(function(){
         //     getSum(7,8)
         // },1000);
+
         // setTimeout(function(){
         //     var s=getSum();
         //     console.log(s);
         // },2000);
 
-    //    var s=getSum(1,2,3)(4,5)(6,7,8)(9,10)()
-    //    console.log(s)
+        // ES6
+        // function currying(fn){
+        //     var arr=[];
+        //     return function(){
+        //         if(arguments.length!==0){
+        //             arr=arr.concat(Array.from(arguments));
+        //              //返回函数==>在哪一个函数中运行，它就代表哪个函数。 一般用在匿名函数中。
+        //             return arguments.callee;
+        //         }else{
+        //             var value=fn(...arr);
+        //             arr.length=0;
+        //             return value;
+        //         }
+        //     }
+        // }
 
+        // ES5
 
-            // ES6
-            // function currying(fn){
-            //     var arr=[];
-            //     return function(){
-            //         if(arguments.length!==0){
-            //             arr=arr.concat(Array.from(arguments));
-            //              返回函数
-            //             return arguments.callee;
-            //         }else{
-            //             var value=fn(...arr);
-            //             arr.length=0;
-            //             return value;
-            //         }
-            //     }
-            // }
-
-            // ES5
-            function currying(fn){
-
+        function currying(fn){
+            var arr=[];
+            return function(){
+                if(arguments.length!==0){
+                    //记住！用于连接两个或多个数组
+                    console.log(arr);
+                    arr=[].concat.apply(arr,arguments);
+                    // 添加arguments.callee 在哪一个函数中运行，它就代表哪个函数可以进行连续括号
+                    return arguments.callee;
+                }else{
+                    // getsum的结果会返回到这里
+                    var value=fn.apply(null,arr);
+                    // 清空
+                    arr.length=0;
+                    return value;
+                }
             }
+        }
+            //    var s=getSum(1,2,3)(4,5)(6,7,8)(9,10)()
+        //    console.log(s)
 
 
-            // function currying(fn){
-            //     var arr=[];
-            //     return function(){
-            //         if(arguments.length!==0){
-            // 记住！用于连接两个或多个数组
-            //             arr=[].concat.apply(arr,arguments);
-            //             return arguments.callee;
-            //         }else{
-            //             var value=fn.apply(null,arr);
-            //             arr.length=0;
-            //             return value;
-            //         }
-            //     }
-            // }
+        // 求和 
+        //将currying里面的函数返回给getSum,下面的函数也就是currying的fn    
+        var getSum=currying(function(){
+            var s=Array.from(arguments).reduce((v,t)=>v+t);
+            return s;
+        });
 
+        getSum(1,2,3);
+        getSum(5,6);
 
+        setTimeout(function(){
+            getSum(7,8)
+        },1000);
+        setTimeout(function(){
+            var s=getSum();
+            console.log(s);
+        },2000);
 
-            //将currying里面的函数返回给getSum
-            // var getSum=currying(function(){
-            // 求和 
-            //     var s=Array.from(arguments).reduce((v,t)=>v+t);
-            //     return s;
-            // });
-
-        // getSum(1,2,3);
-        // getSum(5,6);
-        // setTimeout(function(){
-        //     getSum(7,8)
-        // },1000);
-        // setTimeout(function(){
-        //     var s=getSum();
-        //     console.log(s);
-        // },2000);
-
-        // var s=getSum(1,2,3)(4,5)(6,7)(8)();
-        // console.log(s)
+        var s=getSum(1,2,3)(4,5)(6,7)(8)();
+        console.log(s)
     </script>
 </body>
 </html>

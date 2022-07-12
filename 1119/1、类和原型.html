@@ -15,10 +15,12 @@
     <div>3</div>
 
     <script>
+        // -----------------------ES6面向对象写法--------------------------
         // class Box{
         //     a;
         //     static NUM=1;
         //     constructor(a){
+        ////   将给值的参数 存储赋值给上面定义的a
         //         this.a=a;
         //     }
         //     play(){
@@ -37,31 +39,39 @@
         // console.log(arr.constructor===Array)
 
         // 只有Function有prototype
+         //-------------------------------------------------------------------
+        
 
-
+        //-----------------------ES5面向对象写法--------------------------
+        //这个函数就是上面类的constructor
         // function Box(a){
         //     this.a=a;
         // }
 
+        // Box(5)//函数
+        // new Box(5)//类
+        
+        // 所有的实例化属性都添加在prototype下
         // Box.prototype.a=0;
         // Box.prototype.play=function(){
         //     console.log("play")
         // }
 
+
+        // 静态属性添加
         // Box.NUM=1;
+        // 静态方法添加
         // Box.run=function(){
         //     console.log("run");
         // }
 
-
+        //调用静态方法可以直接执行
         // Box.run();
+        // 调用实例化方法，需要先实例化属性
         // var b=new Box(1);
         // b.play();
 
-
-
-
-
+    //-------------------------------------------------------------------
 
 
         // function Box() {
@@ -70,8 +80,9 @@
         // Box.prototype.a=10;
         // console.dir(Box);
         // Box.prototype   这个属性只有函数有
-        // Function
-        // Box.prototype.constructor  就是原型构造函数，任何函数的原型构造函数都是自身
+        // 原型链指函数继承于什么
+        // 任何构造函数都是 Function 
+        // Box.prototype.constructor  原型构造函数，任何函数的原型构造函数都是自身
 
         // var o={a:1};
         // console.log(o)
@@ -82,11 +93,13 @@
         // 就给构造函数设定了一个prototype属性，并且要求把把所有实例化方法和属性写在这个属性下，
         // 这样在实例对象时就可以把这个属性的所有内容放在实例化对象中
 
-        // Box.a=10;
+        // Box.a=10; 
         // Box.prototype.a=10;
         // 类的prototype下面的所有属性和方法，都会被放在实例化的__proto__这个属性下面
         // 用来区分原型属性和对象属性
 
+
+        //覆盖原有的对象
         // Box.prototype={
         //     a:1,
         //     b:function(){
@@ -98,9 +111,9 @@
         // console.log(b.__proto__===Box.prototype)
         // 实例化的原型链等同于类的原型
 
-
-
+        // 在Array下创建chunk方法
         // Array.prototype.chunk=function(n){
+        //    // this=== 当前的数组
         //    if(typeof n!=="number") throw new TypeError("参数类型有误，请输入数值");
         //    if(n<1 || !Number.isInteger(n)) throw new RangeError("输入数据不能为小数或者负数");
         //    var arr=[];
@@ -115,7 +128,7 @@
         //    var arr1=arr.chunk(0);
         //    console.log(arr)
 
-
+        //保证不可枚举
         //     Object.defineProperties(Array.prototype,{
         //         chunk:{
         //             value:function(n){
@@ -131,17 +144,32 @@
         //         },
         //         filter_1:{
         //             value:function(fn,thisArg){
+        //                 var arr = [];
+        //                for(var i=0;i<this.length;i++){
+        //                 if(fn(this[i],i,this)) arr[arr.length] = this[i];
+        // }
+        //                return arr;
+        //             }
+        //         },
+        //         filter_2:{
+        //             value:function(fn,thisArg){
         //                 if(typeof fn!=="function") throw new TypeError(fn+" is not a function")
         //                 var arr=[];
         //                for(var i=0;i<this.length;i++){
-        //                     if(fn.call(thisArg,this[i],i,this)) arr[arr.length]=this[i];
+            //                  call指向this
+        //                     if(fn.call(thisArg,this[i],i,this)) arr[arr.length]=this[i];//将数组放在尾部
         //                }
         //                return arr;
         //             }
         //         }
         //     })
         //     var arr=[1,2,3,4,5,6,7];
-        //    var arr1=arr.filter_1(1);
+
+        // var arr1 = arr.filter_2(function(item,index,arr){
+        //     return item>2;
+        // },{a:1})
+
+        //    var arr1=arr.filter_2(1);
         //     // var arr2=arr.filter(1);
         //     console.log(arr1,arr2);
 
@@ -168,10 +196,12 @@
         // }
         // fn.bind({a:1});
 
-
+        // 重构bind
         // Function.prototype.bind_1=function(thisArg){
+        //    // this指向调用fn函数
         //     var fn=this;
         //     return function(){
+        //    // this因为回调会指向window
         //        fn.apply(thisArg,arguments);
         //     }
         // }
@@ -183,27 +213,49 @@
         // var f=fn.bind({a:1})
         // f(3,5);
 
-        Array.prototype.concat_1 = function () {
-            var array = [];
-            for (var i = -1; i < arguments.length; i++) {
-                var item;
-                if (i === -1) item = this;
-                else item = arguments[i];
-                if (item && item.constructor === Array) {
-                    for (var j = 0; j < item.length; j++) {
-                        array[array.length] = item[j];
-                    }
-                } else {
-                    array[array.length] = item;
-                }
-            }
-            return array;
-        }
+        // ES5写法
+        // Array.prototype.concat_1 = function () {
+        //     console.log(arguments)
+        //     var array = [];
+        //     for (var i = -1; i < arguments.length; i++) {
+        //         var item;
+        //         if (i === -1) item = this;//先将原数组进行合并进入array中
+        //         else item = arguments[i];//再将形参根据判断合并进入array中
+        //         if (item && item.constructor === Array) {
+        //             for (var j = 0; j < item.length; j++) {
+        //                 array[array.length] = item[j];
+        //             }
+        //         } else {
+        //             array[array.length] = item;
+        //         }
+        //     }
+        //     return array;
+        // }
 
+        // ES6写法
+        // Array.prototype.concat_1 = function () {
+        //     var array = [];
+        //     // this是调用的原数组==>ES6写法
+        //     var list = [this,...arguments];
+        //     for(let i = 0;i<list.length;i++){
+        //         if(list[i] && list[i].constructor === Array){
+        //             for(let j = 0;j<list[j].length;j++){
+        //                 array[array.length] = list[i][j];
+        //             }
+        //         }else{
+        //             array[array.length] = list[i]
+        //         }
+        //     }
+        //     return array;
+        // }
+ 
 
         //     var arr1=[1,2,3,4];
         //   var arr2=arr1.concat_1([3,4,5],[6,7,8])
         //     console.log(arr2)
+        // 如果直接执行的话，this指的是window会报错
+        // Array.prototype.concat_1([1,2,3],[[4,5],[6,7]])
+        // 通过使用apply可以更改this 的指向
         // Array.prototype.concat_1.apply([1,2,3],[[4,5],[6,7]])
 
         //     Function.prototype.currying = function () {
@@ -215,41 +267,51 @@
         //                 arr.length=0;
         //                 return value;
         //             } else {
-        //                 // arr=arr.concat(...arguments);
-        //                 arr = Array.prototype.concat.apply(arr, arguments);
+        //                  //这样放入是将所有形参放入至list中作为一个元素是不对的
+        //                  // arr=arr.concat(arguments);
+
+        //                  // arr=arr.concat(...arguments);
+        //                 //思考！！！！apply怎么进行对于参数的分割
+        //                 //  这里的arguments是形参，会作为一个整体的列表,apply是为了将arguments进行切割，从而让concat会遍历arguments
+        //                 arr = Array.prototype.concat_1.apply(arr, arguments);
         //             }
         //         }
         //     }
 
 
         //     function fn(){
+        //         // ...arguments==>arguments 转数组
         //         return [...arguments].reduce((v,t)=>v+t);
         //     }
         //    var f=fn.currying()
-        //     f(1,2);
-        //     f(4,5);
-        //     f(6);
+        //    f([1,2],5,[6])
+        //     // f(1,2);
+        //     // f(4,5);
+        //     // f(6);
         //    var s=f()
         //    console.log(s)
 
-        // Object.defineProperty(HTMLElement.prototype,"setStyle",{
-        //     value:function(style){
-        //         Object.keys(style).forEach(key=>{
-        //            if(/width|height|left|top|right|bottom|margin|padding/.test(key)){
-        //                if(typeof style[key]==="number") style[key]+="px";
-        //            }
-        //            Object.assign(this.style,style);
-        //         })
-        //     }
-        // })
+        Object.defineProperty(HTMLElement.prototype,"setStyle",{
+            value:function(style){
+                Object.keys(style).forEach(key=>{
+                   if(/width|height|left|top|right|bottom|margin|padding/.test(key)){
+                       if(typeof style[key]==="number") style[key]+="px";
+                   }
+                // console.dir(this);//==>div
+                // console.log(this.style);
+                // 对象的合并
+                   Object.assign(this.style,style);
+                })
+            }
+        })
 
 
-        // var div=document.querySelector("div");
-        // div.setStyle({
-        //     width:50,
-        //     height:50,
-        //     backgroundColor:"red"
-        // })
+        var div=document.querySelector("div");
+        div.setStyle({
+            width:50,
+            height:50,
+            backgroundColor:"red"
+        })
 
         // var p=document.querySelector("p");
         // p.setStyle({
@@ -263,22 +325,23 @@
         // 反柯里化
         // Array.prototype.slice.call(divs)
 
-        Function.prototype.unCurrying = function () {
-            var fn = this
-            return function (...rest) {
-                // rest[0] 就是执行函数fn时，替代fn函数中的this
-                // rest[1-] 就是执行fn函数时传入的参数
-                // return Function.prototype.call.apply(fn, rest)
-                return fn.apply(rest[0],rest.slice(1));
-            }
-        }
+        // Function.prototype.unCurrying = function () {
+            // this就是使用 函数
+        //     var fn = this
+        //     return function (...rest) {
+        //         // rest[0] 就是执行函数fn时，替代fn函数中的this
+        //         // rest[1-] 就是执行fn函数时传入的参数
+        //         // return Function.prototype.call.apply(fn, rest)
+        //         return fn.apply(rest[0],rest.slice(1));
+        //     }
+        // }
 
 
         // function fn(){
 
         // }
         // fn.call({a:1},a,b)
-
+        //上下式子相等
         // call.apply(fn,[{a:1},a,b])
         // call 函数中的this是fn
         // call函数的第0个参数就是要替代fn函数中的this
@@ -292,25 +355,26 @@
 
 
 
-    class Box{
-        a=1;
-        constructor(){
+    // class Box{
+    //     a=1;
+    //     constructor(){
 
-        }
-        play(n){
-            this.a+=n;
-        }
-    }
-
+    //     }
+    //     play(n){
+    //         this.a+=n;
+    //     }
+    // }
+ 
 
     // var b=new Box();
     // b.play();
     // console.log(b.a);
     // var o={a:2};
+    // 运用反柯里化提取o
     // var play=Box.prototype.play.unCurrying();
 
-    // play(o,2);
-    // console.log(o);
+    // play(o,2); 
+    // console.log(o); 
     </script>
 </body>
 

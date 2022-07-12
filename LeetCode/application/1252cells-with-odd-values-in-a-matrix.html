@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let m = 2, n = 3, indices = [[0,1],[1,1]];
+            a = oddCells (m, n, indices);
+            console.log(a);
+        }
+        //直接模拟
+        function oddCells (m, n, indices){
+            let res = 0;
+            let initMatrix = new Array(m).fill(0).map(()=> new Array(n).fill(0));
+            let indicesLength = indices.length;
+            for(let i = 0;i<indicesLength;i++){
+                for(let a = 0;a<n;a++){
+                    initMatrix[indices[i][0]][a]++;
+                }
+                for(let a = 0;a<m;a++){
+                    initMatrix[a][indices[i][1]]++;
+                }
+            }
+            for(let i = 0;i<m;i++){
+                for(let j = 0;j<n;j++){
+                    if(initMatrix[i][j] % 2 !==0){
+                        res++;
+                    }
+                }
+            }
+            return res
+        }
+        // 模拟空间优化
+        function oddCells (m, n, indices){
+            // 使用一个行数组 rows 和列数组cols 分别记录每一行和每一列被增加的次数。
+            let rows = new Array(m).fill(0);
+            let cols = new Array(n).fill(0);
+            for (const index of indices) {
+                rows[index[0]]++;
+                cols[index[1]]++;
+            }
+            let res = 0;
+            for (let i = 0; i < m; i++) {
+                for (let j = 0; j < n; j++) {
+                    if (((rows[i] + cols[j]) & 1) !== 0) {
+                        res++;
+                    }
+                }
+            }
+            return res;
+        }
+    </script>
+</body>
+</html>

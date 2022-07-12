@@ -36,7 +36,7 @@
           h: {},
         },
       };
-      obj.d.g.ssss=10;
+      obj.d.g.ssss=10;//这里会加载上obj.constructor
       obj.eee=new Uint8Array([97,98,99]);
       Object.defineProperties(obj.d.h, {
         i: {
@@ -207,64 +207,77 @@
 // console.log(date1);
 // console.log(obj);
 
-//  function cloneObject(source,target){
-//   // 判断source类型
-//         if(target===undefined){
-//           // HTMLELEMENT继承于Document对象和Element对象继承于node
-//           // 判断标签类
-//             if(Node.prototype.isPrototypeOf(source)){
-  //            创造标签
-//                 target=document.createElement(source.nodeName);
-//                 // 样式的复制
-//                 target.style=source.style.cssText;
-//             }else if(source.constructor===Uint8Array){
-//                 target=new source.constructor(Array.from(source));
-//             }else if(source.constructor===Date || source.constructor===RegExp || source.constructor===Set || source.constructor===Map){
-//                //将原有的source值带入到source构造函数中
-//                 target=new source.constructor(source);
-//             }else if(source.constructor===Function){
-/**
-   *  ƒ (s) {
-            console.log(s);
-          }
-  */
-//                 // 取小括号中的第一个==>arg参数
-//                 // 非贪婪匹配
-//                 // 函数变字符串
-//                 //match该数组的第 0 个元素存放的是匹配文本，而其余的元素存放的是与正则表达式的子表达式匹配的文本。
-//                 var arg=source.toString().match(/\((.*?)\)/)[1];
-//                 // content语句内容
-//                 // replace(/\n|\r/g,"")换行处理
-//                 // 贪婪匹配
-//                 var content=source.toString().replace(/\n|\r/g,"").match(/\{(.*)\}/)[1];
-//                 target=new Function(arg,content)
-//             }else {
-/**               创造相对应的类型的构造函数
- *                arr = new [1,2,3].constructor()==>创造一个空数据[]
-*/
-//                 target=new source.constructor();
-//             } 
-//         }
-//         var names=Object.getOwnPropertyNames(source).concat(Object.getOwnPropertySymbols(source));
-//         for(var i=0;i<names.length;i++){
+ function cloneObject(source,target){
+  // 判断source类型
+        if(target===undefined){
+          // HTMLELEMENT继承于Document对象和Element对象继承于node
+          // 判断标签类
+            if(Node.prototype.isPrototypeOf(source)){
+            //  创造标签
+                target=document.createElement(source.nodeName);
+                // 样式的复制
+                target.style=source.style.cssText;
+            }else if(source.constructor===Uint8Array){
+                target=new source.constructor(Array.from(source));
+            }else if(source.constructor===Date || source.constructor===RegExp || source.constructor===Set || source.constructor===Map){
+               //将原有的source值带入到source构造函数中
+                target=new source.constructor(source);
+            }else if(source.constructor===Function){
+              /**
+                 *  ƒ (s) {
+                          console.log(s);
+                        }
+                */
+                // 取小括号中的第一个==>arg参数
+                // 非贪婪匹配
+                // 函数变字符串
+                //match该数组的第 0 个元素存放的是匹配文本，而其余的元素存放的是与正则表达式的子表达式匹配的文本。
+                var arg=source.toString().match(/\((.*?)\)/)[1];
+                // content语句内容
+                // replace(/\n|\r/g,"")换行处理
+                // 贪婪匹配
+                var content=source.toString().replace(/\n|\r/g,"").match(/\{(.*)\}/)[1];
+                target=new Function(arg,content)
+            }else {
+              /**创造相对应的类型的构造函数
+               * arr = new [1,2,3].constructor()==>创造一个空数据[]
+              */
+                target=new source.constructor();
+            } 
+        }
+        var names=Object.getOwnPropertyNames(source).concat(Object.getOwnPropertySymbols(source));
+        console.log("names:::",names);
+        for(var i=0;i<names.length;i++){
+               //可以保留下constructor
+             if(names[i] === "prototype"){
+                console.log("source-prototype:::",source);//函数
+                console.dir(source);
+             } 
+               // 可以添加原型类函数===>怎么查出constructor？
+             if(names[i]==="constructor") {
+              console.log("source-constructor:::",source);
+                 target.constructor = target;
+                 Object.defineProperty(target,"constructor",{value:source.constructor})
+                 continue;
+               };
 //             if(names[i]==="prototype") continue;
-//             // 获取属性的描述对象==>找到value
-//             var desc=Object.getOwnPropertyDescriptor(source,names[i]);
-//            if((typeof desc.value==="object" && desc.value!==null) || typeof desc.value==="function"){
-//              //回调
-//               var o=cloneObject(desc.value)
-//               Object.defineProperty(target,names[i],{
-//                   value:o,
-//                   enumerable:desc.enumerable,
-//                   writable:desc.writable,
-//                   configurable:desc.configurable
-//               })
-//            }else{
-//                 Object.defineProperty(target,names[i],desc);
-//            }
-//         }
-//         return target;
-//     }
+            // 获取属性的描述对象==>找到value
+            var desc=Object.getOwnPropertyDescriptor(source,names[i]);
+           if((typeof desc.value==="object" && desc.value!==null) || typeof desc.value==="function"){
+             //回调
+              var o=cloneObject(desc.value)
+              Object.defineProperty(target,names[i],{
+                  value:o,
+                  enumerable:desc.enumerable,
+                  writable:desc.writable,
+                  configurable:desc.configurable
+              })
+           }else{
+                Object.defineProperty(target,names[i],desc);
+           }
+        }
+        return target;
+    }
 
 
 
