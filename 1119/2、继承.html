@@ -48,13 +48,7 @@
         // b.play();
 
 
-        // 寄生式继承
-        // function Ball(a){
-        // 相当于super()
-        //若直接执行的话Box(a),这里的this是window(属于回调),通过apply改变this 
-        //     Box.apply(this,arguments);
-        // }
-
+        // 寄生式继承，执行一次
         // 将Box的原型寄生到函数F上，new F()只执行F不执行Box
         // function F(){
 
@@ -64,7 +58,12 @@
         // Ball.prototype=new F();
         
 
-        // 原型继承
+        // //原型继承，但是会执行2次，另外一次属于Box内
+        // function Ball(a){
+        // 相当于super()
+        ////若直接执行的话Box(a),这里的this是window(属于回调),通过apply改变this 
+        //     Box.apply(this,arguments);
+        // }
         // Ball.prototype = new Box();
         // var c=new Ball(1);
         // // c.__proto__=new Box();
