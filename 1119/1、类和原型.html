@@ -111,9 +111,9 @@
         // console.log(b.__proto__===Box.prototype)
         // 实例化的原型链等同于类的原型
 
-        // 在Array下创建chunk方法
+        // 在Array下创建chunk方法(分块，类似flatmap)
         // Array.prototype.chunk=function(n){
-        //    // this=== 当前的数组
+        //    // this===> 当前的数组
         //    if(typeof n!=="number") throw new TypeError("参数类型有误，请输入数值");
         //    if(n<1 || !Number.isInteger(n)) throw new RangeError("输入数据不能为小数或者负数");
         //    var arr=[];
@@ -128,7 +128,7 @@
         //    var arr1=arr.chunk(0);
         //    console.log(arr)
 
-        //保证不可枚举
+        //保证chunk方法不可枚举
         //     Object.defineProperties(Array.prototype,{
         //         chunk:{
         //             value:function(n){
@@ -197,21 +197,28 @@
         // fn.bind({a:1});
 
         // 重构bind
-        // Function.prototype.bind_1=function(thisArg){
-        //    // this指向调用fn函数
-        //     var fn=this;
-        //     return function(){
-        //    // this因为回调会指向window
-        //        fn.apply(thisArg,arguments);
-        //     }
-        // }
+        Function.prototype.bind_1=function(thisArg){
+           // this指向调用fn函数(谁调用指向谁),
+            var fn=this;
+            return function(){
+           // this因为回调会指向window
+               fn.apply(thisArg,arguments);
+            }
+        }
 
-        // function fn(a,b){
-        //     console.log(this,a,b)
-        // }
-        // var f=fn.bind_1({a:1})
-        // var f=fn.bind({a:1})
-        // f(3,5);
+        function fn(a,b){
+            console.log(this,a,b)
+        }
+        var f=fn.bind_1({a:1})
+        // console.log(f);// f就是bind_1所返回的函数
+        /**相当于
+         * var f = function(){
+         *      fn.apply(thisArg,arguments);
+         * }
+         * 只不过这里是闭包，thisArg由bind_1的thisArg所确定
+        */
+        var f=fn.bind({a:1})
+        f(3,5);
 
         // ES5写法
         // Array.prototype.concat_1 = function () {
@@ -219,6 +226,7 @@
         //     var array = [];
         //     for (var i = -1; i < arguments.length; i++) {
         //         var item;
+        // //       用i-1来控制起初的数组
         //         if (i === -1) item = this;//先将原数组进行合并进入array中
         //         else item = arguments[i];//再将形参根据判断合并进入array中
         //         if (item && item.constructor === Array) {
@@ -250,13 +258,14 @@
         // }
  
 
-        //     var arr1=[1,2,3,4];
+        //    var arr1=[1,2,3,4];
         //   var arr2=arr1.concat_1([3,4,5],[6,7,8])
-        //     console.log(arr2)
+        //    console.log(arr2)
         // 如果直接执行的话，this指的是window会报错
         // Array.prototype.concat_1([1,2,3],[[4,5],[6,7]])
         // 通过使用apply可以更改this 的指向
         // Array.prototype.concat_1.apply([1,2,3],[[4,5],[6,7]])
+
 
         //     Function.prototype.currying = function () {
         //         var fn = this;
@@ -269,7 +278,7 @@
         //             } else {
         //                  //这样放入是将所有形参放入至list中作为一个元素是不对的
         //                  // arr=arr.concat(arguments);
-
+        //                  //下面两种办法是可以的
         //                  // arr=arr.concat(...arguments);
         //                 //思考！！！！apply怎么进行对于参数的分割
         //                 //  这里的arguments是形参，会作为一个整体的列表,apply是为了将arguments进行切割，从而让concat会遍历arguments
@@ -280,7 +289,7 @@
 
 
         //     function fn(){
-        //         // ...arguments==>arguments 转数组
+        //         // ...arguments==>将arguments转数组
         //         return [...arguments].reduce((v,t)=>v+t);
         //     }
         //    var f=fn.currying()
