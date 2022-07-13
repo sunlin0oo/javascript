@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        init();
+
+        function init(){
+            let asteroids = [5,10,-5];
+            let a = asteroidCollision(asteroids);
+            console.log(a);
+        }
+        // 栈模拟==>先进后出
+        function asteroidCollision(asteroids) {
+            let stack =[];
+            let length = asteroids.length;
+            for(let i = 0;i<length;i++){
+                let alive = true;
+                let stackLength = stack.length;
+                while(alive && asteroids[i]<0 && stackLength  >0 && stack[stackLength -1] >0){
+                    alive = stack[stack.length - 1] < -asteroids[i]; // aster 是否存在
+                    if (stack[stack.length - 1] <= -asteroids[i]) {  // 栈顶行星爆炸
+                        stack.pop();
+                    }
+                }
+                if(alive) stack.push(asteroids[i]);
+            }
+            const size = stack.length;
+            const ans = new Array(size).fill(0);
+            for (let i = size - 1; i >= 0; i--) {
+                ans[i] = stack.pop();
+            }
+            return ans;
+        }
+    </script>
+</body>
+</html>
