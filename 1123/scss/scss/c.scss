@@ -1,0 +1,25 @@
+$a:ab;
+$v:height;
+@mixin set-block($w,$h) {
+    // @if $w<50px {
+    //     $w:50px;
+    // }@else {
+    //     $w:100px;
+    // }
+    @if $w<50px {
+        $w:50px;
+    }@else if $w>100px{
+        $w:100px;
+    }
+    
+    width: $w;
+    height: $h;
+}
+// 插值运算，插入字符或者值
+.#{$a}-1{ // .ab-1
+    width: 10px;
+    #{$v}:20px;
+}
+.div1{
+    @include set-block(160px,60px );
+}

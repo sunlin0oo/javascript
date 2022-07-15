@@ -1,0 +1,62 @@
+$size:50px;//设置变量$size，可以使用变量==>必须以$开头
+// .map用来寻找的映射文件
+// .div1{
+//     width: $size;
+//     height: $size;
+//     background-color: blue;
+//     .div2{//选择器的嵌套
+//         color: burlywood;
+//     }
+//     &:hover{//父选择器
+//         background-color: chartreuse;
+//     }
+//     .div3+&{//div3的下一个兄弟元素
+//         color: orange;
+//     }
+//     +.div4{//div1的兄弟div4
+//         color: orchid;
+//         .div6{
+//             color: white;
+//         }
+//     }
+//     >.div5{//.div的子代元素div5
+//         color: palegoldenrod;
+//     }
+// }
+
+// .div1{
+//     background:{
+//         color: yellow;
+//         size: 100% 100%;
+//     }
+// }
+// .div1{
+//     border:{
+//         left:{
+//             color: yellow;
+//             style:solid;
+//             width: 1px;
+//         }
+//     }
+// }
+// 导入其他css文件
+// .div2{
+//     @import "b";
+// }
+
+// 设置CSS函数体==>也可以添加默认值
+@mixin set-wh($w,$h,$c:red) {
+    width: $w*2+px;
+    height: $h+30+px;
+    background-color: $c;
+    left:#{$w+20}px;
+    top:if($w<50,50px,$w+px);
+}
+.div1{
+    @include set-wh(70,50,green);
+   
+}
+// CSS中继承的写法
+.div2>.div3{
+    @extend .div1;
+}

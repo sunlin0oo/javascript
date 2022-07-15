@@ -1,0 +1,38 @@
+$w:260;
+$h:200;
+@mixin set-wh($w,$h) {
+    width: $w+px;
+    height: $h+px;
+    padding: 0;
+    margin: 0;
+}
+ul{
+    position: absolute;
+    list-style: none;
+    background-image: url(../img/about4.jpg);
+    background-size: 120% 120%;
+    background-repeat: no-repeat;
+    transition: all 0.5s;
+    @include set-wh($w,$h);
+    li{
+       @include set-wh($w/2,$h/2);
+        float: left;
+        transition: all 0.5s;
+        background-repeat: no-repeat;
+        background-image: url(../img/about3.jpg);
+    }
+    @each $i,$v1,$v2 in (2,-$w/2,0),(3,0,-$h/2),(4,-$w/2,-$h/2) {
+        li:nth-child(#{$i}){
+            background-position: $v1+px $v2+px;
+        }
+    }
+    @each $i,$v1,$v2 in (1,0,$h/2),(2,-$w,0),(3,$w/2,-$h/2),(4,-$w/2,-$h) {
+        &:hover>li:nth-child(#{$i}){
+            background-position: $v1+px $v2+px;
+        }
+    }
+    &:hover{
+        background-size: 100% 100%;
+    }
+}
+

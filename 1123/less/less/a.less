@@ -1,0 +1,9 @@
+.set-block(@w,@h){
+    width: @w;
+    height: @h;
+    background-color: red;
+}
+.div1{
+    .set-block(50px, 50px);
+}
+// lessc ./less/a.less ./css/a.css  a.less输出到a.css

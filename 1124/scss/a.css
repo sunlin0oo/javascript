@@ -1,0 +1,46 @@
+ul {
+  position: absolute;
+  list-style: none;
+  background-image: url(../img/about4.jpg);
+  background-size: 120% 120%;
+  background-repeat: no-repeat;
+  transition: all 0.5s;
+  width: 260px;
+  height: 200px;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  width: 130px;
+  height: 100px;
+  padding: 0;
+  margin: 0;
+  float: left;
+  transition: all 0.5s;
+  background-repeat: no-repeat;
+  background-image: url(../img/about3.jpg);
+}
+ul li:nth-child(2) {
+  background-position: -130px 0px;
+}
+ul li:nth-child(3) {
+  background-position: 0px -100px;
+}
+ul li:nth-child(4) {
+  background-position: -130px -100px;
+}
+ul:hover > li:nth-child(1) {
+  background-position: 0px 100px;
+}
+ul:hover > li:nth-child(2) {
+  background-position: -260px 0px;
+}
+ul:hover > li:nth-child(3) {
+  background-position: 130px -100px;
+}
+ul:hover > li:nth-child(4) {
+  background-position: -130px -200px;
+}
+ul:hover {
+  background-size: 100% 100%;
+}/*# sourceMappingURL=a.css.map */

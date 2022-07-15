@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .carousel{
+            width: 100%;
+            height: 33vw;
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel>.imgCon{
+            position: absolute;
+            width: 100%;
+        }
+        .carousel>.imgCon>img{
+            width: 100%;
+            display: block;
+            position: absolute;
+        }
+        ul{
+            list-style: none;
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            z-index: 100;
+            justify-content: center;
+            width: 100%;
+        }
+        li{
+            width: 18px;
+            height: 18px;
+            border-radius: 18px;
+            border:2px solid #F00;
+            margin-left: 10px;
+        }
+        .left,.right{
+            position: absolute;
+            z-index: 100;
+            top:50%;
+            transform: translate(0,-50%);
+        }
+        .left{
+            left:50px;
+        }
+        .right{
+            right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="imgCon">
+            <img src="./img/a.jpg">
+            <img src="./img/b.jpg">
+            <img src="./img/c.jpg">
+            <img src="./img/d.jpg">
+            <img src="./img/e.jpg">
+        </div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <img src="./img/left.png" class="left">
+        <img src="./img/right.png" class="right">
+    </div>
+    <script>
+        var imgs,ul,left,right,imgCon,ids;
+        var direction="left",pos=0;
+        init()
+        function init(){
+            imgs=Array.from(document.querySelectorAll(".imgCon>img"))
+            imgCon=document.querySelector(".imgCon");
+            ul=document.querySelector("ul");
+            left=document.querySelector(".left");
+            right=document.querySelector(".right");
+            ul.addEventListener("click",dotClickHandler);
+            left.addEventListener("click",bnClickHandler);
+            right.addEventListener("click",bnClickHandler);
+            setInitPosition(0);
+        }
+
+        function bnClickHandler(e){
+            if(ids) return;
+            var i=pos;
+            if(this===left){
+                pos--;
+                if(pos<0) pos=imgs.length-1;
+                direction="right"
+            }else{
+                pos++;
+                if(pos>imgs.length-1) pos=0;
+                direction="left"
+            }
+            setInitPosition(i,pos)
+        }
+        function dotClickHandler(e){
+            if(ids) return;
+            if(e.target.nodeName!=="LI") return;
+            var i=pos;
+            var index=Array.from(ul.children).indexOf(e.target);
+            if(index===pos) return;
+            direction=index>pos ? "left" : "right";
+            pos=index;
+            setInitPosition(i,pos)
+        }
+
+        function setInitPosition(first,second){
+            imgs[first].style.zIndex=1;
+            imgs[first].style.transform="translate(0)"
+            if(second==undefined) return;
+            imgs[second].style.zIndex=1;
+            imgs[second].style.transform=`translate(${direction==="left" ? "100%" : "-100%"})`
+           
+            setMove(first,second);
+        }
+
+        function setMove(first,second){
+            if(direction==="left"){
+              
+                imgCon.style.transform="translate(-100%)";
+            }else{
+                imgCon.style.transform="translate(100%)";
+            }
+            imgCon.style.transition="all 1s";
+            ids=setTimeout(function(){
+                clearTimeout(ids);
+                ids=undefined;
+                changeOrigin(first);
+            },1000);
+        }
+
+        function changeOrigin(first){
+            imgCon.style.transition="none";
+            imgCon.style.transform="translate(0%)";
+            imgs[first].style.zIndex=0;
+            imgs[pos].style.transform="translate(0)"
+        }
+    </script>
+</body>
+</html>

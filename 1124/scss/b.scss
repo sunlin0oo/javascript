@@ -1,0 +1,36 @@
+.div1{
+    display: flex;
+    height: 600px;
+    border: 1px solid #000;
+    // flex-direction: row;
+    // flex-wrap: nowrap;
+    // flex-flow: row nowrap;
+    // justify-content: space-evenly;
+    // justify-content: center;
+    // align-items: baseline;
+
+    // flex-wrap: wrap;
+    // align-content: space-between;
+    @each $i,$color in (1,#FF0000),(2,#FF9900),(3,#FFFF00),(4,#00FF00),(5,#00FF99),(6,#00FFFF),(7,#0000FF) {
+        div:nth-child(#{$i}){
+            width: 100px;
+            height: 100px;
+            padding-top: $i*10px;
+            background-color: $color;
+        }
+    }
+}
+
+.div1>div:nth-child(2){
+    // order: 1;
+    // flex-grow: 0.1;
+    // flex-basis: 0;
+    // flex: 1 0 auto;
+    // flex-shrink: 1;
+    align-self: center
+}
+// @media screen and(max-width:600px){
+//     .div1{
+//         flex-direction: column;
+//     }
+// }

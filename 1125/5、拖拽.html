@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div0{
+            position: relative;
+            display: flex;
+        }
+        .div0>div{
+            width: 200px;
+            height: 200px;
+            border:1px solid #000;
+        }
+       
+    </style>
+</head>
+<body>
+    <!-- <iframe src="http://localhost:4020/index.html" frameborder="0"></iframe> -->
+    <img src="./img/left.png" alt="" draggable="true" id="img1">
+    <div class="div0">
+        <div></div>
+        <div></div>
+    </div>
+    <script>
+        var img=document.querySelector("img");
+        var divs=document.querySelector(".div0");
+        img.addEventListener("dragstart",draghandler);
+        divs.addEventListener("dragover",drapOverHandler);
+        divs.addEventListener("drop",dropHandler);
+
+        function draghandler(e){
+            // console.log(e)
+            // e.dataTransfer.items.add(this);
+            // console.log(e.dataTransfer)
+            // e.dataTransfer.setDragImage(this,100,100);
+            e.dataTransfer.setData("text",this.id);
+            // console.log(e.dataTransfer.getData("text"))
+        }
+
+        function drapOverHandler(e){
+           e.preventDefault();
+           
+        }
+
+        function dropHandler(e){
+            if(e.target.className==="div0") return;
+            var id=e.dataTransfer.getData("text");
+            e.target.appendChild(document.querySelector("#"+id));
+        }
+
+
+        navigator.geolocation.getCurrentPosition(function(pos){
+            console.log(pos.coords)
+        },function(err){
+            console.log(err)
+        })
+
+        // var bool=false;
+        // document.onclick=function(){
+        //     bool=!bool;
+        //     if(bool){
+        //         document.documentElement.requestFullscreen();
+        //     }else{
+        //         document.exitFullscreen();
+        //     }
+
+        // }
+
+        // console.log(navigator.onLine)
+        // window.addEventListener("online",function(){
+
+        // })
+        // window.addEventListener("offline",function(){
+            
+        // })
+
+
+        // window.addEventListener("message",messageHandler);
+        // postMessage("aaa");
+
+        // function messageHandler(e){
+        //     console.log(e)
+        // }
+
+       
+
+
+        // var a=new Worker("./a.js");
+        // a.addEventListener("message",messageHandler);
+
+        // function messageHandler(e){
+        //     console.log(e)
+        // }
+    </script>
+    <!-- <img src="./img/a.jpg"> -->
+</body>
+</html>

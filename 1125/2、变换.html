@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* div{
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            position: relative;
+            perspective: 800px;
+            overflow: hidden; 
+        }
+        div>div{
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            transition: all 0.5s;
+        } */
+        /* div>.div2{
+            transform: translate(100%);
+        }
+        div:hover>.div1{
+            transform: translate(-100%);
+        }
+        div:hover>.div2{
+            transform: translate(0%);
+        } */
+        /* div:hover>.div2{
+            transform-origin:center ;
+            transform: scale(0,0);
+        } */
+        /* div:hover>.div2{
+            transform-origin:center ;
+            transform: rotate(60deg); 
+             transform: rotateZ(60deg);
+            transform: rotateY(60deg);
+        } */
+        div{
+            width: 600px;
+            height: 200px;
+            position: relative;
+            perspective: 800px;
+        }
+        div>img{
+            width: 600px;
+            height: 200px;
+            position: absolute;
+            transition:  all 1s;
+            backface-visibility: hidden;
+        }
+        /* div>img:nth-child(1){
+            transform: rotateY(180deg);
+        }
+        div:hover>img:nth-child(2){
+            transform: rotateY(180deg);
+        }
+        div:hover>img:nth-child(1){
+            transform: rotateY(360deg);
+        } */
+        /* div>img:nth-child(2){
+            transform: skew(60deg,60deg);
+        } */
+
+        div>img:nth-child(2){
+            transform: matrix(1, 1.047, 0, 1, 0, 0);
+            /* X缩放  倾斜X   倾斜Y  Y缩放  位移X  位移Y*/
+        }
+    </style>
+</head>
+<body>
+    <!-- <div>
+        <div class="div1">1</div>
+        <div class="div2">2</div>
+    </div> -->
+
+    <div>
+        <img src="./img/b.jpg">
+        <img src="./img/a.jpg">
+    </div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        details+ul{
+            max-height: 0px;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+        details[open]+ul{
+            max-height:1000px;
+        }
+        bdi{
+            width: 200px;
+            display: block;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+        }
+        [type=range]{
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div>
+        <details open>
+            <summary>商品管理</summary>
+        </details>
+        <ul>
+            <li>商品列表</li>
+            <li>添加商品</li>
+        </ul>
+    </div>
+    <div>
+        <details open>
+            <summary>品牌管理</summary>
+        </details>
+        <ul>
+            <li>品牌列表</li>
+            <li>添加品牌</li>
+        </ul>
+    </div>
+    <div>
+        <details open>
+            <summary>分类管理</summary>
+        </details>
+        <ul>
+            <li>分类列表</li>
+            <li>添加分类</li>
+        </ul>
+    </div>
+    <p>Do not forget to buy <mark>milk</mark> today.</p>
+    <progress value="22" max="100"></progress>
+
+    <meter value="3" min="0" max="10">十分之三</meter>
+    <meter   meter value="0.6">60%</meter> 
+
+
+    <div>Username <bdi dir="ltr">Bill</bdi>:80 points</div>
+    <div>Username <bdi dir="rtl">Steve</bdi>: 78 points</div>
+
+
+      <ruby>
+        <rb>千锋教育</rb>
+        <rp>(</rp>
+        <rt>qian feng jiao yu</rt>
+        <rp>)</rp>
+      </ruby> -->
+
+
+      <form action="#" id="form1" target="_self">
+        <input type="color" form="form1">
+        <input type="date">
+        <input type="datetime">
+        <input type="datetime-local">
+        <input type="email">
+        <input type="file" multiple>
+        <input type="hidden" value="aaa" name="names">
+        <input type="image" src="./img/3-.jpg">
+        <input type="month">
+        <input type="number" step="2">
+        <input type="range" min="0" max="100" value="60">
+        <input type="search" autofocus>
+        <input type="week">
+        <button type="submit">提交</button>
+        <input type="text" id="city" list="datalist">
+        <input type="text" pattern="\d+" placeholder="请输入数值">
+        <input type="text" required>
+        <datalist id="datalist">
+            <option>北京</option>
+            <option>南京</option>
+            <option>广州</option>
+            <option>株洲</option>
+        </datalist>
+      </form>
+      <form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+        <input type="range" id="a" value="50">100
+        +<input type="number" id="b" value="50">
+        =<output name="x" for="a b"></output>
+     </form> 
+    
+     <video src="./video/a.mp4" poster="./img/3-.jpg"></video><br>
+     <input type="range"  min="0" value="0">
+     <button>play</button>
+     <input type="number" value="1" step="0.1">
+
+     <script>
+         var bn=document.querySelector("button");
+         var video=document.querySelector("video");
+         var range=document.querySelector("[type=range]");
+         var speed=document.querySelector("[type=number]");
+         range.addEventListener("click",changeRangeHandler);
+         video.addEventListener("timeupdate",timeHandler);
+         bn.addEventListener("click",clickhandler);
+         speed.addEventListener("change",changeHandler);
+         video.addEventListener("loadedmetadata",loadHandler);
+
+         function changeHandler(e){
+            video.playbackRate=speed.value;
+         }
+
+         function clickhandler(e){
+            //  console.log(e.type);
+            if(video.paused){
+                bn.textContent="pause";
+                video.play();
+            }else{
+                bn.textContent="play";
+                video.pause();
+            }
+         }
+
+         function timeHandler(e){
+                range.max=video.duration;
+                range.value=video.currentTime;   
+         }
+
+         function changeRangeHandler(e){
+             console.log(range.value)
+             video.currentTime=range.value;
+         }
+
+         function loadHandler(e){
+             console.dir(video.duration)
+         }
+     </script>
+</body>
+</html>

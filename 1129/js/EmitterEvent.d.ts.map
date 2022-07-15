@@ -1,0 +1,1 @@
+{"version":3,"file":"EmitterEvent.d.ts","sourceRoot":"","sources":["../ts/EmitterEvent.ts"],"names":[],"mappings":"AAAA,OAAO,aAAa,MAAM,iBAAiB,CAAC;AAE5C,MAAM,CAAC,OAAO,OAAO,YAAY;IACtB,IAAI,EAAC,MAAM,CAAC;IACZ,IAAI,CAAC,EAAC,MAAM,CAAC;IACb,aAAa,EAAC,aAAa,GAAC,IAAI,CAAM;gBACjC,IAAI,EAAC,MAAM,EAAC,IAAI,CAAC,EAAC,MAAM;CAIvC"}
