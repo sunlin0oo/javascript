@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var isValidBST = function(root) {
+            // 创建一个栈
+            let stack = [];
+            // 设置中间节点
+            let inorder = -Infinity;
+            while(stack.length || root!==null){
+                // 遍历左子树
+                while(root!==null){
+                    stack.push(root.val);
+                    root = root.left;
+                }
+                // 弹出左子树的子树 
+                root = stack.pop();
+                // 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+                if(root.val<=inorder)return;
+                inorder = root.val;
+                root = root.right;
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var findTarget = function(root, k) {
+            let result = new Map();
+            if(!root) return false;
+            const dfs = (node)=>{
+                if(!node) return;
+                result.set(node.val);
+                if(node.left) dfs(node.left);
+                if(node.right) dfs(node.right);
+            }
+            dfs(root);
+            if(result.size === 1){
+                return false;
+            }else{
+                for(let key of result.keys()){
+                    if((k-key)!==key){
+                        if(result.has(k-key)) return true;
+                    }
+                }
+            }
+            return false;
+        };
+    </script>
+</body>
+</html>

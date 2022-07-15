@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  先将两个四叉树叉树进行按位或运算==>再显示运算后的二叉树
+// 不懂
+var intersect = function(quadTree1, quadTree2) {
+    // 判断quadTree1是否相同
+    if(quadTree1.isLeaf){
+        // 在quadTree1相同的条件下
+        // quadTree1.val===1,如果为1无需管后面的
+        if(quadTree1.val){
+            return new Node(true,true);
+        }
+        // quadTree1.val===0,只需要管quadTree2
+        return new Node(quadTree2.val, quadTree2.isLeaf, quadTree2.topLeft, quadTree2.topRight, quadTree2.bottomLeft, quadTree2.bottomRight);
+    }
+    // 判断quadTree2是否相同
+    if(quadTree2.isLeaf){
+        return intersect(quadTree2,quadTree1);
+    }
+    // 若quadTree1、quadTree2都不是叶子结点，递归四个子节点进行或运算
+    const o1 = intersect(quadTree1.topLeft,quadTree2.topLeft);
+    const o2 = intersect(quadTree1.topRight,quadTree2.topRight);
+    const o3 = intersect(quadTree1.bottomLeft,quadTree2.bottomLeft);
+    const o4 = intersect(quadTree1.bottomRight,quadTree2.bottomRight);
+    // 判断四个子节点都是叶子结点并且值都是0或者都是1，是的话合并成一个叶子结点。
+    if(o1.isLeaf && o2.isLeaf && o3.isLeaf && o4.isLeaf && o1.val === o2.val && o1.val === o3.val && o1.val === o4.val){
+        return new Node(o1.val,true);
+    }
+    return new Node(false,false,o1,o2,o3,o4);
+};
+    </script>
+</body>
+</html>
