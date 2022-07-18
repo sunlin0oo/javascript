@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    let lowestCommonAncestor = function(root, p, q) {
+        let temp = root;
+        //规定大小顺序 让p是小的，q是大的
+        if(p.val > q.val) [p,q] = [q,p];
+        while(true){
+            // 如果p和q在root两边，那么公共祖先为root
+            if((temp.val >= p.val && temp.val<=q.val) || (temp.val ===q || temp.val ===p)){
+                return temp;
+                // 当前节点比目标两个节点小，那继续向右搜索
+            }else if(temp.val<p.val && temp.val <q.val){
+                temp = temp.right
+            }else{
+                // 当前节点比目标两个节点大，那继续向左搜索
+                temp = temp.left
+            }
+        }
+    };
+    </script>
+</body>
+</html>

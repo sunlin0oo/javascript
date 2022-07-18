@@ -4,7 +4,9 @@ export default class Rect implements IUpdate{
     elem:HTMLDivElement
     y:number=0;
     constructor(){
+        // 创建div
         this.elem=document.createElement("div");
+        // 设置样式--通过断言说明对象类型(CSSStyleDeclaration))
         Object.assign(this.elem.style,{
             width:"50px",
             height:"50px",

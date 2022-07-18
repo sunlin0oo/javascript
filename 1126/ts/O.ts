@@ -26,7 +26,7 @@ export class B implements IB,IC{
 
     }
 }
-
+// C,D类实现IE接口，只要有一个类返回类型是IE且constructor有一个number参数，就可以使用ID接口
 export class C implements IE{
     a:number;
     constructor(a:number)

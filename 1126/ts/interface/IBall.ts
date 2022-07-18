@@ -3,6 +3,7 @@ export default interface IBall{
     height:number;
     run():void;
     play(a:number,b:number):number;
+    // static不可出现
     readonly ID:string;
     set num(v:number);
     get num():number;

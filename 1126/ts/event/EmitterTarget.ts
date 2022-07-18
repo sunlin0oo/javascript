@@ -8,6 +8,7 @@ export default class EmitterTarget{
     }
     public addEventListener(type:string,hanlder:Function):void
     {
+        //判断是否存在
         if(!this.disc[type])this.disc[type]=[];
         if(this.disc[type].indexOf(hanlder)>-1) return;
         this.disc[type].push(hanlder);

@@ -1,3 +1,4 @@
+
 // import ClassA from "./cls/ClassA";
 // import ClassB from "./cls/ClassB";
 // import { A } from "./O";
@@ -74,16 +75,18 @@ import EmitterTarget from "./event/EmitterTarget";
 //     }
 // }
 
-
+// 目标
 var o:EmitterTarget=new EmitterTarget();
+// 以"abc"为key==>保存abcHandler
 o.addEventListener("abc",abcHandler);
 o.addEventListener("abc",abcHandler1);
 
-
+// 事件
 var evt:EmitterEvent=new EmitterEvent("abc");
+// 抛发
 o.dispatchEvent(evt);
 
-
+// 参数一定要写出来,也包括this
 function abcHandler(this:EmitterTarget,e:EmitterEvent){
    console.log(e)
 }

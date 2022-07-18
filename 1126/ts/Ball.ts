@@ -1,5 +1,5 @@
 import IBall from "./interface/IBall";
-
+// 类实现接口，必须要用implements
 export default class Ball implements IBall{
     width:number=1;
     height:number;
