@@ -30,7 +30,7 @@ define(["require", "exports", "./event/EmitterEvent", "./event/EmitterTarget"], 
     // A   
     // 暴露   play()   a:number=1;
     // 只能在自身调用的  getTime();
-    // B--》继承--》A
+    // B==>继承==>A
     // 暴露   play()  run()  a:number=1;  b:number=2;
     // 修改 A中play()   d();
     // class A{
@@ -57,12 +57,13 @@ define(["require", "exports", "./event/EmitterEvent", "./event/EmitterTarget"], 
     //     protected d():void{
     //     }
     // }
-    // 目标
+    // 重写鼠标事件==>目标
+    // 实例化EmitterTarget
     var o = new EmitterTarget_1.default();
     // 以"abc"为key==>保存abcHandler
     o.addEventListener("abc", abcHandler);
     o.addEventListener("abc", abcHandler1);
-    // 事件
+    //  实例化EmitterEvent事件
     var evt = new EmitterEvent_1.default("abc");
     // 抛发
     o.dispatchEvent(evt);
