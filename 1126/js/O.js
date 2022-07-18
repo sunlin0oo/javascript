@@ -26,6 +26,7 @@ define(["require", "exports"], function (require, exports) {
         return B;
     }());
     exports.B = B;
+    // C,D类实现IE接口，只要有一个类返回类型是IE且constructor有一个number参数，就可以使用ID接口
     var C = /** @class */ (function () {
         function C(a) {
             this.a = a;

@@ -7,4 +7,5 @@ export default class A implements IPlay{
     public  play():void{
         console.log("aaaa")
     }
+
 }

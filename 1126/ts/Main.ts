@@ -5,6 +5,7 @@
 
 import EmitterEvent from "./event/EmitterEvent";
 import EmitterTarget from "./event/EmitterTarget";
+import { E } from "./O";
 
 // console.log(ClassA.D);
 // ClassA.b=3;

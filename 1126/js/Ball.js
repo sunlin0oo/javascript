@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    // 类实现接口，必须要用implements
     var Ball = /** @class */ (function () {
         function Ball() {
             this.width = 1;

@@ -19,7 +19,7 @@ import TimeManager from "./TimeManager";
 // ctx.strokeStyle="red";
 // ctx.strokeRect(100,100,50,50);
 
-TimeManager.instance.canvas=canvas;
+// TimeManager.instance.canvas=canvas;
 // var rect:Rect=new Rect(canvas);
 // rect.x=50;
 // rect.y=50;
@@ -42,7 +42,7 @@ TimeManager.instance.canvas=canvas;
 //     rect.speedY=Math.random()*10-5
 // }
 
-var ctx:CanvasRenderingContext2D=canvas.getContext("2d") as CanvasRenderingContext2D;
+// var ctx:CanvasRenderingContext2D=canvas.getContext("2d") as CanvasRenderingContext2D;
 
 // 设置填充色
 // ctx.fillStyle="red";
@@ -124,6 +124,6 @@ var ctx:CanvasRenderingContext2D=canvas.getContext("2d") as CanvasRenderingConte
 // ctx.strokeStyle="red";
 // ctx.strokeRect(160.5,50,100,100);
 
-ctx.fillStyle="red";
-ctx.fillRect(0,0,100,100);
-ctx.fillRect(100,0,100,100);
+// ctx.fillStyle="red";
+// ctx.fillRect(0,0,100,100);
+// ctx.fillRect(100,0,100,100);

@@ -57,11 +57,16 @@ define(["require", "exports", "./event/EmitterEvent", "./event/EmitterTarget"], 
     //     protected d():void{
     //     }
     // }
+    // 目标
     var o = new EmitterTarget_1.default();
+    // 以"abc"为key==>保存abcHandler
     o.addEventListener("abc", abcHandler);
     o.addEventListener("abc", abcHandler1);
+    // 事件
     var evt = new EmitterEvent_1.default("abc");
+    // 抛发
     o.dispatchEvent(evt);
+    // 参数一定要写出来,也包括this
     function abcHandler(e) {
         console.log(e);
     }

@@ -1,1 +1,1 @@
-{"version":3,"file":"EmitterEvent.js","sourceRoot":"","sources":["../../ts/event/EmitterEvent.ts"],"names":[],"mappings":";;;IAAA;QAEI,sBAAmB,IAAW;YAC1B,IAAI,CAAC,IAAI,GAAC,IAAI,CAAC;QACnB,CAAC;QACL,mBAAC;IAAD,CAAC,AALD,IAKC"}
+{"version":3,"file":"EmitterEvent.js","sourceRoot":"","sources":["../../ts/event/EmitterEvent.ts"],"names":[],"mappings":";;;IAAA;QAGI,sBAAmB,IAAW;YAC1B,IAAI,CAAC,IAAI,GAAC,IAAI,CAAC;QACnB,CAAC;QACL,mBAAC;IAAD,CAAC,AAND,IAMC"}
