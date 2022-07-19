@@ -9,6 +9,7 @@ define(["require", "exports", "./TimeManager"], function (require, exports, Time
         function Ball(y) {
             this.x = 0;
             this.elem = document.createElement("div");
+            // 设置样式
             Object.assign(this.elem.style, {
                 width: "50px",
                 height: "50px",
@@ -18,12 +19,14 @@ define(["require", "exports", "./TimeManager"], function (require, exports, Time
                 top: y + "px",
             });
         }
+        // 将元素添加到页面上
         Ball.prototype.appendTo = function (parent) {
             var _this = this;
             if (typeof parent === "string")
                 parent = document.querySelector(parent);
             if (parent)
                 parent.appendChild(this.elem);
+            // TimeManager.instance调用get，返回一个 TimeManager实例
             TimeManager_1.default.instance.add(this);
             this.elem.addEventListener("click", function (e) { return _this.clickHandler(e); });
         };

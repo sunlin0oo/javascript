@@ -15,4 +15,4 @@ export function clearCanvas(thisArg:TimeManager){
            return  method.apply(thisArg)
         }
     }
-}
+}  

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var MyCalendarTwo = function() {
+            this.booked = [];
+            this.overlaps = [];
+        };
+
+        /** 
+         * @param {number} start 
+         * @param {number} end
+         * @return {boolean}
+         */
+        MyCalendarTwo.prototype.book = function(start, end) {
+            /**对于两个区间[s1,e1),[s2,e2),若没有交集，则应该满足s1>=e2或者s2>=e1；反之s1<e2且s2<e1*/
+            // 遍历交集数组,查看是否有三重预定
+            for(const arr of this.overlaps){
+                let l = arr[0],r = arr[1];
+                if(l < end && start < r) return false;
+            };
+            // 将新加入的区间与已经预定的区间进行检查，求出新增的预定两次的区间。
+            for(const arr of this.booked){
+                let l = arr[0],r = arr[1];
+                if(l<end && r>start) this.overlaps.push([Math.max(l,start),Math.min(r,end)]);
+            }
+            this.booked.push([start,end]);
+            return true;
+        };
+
+
+        /**
+         * Your MyCalendarTwo object will be instantiated and called as such:
+         * var obj = new MyCalendarTwo()
+         * var param_1 = obj.book(start,end)
+         */
+    </script>
+</body>
+</html>

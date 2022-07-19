@@ -37,6 +37,7 @@ import TimeManager from "./TimeManager";
 //     var rect:Rect=new Rect(canvas);
 //     rect.x=Math.random()*(1200-50);
 //     rect.y=Math.random()*(400-50);
+//      //随机色
 //     rect.color=Array(6).fill(1).reduce((v:string)=>v+Math.floor(Math.random()*16).toString(16),"#");
 //     rect.speedX=Math.random()*10-5
 //     rect.speedY=Math.random()*10-5

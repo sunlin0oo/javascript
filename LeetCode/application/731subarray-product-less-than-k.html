@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 滑动窗口
+        var numSubarrayProductLessThanK = function(nums, k) {
+            if(k === 0){
+                return 0;
+            }
+            let ans = 0 , left = 0,cur = 1;
+            /** 窗口右边界(r)为固定轴，左边界(l)则是一个变动轴。
+             * 以窗口右边界为结束点的区间，其满足乘积小于k所能维持的最大窗口。
+            */
+            for(let right = 0,len = nums.length;right <len;right++){
+                cur *=nums[right];
+                console.log("cur:::",cur)
+                // 当满足条件是，移动变动轴
+                while(left <= right && cur >= k){
+                    cur /=nums[left++];//先赋值再+1;
+                }
+                console.log("left::",left);
+                // 因为针对上一位置的窗口，移动一次后相对增加出来的个数便是r-l+1。
+                // 最终的答案便是窗口在每个位置的最大长度的累计和。
+                ans +=right - left +1;
+                console.log("ans:::",ans)
+            }
+            return ans;
+        };
+        let nums = [10,5,2,6], k = 100;
+        let a = numSubarrayProductLessThanK(nums, k);
+        console.log(a);
+    </script>
+</body>
+</html>

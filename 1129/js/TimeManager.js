@@ -10,9 +10,10 @@ define(["require", "exports", "./decorate"], function (require, exports, decorat
     var TimeManager = /** @class */ (function () {
         function TimeManager() {
             this.updateList = [];
-            this.ids = 0;
+            this.ids = 0; //动画
         }
         Object.defineProperty(TimeManager, "instance", {
+            //单例
             // public static getInstance():TimeManager
             // {
             //     return TimeManager._instance || (TimeManager._instance=new TimeManager());
@@ -41,13 +42,22 @@ define(["require", "exports", "./decorate"], function (require, exports, decorat
                 this.ids = 0;
             }
         };
+        /**装饰器==>是在方法上面的通过修改descriptor，我们可以实现对方法进行重新描述。
+         * 对于静态方法，第一个参数为类的构造函数。对于实例方法，为类的原型对象
+            第二个参数为方法名。
+            第三个参数为方法描述符。
+            方法装饰器可以有返回值，返回值会作为方法的属性描述符
+            https://blog.csdn.net/qq_36205941/article/details/124675122
+        */
         TimeManager.prototype.anmiation = function () {
             var _this = this;
+            console.log(this); //TimeManager只有方法没有属性
+            // 这样保持this统一
             this.ids = requestAnimationFrame(function () { return _this.anmiation(); });
             this.updateList.forEach(function (item) { return item.update(); });
         };
         __decorate([
-            (0, decorate_1.clearCanvas)(TimeManager.instance)
+            (0, decorate_1.clearCanvas)(TimeManager.instance) //执行函数
         ], TimeManager.prototype, "anmiation", null);
         return TimeManager;
     }());
