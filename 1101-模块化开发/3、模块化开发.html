@@ -8,7 +8,21 @@
 </head>
 <body>
     <script type="module">//模块化开发
+        /**
+         *  1.import x from 'abc..js'
 
+            这种导入要求 abc.js模块中!!有 export default 默认导出!!，x作为消费者导入abc.js模块默认导出的名称，x可以随意更换为你喜欢的名字==>一个模块不允许有多个默认导出
+
+            2.import { y } from 'abc.js'
+
+            这种导入要求 abc.js模块中!!必需有 export y 命名导出!!，y是消费者要从abc.js模块导入的命名元素，y不可更换为其他名称。如果你实在是感觉x不顺眼，那可以采用下面的方式对y重命名
+
+            import { y as xxx } from 'abc.js'，此处xxx就是重命名的新名称
+
+            3.import x,{ y } from 'abc.js'
+
+            这种导入要求 abc.js模块中有 export default 默认导出并且有y的命名导出
+        */
         
         // import A from "./js/A.js";
         import B from "./js/B.js";

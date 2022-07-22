@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var RecentCounter = function() {
+            this.quene = [];
+        };
+
+        /** 
+         * @param {number} t
+         * @return {number}
+         */
+        RecentCounter.prototype.ping = function(t) {
+            this.quene.push(t);
+            while(this.quene[0] < (t-3000)){
+                this.quene.shift();
+            }
+            return this.quene.length;
+        };
+    </script>
+</body>
+</html>
