@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+ * @param {number[]} nums
+ * @return {number}
+ */
+// Hash表
+// var majorityElement = function(nums) {
+//     let halfLen = nums.length / 2;
+//     let len = nums.length;
+//     let number = new Map();
+//     for(let i = 0;i<len;i++){
+//         if(!number.has(nums[i])){
+//             number.set(nums[i],1)
+//             if(number.get(nums[i]) > halfLen) return nums[i]
+//         }else{
+//             let frequencies = number.get(nums[i]) + 1;
+//             if(frequencies > halfLen) return nums[i]
+//             number.set(nums[i],frequencies);
+//         }
+//     }
+// };
+// 摩尔投票法
+    var majorityElement = function(nums) {
+        let len = nums.length;
+        if(len === 0) return null;
+        let targetNum = nums[0];
+        let cnt = 0;
+        for(let i = 1;i<len;i++){
+            if(nums[i] === targetNum){
+                // 假设数组中的元素与假设的target相等时，计数cnt加1;
+                cnt +=1;
+            }else{
+                // 当数组中的元素与假设的target不相等时，计数cnt减1，即模拟不同数字相互抵消；
+                cnt -=1;
+            }
+            if(cnt === -1){
+                // 当计数cnt等于0时，说明在当前遍历到的数组元素中，当前假设的target与其他数字相互抵消（个数相同），所以我们重新假设下一个遍历的数组元素为target,继续上面过程。
+                targetNum = nums[i];
+                cnt = 0;
+            }
+        }
+        return targetNum;
+    };
+    </script>
+</body>
+</html>
