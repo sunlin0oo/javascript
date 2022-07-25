@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './css/02-maizuo.css'
 import Film from './maizuoComponent/Film'
-import Cinema from './maizuoComponent/Cinema'
+// import Cinema from './maizuoComponent/Cinema'
+import Cinema from './15-betterscroll-c'
 import Center from './maizuoComponent/Center'
 export default class App extends Component {
     state = {

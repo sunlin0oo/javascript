@@ -42,8 +42,8 @@ export default class App extends Component{
                                 __html:item.text
                             }}></span> */}
                             {/* <button onClick={this.handleDelClick.bind(this,index)}>del</button>*/}
-                            <button onClick={()=>{this.handleDelClick(index)}}>del</button>
-                            {/* <button onClick={this.handleDelClick1(index)}>del</button> */}
+                            {/* <button onClick={()=>{this.handleDelClick(index)}}>del</button> */}
+                            <button onClick={this.handleDelClick1(index)}>del</button>
                         </li>)
                     }
                  </ul>
@@ -78,7 +78,7 @@ export default class App extends Component{
             list:newlist,
         })
     }
-    handleDelClick1=(index)=>{
+    handleDelClick1=(evt,index)=>()=>{
         let newlist = this.state.list.concat();
         newlist.splice(index,1);
         this.setState({

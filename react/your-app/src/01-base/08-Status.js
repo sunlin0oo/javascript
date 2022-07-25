@@ -38,7 +38,7 @@ export default class App extends Component {
         <h1>欢迎开发-{this.state.myname}</h1>
         <button onClick={()=>{
             //  不可以在点击事件中直接点击，如果直接更改的话，react是无法得知的，所以，需要使用特殊的更改状态的方法 setState 
-            // 可以改变多种状态
+            // 可以改变多种状态,执行setState会重新执行render
             this.setState({
                 myshow:!this.state.myshow,
                 myname:"asdada"
