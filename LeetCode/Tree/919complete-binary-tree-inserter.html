@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//  初始化二叉树结构
+var CBTInserter = function(root) {
+    // candidate用于存储只有倒数第二层（如果存在）最右侧的若干个节点，以及最后一层的全部节点;
+    this.candidate = [];
+    this.root = root;
+    const quene =[];
+    quene.push(root);
+    // 广度优先遍历==>把需要的节点存储起来
+    while(quene.length){
+        // shift去除头部元素
+        const node = quene.shift();
+        if(node.left) quene.push(node.left);
+        if(node.right) quene.push(node.right);
+        // 如果node左右节点有一个不存在则存入candidate中
+        if(!(node.left&&node.right)) this.candidate.push(node)
+    }
+};
+
+/** 
+ * @param {number} val
+ * @return {number}
+ */
+CBTInserter.prototype.insert = function(val) {
+    // 构建树结构
+    const child = new TreeNode(val);
+    const node = this.candidate[0];
+    let ret = node.val;
+    if(!node.left){
+        node.left = child
+    }else{
+        node.right = child
+        this.candidate.shift();
+    }
+    this.candidate.push(child);
+    return ret;
+};
+
+/**
+ * @return {TreeNode}
+ */
+CBTInserter.prototype.get_root = function() {
+    return this.root;
+};
+
+/**
+ * Your CBTInserter object will be instantiated and called as such:
+ * var obj = new CBTInserter(root)
+ * var param_1 = obj.insert(val)
+ * var param_2 = obj.get_root()
+ */
+    </script>
+</body>
+</html>

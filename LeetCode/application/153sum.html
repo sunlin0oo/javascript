@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var threeSum = function(nums){
+        let all =[]
+        if (nums.length < 3 || !nums) return [];
+        nums.sort((a,b)=>a-b);
+        // console.log(nums);
+        for(let i = 0,len = nums.length - 2; i<len ;i++){
+            if(nums[i]>0) break;//避免多次循环
+            if(i>0 && nums[i] === nums[i-1]) continue;//去除掉自身与前面重复的情况
+            let left = i + 1;
+            // console.log("left",left)
+            let right = nums.length - 1;
+            // console.log("right",right);
+            while(left < right){
+                const sum = nums[i] + nums[left] + nums[right]
+                if(sum === 0) {
+                        let temp = [];
+                        temp.push(nums[i] , nums[left] , nums[right]);
+                        // 去除掉自身与前面重复的情况
+                        while(left < right && nums[right - 1] === nums[right]) right--;
+                        // 去除掉自身与后面重复的情况
+                        while(left < right && nums[left + 1] === nums[left]) left++;
+                        // console.log(temp);
+                        all.push(temp);
+                        // console.log(all);
+                        right --;
+                        left ++;
+                        // sum<0证明太小需要向右移动
+                }else if(sum > 0){
+                    right --;
+                    // console.log("遍历中right",right)
+                    // sum>0证明太大需要向左移动
+                }else if (sum < 0){
+                    left ++;
+                    // console.log("遍历中left",left);
+                };
+            }
+        }
+        return all;
+        }
+    </script>
+</body>
+</html>
