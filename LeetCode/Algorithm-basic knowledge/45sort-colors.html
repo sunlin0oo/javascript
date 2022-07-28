@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nums = [2,0,2,1,1,0];
+        // 双指针
+        var sortColors = function(nums) {
+            let len = nums.length;
+            let temp;
+            for(let i =len;i>0;i--){
+                let left =0;
+                let right = 1;
+                while(right<i){
+                    if(nums[left]>nums[right]){
+                        temp = nums[left];
+                        nums[left] = nums[right];
+                        nums[right] = temp;
+                    }
+                    left++;
+                    right++;
+                }
+            }
+            return nums;
+        };
+        let a = sortColors(nums);
+        console.log(a); 
+    </script>
+</body>
+</html>

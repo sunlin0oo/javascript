@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 不会
+        let expression = "-5/2+10/3+7/9";
+        var fractionAddition = function(expression) {
+            let denominator = 0, numerator = 1; // 分子，分母
+            let index = 0, n = expression.length;
+            while (index < n) {
+                // 读取分子
+                let denominator1 = 0, sign = 1;
+                //判断分子的正负号
+                if (expression[index] === '-' || expression[index] === '+') {
+                    sign = expression[index] === '-' ? -1 : 1;
+                    index++;
+                }
+                // 读取分子
+                while (index < n && isDigit(expression[index])) {
+                    console.log("denominator1::",denominator1,"denominator1 * 10::",denominator1 * 10);
+                    // *10的原因是为了求出分子或者分母10这个数字，因为字符串中他是两个字符
+                    // charCodeAt() 方法可返回指定位置的字符的 Unicode 编码
+                    denominator1 = denominator1 * 10 + expression[index].charCodeAt() - '0'.charCodeAt();
+                    console.log(denominator1,expression[index].charCodeAt(),'0'.charCodeAt());
+                    index++;
+                }
+                denominator1 = sign * denominator1;
+                // 跳过除号
+                index++;
+
+                // 读取分母
+                let numerator1 = 0;
+                while (index < n && isDigit(expression[index])) {
+                    numerator1 = numerator1 * 10 + expression[index].charCodeAt() - '0'.charCodeAt();
+                    console.log("numerator1::",numerator1);
+                    index++;
+                }
+                //相加
+                denominator = denominator * numerator1 + denominator1 * numerator;
+                numerator *= numerator1;
+            }
+            if (denominator === 0) {
+                return "0/1";
+            }
+            const g = gcd(Math.abs(denominator), numerator); // 获取最大公约数
+            return Math.floor(denominator / g) + "/" + Math.floor(numerator / g);
+        }
+        //辗转相除法 计算m和n的最大公约数
+        const gcd = (a, b) => {
+            let remainder = a % b;
+            while (remainder !== 0) {
+                a = b;
+                b = remainder;
+                remainder = a % b;
+            }
+            return b;
+        };
+        //判断是否是数字
+        const isDigit = (ch) => {
+            return parseFloat(ch).toString() === "NaN" ? false : true;
+        }
+
+        let b = fractionAddition(expression);
+        console.log(b);
+    </script>
+</body>
+</html>
