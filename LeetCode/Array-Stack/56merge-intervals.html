@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var merge = function(intervals) {
+            intervals.sort((a,b)=>a[0]-b[0]);
+            let result = [];
+            let temp = intervals[0];
+            let len = intervals.length;
+            for(let i = 0;i<len;i++){
+                let item = intervals[i];
+                // 前一个区间的end >=后一个区间的start
+                if(temp[1] >= item[0]) {
+                    // 取两个区间最大的end部分，保证区间最大化
+                    temp[1] = Math.max(temp[1],item[1]);
+                }else{
+                    result.push(temp);
+                    temp = item;
+                }
+            }
+            result.push(temp);
+            return result;
+        };
+    </script>
+</body>
+</html>
