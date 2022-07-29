@@ -33,14 +33,15 @@ export default class Cinema extends Component {
                 // 获取所有的数据
                 cinemaList:res.data.data.cinemas,
                 // bakcinemaList:res.data.data.cinemas
-            })
-
-            // 打印log
+            },()=>{
+                // 打印log
 
             console.log(this.state.cinemaList)
 
 
             new BetterScroll(".kerwinwrapper")
+            })
+
         })
     }
 

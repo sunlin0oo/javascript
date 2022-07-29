@@ -10,14 +10,26 @@ export default class App extends Component {
             info:''
         }
         // public是静态库，可以直接获取到
-        axios.get(`/test.json`).then(res=>{
+        // axios.get(`/test.json`).then(res=>{
+        //     this.setState({
+        //         fileList:res.data.data.films
+        //     })
+        //     console.log(res.data.data.films)
+        // })
+    }
+    //在这里进行axios请求
+    componentDidMount(){
+        axios.get("/test.json").then(res=>{
+            console.log(res.data.data.films)
+    
             this.setState({
                 fileList:res.data.data.films
             })
-            console.log(res.data.data.films)
+    
+            // 访问
+
         })
     }
-
   render() {
     return (
       <div>
