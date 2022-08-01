@@ -4,7 +4,7 @@ import BetterScroll from 'better-scroll'
 export default class App extends Component {
     state = {
         myname:"sunlin",
-        list:['','','','','','','','','','','','',''],
+        list:[],
     }
 
     componentDidMount(){
@@ -18,9 +18,10 @@ export default class App extends Component {
                 // 访问到真实的DOM
                 console.log("this.state.list:",this.state.list);
                 new BetterScroll("#warpper");
-            })
+            }) 
+            console.log("this.state.list::",this.state.list); 
         })
-        console.log("this.state.list::",this.state.list); 
+       
     }
 
     render() {

@@ -30,6 +30,7 @@ export default class Cinema extends Component {
                 CinemaList:res.data.data.cinemas,
                 backinemaList:res.data.data.cinemas
             })
+            console.log("CinemaList:",this.state.CinemaList);
         })
     }
 

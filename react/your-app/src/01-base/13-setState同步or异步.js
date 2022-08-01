@@ -14,6 +14,7 @@ export default class App extends Component {
       </div>
     )
   }
+//   Setstate是异步更新状态，异步更新真实dom
   handlerClick1=()=>{
     this.setState({
         count:this.state.count + 1
@@ -33,7 +34,7 @@ export default class App extends Component {
 
     console.log(this.state.count)
   }
-
+//   setState处于异步逻辑中 同步新状态，同步更新真实dom
   handlerClick2=()=>{
     setTimeout(()=>{
         this.setState({
@@ -43,7 +44,7 @@ export default class App extends Component {
         console.log(this.state.count)
     
         this.setState({
-            count:this.state.count + 1
+            count:this.state.count + 1 
         })
     
         console.log(this.state.count)
@@ -55,7 +56,7 @@ export default class App extends Component {
         console.log(this.state.count)
     },0)
   }
-
+//   setState接收第二个参数，第二个参数是回调函数，状态和dom更新完后会被触发
   handlerClick3=()=>{
     this.setState({
         count:this.state.count + 1
@@ -75,9 +76,4 @@ export default class App extends Component {
         console.log(this.state.count)
     }) ;
   }
-}
-/**
- * setState处于同步逻辑中 异步更新状态，更新真  实dom
- * setState处于异步逻辑中 同步新状态，更新真实dom
- * setState接收第二个参数，第二个参数是回调函数，状态和dom更新完后会被触发
- */
+} 

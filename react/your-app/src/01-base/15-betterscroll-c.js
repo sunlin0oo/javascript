@@ -41,14 +41,16 @@ export default class Cinema extends Component {
             this.setState({
                 cinemaList:res.data.data.cinemas,
                 bakcinemaList:res.data.data.cinemas
+            },()=>{
+                 new BetterScroll(".kerwinwrapper")
             })
 
             // 打印log
 
-            console.log(this.state.cinemaList)
+            console.log("this.state.cinemaList::",this.state.cinemaList)
 
 
-            new BetterScroll(".kerwinwrapper")
+           
         })
     }
 
