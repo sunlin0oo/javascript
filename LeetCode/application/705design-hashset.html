@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var MyHashSet = function() {
+            // 设哈希表的大小为 base
+            this.BASE = 769;
+            // 开辟一个大小为 base 的数组，数组的每个位置是一个链表。当计算出哈希值之后，就插入到对应位置的链表当中。
+            this.data = new Array(this.BASE).fill(0).map(() => new Array());
+        };
+
+        /** 
+         * @param {number} key
+         * @return {void}
+         */
+        MyHashSet.prototype.add = function(key) {
+            //返回一个index
+            const h = this.hash(key);
+            // 查找是否存在key
+            for(const element of this.data[h]){
+                if(element === key){
+                    return;
+                }
+            }
+            this.data[h].push(key);
+        };
+
+        /** 
+         * @param {number} key
+         * @return {void}
+         */
+        MyHashSet.prototype.remove = function(key) {
+            const h = this.hash(key);
+            const it = this.data[h];
+            for (let i = 0; i < it.length; ++i) {
+                if (it[i] === key) {
+                    it.splice(i, 1);
+                    return;
+                }
+            }
+        };
+
+        /** 
+         * @param {number} key
+         * @return {boolean}
+         * 查找：
+         */
+        MyHashSet.prototype.contains = function(key) {
+            const h = this.hash(key);
+            for(const element of this.data[h]){
+                if(element === key) return true
+            }
+            return false
+        };
+
+        MyHashSet.prototype.hash = function(key) {
+            // 保证key在整数范围内
+            return key % this.BASE;
+        }
+    </script>
+</body>
+</html>
