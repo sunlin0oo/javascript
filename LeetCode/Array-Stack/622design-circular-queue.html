@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 通过一个数组进行模拟，通过操作数组的索引构建一个虚拟的首尾相连的环。在循环队列结构中，设置一个队尾 \textit{rear}rear 与队首 \textit{front}front，且大小固定
+    //为了区别这两种情况（队列满和队列空），假设队列使用的数组有 capacity 个存储空间，则此时规定循环队列最多只能有capacity−1 个队列元素，当循环队列中只剩下一个空存储单元时，则表示队列已满。
+
+        /**
+         * @param {number} k
+         */
+        var MyCircularQueue = function(k) {
+            // 定义初始空间
+            this.capacity = k + 1;
+            // 用于保存循环队列元素
+            this.elements = new Array(this.capacity).fill(0);
+            // 首元素对应数组的索引
+            this.front = 0;
+            // 队列为元素对应的索引的下一个索引
+            this.rear = 0;
+        };
+
+        /** 
+         * @param {number} value
+         * @return {boolean}
+         * 在队列尾部插入一个元素，并同时将队尾索引rear更新为(rear+1)mod caoacity
+         */
+        MyCircularQueue.prototype.enQueue = function(value) {
+            if(this.isFull()) return false;
+            this.elements[this.rear] = value;
+            this.rear = (this.rear + 1) % this.capacity;
+            return true;
+        };
+
+        /**
+         * @return {boolean}
+         * 去除一个元素
+         */
+        MyCircularQueue.prototype.deQueue = function() {
+            if(this.isEmpty()) return false;
+            this.front = (this.front + 1) % this.capacity;
+            return true;
+        };
+
+        /**
+         * @return {number}
+         * 返回队首元素
+         */
+        MyCircularQueue.prototype.Front = function() {
+            if(this.isEmpty()) return -1;
+            return this.elements[this.front]
+        };
+
+        /**
+         * @return {number}
+         * 返回队尾元素
+         */
+        MyCircularQueue.prototype.Rear = function() {
+            if(this.isEmpty()) return -1;
+            return this.elements[(this.rear - 1 + this.capacity) % this.capacity];
+        };
+
+        /**
+         * @return {boolean}
+         */
+        MyCircularQueue.prototype.isEmpty = function() {
+            // 当两个指针重合时表示为空
+            return this.rear === this.front;
+        };
+
+        /**
+         * @return {boolean}
+         * 
+         */
+        MyCircularQueue.prototype.isFull = function() {
+            return (this.rear + 1) % this.capacity === this.front
+        };
+
+        /**
+         * Your MyCircularQueue object will be instantiated and called as such:
+         * var obj = new MyCircularQueue(k)
+         * var param_1 = obj.enQueue(value)
+         * var param_2 = obj.deQueue()
+         * var param_3 = obj.Front()
+         * var param_4 = obj.Rear()
+         * var param_5 = obj.isEmpty()
+         * var param_6 = obj.isFull()
+         */
+    </script>
+</body>
+</html>
