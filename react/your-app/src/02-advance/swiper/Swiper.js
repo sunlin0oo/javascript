@@ -8,17 +8,14 @@ import '../../../node_modules/swiper/swiper-bundle.min.css'
 Swiper.use([Navigation, Pagination]);
 
 export default class KSwiper extends Component {
-
-    state = {
-        list: ["111", "222", "333"]
-    }
-
     componentDidMount() {
         new Swiper(".swiper",{
              // 如果需要分页器
             pagination: {
                 el: '.swiper-pagination',
             },
+            // 开启衔接滑动
+            loop:this.props.loop
         })
     }
     
@@ -26,9 +23,9 @@ export default class KSwiper extends Component {
     render() {
         return (
             <div>
-                <div className="swiper" style={{height:"200px",background:"yellow"}}>
+                <div className="swiper" >
                     <div className="swiper-wrapper">
-                        {this.props.children} 
+                        {this.props.children}
                     </div>
 
                     <div className="swiper-pagination"></div>
