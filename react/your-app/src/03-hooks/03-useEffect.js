@@ -14,6 +14,10 @@ export default function App() {
                 setList(res.data.data.films)
             })
     },[])//传空数组，只会执行一次
+    //USEffect支持写多个数据
+    useEffect(()=>{
+      //AXIOS
+    })
   return (
     <div>
         {

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 原地旋转
+        var rotate = function(matrix) {
+            // 获取到列/行的数量
+            const n = matrix.length;
+            // 行
+            for(let i = 0 ;i<Math.floor(n/2);++i){
+                // 列
+                for(let j = 0;j<Math.floor((n+1)/2);++j){
+                    // 作为中间变量进行暂存
+                    const temp = matrix[i][j];
+                    matrix[i][j] = matrix[n-j-1][i];
+                    matrix[n-j-1][i] = matrix[n-i-1][n-j-1];
+                    matrix[n-i-1][n-j-1] = matrix[j][n-i-1];
+                    matrix[j][n-i-1] = temp;
+                }
+            }
+        }   
+    </script>
+</body>
+</html>
