@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  * function TreeNode(val, left, right) {
+        //  *     this.val = (val===undefined ? 0 : val)
+        //  *     this.left = (left===undefined ? null : left)
+        //  *     this.right = (right===undefined ? null : right)
+        //  * }
+        // 深度优先遍历
+        var addOneRow = function(root, val, depth) {
+            if (!root) {
+                return null;
+            }
+            // 当输入 depth 为 1 时，需要创建一个新的root，并将原root 作为新root 的左子节点。
+            if(depth === 1) return new TreeNode(val,root,null);
+            //当depth为2时，需要在root下面新增两个节点left 和 right新节点
+            if(depth === 2) {
+                root.left =  new TreeNode(val,root.left,null);
+                root.right = new TreeNode(val,null,root.right);
+            }else{
+                root.left = addOneRow(root.left, val, depth - 1);
+                root.right = addOneRow(root.right, val, depth - 1);
+            }
+        };
+
+        // 广度优先遍历
+        var addOneRow = function (root,val,depth){
+            // 值 val 作为整个原始树的新根，而原始树就是新根的左子树。
+            if(depth === 1) return new TreeNode(val,root,null);
+            let curLevel = [];
+            // 将根目录放到curlevel中
+            curLevel.push(root);
+            for(let i = 1;i<depth-1;i++){
+                const tmp = [];
+                // 遍历根节点的左右子树写入tmp中
+                for (const node of curLevel) {
+                    if (node.left) {
+                        tmp.push(node.left);
+                    }
+                    if (node.right) {
+                        tmp.push(node.right);
+                    }
+                }
+                curLevel = tmp;
+            }
+            for (const node of curLevel) {
+                node.left = new TreeNode(val, node.left, null);
+                node.right = new TreeNode(val, null, node.right);
+            }
+            return root;
+        }
+    </script>
+</body>
+</html>

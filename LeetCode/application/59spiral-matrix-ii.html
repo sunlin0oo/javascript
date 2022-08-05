@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 模拟
+        var generateMatrix = function(n) {
+            // 规定最大规模
+            const maxNum = n * n;
+            // 指定当前数字
+            let curNum = 1;
+            // 建立初始矩阵
+            const matrix = new Array(n).fill(0).map(() => new Array(n).fill(0));
+            let row = 0, column = 0;
+            //                  右移动， 下移动， 左移动，  上移动
+            const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]]; // 右下左上
+            let directionIndex = 0;
+            while (curNum <= maxNum) {
+                matrix[row][column] = curNum;
+                curNum++;
+                const nextRow = row + directions[directionIndex][0]
+                const nextColumn = column + directions[directionIndex][1];
+                if (nextRow < 0 || nextRow >= n || nextColumn < 0 || nextColumn >= n || matrix[nextRow][nextColumn] !== 0) {
+                    directionIndex = (directionIndex + 1) % 4; // 顺时针旋转至下一个方向
+                }
+                row = row + directions[directionIndex][0];
+                column = column + directions[directionIndex][1];
+            }
+            return matrix;
+        };
+
+        // 按层模拟
+        var generateMatrix = function(n) {
+            let num = 1;
+            const matrix = new Array(n).fill(0).map(() => new Array(n).fill(0));
+            // 遍历层序号
+            let left = 0, right = n - 1, top = 0, bottom = n - 1;
+            while (left <= right && top <= bottom) {
+                // 从左到右填入上侧元素,(top,left)==>(top,right)
+                for (let column = left; column <= right; column++) {
+                    matrix[top][column] = num;
+                    num++;
+                }
+                // 从上到下填入右侧元素,(top+1,right)==>(bottom,right)
+                for (let row = top + 1; row <= bottom; row++) {
+                    matrix[row][right] = num;
+                    num++;
+                }
+                if (left < right && top < bottom) {
+                     // 从右到左填入下侧元素,(bottom,right-1)==>(bottom,left+1)
+                    for (let column = right - 1; column > left; column--) {
+                        matrix[bottom][column] = num;
+                        num++;
+                    }
+                     // 从下到上填入左侧侧元素,(bottom1,left)==>(top+1,left)
+                    for (let row = bottom; row > top; row--) {
+                        matrix[row][left] = num;
+                        num++;
+                    }
+                }
+                left++;
+                right--;
+                top++;
+                bottom--;
+            }
+            return matrix;
+        };
+    </script>
+</body>
+</html>
