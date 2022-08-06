@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 // 必须要首字母大写
 // import App from"./01-base/01-class"
 // 将div插入到id===root的节点中==>JSX
-import App from './03-hooks/11-useRef-保存值'
+import App from './03-hooks/15-useReducer3'
 // react 17
 // ReactDOM.render(<div>11111111111</div>,document.getElementById("root"));
 //react 18
