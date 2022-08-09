@@ -17,7 +17,7 @@
         // }
 
 
-        // 匿名函数==>可以被保护
+        // 匿名函数==>可以被保护==>闭包是用匿名函数来实现
         // var fn=function(){
 
         // }
@@ -51,6 +51,7 @@
         // 中空间，给这个变量赋值undefined，如果已经定义过，则不改变原值
         // var a;
         // 不管a是否定义过，在这里都重新赋值为undefined
+
         // var a=undefined;
 
         // console.log(a);
@@ -59,9 +60,6 @@
         // }
 
         // a();
-
-
-
 
         // var fn=function(){
         //     console.log("aa");
@@ -204,12 +202,12 @@
         //     a:100,
         //     b:function(){
         // //上下文环境，this，谁调用o调用，o环境下的a
-        //         console.log(this);//----->指向o
+        //         console.log(this);//----->指向o,o调用b
         //         var obj1={
         //             a:1,
         //             b:this.a//---->this指向o
         //         }
-        //         console.log(obj1.b);
+        //         console.log("obj1.b",obj1.b);
         //     }
         // }
         // o.b();

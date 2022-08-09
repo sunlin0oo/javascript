@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nums = [2,3,5,-5,-1];
+        let a = minStartValue(nums);
+        console.log(a);
+        function minStartValue(nums) {
+            let accSum = 0, accSumMin= 0,length = nums.length;
+            for(let i = 0;i<length;i++){
+                accSum += nums[i];
+                accSumMin = Math.min(accSumMin,accSum);
+            }
+            return -accSumMin + 1
+        };
+    </script>
+</body>
+</html>
