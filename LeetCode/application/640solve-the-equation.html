@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let equation = "x+5-3+x=6+x-2";
+        function solveEquation(equation) {
+            let factor = 0,val = 0;//factor管理变量前面的系数;val管理数字
+            let index = 0//当前指向索引
+            // sign1 sign2作为数字的符号
+            let n = equation.length,sign1 = 1// 等式左边默认系数为正
+            while(index<n){
+                // 跳过 = 部分
+                if(equation[index] === '='){
+                    sign1 = -1;
+                    index++;
+                    continue;
+                }
+                let sign2 = sign1,number = 0;
+                let valid = false;//记录number是否有效
+                // 跳过符号位
+                if (equation[index] === '-' || equation[index] === '+') { // 去掉前面的符号
+                    sign2 = (equation[index] === '-') ? -sign1 : sign1;
+                    index++;
+                }
+                // 获得数字
+                while (index < n && isDigit(equation[index])) {
+                    number = number * 10 + (equation[index].charCodeAt() - '0'.charCodeAt());
+                    index++;
+                    valid = true;
+                }
+                // 判断变量
+                if(index<n && equation[index] === 'x'){
+                    factor += valid ? sign2 * number : sign2;
+                    index++;
+                }else{
+                    val += sign2 * number;
+                }
+            }
+            if(factor === 0){
+                return val === 0 ? "Infinite solutions" : "No solution";
+            };
+            if (val % factor !== 0) {
+                return "No solution";
+            }
+            return "x=" + (-val / factor);
+
+        };
+        //判断是否是数字
+        const isDigit = (ch) => {
+            return parseFloat(ch).toString() === "NaN" ? false : true;
+        }
+    </script>
+</body>
+</html>

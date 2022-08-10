@@ -4,6 +4,7 @@ import Films from '../view/Films'
 import Cinemas from '../view/Cinemas'
 import Center from '../view/Center'
 import NotFound from '../view/NotFound'
+// import Nowplaying from '../view/Nowplaying'
 export default class App extends Component {
   render() {
     return (
@@ -11,9 +12,14 @@ export default class App extends Component {
         {/* location.hash获取 */}
         {/* view放置页面视图 */}
         <HashRouter>
+          {/* 留插槽，让Tabbar组件插入 */}
+          {this.props.children}
             {/* 只渲染匹配到的第一个 */}
             <Switch>
-                <Route path='/films' component={Films}/>
+              {/* 做嵌套路由 不要进行精确匹配 */}
+                <Route path='/films' component={Films} />
+                {/* 这里写二级路由的话，只会进行覆盖，因为这两个路由是兄弟关系，而不是父子关系*/}
+                {/* <Route path='/films/nowplaying' component={Nowplaying}/> */}
                 <Route path='/cinemas' component={Cinemas}/>
                 <Route path='/center' component={Center}/>
                 {/* 重定向==>from='/'==>是模糊匹配==>若没有匹配的Router则会到 to 里面所展示的router
