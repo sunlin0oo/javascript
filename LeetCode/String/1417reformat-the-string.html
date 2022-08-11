@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let s = "1229857369";
+        let a = reformat(s);
+        console.log(a);
+        function reformat(s) {
+            let sLen = s.length;
+            let sumDigit = 0;
+            for(let i = 0;i<sLen;i++){
+                if(isDigit(s[i])) sumDigit++
+            }
+            let sumString = sLen - sumDigit;
+            console.log(Math.abs(sumString - sumDigit>1));
+            if(Math.abs(sumString - sumDigit)>1) return '';
+            // 数字和字母中个数多的放在偶数位上；若数字比字母多，则为true，放于偶数位
+            let flag = sumDigit > sumString;
+            let arr = [...s];
+            // i是个数多下标，j是个数少下标==>两个为一组
+            for (let i = 0, j = 1; i < s.length; i += 2) {
+                // 以数字比字母多为例：i位置是数字，j位置就要是字母
+                // 如果这个不是数字，则进入循环;是数字，则进行下一个循环
+                if (isDigit(arr[i]) !== flag) {
+                    // 去寻找数字，与i位置的字母进行交换
+                    while (isDigit(arr[j]) !== flag) {
+                        j += 2;
+                    }
+                    // 位置交换
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+            }
+            return arr.join('');
+        };
+
+        function isDigit(ch){
+            return parseFloat(ch).toString() === "NaN"?false:true;
+        }
+    </script>
+</body>
+</html>
