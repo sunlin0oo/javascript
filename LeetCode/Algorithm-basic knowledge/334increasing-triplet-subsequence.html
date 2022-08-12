@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 双向遍历
+        var increasingTriplet = function(nums) {
+            const n = nums.length;
+            if (n < 3) {
+                return false;
+            }
+            const leftMin = new Array(n).fill(0);
+            // 找出左侧最小
+            leftMin[0] = nums[0];
+            for (let i = 1; i < n; i++) {
+                leftMin[i] = Math.min(leftMin[i - 1], nums[i]);
+            }
+            const rightMax = new Array(n).fill(0);
+            // 找出右侧最大
+            rightMax[n - 1] = nums[n - 1];
+            for (let i = n - 2; i >= 0; i--) {
+                rightMax[i] = Math.max(rightMax[i + 1], nums[i]);
+            }
+            for (let i = 1; i < n - 1; i++) {
+                if (nums[i] > leftMin[i - 1] && nums[i] < rightMax[i + 1]) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        // 贪心算法：为了找到递增的三元子序列，first 和second 应该尽可能地小，此时找到递增的三元子序列的可能性更大。
+        var increasingTriplet = function(nums) {
+            const n = nums.length;
+            if (n < 3) {
+                return false;
+            }
+            let first = nums[0], second = Number.MAX_VALUE;
+            for (let i = 1; i < n; i++) {
+                const num = nums[i];
+            /**
+             * 遍历过程中遇到的所有元素都大于first，则当遇到num>second 时，first 一定出现在 second 的前面，
+             * second 一定出现在num 的前面，(first,second,num) 即为递增的三元子序列。
+            */
+                if (num > second) {
+                    return true;
+                } else if (num > first) {
+                    second = num;
+                } else {
+                    first = num;
+                }
+            }
+            return false;
+        };
+    </script>
+</body>
+</html>
