@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
+import { show, hide } from '../redux/actionCreator/TabbaractionCreator';
+import store from '../redux/store'
 
 export default function Detail(props) {
   useEffect(()=>{
     console.log('create')
 
     // store.dispatch 通知
-
+    store.dispatch(hide());
     return ()=>{
       console.log('destory')
+      store.dispatch(show())
     }
   },[])
   // 动态路由传参
