@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number[]} nums
+         * @param {number} k
+         * @return {number}
+         */
+        var subarraySum = function(nums, k) {
+            let pre = 0;//代表前n项和
+            let count = 0;//代表出现的次数
+            let map = new Map();
+            map.set(0,1);
+            for(const x of nums){
+                pre += x;
+                if(map.has(pre - k)){
+                    count += map.get(pre - k);
+                }
+                if(map.has(pre)){
+                    map.set(pre,map.get(pre)+1);
+                }else{
+                    map.set(pre,1)
+                }
+            }
+            return count;
+        };
+    </script>
+</body>
+</html>

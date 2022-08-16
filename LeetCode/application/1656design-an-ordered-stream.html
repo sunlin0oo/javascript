@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number} n
+         */
+        var OrderedStream = function(n) {
+            this.ptr = 0;
+            this.array = new Array(n);
+        };
+
+        /** 
+         * @param {number} idKey 
+         * @param {string} value
+         * @return {string[]}
+         */
+        OrderedStream.prototype.insert = function(idKey, value) {
+            let len = this.array.length;
+            let ans = [];
+            if(this.array[idKey-1] === undefined) this.array[idKey-1] = value;
+            for(let i = this.ptr ;i<len;i++){
+                if(this.array[i] !== undefined){
+                    this.ptr++;
+                    ans.push(this.array[i]);
+                }else{
+                    break;
+                }
+            }
+            return ans;
+        };
+
+        /**
+         * Your OrderedStream object will be instantiated and called as such:
+         * var obj = new OrderedStream(n)
+         * var param_1 = obj.insert(idKey,value)
+         */
+    </script>
+</body>
+</html>
