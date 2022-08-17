@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+ * @param {string[]} words
+ * @param {string} order
+ * @return {boolean}
+ */
+var isAlienSorted = function(words, order) {
+    let biglen;
+        let map = new Map();
+        //建立Hash表
+        for(let i = 0,len = order.length;i<len;i++){
+            map.set(order[i],i);
+        }
+
+        for(let i = 0,len = words.length;i<len;i++){
+            if((i+1)>=len) break;
+            biglen = ((words[i].length >= words[i+1].length) ? words[i].length : words[i+1].length);
+            // console.log(words[i+1].length);
+            // console.log(biglen);
+            if(words[i] === words[i+1]) continue;
+            for(let j = 0;j<biglen;j++){    
+                if(words[i][j] !== words[i+1][j]){
+                    // console.log(words[i][j],words[i+1][j]);
+                    //只要这两个之间有一个是false 就直接返回false
+                    if(words[i][j]===null || words[i][j]===undefined) break;
+                    if(words[i+1][j]===null|| words[i+1][j]===undefined) return false;
+                    //在hash表中寻找比较前后位置
+                    if(map.get(words[i][j]) > map.get(words[i+1][j])){
+                        return false;
+                    }else{
+                        break;
+                    }
+                }
+            }
+        }
+        return true;
+    };
+    </script>
+</body>
+</html>
