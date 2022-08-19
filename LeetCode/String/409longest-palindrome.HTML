@@ -32,8 +32,9 @@
             console.log(map);
             for(let key of map.keys()){
                 if(target && map.get(key) %2 === 1){
+                    // 只允许有一个奇数
                     target = false;
-                    sum += (map.get(key));;
+                    sum += (map.get(key));
                 }else{
                     if(map.get(key)%2===0){
                         sum += (map.get(key));
