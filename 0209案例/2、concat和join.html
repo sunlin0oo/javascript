@@ -19,7 +19,6 @@
         // var str=arr.join("");
         // console.log(str);
 
-
         //讲解空元素和undefined；
         // var arr=[1,2,3,,4,undefined,6]
         // var arr1=[]
@@ -36,35 +35,37 @@
         // console.log("c" in obj);  false
         // console.log("d" in obj);  true
 
-/*  concat
-        function arrayConcat(array){
-            if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
-            var arr=[];
-            for(var i=0;i<arguments.length;i++){
-                if(arguments[i] && arguments[i].constructor===Array){
-                    for(var j=0;j<arguments[i].length;j++){
-                       if(j in arguments[i])  arr[arr.length]=arguments[i][j];  //判断空元素，用下标（索引）去判断
-                       else arr.length++;
-                    }
-                }else{
-                   arr[arr.length]=arguments[i];
-                }
-            }
-            return arr;
-        }
 
-       var arr1=arrayConcat(arr,-1,[0,undefined,,[-1,-2]],-2);
-       console.log(arr1);
+//   concat
+    //     function arrayConcat(array){
+    //         if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
+    //         var arr=[];
+    //         for(var i=0;i<arguments.length;i++){
+    //             if(arguments[i] && arguments[i].constructor===Array){
+    //                 // 判断属性是否存在于对象中,如果存在,返回值为true,如果不存在,则为false;
+    //                 // 判断数组,对于数组来说,索引号就是属性,可以使用数组索引,也可以使用字符串。 
+    //                 for(var j=0;j<arguments[i].length;j++){
+    //                    if(j in arguments[i])  arr[arr.length]=arguments[i][j];  //判断空元素，用下标（索引）去判断
+    //                    else arr.length++;
+    //                 }
+    //             }else{
+    //                arr[arr.length]=arguments[i];
+    //             }
+    //         }
+    //         return arr;
+    //     }
 
-      var arr2=arr .concat(-1,[0,undefined,,[-1,-2]],-2);
-      console.log(arr2);
- */
+    //    var arr1=arrayConcat(arr,-1,[0,undefined,,[-1,-2]],-2);
+    //    console.log(arr1);
+
+    //   var arr2=arr .concat(-1,[0,undefined,,[-1,-2]],-2);
+    //   console.log(arr2);
 //   join
     function arrayJoin(array,separator){
         if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
         if(array.length===0) return "";
         if(separator===undefined) separator=",";
-        separator=String(separator);
+        separator=String(separator);//避免不是字符串的字符传入
         var str="";
         for(var i=0;i<array.length-1;i++){
             str+=array[i]+separator;
@@ -72,7 +73,7 @@
         return str+array[array.length-1];//+上最后一个数字
     }
 
-    // arrayJoin(arr);
+    arrayJoin(arr);
 
    var str=arr.join("[1]");//String
    var str1=arrayJoin(arr,"[1]");//String
