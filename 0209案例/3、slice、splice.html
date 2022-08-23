@@ -18,14 +18,14 @@
     // var arr1=arr.slice("a","b");
     // console.log(arr1,arr);
 
-
     /*
     slice
-    function arraySlice(array,,end){
+    function arraySlice(array,start,end){
         if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
         if(array.length===0) return [];
         if(start===undefined) start=0;
         if(end===undefined) end=array.length;
+        // 取整
         start=~~start;
         end=~~end;
         if(start<0) start=(array.length+start<0 ? 0 : array.length+start);
@@ -60,7 +60,31 @@
 
         // splice
 
-    
+        function arraySplice(array,start,countDelete){
+            if(!array || array.constructor!==Array)throw new TypeError("请给入正确的数组");
+            if(start === undefined) return [];
+            start=~~start;
+            if(start<0) start = (array.length + start)<0? 0: array.length + start;
+            if(countDelete===undefined) countDelete = array.length - start;
+            countDelete=~~countDelete;
+            if(countDelete<0) countDelete =0;
+            let delArr = [];
+            let len = start + countDelete;
+            if(start + countDelete > array.length) len = array.length;
+            for(let i = start;i<array.length;i++){
+                if(i<len) delArr[delArr.length] = array[i];
+                array[i] = array[i+countDelete]
+            }
+
+            array.length-=len - start;
+            if(arguments.length<=3) return delArr;
+            len = arguments.length - 3;
+            for(let i = array.length + len -1;i>=start;i--){
+                if(i>start+len) array[i] = array[i-len];
+                else array[i] = arguments[arguments.length - len+(i-start)]
+            }
+            return delArr;
+        }
 
         function arraySplice(array,start,countDelete){
             if(!array || array.constructor!==Array) throw new TypeError("请给入正确的数组");
@@ -76,7 +100,7 @@
             if(start+countDelete>array.length)len=array.length;
             for(var i=start;i<array.length;i++){
                if(i<len)  delArr[delArr.length]=array[i];
-                array[i]=array[i+countDelete];  // 从前往后进行覆盖
+                array[i]=array[i+countDelete];  // 从后往前进行覆盖
             }
 
             array.length-=len-start;
@@ -85,7 +109,9 @@
             len=arguments.length-3;//添加个数==>len=1    array.length==>3    i===>3
             for(var i=array.length+len-1;i>=start;i--){  //从前往后添加
                if(i>=start+len) array[i]=array[i-len]//len 是插入项===>挪到start+len
-               else array[i]=arguments[arguments.length-len+(i-start)]
+            //    rguments.length-len = 3
+            //    else array[i]=arguments[arguments.length-len+(i-start)]
+                else array[i]=arguments[3+(i-start)]
             }
             return delArr;
         }

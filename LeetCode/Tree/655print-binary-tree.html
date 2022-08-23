@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {string[][]}
+ */
+// 深度遍历长度，广度遍历数组
+var printTree = function(root) {
+    let height = treeHeight(root);
+    let cloumn = Math.pow(2,height+1)-1
+    let res = new Array(height+1).fill(0).map(()=> new Array(cloumn).fill(""));
+    let queue = [];
+    queue.push([root,0,Math.floor((cloumn-1)/2)]);
+    while(queue.length>0){
+        const temp = queue.shift();
+        const node = temp[0];
+        const  r = temp[1] ,c = temp[2]; 
+        res[r][c] = node.val.toString();
+        if(node.left) {
+            queue.push([node.left,r+1,c-Math.pow(2,height-1-r)]);
+        }
+        if(node.right){
+            queue.push([node.right,r+1,c+Math.pow(2,height-1-r)]);
+        }
+    }
+    return res;
+};
+const treeHeight =(root)=>{
+    let h = 0;
+        if (root.left) {
+            h = Math.max(h, treeHeight(root.left) + 1);
+        }
+        if (root.right) {
+            h = Math.max(h, treeHeight(root.right) + 1);
+        }
+        return h;
+}
+// 广度优先遍历获取树的深度
+const CalDepth = (root) => {
+    let res = -1;
+    const queue = [root];
+    while (queue.length > 0) {
+        let len = queue.length;
+        res++;
+        while (len > 0) {
+            len--;
+            const t = queue.shift();
+            if (t.left) {
+                queue.push(t.left);
+            }
+            if (t.right) {
+                queue.push(t.right);
+            }
+        }
+    }
+    return res;
+}
+
+
+    </script>
+</body>
+</html>
