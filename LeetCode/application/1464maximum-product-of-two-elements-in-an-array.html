@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var maxProduct = function(nums) {
+        //     let len = nums.length;
+        //     let ans = 1;
+        //     if(len<3){
+        //         for(let i = 0;i<len;i++){
+        //             ans *=(nums[i]-1);
+        //         }
+        //         return ans;
+        //     }
+        //     nums.sort((a,b)=>b-a);
+        //     for(let i = 0;i<2;i++){
+        //         ans *=(nums[i]-1);
+        //     }
+        //     return ans
+        // };
+
+        // var maxProduct = function(nums) {
+        //     let len = nums.length;
+        //     let ans = 1;
+        //     if(len<3){
+        //         for(let i = 0;i<len;i++){
+        //             ans *=(nums[i]-1);
+        //         }
+        //         return ans;
+        //     }
+        //     let index = 0;
+        //     let max = 1;
+        //     for(let i = 0;i<len;i++){
+        //         if(max < nums[i]){
+        //             max = nums[i];
+        //             index = i
+        //         }
+        //     }
+        //     max = 0
+        //     ans *=(nums[index]-1);
+        //     let temp = index;
+        //     console.log(temp)
+        //     for(let i = 0;i<len;i++){
+        //         if(max < nums[i]){
+        //             if(i !== temp){
+        //                 max = nums[i];
+        //                 index = i
+        //             }
+        //         }
+        //     }
+        //     ans *=(nums[index]-1);
+        //     return ans
+        // };
+        // 一次遍历，维护最大和次大值
+        var maxProduct = function(nums) {
+            let len = nums.length;
+            let a = nums[0],b= nums[1];
+            if(a<b){
+                const temp = a;
+                a = b;
+                b = temp;
+            };
+            for(let i = 2;i<len;i++){
+                if(nums[i] > a){
+                    b = a;
+                    a = nums[i];
+                }else if(nums[i] > b){
+                    b = nums[i];
+                }
+            }
+            return (a-1)*(b-1);
+        }
+        let nums =  [3,4,5,2];
+        let a = maxProduct(nums);
+        console.log(a);
+    </script>
+</body>
+</html>

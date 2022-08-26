@@ -22,21 +22,29 @@
             const startIntervals = new Array(n).fill(0).map(()=>new Array(2).fill(0));
             //基于所有区间的结束点从小到大排序。
             const endIntervals = new Array(n).fill(0).map(()=>new Array(2).fill(0));
+            // 将每个元素的起点和终点筛选出来
             for(let i = 0;i<n;i++){
                 startIntervals[i][0] = intervals[i][0];
                 startIntervals[i][1] = i;
                 endIntervals[i][0] = intervals[i][1];
                 endIntervals[i][1] = i;
             }
-            startIntervals.sort((a,b)=>a[0]-b[0]);
-            endIntervals.sort((a,b)=>a[0]-b[0]);
+            // 并且进行排列
+            // startIntervals中[j][1]作为右侧区间填充的索引
+            startIntervals.sort((a,b)=>a[0]-b[0]);//[[1,2],[2,1],[3,0]]
+            // endIntervals中[i][1]作为ans索引区间的索引
+            endIntervals.sort((a,b)=>a[0]-b[0]);//[[2,2],[3,1],[4,0]]
+            // console.log(startIntervals,endIntervals)
             const ans = new Array(n).fill(0);
             for(let i = 0,j=0;i<n;i++){
                 /**endIntervals 数组中取出第 i 个区间，就可以从左到右扫描 startIntervals 数组中的区间起点来找到满足右区间条件的区间。
                 因为都是升序状态，所以可以直接从第j个元素进行扫描，前j个肯定是小于现在的endIntervals[i][0]*/
+                // 右侧边界固定找左侧边界，从小往大找()，双指针进行操作，
                 while(j<n && startIntervals[j][0] < endIntervals[i][0]){
                     j++;
                 }
+                
+                // 只要endIntervals[i][0]<=startIntervals[j][0] 就可以 ans[endIntervals[i][1]]=startIntervals[j][1];被填充
                 if(j<n){
                     ans[endIntervals[i][1]]=startIntervals[j][1];
                 }else {

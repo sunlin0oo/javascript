@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 暴力求解
+        var findClosestElements = function(arr, k, x) {
+            const list = [...arr];
+            list.sort((a,b)=>{
+                if(Math.abs(a-x)!==Math.abs(b-x)){
+                    return Math.abs(a-x) - Math.abs(b-x);
+                }else{
+                    return a-b;
+                }
+            })
+            const ans = list.slice(0,k);
+            ans.sort((a,b)=>a-b);
+            return ans;
+        };
+        // 二分查找+双指针
+        // 可以通过二分查找对有序的数组进行分割
+        var findClosestElements = function(arr, k, x) {
+            let right = binarySearch(arr,x);
+            let left = right - 1;
+            let length = arr.length;
+            while(k-->0){
+                // 查看越界
+                if(left<0) right++;
+                // 查看越界
+                else if(right>=length) left--;
+                // 整数left > 整数right
+                else if(x-arr[left]<=arr[right]-x)left--;
+                else right++;
+            }
+            const ans = [];
+            // 将left+1 与right-1范围内的内容加入数组中
+            for(let i = left+1;i<right;i++){
+                ans.push(arr[i]);
+            }
+            return ans;
+        };
+
+        const binarySearch=(arr,x)=>{
+            let low = 0,high = arr.length - 1;
+            while(low<high){
+                const mid = Math.floor((low+high)/2);
+                if(arr[mid]>=x){
+                    high = mid
+                }else{
+                    low = mid + 1;
+                }
+            }
+            return low;
+        }
+    </script>
+</body>
+</html>
