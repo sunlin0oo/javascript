@@ -30,10 +30,10 @@
             let start = 0, end = 0;
 
             for (let i = 0; i < length; i++) {
-                //对于每个访问到的字母 cc，得到当前字母的最后一次出现的下标位置end_c;则当前片段的结束下标一定不会小于end_c
+                //对于每个访问到的字母 c，得到当前字母的最后一次出现的下标位置end_c;则当前片段的结束下标一定不会小于end_c
                 end = Math.max(end, last[s.codePointAt(i) - codePointA]);
                 //如果遍历到的字母是结束下表，则放入数组中
-                if (i == end) {
+                if (i === end) {
                     //将当前片段的长度添加到返回值
                     partition.push(end - start + 1);
                     start = end + 1;
