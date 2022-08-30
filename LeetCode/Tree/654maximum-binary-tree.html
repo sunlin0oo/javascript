@@ -28,45 +28,46 @@
             }
             return construct(nums,0,nums.length-1)
         };
-        // 单调栈
-        var constructMaximumBinaryTree = function(nums) {
-    const n = nums.length;
-    const stack = [];
-    const left = new Array(n).fill(-1);//根节点的左子树
-    const right = new Array(n).fill(-1);//根节点的右子树
-    const tree = new Array(n).fill(-1);//树的各个节点
 
-    for (let i = 0; i < n; ++i) {
-        tree[i] = new TreeNode(nums[i]);
-        // 如果当前nums[i] 大于stack中的nums[stack[stack.length - 1]] 则存入到右侧并将，索引删除
-        while (stack.length && nums[i] > nums[stack[stack.length - 1]]) {
-            right[stack.pop()] = i;
+        // 单调栈--不懂
+        var constructMaximumBinaryTree = function(nums) {
+            const n = nums.length;
+            const stack = [];
+            const left = new Array(n).fill(-1);//根节点的左子树
+            const right = new Array(n).fill(-1);//根节点的右子树
+            const tree = new Array(n).fill(-1);//树的各个节点
+
+            for (let i = 0; i < n; ++i) {
+                tree[i] = new TreeNode(nums[i]);
+                // 如果当前nums[i] 大于stack中的nums[stack[stack.length - 1]] 则存入到右侧并将，索引删除
+                while (stack.length && nums[i] > nums[stack[stack.length - 1]]) {
+                    right[stack.pop()] = i;
+                }
+                // 如果stack不为空，则读取最后一个元素
+                if (stack.length) {
+                    left[i] = stack[stack.length - 1];
+                }
+                // 存储的索引
+                stack.push(i);
         }
-        // 如果stack不为空，则读取最后一个元素
-        if (stack.length) {
-            left[i] = stack[stack.length - 1];
-        }
-        // 存储的索引
-        stack.push(i);
-    }
 /**在最终构造出的树上，
  * 以 nums[i] 为根节点的子树，在原数组中对应的区间，左边界为 nums[i] 左侧第一个比它大的元素所在的位置，
  * 右边界为 nums[i] 右侧第一个比它大的元素所在的位置。
  * 左右边界均为开边界。
 如果某一侧边界不存在，则那一侧边界为数组的边界。如果两侧边界均不存在，说明其为最大值，即根节点。
 */
-    let root = null;
-    for (let i = 0; i < n; ++i) {
-        if (left[i] === -1 && right[i] === -1) {
-            root = tree[i];
-        } else if (right[i] === -1 || (left[i] !== -1 && nums[left[i]] < nums[right[i]])) {
-            tree[left[i]].right = tree[i];
-        } else {
-            tree[right[i]].left = tree[i];
-        }
-    }
-    return root;
-};
+            let root = null;
+            for (let i = 0; i < n; ++i) {
+                if (left[i] === -1 && right[i] === -1) {
+                    root = tree[i];
+                } else if (right[i] === -1 || (left[i] !== -1 && nums[left[i]] < nums[right[i]])) {
+                    tree[left[i]].right = tree[i];
+                } else {
+                    tree[right[i]].left = tree[i];
+                }
+            }
+            return root;
+        };
     </script>
 </body>
 </html>

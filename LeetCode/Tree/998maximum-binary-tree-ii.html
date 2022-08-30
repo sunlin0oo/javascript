@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var insertIntoMaxTree = function(root, val) {
+            let parent = null;
+            let cur = root;
+            while(cur){
+                if(cur.val < val){
+                    if(!parent) return new TreeNode(val,root,null);
+                    // 以val为根节点构造一棵树，将当前的插入到左侧
+                    let node = new TreeNode(val,cur,null);
+                    // 将构造新的插入到父节点右侧
+                    parent.right = node;
+                    return node;
+                }else{
+                    parent = cur;
+                    cur = cur.right;
+                }
+            }
+            // 最小的情况
+            parent.right = new TreeNode(val);
+            return root;
+        };
+    </script>
+</body>
+</html>
