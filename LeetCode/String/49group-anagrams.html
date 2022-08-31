@@ -20,7 +20,7 @@
         function groupAnagrams(strs){
             let map = new Map();
             let pointA = "a".charCodeAt(0);//求出a的Unicode 编码
-            //将每个字母出现的次数使用字符串表示，作为哈希表的键
+            //将每个字母出现的次数使用字符串表示，次数的数组作为哈希表的键
             for(let s of strs){
                 const count = new Array(26).fill(0);
                 for(let c of s){
@@ -38,8 +38,15 @@
             }
             console.log("map:::",map);
             console.log("keys:::",Object.keys(map))
-            return Object.values(map);//返回遍历集合的所有values的数组
+            // 方法返回一个给定对象自身的所有可枚举属性值的数组，
+            // 值的顺序与使用for...in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。
+            return Object.values(map);
+            //返回遍历集合的所有values的数组 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/values
         }
+
+            // // array like object
+            // var obj = { 0: 'a', 1: 'b', 2: 'c' };
+            // console.log(Object.values(obj)); // ['a', 'b', 'c']
     </script>
 </body>
 </html>
