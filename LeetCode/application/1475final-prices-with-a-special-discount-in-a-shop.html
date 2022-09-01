@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let prices = [8,4,6,2,3];
+        // 直接遍历
+        var finalPrices = function(prices) {
+            let len = prices.length;
+            let ans = [];
+            for(let i = 0;i<len;i++){
+                for(let j = i + 1;j<len;j++){
+                    if(prices[j] <= prices[i]){
+                        ans.push(prices[i] - prices[j]);
+                        break
+                    }
+                }
+                if(ans[i] === undefined) ans.push(prices[i]);
+            }
+            return ans;
+        };
+
+        var finalPrices = function(prices) {
+            const n = prices.length;
+            const ans = new Array(n).fill(0);
+            const stack = [];
+            // 使用单调栈预处理prices，使得查询prices中每个元素对应位置的右边的第一个更小的元素时不需要遍历prices
+            // 从右往左走，如果stack.length === 0 证明右侧没有比他小的元素
+            for(let i = n - 1;i >=0 ;i--){
+                while(stack.length && stack[stack.length - 1] > prices[i]) stack.pop();
+                ans[i] = stack.length === 0?prices[i] : prices[i] - stack[stack.length - 1];
+                stack.push(prices[i]);
+                console.log(stack);
+            }
+            return ans;
+        }
+
+        let a = finalPrices(prices);
+        console.log(a);
+    </script>
+</body>
+</html>
