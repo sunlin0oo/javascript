@@ -7,14 +7,34 @@ import TabbarReducer from './reducers/TabbarReducer';
 import CinemaListReducer from './reducers/CinemaListReducer';
 import reduxThunk from 'redux-thunk'
 import reduxPromise from 'redux-promise'
+import {persistStore, persistReducer} from 'redux-persist'
+// 按照localstore进行存储
+import storage from 'redux-persist/lib/storage'
+//在localStorge中生成key为root的值
+const persistConfig = {
+    key: 'root',
+    storage,
+    blacklist:['loading'],  //设置某个reducer数据不持久化，黑名单
+                           //注意单词的拼写
+    whitelist:['CityReducer']//白名单，只持久化
+  }
+
 const reducer = combineReducers({
     CityReducer,
     TabbarReducer,
     CinemaListReducer
 })
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer,composeEnhancers(applyMiddleware(reduxThunk,reduxPromise)));
+// 将reducer传入，按照persistConfig的规则进行持久化操作
+const myPersistReducer = persistReducer(persistConfig, reducer);
+// 再将持久化之后的Reducer进行传输
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(myPersistReducer,composeEnhancers(applyMiddleware(reduxThunk,reduxPromise)));
+const persistor = persistStore(store);
+export {
+    store,
+    persistor,
+}
 // 整体部分未拆分
 // const reducer = (prevState={
 //     show:true,//赋值初始值
