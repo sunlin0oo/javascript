@@ -1,20 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import { List, Image, InfiniteScroll } from 'antd-mobile';
 import { NavLink,useHistory, withRouter } from 'react-router-dom';
 export default function Nowplaying(props) {
   const [list,setlist] = useState([]);
-  useEffect(() => {
-    axios({
-        url:"https://m.maizuo.com/gateway?cityId=110100&pageNum=1&pageSize=10&type=1&k=1886067",
-        headers:{
-            'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.2.0","e":"16395416565231270166529","bc":"110100"}',
-            'X-Host': 'mall.film-ticket.film.list'
-        }
-    }).then(res=>{
-        console.log(res.data.data.films)
-        setlist(res.data.data.films)
-    })
-}, [])
+  const [hasMore,setHasMore] = useState(true);
+  // 作为值进行存储
+  const count = useRef(0);
+//   useEffect(() => {
+//     axios({
+//         url:"https://m.maizuo.com/gateway?cityId=110100&pageNum=1&pageSize=10&type=1&k=1886067",
+//         headers:{
+//             'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.2.0","e":"16395416565231270166529","bc":"110100"}',
+//             'X-Host': 'mall.film-ticket.film.list'
+//         }
+//     }).then(res=>{
+//         console.log(res.data.data.films)
+//         setlist(res.data.data.films)
+//     })
+// }, [])
+const loadMore = ()=>{
+  console.log('到底了')
+  count.current++;
+  // 解决频繁触发到底bug
+  setHasMore(false)
+  axios({
+    url:`https://m.maizuo.com/gateway?cityId=110100&pageNum=${count.current}&pageSize=10&type=1&k=1886067`,
+    headers:{
+        'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.2.0","e":"16395416565231270166529","bc":"110100"}',
+        'X-Host': 'mall.film-ticket.film.list'
+      }
+  }).then(res=>{
+      console.log(res.data.data.films);
+      // 数据的叠加
+      setlist([...list, ...res.data.data.films]);
+      // res.data.data.films>0控制最后的数据
+      setHasMore(res.data.data.films.length>0);
+  })
+  
+  }
   const history = useHistory();
 
   const handleChangePage=(id)=>{
@@ -39,34 +63,35 @@ export default function Nowplaying(props) {
 
   return (
     <div>
-      <ul>
-        {
-          // 渲染一个个组件
-          list.map(item=>
-            // {...item}作为属性传到FilmItem中,{...props}通过父组件给子组件拿到props.history
-            // <FilmItem key={item.filmId} {...item} {...props}></FilmItem>
-            <WithFilmItem key={item.filmId} {...item}></WithFilmItem>
-          )
-        }
-      </ul>
-      
+      {console.log(list)}
+      <List>
+        {list.map(item => (
+          <List.Item onClick={()=>handleChangePage(item.filmId)}
+            key={item.filmId}
+            prefix={
+              <Image
+                src={item.poster}
+                // style={{ borderRadius: 20 }}
+                // fit='cover'
+                width={40}
+                height={40}
+              />
+            }
+            description={
+              <>{
+                item.grade?<div>观众评分:{item.grade}</div>:
+                <div style={{visibility:"hidden"}}>观众评分:{item.grade}</div>
+              }
+              <div>导演:{item.director}</div>
+              <div>{item.nation}|{item.runtime}分钟</div>
+              </>
+            }
+          >
+            {item.name}
+          </List.Item>
+        ))}
+      </List>
+      <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
     </div>
   )
 }
-// FilmItem是Nowplaying的亲儿子
-function FilmItem(props){
-  console.log(props);
-  // <li key={item.filmId}>{item.name}</li>
-  // NavLink进行拼接
-  // <li key={item.filmId}><NavLink to={'/detail/'+item.filmId}>{item.name}</NavLink></li>
-  // 编程式导航
-  // return <li key={item.filmId} onClick={()=>{
-  //   handleChangePage(item.filmId)
-  // }}>{item.name}</li>
-  let {name,filmId} = props;//解构
-  return <li onClick={()=>{
-    props.history.push(`/detail/${filmId}`);
-  }}>{name}</li>
-}
-// withRouter跨级传输
-const WithFilmItem = withRouter(FilmItem)

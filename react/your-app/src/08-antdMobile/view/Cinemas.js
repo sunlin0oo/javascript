@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux';
+import { NavBar, Space, Toast } from 'antd-mobile'
 // import store from '../redux/store';
 import {getCinemaListAction} from '../redux/actionCreator/getCinemaListAction'
+import { SearchOutline, MoreOutline} from 'antd-mobile-icons'
 function Cinemas(props) {
   // 这里store.getState().cityName获取由redux到最新的数据
   // 拆开调用多了一层，相当于子redux是子空间，需要多套一层
@@ -10,6 +12,7 @@ function Cinemas(props) {
 
   // const [CinemaList, setCinemaList] = useState(store.getState().CinemaListReducer.list);
 let {list,getCinemaListAction} = props;
+
 useEffect(()=>{
     // console.log('CinemaListReducer' ,store.getState().CinemaListReducer);
     if(list.length === 0){
@@ -25,14 +28,22 @@ useEffect(()=>{
 
   return (
     <div>
-       <div>
-        <div onClick={()=>{
-        props.history.push(`/city`);
-      }}>{props.cityName}</div>
-      <div style={{float:'right'}} onClick={()=>{
-        props.history.push(`/cinemas/search`)
-      }}>搜索</div>
-    </div>
+      {/* 导航栏 */}
+      {/* <div>
+          <div onClick={()=>{
+            props.history.push(`/city`);
+          }}>{props.cityName}</div>
+          <div style={{float:'right'}} onClick={()=>{
+            props.history.push(`/cinemas/search`)
+          }}>搜索
+        </div>
+      </div> */}
+      <NavBar 
+      right={<SearchOutline onClick={()=>{props.history.push(`/cinemas/search`)}} />} 
+      left={<div onClick={()=>{props.history.push(`/city`);}}>{props.cityName}</div>}
+      back={null}>
+          影院
+        </NavBar>
     
       {
         props.list.map(item=>
