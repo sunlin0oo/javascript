@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var longestUnivaluePath = function(root) {
+            let res = 0;
+            // 深度优先遍历--控制一条分支的左右，不可以同时进行
+            const dfs=(root)=>{
+                // 先通过递归root，获取到左右节点root.left,root.right,为起点路径
+                if(!root) return 0;
+                let left = dfs(root.left);
+                let right = dfs(root.right);
+                let left1 = 0,right1 =0;
+                if(root.left && root.left.val === root.val) left1 = left + 1;
+                if(root.right && root.right.val === root.val) right1 = right + 1;
+                res = Math.max(res, left1 + right1);
+                return Math.max(left1, right1);
+            }
+            dfs(root);
+            return res;
+        };
+    </script>
+</body>
+</html>
