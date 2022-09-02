@@ -9,12 +9,14 @@
 <body>
     <script>
         var longestUnivaluePath = function(root) {
-            let res = 0;
+            let res = 0;// 变量res 保存最长同值路径长度
             // 深度优先遍历--控制一条分支的左右，不可以同时进行
             const dfs=(root)=>{
                 // 先通过递归root，获取到左右节点root.left,root.right,为起点路径
                 if(!root) return 0;
+                // 存储的是当前节点左子树最大的路径长度
                 let left = dfs(root.left);
+                // 存储的是当前节点右子树最大的路径长度
                 let right = dfs(root.right);
                 let left1 = 0,right1 =0;
                 if(root.left && root.left.val === root.val) left1 = left + 1;
