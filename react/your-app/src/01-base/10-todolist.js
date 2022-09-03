@@ -27,11 +27,6 @@ export default class App extends Component{
                  <button onClick={
                     // console.log("click1",this.refs.mytext)//this.refs.mytext 绑定到标签身上得到，DOM自身
                     this.handleClick1}>add</button>
-
-                {/* 不要主动用()去执行函数 */}
-                {/* 这里是由点击事件系统来调用，故点击函数的this是点击事件系统，而非App
-                    通过bind改变函数内的this
-                 */}
                  <ul>
                     {
                         this.state.list.map((item,index)=>
@@ -47,17 +42,19 @@ export default class App extends Component{
                         </li>)
                     }
                  </ul>
-                
                  {/* {this.state.list.length === 0?<div>暂无待办事项</div>:null} */}
                  {/* 与的作用前面为假才会执行后面的 */}
                  {/* {this.state.list.length === 0 && <div>暂无待办事项</div>} */}
                  {/* 从01-index.css导入hidden类型 */}
+                 {/* className === class */}
                  <div className={this.state.list.length === 0?'':'hidden'}>暂无待办事项</div>
-            </div> 
+            </div>
         )
     }
     // 箭头函数中this是当前对象外上下文环境中的this指向
+    // 添加新的list内容
     handleClick1=(evt)=>{
+        // 深复制到新的newlist
         let newlist = [...this.state.list];
         let length = newlist.length +1;
         newlist.push({
@@ -70,7 +67,7 @@ export default class App extends Component{
         // 清空输入框
         this.myref.current.value = '';
     }
-
+    // 删除list的内容
     handleDelClick(index){
         let newlist = this.state.list.concat();
         newlist.splice(index,1);
@@ -78,6 +75,7 @@ export default class App extends Component{
             list:newlist,
         })
     }
+    
     handleDelClick1=(evt,index)=>()=>{
         let newlist = this.state.list.concat();
         newlist.splice(index,1);

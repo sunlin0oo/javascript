@@ -17,11 +17,12 @@ export default class App extends Component{
 
                 {/* 不要主动用()去执行函数 */}
                 {/* 这里是由点击事件系统来调用，故点击函数的this是点击事件系统，而非App
-                    通过bind改变函数内的this
+                    通过bind改变函数内的this  不推荐写法
                  */}
                 <button onClick={this.handleClick1.bind(this) }>add3</button>
                 {/* 推荐，handleClick2 要用箭头函数写*/}
                 <button onClick={this.handleClick2 }>add3</button>
+                {/* 可以传递参数 */}
                 <button onClick={(evt)=>{
                     this.handleClick3(evt);//比较推荐
                 }}>add4</button>
@@ -88,4 +89,4 @@ var obj2 = {
     }
 }
 
-obj1.getName.bind(obj2)();
+obj1.getName.bind(obj2)();//obj2

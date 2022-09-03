@@ -8,7 +8,7 @@ class Navbar extends Component{
         </div>
     }
 }
-// Child组件是Navbar的孩子，不可以写在爷爷
+// Child组件是Navbar的孩子，不可以写在爷爷(App)
 function Child(){
     return <div>Child</div>
 }
@@ -20,6 +20,7 @@ function Swiper(){
 const Tabbar = ()=>{
     return <div>Swiper</div>
 }
+
 export default class App extends Component{
     render(){
         return(

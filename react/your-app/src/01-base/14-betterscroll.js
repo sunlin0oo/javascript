@@ -13,6 +13,7 @@ export default class App extends Component {
         return (
             <div>
                 <button onClick={()=>this.getData()}>click</button>
+                {/* 注意这里的两个括号，第一个表示我们在要JSX里插入JS了，第二个是对象的括号 */}
                 <div className="kerwinwrapper" style={{height:'200px',background:'yellow',overflow:'hidden'}}>
                     <ul className="kerwincontent">
                        {

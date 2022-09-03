@@ -7,17 +7,13 @@ export default class App extends Component{
         return(
             <div>
                  {/* <input ref="mytext"/>  直接使用ref会被弃用*/}
+                 {/* 给input标签挂载ref */}
                  <input ref={this.myref}/>
                  {/* 点击事件加一个处理函数 */}
                  <button onClick={()=>{
                     // console.log("click1",this.refs.mytext)//this.refs.mytext 绑定到标签身上得到，DOM自身
-                    console.log("click1",this.myref)
+                    console.log("click1",this.myref)//this.refs.current可以获取到这个DOM结构
                  }}>add</button>
-
-                {/* 不要主动用()去执行函数 */}
-                {/* 这里是由点击事件系统来调用，故点击函数的this是点击事件系统，而非App
-                    通过bind改变函数内的this
-                 */}
             </div> 
         )
     }
