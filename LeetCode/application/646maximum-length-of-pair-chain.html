@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let pairs = [[1,2], [2,3], [3,4]];
+        /** 贪心:
+         * 最优的选择是挑选第二个数字最小的，这样能给挑选后续的数对留下更多的空间。
+        挑完第一个数对后，要挑第二个数对时，也是按照相同的思路，是在剩下的数对中，第一个数字满足题意的条件下，挑选第二个数字最小的。
+        按照这样的思路，可以先将输入按照第二个数字排序，然后不停地判断第一个数字是否能满足大于前一个数对的第二个数字即可。*/
+        // var findLongestChain = function(pairs) {
+        //     pairs.sort((a,b)=>a[1]-b[1]);
+        //     let len = pairs.length;
+        //     let right = pairs[0][1];
+        //     let ans = 1;
+        //     for(let i = 1;i<len;i++){
+        //         if(pairs[i][0] > right){
+        //             right = pairs[i][1];
+        //             ans++;
+        //         }
+        //     }
+        //     return ans;
+        // };
+        // 动态规划
+        var findLongestChain = function(pairs) {
+            const n = pairs.length;
+            // 左侧升序排列
+            pairs.sort((a, b) => a[0] - b[0]);
+            // console.log(pairs)
+            // 用于存储当前索引前最大的链接数量
+            const dp = new Array(n).fill(1);
+            // 当前索引左侧与之前的值右侧一一进行对比
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < i; j++) {
+                    if (pairs[i][0] > pairs[j][1]) {
+                        dp[i] = Math.max(dp[i], dp[j] + 1);
+                    }
+                }
+            }
+            return dp[n - 1];
+        };
+        let a = findLongestChain(pairs);
+        console.log(a);
+    </script>
+</body>
+</html>
