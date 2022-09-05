@@ -34,9 +34,14 @@ export default function Search() {
             {/* <input value={mytext} onChange={(evt)=>{
                         setmytext(evt.target.value);
                     }}/> */}
-            <SearchBar placeholder='请输入内容' showCancelButton={() => true} onChange={(evt)=>{
-                        setmytext(evt.target.value);
+            <div style={{padding:'10px'}}>
+              <SearchBar placeholder='请输入内容' showCancelButton={() => true} values = {mytext} onChange={(values)=>{
+                        // values = {mytext} 传递给onChange回调函数中
+                        // 这里的value就是输入的值
+                        // console.log(evt);// 受控组件，完全受mytext的控制
+                        setmytext(values);
                     }}/>
+                    </div>
           {
             getCinemaList.map(item=>
             <dl key={item.cinemaId} style={{padding:"20px"}}>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let mat =  [[1,0,0],
+                    [0,0,1],
+                    [1,0,0]]
+                    // 慢
+        var numSpecial = function(mat) {
+            // 行
+            let row = mat.length;
+            // 列
+            let col = mat[0].length;
+            let ans = 0
+            let rowSum = new Array(row).fill(0);
+            let colSum = new Array(col).fill(0);
+            for(let i = 0;i<row;i++){
+                for(let j = 0;j<col;j++){
+                    rowSum[i] += mat[i][j];
+                    colSum[j] += mat[i][j];
+                }
+            }
+            console.log(rowSum,colSum)
+            for(let i = 0;i<row;i++){
+                if(rowSum[i] >1) continue;
+                for(let j = 0;j<col;j++){
+                    if(colSum[j] > 1){
+                        continue
+                    };
+                    if(mat[i][j] === 1) ans++;
+                }
+            }
+            return ans;
+        };
+        // 快
+        var numSpecial = function(mat) {
+            const m = mat.length, n = mat[0].length;
+            const rowsSum = new Array(m).fill(0);
+            const colsSum = new Array(n).fill(0);
+            for (let i = 0; i < m; i++) {
+                for (let j = 0; j < n; j++) {
+                    rowsSum[i] += mat[i][j];
+                    colsSum[j] += mat[i][j];
+                }
+            }
+            let res = 0;
+            for (let i = 0; i < m; i++) {
+                for (let j = 0; j < n; j++) {
+                    if (mat[i][j] === 1 && rowsSum[i] === 1 && colsSum[j] === 1) {
+                        res++;
+                    }
+                }
+            }
+            return res;
+        };
+        let a = numSpecial(mat);
+        console.log(a);
+    </script>
+</body>
+</html>
