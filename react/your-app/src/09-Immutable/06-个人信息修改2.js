@@ -24,7 +24,7 @@ export default class App extends Component {
             this.setState({
                 info:this.state.info.set(['name'],'xiaoming')
                 // 先获取到loction Map结构，再进行修改
-                // 渗透到loction-city级别
+                // SetIn渗透到loction-city级别
                 .setIn(['location','city'],'沈阳')
             })
         }}>修改</button>
@@ -49,7 +49,10 @@ export default class App extends Component {
                             // // 获取到老状态
                             // this.state.info.get('favor')
                             // .splice(index,1))
-                            info:this.state.info.setIn(['favor',index],'11111')
+                            // 修改
+                            // info:this.state.info.setIn(['favor',index],'11111')
+                            // 删除：updateIn更新favor字段，返回list结构
+                            info:this.state.info.updateIn(['favor'],(list)=>(list.splice(index,1)))
                         })
                     }}>del</button></li>)
                 )

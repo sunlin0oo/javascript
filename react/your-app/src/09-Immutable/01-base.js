@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 // obj2.name = "sunzifeng";//引用地址相同一块进行改变
 
 //比浅复制多复制了一层
+// 简单的一层可以用 ... 一层进行处理
 // let obj = {
 //     name:"sunlin",
 //     // 如果多了一层

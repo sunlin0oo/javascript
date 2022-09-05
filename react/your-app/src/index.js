@@ -4,7 +4,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 // 必须要首字母大写
 // 将div插入到id===root的节点中==>JSX
-import App from './09-Immutable/06-个人信息修改2'
+import App from './09-Immutable/redux/App'
 //react 18
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript

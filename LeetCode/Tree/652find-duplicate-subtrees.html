@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 法一：序列化--每一棵子树都「序列化」成一个字符串
+        var findDuplicateSubtrees = function(root) {
+            let seen = new Map();
+            let repeat = new Set();
+            const dfs = (node)=>{
+                let ans = '';
+                if(!node) return '';
+                ans+= node.val;
+                ans+='(';
+                ans+= dfs(node.left);
+                ans+=')(';
+                ans+= dfs(node.right);
+                ans+=')';
+                if (seen.has(ans)) {
+                    repeat.add(seen.get(ans));
+                } else {
+                    seen.set(ans, node);
+                }
+                return ans;
+            }
+            // [1,2,3,4,null,2,4,null,null,4]
+            // x(左子树的序列化结果)(右子树的序列化结果)
+            // 1( 2( 4 () () ) ()) (3 (2 (4() ()) ()) (4 () ()) )
+            dfs(root);
+            return [...repeat]
+        };
+
+        //法2：使用三元组进行唯一表示
+        var findDuplicateSubtrees = function(root) {
+            let seen = new Map();
+            let repeat = new Set();
+            let idx = 0;
+            const dfs = (node)=>{
+                if(!node) return 0;
+                // [根节点值，左子树序号，右子树序号]为key去进行唯一标识 value:[node,idx];
+                let tree = [node.val,dfs(node.left),dfs(node.right)];
+                let hash = tree.toString();
+                if(seen.has(hash)){
+                    const pair = seen.get(hash);
+                    repeat.add(pair[0]);
+                    return pair[1];
+                }else{
+                    // seen.set(hash,[node,++idx]);
+                    // 上下两句相同
+                    idx++;
+                    seen.set(hash,[node,idx]);
+                    return idx
+                }
+            }
+            dfs(root);
+            return [...repeat]
+        }
+    </script>
+</body>
+</html>
