@@ -1,0 +1,9 @@
+.active{
+    border-bottom: 1px solid red;
+    color: blue;
+}
+/* 变成全局的id选择器 */
+:global(#kerwin){
+    border-bottom: 1px solid red;
+    color: blue;
+}
