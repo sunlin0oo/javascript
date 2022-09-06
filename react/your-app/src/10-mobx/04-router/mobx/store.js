@@ -18,11 +18,6 @@ configure({
 //     changeHide:action,
 //     changeShow:action//标记两个方法是action，专门修改可观测的value
 // })
-<<<<<<< HEAD
-
-=======
-// 修饰器没配好
->>>>>>> 953aa7bcb26ba011faf343f5b86976869c631d9c
 class Store{
     @observable isTabbarShow = true
     @observable list = []
