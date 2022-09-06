@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@babel/core": "^7.19.0",
     "@babel/plugin-proposal-decorators": "^7.19.0",
     "@babel/preset-env": "^7.19.0",
+=======
+    "@babel/core": "^7.16.7",
+    "@babel/plugin-proposal-decorators": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+>>>>>>> 953aa7bcb26ba011faf343f5b86976869c631d9c
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -18,6 +24,7 @@
     "immutable": "^4.0.0",
     "mobx": "^5.15.7",
     "mobx-react": "^5.4.4",
+<<<<<<< HEAD
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-app-rewired": "^2.2.1",
@@ -27,6 +34,15 @@
     "react-refresh": "^0.11.0",
     "react-router-dom": "^5.3.3",
     "redux": "^4.2.0",
+=======
+    "react": "^17.0.2",
+    "react-app-rewired": "^2.1.11",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "redux": "^4.1.2",
+>>>>>>> 953aa7bcb26ba011faf343f5b86976869c631d9c
     "redux-persist": "^6.0.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.4.1",
