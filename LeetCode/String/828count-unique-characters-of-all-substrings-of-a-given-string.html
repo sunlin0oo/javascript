@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 分别计算每个字符的贡献
+        let s = "LEETCODE";
+        var uniqueLetterString = function(s) {
+            let index = new Map();
+            const len = s.length;
+            for(let i = 0;i<len;i++){   
+                const c = s[i];
+                if(!index.has(c)){
+                    index.set(c,[]);
+                    // 这要是为了计算从0开始的位置
+                    index.get(c).push(-1);
+                }
+                index.get(c).push(i);
+            }
+            console.log(index);
+            let res = 0;
+            for(const  [_, arr] of index.entries()){
+                arr.push(len);
+                let arrLen = arr.length;
+                /**
+                 * 上一次出现的位置为arr[i - 1]
+                 * 下一次出现的位置为arr[i + 1]
+                 * 即子字符串的起始位置有arr[i - 1](不含) 到arr[i](含)==>(arr[i] - arr[i - 1])种可能
+                 * 到结束位置arr[i + 1]==>有arr[i + 1] - arr[i]种可能
+                */
+                for (let i = 1; i < arrLen - 1; i++) {
+                    res += (arr[i] - arr[i - 1]) * (arr[i + 1] - arr[i]);
+                }
+            }
+            return res;
+        };
+        let a = uniqueLetterString(s);
+        console.log(a);
+    </script>
+</body>
+</html>
