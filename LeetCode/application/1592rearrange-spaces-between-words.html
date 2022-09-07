@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const text = " practice   makes   perfect";
+        var reorderSpaces = function(text) {
+            const length = text.length;
+            const words = [];
+            text.split(' ').forEach(e => {
+                if (e.length > 0) {
+                    words.push(e);
+                }
+            });
+            let cntSpace = length;
+            for (const word of words) {
+                if (word.length) {
+                    cntSpace -= word.length;
+                }
+            }
+            let sb = '';
+            if (words.length === 1) {
+                sb += words[0];
+                for (let i = 0; i < cntSpace; i++) {
+                    sb += ' ';
+                }
+                return sb;
+            }
+            const perSpace = Math.floor(cntSpace / (words.length - 1));
+            const restSpace = cntSpace % (words.length - 1);
+            for (let i = 0; i < words.length; i++) {
+                if (i > 0) {
+                    for (let j = 0; j < perSpace; j++) {
+                        sb += ' ';
+                    }
+                }
+                sb += words[i];
+            }
+            for (let i = 0; i < restSpace; i++) {
+                sb += ' ';
+            }
+            return sb;
+        };
+        var reorderSpaces = function(text) {
+            const len = text.length;
+            // 统计单词
+            const words = [];
+            // 将字符串分割成数组再进行拼接
+            text.split(' ').forEach(e => {
+                if (e.length > 0) {
+                    words.push(e);
+                }
+            });
+            let cntSpace = 0;
+            // 找出最后一个单词字母的索引
+            for(let i = 0;i<len;i++){
+                if(text[i] === ' '){
+                    cntSpace++;
+                }
+            }
+            // 如果单词数为 1，则将全部的空格拼接到这个单词后面即可
+            let sb = '';
+            const wordsLen = words.length;
+            if (wordsLen === 1) {
+                sb += words[0];
+                for (let i = 0; i < cntSpace; i++) {
+                    sb += ' ';
+                }
+                return sb;
+            }
+            // 平均
+            const average = Math.floor(cntSpace/(wordsLen-1));
+            // 剩余
+            const restSpace = cntSpace%(wordsLen-1);
+            for (let i = 0; i < wordsLen; i++) {
+                if (i > 0) {
+                    for (let j = 0; j < average; j++) { 
+                        console.log(sb);
+                        sb += ' ';
+                    }
+                }
+                sb += words[i];
+            }
+            for (let i = 0; i < restSpace; i++) {
+                sb += ' ';
+            }
+            return sb
+        };
+        let b = reorderSpaces(text);
+        console.log(b);
+    </script>
+</body>
+</html>

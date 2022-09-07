@@ -1,6 +1,6 @@
 import React from 'react';
 // import 'antd/dist/antd.css' // antd-mobile--PC版本CSS
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import App from './10-mobx/04-router/App'
 //react 18
 import { createRoot } from 'react-dom/client';
