@@ -8,21 +8,51 @@
 </head>
 <body>
     <script>
-        let s = "abcabcbb";
-        var lengthOfLongestSubstring = function(s) {
-            let map = new Map();
-            let numArray = [];
-            const array = s.split('');
-            for(let i = 0;i<s.length;i++){
-                if(!mpa.has(array[i])){
-                    map.set(array[i],index);
+        let s = "abba";
+        // 双指针控制滑动窗口，左边界作为重复项的边界向前移动，右边界是循环的索引
+        var lengthOfLongestSubstring = function(str) {
+            if(str.length <= 1) return str.length;
+            let left = 0;
+            let right = 0;
+            let max = 0;
+            let temp;
+            while(right < str.length){
+                // 截取一段检查是否有问题
+                temp = str.slice(left,right);
+                if(temp.indexOf(str.charAt(right)) > -1){
+                    left++;
+                    continue;
                 }else{
-                    
+                    right++;
                 }
-
-            };
-            return array
+                if(right - left > max) max = right - left;
+            }
+            return max;
         };
+        //有瑕疵
+        // var lengthOfLongestSubstring = function(s) {
+        //     if(s.length <= 1) return s.length;
+        //     let map = new Map();
+        //     let numArray = [];
+        //     const array = s.split('');
+        //     let temp = 0;
+        //     let maxNum = 0;
+        //     for(let i = 0;i<s.length;i++){
+        //         if(!map.has(array[i])){
+        //             // map记录index的位置
+        //             map.set(array[i],i+1);
+        //         }else{
+        //             // 已存在的话则重新记录
+        //             temp = map.get(array[i-1]);
+        //             map.set(array[i],i+1);
+        //         }
+        //         console.log(map)
+        //         numArray[i] = i+1 - temp;
+        //         console.log(numArray);
+        //         maxNum = Math.max(maxNum,(i+1) - temp);
+        //     };
+        //     return maxNum
+        // };
         let a = lengthOfLongestSubstring (s);
         console.log(a);
     </script>
