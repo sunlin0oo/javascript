@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3];
+        // 删除前1/20 删除后1/20;
+        var trimMean = function(arr) {
+            const len = arr.length;
+            arr.sort((a,b)=>a-b);
+            const startIndex = len/20;
+            const endIndex = (19 * len)/20;
+            let ans = 0;
+            for(let i = startIndex;i<endIndex;i++){
+                ans += arr[i];
+            }
+            ans = ans/(0.9* len);
+            return ans
+        };
+        let a = trimMean(arr);
+        console.log(a);0
+    </script>
+</body>
+</html>
