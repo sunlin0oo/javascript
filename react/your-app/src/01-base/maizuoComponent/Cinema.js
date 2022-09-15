@@ -58,6 +58,7 @@ export default class Cinema extends Component {
     this.setState({
         CinemaList:newList,
     })
+    // 异步，这里的setstate是老状态
     console.log(this.state.CinemaList) 
   }
 }

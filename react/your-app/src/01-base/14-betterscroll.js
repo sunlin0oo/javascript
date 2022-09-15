@@ -29,24 +29,24 @@ export default class App extends Component {
 
     getData(){
         var list =[1,2,3,4,5,6,7,8,9,0,11,12,13,14,15]
-        //在setState第二个参数中，进行操纵DOM，因为那时候DOM更新完成
-        // this.setState({
-        //     list:list
-        // },()=>{
-        //     console.log(this.state.list)
-        //     console.log(document.querySelectorAll("li"))
-        //     new BetterScroll(".kerwinwrapper")
-        // })
-
-        //这里可以立即更新！
-        setTimeout(()=>{
-            this.setState({
-                list:list
-            })
-
+        //在setState第二个参数中，进行操纵DOM，因为那时候DOM更新完成，在React18中想要同步，只能用第二个参数同步进行
+        this.setState({
+            list:list
+        },()=>{
             console.log(this.state.list)
             console.log(document.querySelectorAll("li"))
             new BetterScroll(".kerwinwrapper")
-        },0)
+        })
+
+        //这里可以立即更新！React17中可以  React18中不行，
+        // setTimeout(()=>{
+        //     this.setState({
+        //         list:list
+        //     })
+
+        //     console.log(this.state.list)
+        //     console.log(document.querySelectorAll("li"))
+        //     new BetterScroll(".kerwinwrapper")
+        // },0)
     }
 }
