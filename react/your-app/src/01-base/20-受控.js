@@ -11,7 +11,8 @@ export default class App extends Component {
         {/*将input看作组件看待 */}        
         <input type='text' 
         ref={this.myusername} 
-        value={this.state.username} 
+        value={this.state.username}
+        // 发生改变时，出发setState
         onChange={(evt)=>{
             this.setState({
                 username:evt.target.value

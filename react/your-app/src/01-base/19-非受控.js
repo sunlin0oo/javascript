@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class App extends Component {
     // 通过ref来获取到DOM表单
-    myusername = React.createRef();
+  myusername = React.createRef();
   render() {
     return (
       <div>

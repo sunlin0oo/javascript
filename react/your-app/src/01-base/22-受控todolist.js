@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import './css/01-index.css'
 export default class App extends Component{
     a = 100;
+    // 状态改变 重新渲染
     state = {
         list:[{
                     id:1,
@@ -28,16 +29,20 @@ export default class App extends Component{
             <div>
                  {/* <input ref="mytext"/>  直接使用ref会被弃用*/}
                  {/* <input ref={this.myref}/> */}
-                 <input value = {this.state.mytext} onChange={(evt)=>{
-                    this.setState({
-                        mytext:evt.target.value,
-                    })
+                 <input value = {this.state.mytext} 
+                        onChange={(evt)=>{
+                            this.setState({
+                                mytext:evt.target.value,
+                            })
                  }}/>
                  {/* 点击事件加一个处理函数 */}
-                 <button onClick={
-                    // console.log("click1",this.refs.mytext)//this.refs.mytext 绑定到标签身上得到，DOM自身
-                    this.handleClick}>add</button>
+                 <button 
+                 onClick={
 
+                    // console.log("click1",this.refs.mytext)//this.refs.mytext 绑定到标签身上得到，DOM自身
+
+                    this.handleClick}
+                >add</button>
                 {/* 不要主动用()去执行函数 */}
                 {/* 这里是由点击事件系统来调用，故点击函数的this是点击事件系统，而非App
                     通过bind改变函数内的this
@@ -71,7 +76,7 @@ export default class App extends Component{
             </div> 
         )
     }
-    // 箭头函数中this是当前对象外上下文环境中的this指向
+    // 箭头函数中this是当前对象外上下文环境中的this指向，添加的点击函数
     handleClick=(evt)=>{
         let newlist = [...this.state.list];
         let length = newlist.length +1;
@@ -87,7 +92,8 @@ export default class App extends Component{
             list:newlist,
             mytext:''
         })
-        this.myref.current.value = '';
+
+        // this.myref.current.value = '';
     }
 
     handleDelClick(index){
@@ -105,7 +111,7 @@ export default class App extends Component{
             list:newlist,
         })
     }
-
+    // 划线点击函数
     handleChecked = (index)=>{
         let newlist =[...this.state.list];
         newlist[index].isChecked = !newlist[index].isChecked;

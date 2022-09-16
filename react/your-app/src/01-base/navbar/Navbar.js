@@ -11,7 +11,7 @@ export default class Navbar extends Component {
       leftshow:kerwinPropTypes.bool//验证是否是Bool
     } 
     // 默认属性，如果没有设置的话则会默认这个
-    static  defaultProps = {
+    static defaultProps = {
       leftshow:true
     }
 
@@ -20,6 +20,7 @@ export default class Navbar extends Component {
     // 属性是父组件传来的==>this.props得到
   render() {
     // 解构==>传来的是字符串
+    // 类组件this.props
     let {title,leftshow} = this.props;
     console.log(this.props);
     // 如何接受属性的时候做验证
