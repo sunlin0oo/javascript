@@ -7,6 +7,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        {/* 给Navbar组件 挂载属性 */}
         <Navbar title='首页' cb={()=>{
             this.setState({
                 isShow:!this.state.isShow
@@ -18,14 +19,18 @@ export default class App extends Component {
     )
   }
 }
+
+// 添加接口限制
 interface IProps{
     title:string,
     cb:()=>void
 }
+
 class Navbar extends Component<IProps,any>{
     render(){
         return <div>
             navbar-{this.props.title}
+            {/* 调用回调函数 */}
             <button onClick={()=>{
                 this.props.cb();
             }}>Click</button>
