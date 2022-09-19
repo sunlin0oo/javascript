@@ -7,10 +7,10 @@ import Center from './maizuoComponent/Center'
 import Tabbar from './maizuoComponent/Tabbar'
 import Navbar from './maizuoComponent/Navbar'
 export default class App extends Component {
+    // 当前的指向页面索引(父状态)
     state = {
         current:0
     }
-
     which(){
         switch (this.state.current){
             case 0:
@@ -19,18 +19,15 @@ export default class App extends Component {
                 return <Cinema></Cinema>
             case 2:
                 return <Center></Center>
-
             default:
                 return null;
         }
     }
-
     render() {
         return (
         <div>
-            <Navbar myevent={()=>{
-                
-            }}></Navbar>
+            {/* 给Navbar子组件传一个回调函数 */}
+            <Navbar myevent={()=>{}}></Navbar>
             {/* {
                 this.setState.current === 0 && <Film></Film>
             }

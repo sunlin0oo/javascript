@@ -61,7 +61,8 @@ export default class App extends Component {
             // 函数表达式
                 this.which()
             }
-            {/* 通过子组件的传参通知父组件改变状态 */}
+            {/* 通过子组件的传参通知父组件改变状态
+                将父组件的状态转递给子组件 */}
             <Tabbar 
             myevent={(index)=>{
                 this.setState({

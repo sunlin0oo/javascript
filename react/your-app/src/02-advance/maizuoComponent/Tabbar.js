@@ -14,7 +14,8 @@ export default class Tabbar extends Component {
                 text:"我的"
             },
         ],
-        current:0
+        // 子状态
+        current:0// 默认的初始值
     }
 
   render() {
@@ -23,7 +24,8 @@ export default class Tabbar extends Component {
         <ul>
                 {
                     this.state.list.map((item,index)=>
-                    <li key={item.id} 
+                    <li key={item.id}
+                    // 当前current 是否与 index相匹配 true:active标红
                     className={this.state.current === index ?'active':''} 
                     onClick={()=>this.handlerClick(index)}
                     >
@@ -34,13 +36,11 @@ export default class Tabbar extends Component {
       </div>
     )
   }
-
     handlerClick(index){
         this.setState({
             current:index
         })
-
-        // 通知父组件，修改父组件状态
+        // 将点击的数组索引传递给父组件的回调函数，修改父组件状态
         this.props.myevent(index);
     }
 }
