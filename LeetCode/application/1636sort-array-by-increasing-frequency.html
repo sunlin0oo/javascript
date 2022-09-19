@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 每个值的频率 升序 排序 ,频率相同看数值本身，然后降序处理
+        let nums = [1,1,2,2,2,3];
+        var frequencySort = function(nums) {
+            let map = new Map();
+            let number = 0;
+            const len = nums.length;
+            for(let i = 0; i<len ; i++){
+                if(!map.has(nums[i])){
+                     map.set(nums[i],1)
+                }else{
+                    number = map.get(nums[i]) + 1;
+                    map.set(nums[i],number)
+                }
+            }
+            const list = [...nums];
+            // 对频率进行比较  如果频率相同，比较数值降序排列;如果频率不同,升序排列
+            list.sort((a,b)=>{
+                const cnt1 = map.get(a),  cnt2 = map.get(b);
+                // 也就是说 当cnt1(小)>cnt2(大)时才会进行调换处理
+                // 背后的逻辑见0210案例-排序,当函数的返回值>0才会进行对调排序
+                return cnt1 === cnt2 ? b-a : cnt1 - cnt2;
+            })
+            return list;
+        };
+        const a = frequencySort(nums);
+        console.log(a);
+    </script>
+</body>
+</html>

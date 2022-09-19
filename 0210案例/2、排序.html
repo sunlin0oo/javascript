@@ -102,7 +102,7 @@
         // fn();
 
 
-
+        // 在任何情况下，数组中 undefined 的元素都被排序在末尾。
         // function arraySort(array, fn) {
         //     if (!array || array.constructor !== Array) throw new TypeError("当前的array不是一个数组!");
         //     for (var i = 0; i < array.length - 1; i++) {
@@ -142,6 +142,10 @@
         // var arr=["你","好","欢","迎","来","到","北","京"];
         var arr=["a","ab","anc","abc","acc","ad","bd"];
         // var str="abc";
+        
+        // 如果根据自定义评判标准，a 小于 b，在排序后的数组中 a 应该出现在 b 之前，就返回一个小于 0 的值。
+        // 如果 a 等于 b，就返回 0。
+        // 如果 a 大于 b，就返回一个大于 0 的值。
             
         arr.sort(function(a,b){
             var value;
