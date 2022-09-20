@@ -48,6 +48,7 @@ export default class App extends Component {
     )
   }
 }
+
 // 发布者
 class FilmItem extends Component{
     render(){
@@ -56,6 +57,7 @@ class FilmItem extends Component{
         return <div className='filmitem' onClick={()=>{
             // console.log(synopsis)
             // 点击哪一个列表就发布哪一个列表的信息
+            // 将synopsis==赋值==>info==>进行info状态的改变
             bus.publish(synopsis);
             // this.props.onEvent(synopsis);
         }}>
@@ -66,7 +68,7 @@ class FilmItem extends Component{
     }
 }
 
-// 订阅者
+// 订阅者的组件，已经订阅上，根据发布者的操作去改变订阅者的东西
 class FilmDetail extends Component{
 
     constructor(){
@@ -74,6 +76,7 @@ class FilmDetail extends Component{
         this.state = {
             info:''
         }
+        // 将(info)=>{}作为回调函数 推到 调度中心
         bus.subscribe((info)=>{
             // console.log("我在filmdetali中订阅",info)
             this.setState({

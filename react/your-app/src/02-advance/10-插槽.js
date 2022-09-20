@@ -4,7 +4,6 @@ class Child extends Component{
         return <div>
             Child
             {/* 插槽 slot */}
-
             {this.props.children[0]}
             {this.props.children[2]}
             {this.props.children[1]}
@@ -20,6 +19,7 @@ class Swiper extends Component{
     </div>
   }
 }
+// 父组件
 export default class App extends Component {
   render() {
     return (
@@ -32,8 +32,11 @@ export default class App extends Component {
         {/* 这里只会显示Child组件里面的东西，遇到组件时，会将此时替换成组件的内容 
         想把标签等其他内容放到Child里面，需要使用插槽,将其挂载到children属性上(固定 )*/}
         <Child>
+          {/* children[0] */}
             <div>111111111</div>
+          {/* children[1] */}
             <div>222222222</div>
+          {/* children[2] */}
             <div>333333333</div>
             {
                 // children

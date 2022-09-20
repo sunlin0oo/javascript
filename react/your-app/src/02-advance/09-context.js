@@ -3,6 +3,7 @@ import axios from 'axios'
 import './css/03-communination.css'
 
 //子组件想要通信，需要设置context，并且设置共有的父组件供应商
+// 可以算作一个全局的变量
 const GlobalContext = React.createContext()//创造context对象
 
 export default class App extends Component {
@@ -24,7 +25,7 @@ export default class App extends Component {
 
   render() {
     return (
-        // 供应商提供方法和变量
+        // 供应商 中设置value对象，里面的提供方法(changeInfo)和变量(info)
         <GlobalContext.Provider value={{
             info:this.state.info,
             changeInfo:(value)=>{
@@ -45,6 +46,7 @@ export default class App extends Component {
     )
   }
 }
+
 //想要拿到信息要把自己包装成消费者
 class FilmItem extends Component{
     render(){
@@ -76,10 +78,10 @@ class FilmDetail extends Component{
         return(
             <GlobalContext.Consumer>
                 {
+                    // value相当于是props可以获取到供应商(Provider)中的参数==>传递公共服务
                     (value)=><div className='filmdetail'>
                             detail-{value.info}
                         </div>
-                    
                 }
             </GlobalContext.Consumer>
         )
