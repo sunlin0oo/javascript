@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let nums = [4, 3, 2, 3, 5, 2, 1], k = 4;
+        var canPartitionKSubsets = function(nums, k) {
+                const len = nums.length;
+                let all = 0;
+                for(let i = 0;i<len;i++){
+                    all += nums[i];
+                }
+                // 1<<len  1 向左移动len位 00000001==>
+                // 判断是否能将数组分成 kk 个总和相等的非空子集   001110
+                if(all % k!== 0) return false;
+                let per = all/k;
+                nums.sort((a,b)=>a-b);
+                if(nums[len-1] > per) return false;
+                const dp = new Array(1<<len).fill(false);// 用于记录数字状态是否为可行状态
+                const curSum = new Array(1<<len).fill(0);
+                dp[0] = true;
+                for(let i = 0;i<(1<<len);i++){
+                    if(!dp[i]) continue;
+                    // 遍历数组nums
+                    for(let j = 0;j<len;j++){
+                        // 若当前状态下从可用的数字中选择一个数字 与 nums[j]，相加后>per 则证明后续的数字不可达标
+                        if(curSum[i] + nums[j] > per)break;
+                        if (((i >> j) & 1) == 0) {
+                        // 转换成而进行后进行或运算 
+                        let next = i | (1 << j);  //计算下一位
+                        // 如果下一位的可行状态为false,则将其改成true
+                        if (!dp[next]) {
+                            curSum[next] = (curSum[i] + nums[j]) % per;
+                            dp[next] = true;
+                        }
+                    }
+                }
+            }
+            return dp[(1 << len) - 1];
+        };
+        const a = canPartitionKSubsets(nums, k);
+        console.log(a);
+    </script>
+</body>
+</html>
