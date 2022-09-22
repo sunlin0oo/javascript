@@ -9,6 +9,7 @@
 <body>
     <script>
         const s1 = "abc", s2 = "bca";
+        // 用到队列==>广度优先遍历
         var kSimilarity = function(s1, s2) {
             // const len1 = s1.length,len2 = s2.length;
             // if(len1 !== len2) return;
@@ -38,6 +39,7 @@
                     // 当第pos个位置的字符不匹配需要交换时，跳出while循环
                     while(pos < n && cur[pos] === s2[pos]) pos++;
                     // s2是标杆(标准,是从0开始进行遍历处理)去比较==>移动s1
+                    //    保证pos前都是排好序，pos后面可能有多种交换情况都需要放到队列中进行判断 
                     for(let j = pos + 1;j<n;j++){
                         // 确定pos位置的字符不同，统计后续的字符是否相同，若相同则continue
                         if(cur[j] === s2[j]) continue;
