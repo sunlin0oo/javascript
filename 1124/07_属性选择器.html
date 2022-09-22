@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* 带有 disabled 属性的元素才会执行这个样式 */
+    [disabled] {
+      color: red;
+    }
+
+    /* 带有 type 属性的元素, 并且 type 属性的值还得是 password 才会生效 */
+    [type=password] {
+      color: skyblue;
+    }
+
+    button[type=button] {
+      color: orange;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    属性选择器
+      + 一般用于表单元素较多
+      + 按照元素身上的属性进行元素锁定
+      + 语法:
+        => [属性名=属性值]   属性名和属性值都满足
+        => [属性名]         属性名满足即可
+        =>[属性名^=属性值]   以属性值开头
+        =>[属性名$=属性值]   以属性值结尾
+  -->
+
+  <input type="text" disabled value="1">
+  <input type="text" value="2">
+  <input type="text" disabled value="3" >
+  <input type="text" value="4">
+  <input type="password">
+
+  <input type="button" value="按钮">
+  <button type="button">按钮</button>
+
+
+
+</body>
+</html>

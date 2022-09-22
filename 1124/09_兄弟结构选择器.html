@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /*
+      单一兄弟结构选择器
+        + 意义: 找到某一个元素的 **后面** 一个兄弟元素
+        + 语法: 选择器1 + 选择器2 { 样式 }
+        + 最终给 选择器2 的元素添加样式
+          => 必须要保证 选择器2 是 选择器1 的弟弟(并且是相邻的弟弟)
+    */
+
+
+    /*
+      最终会给后面那个 p 标签添加样式
+        + 保证两个 p 是相连的, 自己有一个哥哥是 p
+    */
+    /* p + p {
+      color: red;
+    } */
+
+    /*
+      多个兄弟结构选择器
+        + 意义: 找到某一个元素的 **后面** 所有的兄弟元素
+        + 语法: 选择器1 ~ 选择器2 { 样式 }
+        + 最终给 选择器2 的元素添加样式
+          => 需要保证选择器2 和 选择器1 需要是兄弟关系
+          => 并且 2 在 1 的后面就行
+    */
+
+    /*
+      给 p 标签添加样式
+        + 需要保证 一定是 h3 标签的后续兄弟元素中的 p
+    */
+    h3 ~ p {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    兄弟结构选择器
+      + 保证两个元素之间必须是 "亲兄弟", 有共同的父元素
+  -->
+
+  <div>
+    <p>你好</p>
+    <h3>我是 h3 标签</h3>
+    <span>span</span>
+    <p>世界1</p>
+    <span>span</span>
+    <p>世界2</p>
+    <span>span</span>
+    <p>世界3</p>
+    <span>span</span>
+    <p>世界4</p>
+    <span>span</span>
+    <p>世界5</p>
+    <span>span</span>
+    <p>世界6</p>
+  </div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      /* 给这个样式添加绝对权重 */
+      /* color: red!important; */
+    }
+
+    /* #box {
+      color: skyblue;
+    } */
+
+    .a {
+      color: pink;
+    }
+
+    .b {
+      color: orange;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    选择器权重
+      + 什么时候考虑权重
+        => 不同选择器作用在一个标签上的时候
+        => 不同选择器的权重不一样
+        => id 选择器 > 类名选择器 > 标签名选择器
+      + 对于选择器权重的分配
+        => 绝对权重(!important)  正无穷
+        => 行内式样式  1,0,0,0,0
+        => id 选择器  0,1,0,0,0
+        => 类名选择器  0,0,1,0,0
+        => 标签名选择器 0,0,0,1,0
+        => 通配符选择器 0,0,0,0,1
+        =>继承样式 没有优先级
+        选择器的累加不会超过其最大的数量级，类选择器再高也不会超过id选择器
+        如果优先级相等，则优先使用靠下的样式
+      + 书写样式的特殊方式
+        => 在样式值后面 分号(;) 的前面
+        => 书写一个关键字 !important
+        复合选择器，进行有权重叠加，需要计算权重。
+  -->
+
+  <div id="box" class="a b">你好 世界</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* a 标签默认的状态 */
+    a:link {
+      color: red;
+    }
+
+    /* 鼠标悬停的状态 */
+    a:hover {
+      color: skyblue;
+    }
+
+    /* 鼠标按下的状态(没有抬起) */
+    a:active {
+      color: orange;
+    }
+
+    /* a 标签跳转以后的状态 */
+    a:visited {
+      color: green;
+    }
+    /*用于选取获得焦点的表单元素*/
+    input:focus{
+      background-color: rebeccapurple;
+    }
+
+    /* 其他标签鼠标悬停的状态 */
+    div:hover {
+      color: skyblue;
+      cursor: pointer;
+    }
+
+
+    input:checked {
+      width: 100px;
+      height: 100px;
+    }
+
+    input:disabled {
+      width: 50px;
+      height: 50px;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    伪类选择器
+    :firstChild 第一个子元素
+    :lastChild 最后一个子元素
+    :nth-child()选中第n个子元素(n);若填写n则是0到正无穷
+         2n:为偶数；2n+1:为奇数;
+      + 依赖一些页面元素的表现形式出现的选择器
+        => 伪类一般书写都会连接一个其他类型选择器
+        => 例如:
+          .box:link
+          #box:link
+          a:link
+          :link  表示的是 *:link
+
+      + a 标签
+        => 根据 a 标签不同的状态来决定 选择器 生效的时候
+        => :link      a 标签默认状态
+        => :hover     鼠标悬停的状态
+        => :active    鼠标按下但是没有抬起的状态
+        => :visited   鼠标按下抬起以后, 并且跳转页面以后
+
+      + 非 a 标签
+        => :hover     表示鼠标悬停
+
+      + 个别表单标签
+        => :checked   表示选中后的状态
+        => :disabled  表示禁用状态时
+  -->
+
+
+  <a href="https://www.baidu.com">百度一下</a>
+
+  <div>你好 世界</div>
+
+  <input type="checkbox">
+  <input type="checkbox">
+  <input type="checkbox" disabled>
+  <input type="checkbox">
+  <input type="checkbox">
+
+</body>
+</html>

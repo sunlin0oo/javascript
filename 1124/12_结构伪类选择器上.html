@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* 我是一个 p 标签, 并且是某一个元素下的第一个孩子 */
+    /* p:first-child {
+      color: red;
+    } */
+
+
+    /* 我是一个 p 标签, 并且是某一个元素下的最后一个孩子 */
+    /* p:last-child {
+      color: skyblue;
+    } */
+
+
+    /* 我是一个 p 标签, 并且是某一个元素下的第六个孩子 */
+    /* p:nth-child(6) {
+      color: pink;
+    } */
+
+    /* 我是一个 p 标签, 除了第6个以外都是粉色 */
+    /* p:not(nth-child(6)) {
+      color: pink;
+    } */
+
+    /* 第 奇数个 p 标签, 遵循样式 */
+    /* p:nth-child(odd) {
+      color: red;
+    } */
+
+    /* 第 偶数个 p 标签, 遵循样式 */
+    /* p:nth-child(even) {
+      color: pink;
+    } */
+
+
+    /* 第 三的倍数 个 p 标签遵循样式 */
+    /* p:nth-child(3n) {
+      color: red;
+    } */
+
+    /* 前三个 p 标签 */
+    p:nth-child(-n + 3) {
+      color: skyblue;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    结构伪类选择器
+      + 根据 html 的书写结构, 由伪类来进行一些修饰
+      + 注意: 伪类是修饰前面的选择器的
+      + 例子:
+        => a:link    :link 是伪类, 修饰 a 标签的状态
+        => input:checked    :checked 是一个伪类, 修饰 input 的状态
+
+    1. 第一个子元素
+      + :first-child
+      + 使用: 选择器:first-child
+      + :first-child 是一个伪类, 修饰前面的选择器
+        => 例子: div:first-child
+        => 表示必须是一个div, 并且是某一个元素下的第一个元素div
+      + 注意:
+        1. 我得是谁的第一个孩子
+        2. 我还得满足前面的选择器
+
+    2. 最后一个子元素
+      + :last-child
+      + 使用: 选择器:last-child
+      + :last-child 是一个伪类, 修饰前面的选择器
+      + 注意:
+        1. 我得是谁的最后一个孩子
+        2. 我还得满足前面的选择器
+
+    3. 某一个子元素
+      + :nth-child(数字)
+      + 使用: 选择器:nth-child(n)
+      + 表示必须要是第 n 个孩子, 并且满足前面的选择器要求
+      + 小括号内不光可以写一个数字
+        => 写单词
+          -> odd    奇数
+          -> even   偶数
+        => 写一个表达式
+          -> 表达式必须满足要求: xn-y
+          -> n 的取值范围是 0 ~ 正无穷
+          -> 例子:
+            + 2n-1  所有奇数
+            + 2n    所有偶数
+      + 例子: 操作前三个
+        => 分析: 我和核心目标就是要 1 2 3
+          -> n 取值是 0 1 2 3 4 5 6 7 ... 100 ... 200 ...
+          -> 需要上限封顶需要 * -1, 上限封顶变成了 0
+          -> 封顶不是 0, 是 3, 再加 3
+      + 注意: 表达式你可以随便写, 但是必须保证 n 在前面
+  -->
+
+  <div>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    <p>10</p>
+  </div>
+
+</body>
+</html>

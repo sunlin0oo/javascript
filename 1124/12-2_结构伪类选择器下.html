@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* 第一个子元素, 还得是一个 p  整体排序的第一个 */
+    p:first-child {
+      color: red;
+    }
+
+
+    /* 拿到某一个元素下的 第一个 p 元素 */
+    p:first-of-type {
+      color: pink;
+    }
+
+
+    p:last-child {
+      color: skyblue;
+    }
+
+
+    p:last-of-type {
+      color: purple;
+    }
+
+
+    /* 需要三号 p 标签有样式 */
+    p:nth-child(4) {
+      color: orange;
+    }
+
+    p:nth-of-type(3) {
+      color: green;
+    }
+
+    /* 得是一个 p 标签, 还得是一个空标签 */
+    p:empty {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    结构伪类选择器
+      :first-child
+      :last-child
+      :nth-child(n)
+
+    结构伪类选择器
+
+    1. 第一个类型子元素
+      + :first-of-type
+      + 书写: 选择器:first-of-type
+      + 意义: 是这个选择器, 选择器同类型元素的第一个(不一定是结构排列在第一个)
+
+    2. 最后一个类型子元素
+      + :last-of-type
+      + 书写: 选择器:last-of-type
+      + 意义: 是这个选择器, 选择器同类型元素的最后一个
+
+    3. 某一个类型子元素
+      + :nth-of-type(n)
+      + 书写: 选择器:nth-of-type(n)
+      + 意义: 是这个选择器, 选择器同类型元素的第 n 个
+      + 取值:
+        => 直接书写数字
+        => 单词
+          -> odd
+          -> even
+        => 表达式: xn-y
+
+    4. 空类型伪类
+      + :empty
+      + 表示捕获的是空标签
+  -->
+
+  <div>
+    <span>0</span>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <i></i>
+    <p>4</p>
+    <p></p>
+    <span>6</span>
+  </div>
+
+</body>
+</html>

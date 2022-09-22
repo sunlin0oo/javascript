@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /*
+      交集选择器
+        + 多个选择器去确定一个标签
+        + 小注意: 交集选择器不能 标签名 和 标签名交集
+        + 书写: 选择器1选择器2 {}
+          => 表示 {} 内的样式添加元素, 既要满足选择器1 的要求, 还要满足选择器2的要求
+
+      交集选择器可以叠加权重
+    */
+
+    /* 下面选择器既要满足 标签名是 p, 还要满足类名是 b */
+    /* p.b {
+      color: red;
+    } */
+
+
+    /* 下面选择器既要满足 标签名是 span, 还要满足类名是 a 并且类名是 b */
+    /* span.a.b {
+      color: pink;
+    } */
+
+    /* .a.b.c {
+      color: skyblue;
+    } */
+
+    /* 既要满足 id名 是 box 又要满足 类名是 a */
+    /* #box.a {
+      color: purple;
+    } */
+
+    /* 一个类名选择器 */
+    /* 权重: 100 */
+    /* .a {
+      color: red;
+    } */
+
+    /* 两个类名选择器交集 */
+    /* 权重: 100 + 100 */
+    /* .a.b {
+      color: pink;
+    } */
+
+
+    /*
+      并集选择器(群组选择器)
+        + 书写: 选择器1, 选择器2 {}
+        + 意义: 满足选择器1 或者满足选择器2 任意一个都行
+    */
+
+    /* 一下选择器选择的标签需要满足 */
+    /* 可以是 div 标签, 可以是 p 标签, 可以是 span 标签 都行 */
+    div, p, span {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    交集和并集选择器
+  -->
+
+  <div class="a">DIVA</div>
+  <div id="box" class="a b c">DIVB</div>
+  <p class="a">PA</p>
+  <p class="b">PB</p>
+  <span class="a">SPANA</span>
+  <span class="a b">SPANB</span>
+  <span class="a b c">SPANC</span>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /*
+      子代选择器
+        + 表示获取的是直系的儿子
+        + 语法: 选择器1 > 选择器2 { 样式 }
+        + 给选择器2 的元素添加样式
+          => 但是需要保证选择器2 必须是选择器1 的直系儿子
+          => 后代不好使
+    */
+
+    /*
+      最终一定是给 p 标签添加的样式
+      但是要求这个 p 标签必须是一个 div 的直系子代元素
+    */
+    /* div > p {
+      color: red;
+    } */
+
+
+    /*
+      最终一定给 span 标签添加样式
+      但是要求这个 span 标签必须是一个 p 标签的直系子代元素
+    */
+    /* p > span {
+      color: orange;
+    } */
+
+    /*
+      最终一定给 span 标签添加样式
+      但是要求这个 span 标签必须是一个 div 标签的直系子代元素
+    */
+    /* div > span {
+      color: skyblue;
+    } */
+
+    /*
+      最终一定给 span 标签添加样式
+      但是要求 span 标签必须是一个 p 标签的直系子代元素
+      并且要求 p 必须要是一个 div 元素的直系子代元素
+    */
+    /* div > p > span {
+      color: skyblue;
+    } */
+
+    /*
+      后代选择器
+        + 只要出现了后代关系即可, 不管间隔多少层
+        + 语法: 选择器1 选择器2 { 样式 }
+    */
+
+    /*
+      最终样式一定是 span 加上
+        只要保证 span 的逐层父级上有一个 div 标签即可
+    */
+    /* div span {
+      color: red;
+    } */
+
+
+
+    .header p {
+      color: pink;
+    }
+
+    .footer p {
+      color: skyblue;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    父子结构选择器
+      + 父子: 出现父子关系
+      + 结构: 表示和 html 书写的结构有关系
+  -->
+
+  <!-- div 的直系 儿子 就是 p -->
+  <!-- p 的直系 儿子 就是 span -->
+  <!-- div 是 span 的爷爷, 存在一个后代关系 -->
+  <!-- <div>
+    <p>
+      我是 div 下的 p 标签
+      <span id="box" class="a b c d e f g">我是 p 内的一个 span</span>
+    </p>
+  </div>
+
+  <p>我是一个额外的 p 标签
+    <span>我是 p 内的一个 span</span>
+  </p> -->
+
+
+  <!-- 网页头部 -->
+  <div class="header">
+    <p>头部相关文本</p>
+  </div>
+
+  <!-- 网页底部 -->
+  <div class="footer">
+    <p>底部相关文本</p>
+  </div>
+
+
+
+
+</body>
+</html>

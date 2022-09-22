@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* 让 div 的 before 伪元素出现 */
+    div::before {
+      /* content 就是修饰该伪元素的内容 */
+      /* content 只能书写文本, 不能写超文本 */
+      /* content: '我是最前面的伪元素'; */
+    }
+
+    /* 让 div 的 after 伪元素出现 */
+    div::after {
+      /* content: '我是最后面的伪元素'; */
+    }
+
+    /*
+      所有 p 标签的前伪元素文本内容是 +
+    */
+    p:before {
+      content: '+';
+    }
+
+    /*
+      所有带有 aaa 类名 p 元素前伪元素文本内容是 -  无法被选择，只是添加一个样子
+    */
+    p.aaa:before {
+      content: '-';
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    伪元素选择器
+      + html 标准里面规定, 所有 **双标签** 都天生自带两个 伪元素
+        => 伪元素: 假装是一个标签, 但是其实不是
+        => 伪元素默认是不会显示在页面上的
+        => 只有当伪元素设置了 content 样式以后, 才会显示
+      + 元素的两个伪元素
+        => 一个叫做 ::before 排列在所有子元素的最前面
+        => 一个叫做 ::after  排列在所有子元素的最后面
+
+    伪元素的历史
+      + 很早很早以前, before 和 after 叫做 伪类, 而且在书写的时候是一个 冒号(:)
+      + 后来改名叫做 伪元素, 所有浏览器厂商(IE除外) 认为修改一下, 变成了两个 冒号(::)
+      + 在标准浏览器内, 你写一个冒号或者两个冒号都行
+        => 我再浏览器渲染伪元素的时候, 会帮你全部渲染成两个
+  -->
+
+  <div>
+    <p>用户管理</p>
+    <p>商品管理</p>
+    <p class="aaa">权限管理</p>
+    <p>订单管理</p>
+  </div>
+
+
+</body>
+</html>

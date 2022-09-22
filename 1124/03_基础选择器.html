@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 我通过标签名选择器给 添加样式 */
+    /* div { */
+      /* 这个大括号内的样式就是加给页面上一个 标签名叫做 div 的元素 */
+      /* color: red;
+    } */
+
+
+    /* 通过类名选择器给 添加样式 可以重复使用*/
+    .b {
+      /* 这个大括号内的样式就是加给页面上一个 类名叫做 a 的元素 */
+      color: pink;
+    }
+
+
+    /* 通过 id名选择器给 添加样式 */
+    /* #box { */
+      /* 这个大括号内的样式就是加给页面上一个 id名叫做 box 的元素 */
+      /* color: skyblue; */
+    /* } */
+  </style>
+</head>
+<body>
+  <!--
+    选择器:
+      + 目的: 在书写 css 的时候, 为了确定某一个样式集是给页面的哪一个标签添加的
+
+    三个基础选择器:
+      => 标签名选择器:  标签名 { 样式 }
+      => 类名选择器: .类名 { 样式 }
+      => id名选择器: #id名 { 样式 }
+
+    在书写 css 的时候
+      => 可以使用一个标签的任何一个名字来准确的捕获这个标签
+  -->
+
+
+  <!--
+    认识标签的三种名字
+
+    什么是标签的 id 名
+      + 在标签身上书写一个 id 属性， id 的值就是该元素的 id 名
+      + 注意: 书写 id 名的时候, 应该遵循 id 名唯一的原则
+        -> 一个标签只给一个 id 名称
+        -> 一个 id 名称也只给一个标签
+
+    什么是标签的 类名
+      + 在标签身上书写一个 class 属性, class 属性的值就是该标签的 类名
+      + 注意: 书写 class 类型的时候
+        -> 一个标签可以有多个 类名
+        -> 多个类名之间使用 空格 分隔
+
+    此时下面标签的名字
+      + 三种五个名字
+      + 标签名      div
+      + id 名      box
+      + 类名       a 或者 b 或者 c
+  -->
+  <div id="box" class="a b c">1</div>
+  <div id="box2" class="a b">2</div>
+  <div id="box3" class="a c">3</div>
+  <div id="box4" class="b c">4</div>
+  <p class="a">5</p>
+  <p class="b">6</p>
+
+  <div>
+    <span>
+      <i class="b">你好 世界</i>
+    </span>
+  </div>
+</body>
+</html>
