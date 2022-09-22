@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const s1 = "abc", s2 = "bca";
+        var kSimilarity = function(s1, s2) {
+            // const len1 = s1.length,len2 = s2.length;
+            // if(len1 !== len2) return;
+            // const a = 'a'.charCodeAt();
+            // let sum1 = 0,sum2 = 0;
+            // for(let i = 0;i<len1;i++){
+            //     sum1 += s1[i].charCodeAt() - a;
+            //     sum2 += s2[i].charCodeAt() - a;
+            // }
+            // if(sum1 !== sum2)return;
+            const n = s1.length;
+            const queue = [];
+            const visit = new Set();
+            // 队列,推进[cur(s1), pos(0)]
+            queue.push([s1,0]);
+            // 用哈希表记录这些中间状态，当通过交换时发现当前状态已经计算过，则此时我们可以直接跳过该状态。
+            visit.add(s1);
+            let step = 0;
+            while(queue.length){
+                console.log('queue', queue,'visit', visit);
+                const sz = queue.length;
+                for(let i = 0;i<sz;i++){
+                    // 解构队列中第一个数组
+                    let [cur, pos] = queue.shift();
+                    // 如果交换后字符串相同 则跳出
+                    if(cur === s2) return step;
+                    // 当第pos个位置的字符不匹配需要交换时，跳出while循环
+                    while(pos < n && cur[pos] === s2[pos]) pos++;
+                    // s2是标杆(标准,是从0开始进行遍历处理)去比较==>移动s1
+                    for(let j = pos + 1;j<n;j++){
+                        // 确定pos位置的字符不同，统计后续的字符是否相同，若相同则continue
+                        if(cur[j] === s2[j]) continue;
+                        // 根据s2中的字符位置s2[pos]去与cur[j]进行比较
+                        if(cur[j] === s2[pos]){
+                            // 将当前数组s1 进行位置pos,j交换;
+                            const next = swap(cur, pos, j);
+                            // 用于查看交换后是否存在变换，若存在变化，则将交换过的数组next 添加到visit中进行监督，并且推到queue中，再次进行筛选
+                            if(!visit.has(next)){
+                                visit.add(next);
+                                // pos + 1保证前面的位置的顺序都是一致的
+                                queue.push([next, pos + 1]);
+                            }
+                        }
+                    }
+                }
+                step++
+            }
+            return step;
+        };
+        // 交换函数
+        function swap(cur, i, j){
+            // 深复制
+            const arr = [...cur];
+            const c = arr[i];
+            arr[i] = arr[j];
+            arr[j] = c;
+            // 用''进行分割
+            return arr.join('');
+        }
+
+        const a = kSimilarity(s1, s2);
+        console.log(a);
+
+    </script>
+</body>
+</html>
