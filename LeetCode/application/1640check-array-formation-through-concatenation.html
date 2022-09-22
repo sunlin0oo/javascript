@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 速度快
+        let arr = [1,2,3], pieces = [[2],[1,3]];
+        var canFormArray = function(arr, pieces) {
+            let array = [];
+            const len1 = pieces.length;
+            let len2;
+            let tempindex;
+            let arrindex;
+            for(let i = 0;i<len1;i++){
+                tempindex = arr.indexOf(pieces[i][0]);
+                if(tempindex === -1) return false;
+                len2 = pieces[i].length;
+                for(let j = 1;j<len2;j++){
+                    arrindex = arr.indexOf(pieces[i][j]);
+                    if((arrindex - tempindex) !== 1 || arrindex === -1) return false;
+                    tempindex = arrindex;
+                }
+            }
+            return true;
+        };
+        console.log(canFormArray(arr, pieces));
+// 哈希表
+        var canFormArray = function(arr, pieces) {
+            const n = arr.length, m = pieces.length;
+            const index = new Map();
+            for (let i = 0; i < m; i++) {
+                index.set(pieces[i][0], i);
+            }
+            for (let i = 0; i < n;) {
+                if (!index.has(arr[i])) {
+                    return false;
+                }
+                const j = index.get(arr[i]), len = pieces[j].length;
+                for (let k = 0; k < len; k++) {
+                    if (arr[i + k] != pieces[j][k]) {
+                        return false;
+                    }
+                }
+                i = i + len;
+            }
+            return true;
+        };
+    </script>
+</body>
+</html>
