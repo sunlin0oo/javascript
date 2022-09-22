@@ -40,7 +40,7 @@ class FileList extends Component{
             })
         }
     }
-//后续的周期中进行渲染
+    //后续中，如果父组件出发点击事件修改状态值type,从而触发UNSAFE_componentWillReceiveProps周期去进行渲染
     UNSAFE_componentWillReceiveProps(nextProps){
         if(nextProps.type===1){
             //请求卖座正在热映的数据
@@ -105,7 +105,6 @@ export default class App extends Component {
                 })
             }}>即将上映</li>
         </ul>
-
         <FileList type={this.state.type}></FileList>
       </div>
     )

@@ -18,13 +18,18 @@ export default class App extends Component {
     )
   }
 
+  // componentWillUpdate(){
+  //   console.log('componentWillUpdate');
+  // }
+
   componentDidUpdate(prevProps,prevState,value){
     console.log("componentDidUpdate",value)
   }
-
+// 可代替componentWillUpdate==>可以记录信息状态给DidUpdate 
   getSnapshotBeforeUpdate(){
     console.log("getSnapshotBeforeUpdate")
     return 100;
   }
+  
   //render==>getSnapshotBeforeUpdate==>componentDidUpdate
 }

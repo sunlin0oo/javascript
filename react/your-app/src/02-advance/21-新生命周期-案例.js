@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+// 新老生命周期不可共存
 class FileList extends Component{
     state={
         list:[],
@@ -42,7 +43,7 @@ class FileList extends Component{
         }
     }
 
-    //建议将属性变成孩子的状态去放到componentDidUpdate中做==>解决频繁的异步请求
+    //建议将属性变成孩子的状态去放到componentDidUpdate中做(和并请求，进行一次调用)==>解决频繁的异步请求==>初始化创建会触发一次，父传子会触发一次
     static getDerivedStateFromProps(nextProps,nextState){
         console.log("getDrivedStateFromProps",nextProps,nextState);
         return{
@@ -50,10 +51,10 @@ class FileList extends Component{
             type:nextProps.type
         }
     }
-
+    // 配合周期
     componentDidUpdate(prevProps,prevState){
         console.log(this.state.type);
-        if(this.state.type === prevState.type) return;//新状态 === 老状态==>返回
+        if(this.state.type === prevState.type) return;//新状态 === 老状态==>返回==>解决死循环
         if(this.props.type===1){
             //请求卖座正在热映的数据
             console.log("请求卖座正在热映的数据")

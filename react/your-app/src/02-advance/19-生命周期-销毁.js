@@ -27,12 +27,11 @@ class Child extends Component{
     }
 
 
-    // 绑在window窗口的事件不会被销毁,除非手动进行清除
+    // 绑在window窗口的事件不会被销毁,除非手动进行清除===>通过componentWillUnmount进行销毁
     componentDidMount(){
         window.onresize=()=>{
             console.log("resize");
         }
-        
         this.time = setInterval(()=>{
             console.log("11111")
         },1000)

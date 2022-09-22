@@ -18,7 +18,7 @@ export default class App extends Component {
             },()=>{
                 // 访问到真实的DOM
                 console.log("this.state.list:",this.state.list);
-                // new BetterScroll("#warpper");
+                new BetterScroll("#warpper");
             }) 
             console.log("this.state.list::",this.state.list); 
         })
