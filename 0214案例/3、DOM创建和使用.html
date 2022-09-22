@@ -18,37 +18,37 @@
     </p>
     <script>
         // //创建
-        // var div=document.querySelector("div");
+        var div=document.querySelector("div");
         // var bn=document.querySelector("button");
+        // 点击console a 函数
         // bn.onclick=function(){
         //     console.log("aaa")
         // }
+
+        // document(屏幕)点击创建button按钮事件函数
         // document.onclick=function(){
         //     div.innerHTML=div.innerHTML+"<button>按钮</button>";
         // }
 
 
-        //     // 创建DOM元素
-        //         // 根据标签名创建一个元素
-        //     // document.createElement("标签名称")
-        //     //将子元素插入到父元素的尾部
-        //     // 父元素.appendChild(子元素)
-        //         // 将子元素插入到父元素中某个元素的前面
-        //     // 父元素.insertBefore(要插入的子元素，插入到谁的前面)
+        // 创建DOM元素
+        // 根据标签名创建一个元素
+        // document.createElement("标签名称")
+        //将子元素插入到父元素的尾部
+        // 父元素.appendChild(子元素)
+        // 将子元素插入到父元素中某个元素的前面
+        // 父元素.insertBefore(要插入的子元素，插入到谁的前面)
         //  document.onclick=function(){
         //     var button=document.createElement("button");
         //      div.appendChild(button);//在div下添加button标签
         //     // div.insertBefore(button,bn);
+        //     // 插入到div第一个的节点前面
         //     div.insertBefore(button,div.firstChild);//div.firstChild == <button></button> == bn
         //  }
 
 
-
-
-
-
+        // 都在document下创建标签元素，然后再逐渐写入所需要的标签下作为他的孩子存在
         // var  table=document.createElement("table");
-      
         // for(var i=0;i<10;i++){
         //     var tr=document.createElement("tr");
            
@@ -60,34 +60,35 @@
         // }
         // document.body.appendChild(table);
 
-           // 创建文档碎片容器
+        // 创建文档碎片容器==>是用来创建一个虚拟的节点对象，或者说，是用来创建文档碎片节点。它可以包含各种类型的节点，在创建之初是空的。
+        // 使用DocumentFragment可以起到性能优化的作用==>因为文档片段存在于内存中，并不在DOM中，所以将子元素插入到文档片段中时不会引起页面回流
         // var element=document.createDocumentFragment();
         // for(var i=0;i<100;i++){
         //     var div=document.createElement("div");
         //     element.appendChild(div);
         // }
-
         // document.body.appendChild(element);
 
 
-            // innerHTML  innerText  textContent区别
-        // var button=document.createElement("button");
+        // innerHTML  innerText  textContent区别
+        var button=document.createElement("button");
         // button.innerHTML="按钮1"
         // button.innerText="按钮1"
         // button.textContent="按钮1";
+        // console.log(button);
+
         // innerHTML 是可以给里面放入！！！标签元素！！！！
         // innerText和textContent都是只能放入文本的
 
         // button.innerHTML="按钮<hr>";
-        // button.innerText="按钮<hr>"
-        // button.textContent="按钮<hr>"
+        // button.innerText="按钮<hr>"//报错
+        // button.textContent="按钮<hr>"//报错
 
         // document.body.appendChild(button);
 
         // var p=document.querySelector("p");
         // console.log(p.innerText)//会显示所有子文本和后代文本，但是不带格式
         // console.log(p.textContent)//会显示所有子文本和后代文本,但是会带换行等格式
-
 
 
 
@@ -109,23 +110,30 @@
 
 
         // 复制节点   div.cloneNode(是否深复制);
+
         // 复制元素时，会将这个元素的所有标签属性复制，如果有id就需要重新修改id
         // var div1=div.cloneNode();
         // document.body.appendChild(div1);
 
-            // 深复制 将元素的后代节点及后代元素也完全复制
-            // 浅复制 只复制当前元素
-    //    var div1=div.cloneNode(true);
-    //    document.body.appendChild(div1);
-    //    console.log(document.body);
+        // 深复制 将元素的后代节点及后代元素也完全复制
+        // 浅复制 只复制当前元素
+
+    //    //cloneNode未传参的时候表示浅克隆，此时不会克隆div的内容部分
+    //    const cloneDiv1 = div.cloneNode();
+
+    //     //传入参数true表示深克隆，这时会把div的内容123也克隆进去
+    //     const cloneDiv2 = div.cloneNode(true)
+
+        // var div1=div.cloneNode(true);
+        // document.body.appendChild(div1);
+        // console.log(document.body);
 
 
-
-           // 父元素.replaceChild(新元素,要替换掉元素);
-            // var span=document.createElement("span");
-            // div.replaceChild(span,button);
-            // 要替换掉的元素.replaceWith(新元素)
-            // div.replaceWith(span)
+        // 父元素.replaceChild(新元素,要替换掉元素);
+        // var span=document.createElement("span");
+        // div.replaceChild(span,button);
+        // 要替换掉的元素.replaceWith(新元素)
+        // div.replaceWith(span)
     </script>
 </body>
 </html>

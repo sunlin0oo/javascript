@@ -47,6 +47,7 @@
     </style>
 </head>
 <body>
+    <!-- 选择栏 -->
     <ul class="clear">
         <li id="vegetable"><a href="#vegetable">蔬菜</a></li>
         <li id="fruits"><a href="#fruits">水果</a></li>
@@ -66,9 +67,13 @@
         var lis,div,prev;
         init();
         function init(){
+            // 当窗口hash值发生变化时，触发hashChangeHandler
             window.onhashchange=hashChangeHandler;
+            console.log(document.getElementsByTagName("li"))
+            // 依据节点标签进行数组的创建
             lis=Array.from(document.getElementsByTagName("li"));
             div=document.getElementsByTagName("div")[0];
+            // 若location.hash===0则默认#vegetable
              if(!location.hash) location.hash="#vegetable";
              else  hashChangeHandler();
         }
@@ -78,6 +83,7 @@
             if(prev){
                 prev.className=""
             }
+            // 记录上一次的li标签
             prev=li;
             prev.className="li-select";
             div.innerHTML=list[li.id].reduce(function(v,t){
