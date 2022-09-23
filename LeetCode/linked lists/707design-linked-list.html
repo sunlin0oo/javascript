@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var MyLinkedList = function() {
+            // 长度为0
+            this.size = 0;
+            // 创造节点0
+            this.head = new ListNode(0);
+        };
+        // 获取链表中第 index 个节点的值。如果索引无效，则返回-1。
+        MyLinkedList.prototype.get = function(index) {
+            if (index < 0 || index >= this.size) {
+                return -1;
+            }
+            // 获取到头节点
+            let cur = this.head;
+            // 从头节点开始遍历到第index个节点值
+            for (let i = 0; i <= index; i++) {
+                cur = cur.next;
+            }
+            return cur.val;
+        };
+        // 在头节点位置添加
+        MyLinkedList.prototype.addAtHead = function(val) {
+            this.addAtIndex(0, val);
+        };
+        // 在尾部位置添加
+        MyLinkedList.prototype.addAtTail = function(val) {
+            this.addAtIndex(this.size, val);
+        };
+        /**在链表中的第 index 个节点之前添加值为 val  的节点。如果 index 等于链表的长度，则该节点将附加到链表的末尾。
+         * 如果 index 大于链表长度，则不会插入节点。如果index小于0，则在头部插入节点。*/
+        MyLinkedList.prototype.addAtIndex = function(index, val) {
+            if (index > this.size) {
+                return;
+            }
+            index = Math.max(0, index);
+            this.size++;
+            let pred = this.head;
+            for (let i = 0; i < index; i++) {
+                pred = pred.next;
+            }
+            let toAdd = new ListNode(val);
+            toAdd.next = pred.next;
+            pred.next = toAdd;
+        };
+        // 如果索引 index 有效，则删除链表中的第 index 个节点
+        MyLinkedList.prototype.deleteAtIndex = function(index) {
+            if (index < 0 || index >= this.size) {
+                return;
+            }
+            this.size--;
+            let pred = this.head;
+            for (let i = 0; i < index; i++) {
+                pred = pred.next;
+            }
+            pred.next = pred.next.next;
+        };
+
+        function ListNode(val, next) {
+            // val指当前选择的节点
+            this.val = (val===undefined ? 0 : val)
+            // next指链表所选择的下一个节点
+            this.next = (next===undefined ? null : next)
+        }
+
+    </script>
+</body>
+</html>
