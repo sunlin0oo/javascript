@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let temperatureA = [21,18,18,18,31],temperatureB = [34,32,16,16,17]
+        var temperatureTrend = function(temperatureA, temperatureB) {
+            const len = temperatureA.length;
+            let arrayA = Array.from(len-1);
+            let arrayB = Array.from(len-1);
+            for(let i = 1;i<len;i++){
+                if(temperatureA[i-1]>temperatureA[i]){
+                    arrayA.push('+')
+                }else if(temperatureA[i-1]<temperatureA[i]){
+                    arrayA.push('-');
+                }else {
+                    arrayA.push('=');
+                }
+                if(temperatureB[i-1]>temperatureB[i]){
+                    arrayB.push('+');
+                }else if(temperatureB[i-1]<temperatureB[i]){
+                    arrayB.push('-');
+                }else {
+                    arrayB.push('=');
+                }
+            }
+            let index = 0;
+            let max = 0
+            const stageLen = len - 1;
+            for(let i = 0;i<stageLen;i++){
+                if(arrayA[i] === arrayB[i]){
+                    index++;
+                }else{
+                    index = 0;
+                    continue;
+                }
+                max = Math.max(max,index);
+            }
+            return max
+        };
+        // console.log(temperatureTrend(temperatureA, temperatureB))
+
+        const num = 4,plate = ["W.E.",".EOW","..W."];
+        var ballGame = function(num, plate) {
+            //     W是逆时针，E是顺时针
+            const column = plate[0].length;//列
+            const row = plate.length;//行
+            const E = [];
+            const o = Array.from(1);
+            const W = [];
+            let flag = false;
+            for(let i=0;i<row;i++){
+                for(let j = 0 ;j<column;j++){
+                    if(plate[i][j] === 'O'){
+                        o.push(i,j)
+                    }
+                }
+            }
+            console.log('o',o);
+            // i 是 行 j是列
+            for(let i=0;i<row;i++){
+                for(let j = 0 ;j<column;j++){
+                    if(plate[i][j] === 'W' && judgeFeasibilityE(i,j,o,column,row)){
+                        W.push([i,j]);
+                    }else if(plate[i][j] === 'E' && judgeFeasibilityE(i,j,o,column,row)){
+                        E.push([i,j]);
+                    }else{
+                        continue;
+                    }
+                }
+            }
+            const eLen = E.length;
+            const wLen = W.length;
+           
+            return[E,o,W]
+        };
+        function judgeFeasibilityE(i,j,o,column,row){
+            // 判断E
+            // 判断E在O的上下中哪一侧
+            if(i > o[0]){
+                // 上非贴左
+                if(j !== 0) return true;
+            }else if(i < o[0]){
+                // 下非贴右
+                if(j !== column - 1) return true;
+            }else{
+                // 判断中的右侧还是左侧
+                if(j > o[0]){
+                    // 中右非贴上
+                    if(i !== 0) return true;
+                }else{
+                    // 中左非贴下
+                    if(i !== row - 1) return true;
+                }
+            }
+            return false
+        }
+
+        function judgeFeasibilityW(i,j,o,column,row){
+            // 判断W
+            // 判断E在O的上下中哪一侧
+            if(i > o[0]){
+                if(j !== column - 1) return true;
+            }else if(i < o[0]){
+                if(j !== 0) return true;
+            }else{
+                // 判断中的右侧还是左侧
+                if(j > o[0]){
+                    if(i !== row - 1) return true;
+                }else{
+                    if(i !== 0) return true;
+                }
+            }
+            return false
+        }
+    
+        console.log(ballGame(num, plate));
+    </script>
+</body>
+</html>
