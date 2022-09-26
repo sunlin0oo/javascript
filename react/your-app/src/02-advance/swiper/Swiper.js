@@ -25,6 +25,7 @@ export default class KSwiper extends Component {
                 <div className="swiper" style={{height:"200px",background:"yellow"}}>
                     <div className="swiper-wrapper">
                         {console.log("this.props.children:", this.props)}
+                        {/* 插槽的用法 */}
                         {this.props.children}
                     </div>
 
