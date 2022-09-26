@@ -13,6 +13,7 @@
         // 可以用hash表进行记录，但是会变得很慢
         // 用位运算的性质，可以达到时间复杂度 O(n)O(n) 和空间复杂度 O(1)O(1)。
         // hash没看懂
+        // 此方法==>将原数组放入限定长度中==>设置检查数字缺失的数组==>将缺失数字放入res中
         var missingTwo = function(nums) {
             const arr = new Array(nums.length+2).fill(-1);
             // 遍历nums==> 将结果-1===索引位置 ==>放arr中
