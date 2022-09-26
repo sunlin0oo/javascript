@@ -19,12 +19,12 @@ export default class KSwiper extends Component {
         })
     }
     
-
     render() {
         return (
             <div>
-                <div className="swiper" >
+                <div className="swiper" style={{height:"200px",background:"yellow"}}>
                     <div className="swiper-wrapper">
+                        {console.log("this.props.children:", this.props)}
                         {this.props.children}
                     </div>
 

@@ -17,7 +17,7 @@ export default class App extends  PureComponent {
       </div>
     )
   }
-//   scu性能优化函数==>阻止重复无意义的渲染
+//   scu性能优化函数==>查看新老状态是否有变化==>阻止重复无意义的渲染
 //   shouldComponentUpdate(nextProps,nextState){
 //     // this.state 老状态
 //     // nextState 新状态

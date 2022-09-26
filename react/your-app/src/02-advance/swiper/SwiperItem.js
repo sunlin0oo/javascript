@@ -8,6 +8,8 @@ export default class KSwiperItem extends Component {
     render() {
         return (
             <div className="swiper-slide">
+                {console.log(this.props.children)}
+                {/* 插槽的用法 */}
                 {this.props.children}
             </div>
         )
