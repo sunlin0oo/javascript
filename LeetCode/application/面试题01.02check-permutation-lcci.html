@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const s1 = "abc", s2 = "bca";
+        // 法一：
+        var CheckPermutation = function(s1, s2) {
+            const table = new Array(26).fill(0);
+            const sLen1 = s1.length;
+            const sLen2 = s2.length;
+            const a = 'a'.charCodeAt(0);
+            let temp1 = 0,temp2 = 0;
+            if(sLen1 !== sLen2) return false;
+            for(let i = 0;i<sLen1;i++){
+                temp1 = s1.charCodeAt(i) - a;
+                temp2 = s2.charCodeAt(i) - a;
+                console.log(temp1,temp2)
+                table[temp1]++;
+                table[temp2]--;
+            }
+            for(let i = 0;i<26;i++){
+                if(table[i]!==0)return false
+            }
+            return true
+        };
+        // 法二：
+        var CheckPermutation = function(s1, s2) {
+            return s1.length == s2.length && [...s1].sort().join('') === [...s2].sort().join('')
+        };
+        // 法三：(不成熟==>无法解决异号同数量的问题)
+        // "abbcdde"    "abcccde"
+        var CheckPermutation = function(s1, s2) {
+            const table = new Map();
+            const sLen1 = s1.length;
+            const sLen2 = s2.length;
+            // const a = 'a'.charCodeAt(0);
+            // console.log(a);
+            if(sLen1 !== sLen2) return false;
+            // console.log(1);
+            let res1 = 0;
+            let res2 = 0;
+            for(let i = 0;i<sLen1;i++){
+                table.set(s1[i],0);
+                res1 += s1.charCodeAt(i);
+                res2 += s2.charCodeAt(i);
+            }
+
+            // console.log(res1,res2);
+            if(res1!==res2) return false;            
+            for(let i = 0 ;i<sLen1;i++){
+                if(!table.has(i)) return false;
+            }
+            return true;
+        };
+        console.log(CheckPermutation(s1, s2));
+    </script>
+</body>
+</html>
