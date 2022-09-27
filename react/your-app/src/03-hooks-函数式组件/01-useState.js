@@ -1,6 +1,7 @@
 import React ,{useState} from 'react'
 
 export default function App() {
+  // 不需要使用this.state.xxxx
   const [name,setName] = useState('kerwin');
   const [age,setAge] = useState(100);
 //   const obj = useState('kerwin');

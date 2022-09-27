@@ -20,12 +20,13 @@ export default class App extends Component {
                 })
             }}>即将上映</li>
         </ul>
-
+            {/* 子组件 */}
         <FilmList type={this.state.type}></FilmList>
       </div>
     )
   }
 }
+
 
 function FilmList(props){
     const [list,setlist] = useState([]);

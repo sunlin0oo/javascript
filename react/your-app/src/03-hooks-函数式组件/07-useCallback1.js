@@ -11,6 +11,7 @@ export default function App() {
             setcount(count+1);
             mycount++;
         }}>Click</button>
+        {/* count会逐渐增加，mycount一直维持为0 */}
         {count} - {mycount}
     </div>
   )

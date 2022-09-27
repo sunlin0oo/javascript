@@ -26,7 +26,8 @@ export default function Cinema(){
         })
     })
     //useMemo会记忆返回值，一开始是空数组==>添加cinemaList,mytext依赖，当这俩改变时去进行重新渲染
-    const getCinemaList = useMemo(()=> cinemaList.filter(item=>item.name.toUpperCase().includes(mytext.toUpperCase()) || 
+    const getCinemaList = useMemo(()=> 
+    cinemaList.filter(item=>item.name.toUpperCase().includes(mytext.toUpperCase()) || 
     item.address.toUpperCase().includes(mytext.toUpperCase())
     ),[cinemaList,mytext])
 

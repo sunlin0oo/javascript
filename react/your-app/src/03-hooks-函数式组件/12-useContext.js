@@ -16,7 +16,7 @@ export default function App(){
     })
 
     return (
-        // 供应商提供方法和变量
+        // 供应商提供方法(changeInfo)和参数(info)
         <GlobalContext.Provider value={{
             info:info,
             changeInfo:(value)=>{
@@ -35,7 +35,7 @@ export default function App(){
     )
 }
 
-
+// 类组件
 // export default class App extends Component {
 
 //     constructor(){
@@ -79,7 +79,7 @@ export default function App(){
 
 function FilmItem(props){
     let {name, poster,grade,synopsis} = props;//解构
-    const value = useContext(GlobalContext);//这里value返回的value,无需下面进行回调
+    const value = useContext(GlobalContext);////直接将GlobalContext当参数传入==>这里value返回的是供应商所提供的服务对象(value),无需下面进行回调
         return <div className='filmitem' onClick={()=>{
             console.log(synopsis);
             value.changeInfo(synopsis);
@@ -89,7 +89,8 @@ function FilmItem(props){
             <h4>{name}</h4>
             <div>{grade}</div>
         </div>
-    
+        // 消费者写法
+
         // return(
         //     <GlobalContext.Consumer>
         //         { //回调函数传递公共服务
@@ -109,7 +110,7 @@ function FilmItem(props){
         //     </GlobalContext.Consumer>
         // )
 }
-
+// 类组件
 //想要拿到信息要把自己包装成消费者
 // class FilmItem extends Component{
 //     render(){
@@ -136,14 +137,16 @@ function FilmItem(props){
 //     }
 // }
 
-// 改造成函数组件
+// 函数组件
 function FilmDetail(){
     const value = useContext(GlobalContext)
+    // context写法
     return (
         <div className='filmdetail'>
                         detail-{value.info}
                     </div>
     )
+    // 消费者写法
     // return(
     //     <GlobalContext.Consumer>
     //         {
@@ -155,7 +158,7 @@ function FilmDetail(){
     //     </GlobalContext.Consumer>
     // )
 }
-
+// 类组件
 // class FilmDetail extends Component{
 //     render(){
 //         return(

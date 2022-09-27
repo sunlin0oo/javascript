@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios'
+// 
 export default function App() {
     const [list,setList] = useState([]);
     // 每次执行setList都会执行函数App，故会无限循环
