@@ -8,7 +8,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-            <MRouter> 
+        {/* 指首页 */}
+            <MRouter>
               <Tabbar></Tabbar>
             </MRouter>
 
