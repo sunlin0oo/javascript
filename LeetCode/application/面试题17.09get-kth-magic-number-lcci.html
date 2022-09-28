@@ -10,7 +10,16 @@
     <script>
         const k = 5;
         // 找出含有3 5 7素因子的数，至少有一个
-        // 动态规划==>定义三个index 分别指向上面三个数列，下一个数一定是三个 index(指针) 代表的值中最小的那个。然后相应 index++ 即可。
+       /** 
+        * 如果把丑数数列叫做 ugly[i]，那么考虑一下三个数列：
+        *   定义三个index 分别指向下面三个数列，
+        * 因为第一个数是0 所以从1开始
+        *    p3=1,p5=1,p7=1;==>这里的index指的是有序数列中的第几个数，这样子慢慢推进既可以保证有序又可以保证只包含所需素因子
+            1. ugly[p3]*3,ugly[p3]*3,ugly[p3]*3,ugly[p3]*3,ugly[p3]*3,ugly[p3]*3……
+            2. ugly[p5]*5,ugly[p5]*5,ugly[p5]*5,ugly[p5]*5,ugly[p5]*5,ugly[p5]*5……
+            3. ugly[p7]*7,ugly[p7]*7,ugly[p7]*7,ugly[p7]*7,ugly[p7]*7,ugly[p7]*7……
+            动态规划==>下一个数(ugly[i])一定是三个 index(指针) 代表的值中最小的那个。然后相应 index++ 即可。
+        */
         var getKthMagicNumber = function(k) {
             // 定义数组dp，其中dp[i] 表示第 i 个数，第 k 个数即为dp[k]。
             const dp = new Array(k + 1).fill(0);
