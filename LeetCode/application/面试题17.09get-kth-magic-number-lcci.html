@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const k = 5;
+        // 找出含有3 5 7素因子的数，至少有一个
+        // 动态规划==>定义三个index 分别指向上面三个数列，下一个数一定是三个 index(指针) 代表的值中最小的那个。然后相应 index++ 即可。
+        var getKthMagicNumber = function(k) {
+            // 定义数组dp，其中dp[i] 表示第 i 个数，第 k 个数即为dp[k]。
+            const dp = new Array(k + 1).fill(0);
+            dp[1] = 1;
+            // 定义三个指针p3,p5,p7表示下一个数是当前指针指向的数乘以对应的质因数。初始时，三个指针的值都是1;
+            let p3=1,p5=1,p7=1;
+            for(let i = 2;i<=k;i++){
+                const num3 = dp[p3] * 3,num5 = dp[p5] * 5,num7 = dp[p7] * 7;
+                dp[i] = Math.min(Math.min(num3, num5), num7);
+                // 排除重复项，当相等时则证明
+                if(dp[i]===num3) p3++;
+                if(dp[i]===num5) p5++;
+                if(dp[i]===num7) p7++;
+            }
+            return dp[k];
+        };
+
+        console.log(getKthMagicNumber(k));
+    </script>
+</body>
+</html>
