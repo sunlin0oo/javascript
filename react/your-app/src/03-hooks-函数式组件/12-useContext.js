@@ -2,8 +2,10 @@ import React, { Component, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import './css/03-communination.css'
 //修改自02-advance==>09-context
+
 //子组件想要通信，需要设置context，并且设置共有的父组件供应商
 const GlobalContext = React.createContext()//创造context对象
+
 // useContext 减少组件层级
 export default function App(){
     const [filmList, setfilmList] = useState([]);
@@ -79,7 +81,7 @@ export default function App(){
 
 function FilmItem(props){
     let {name, poster,grade,synopsis} = props;//解构
-    const value = useContext(GlobalContext);////直接将GlobalContext当参数传入==>这里value返回的是供应商所提供的服务对象(value),无需下面进行回调
+    const value = useContext(GlobalContext);//直接将GlobalContext当参数传入==>这里value返回的是供应商所提供的服务对象(value),无需下面进行回调
         return <div className='filmitem' onClick={()=>{
             console.log(synopsis);
             value.changeInfo(synopsis);
