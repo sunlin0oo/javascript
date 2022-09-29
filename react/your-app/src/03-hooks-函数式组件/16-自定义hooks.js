@@ -34,19 +34,19 @@ function useCinemaList(){
 }
 
 function useFilter(cinemaList,mytext){
-        //useMemo会记忆返回值，一开始是空数组==>添加cinemaList,mytext依赖，当这俩改变时去进行重新渲染
-        const getCinemaList = useMemo(()=> cinemaList.filter(item=>item.name.toUpperCase().includes(mytext.toUpperCase()) || 
-        item.address.toUpperCase().includes(mytext.toUpperCase())
-        ),[cinemaList,mytext])
-        return {
-            getCinemaList
-        }
+    //useMemo会记忆返回值，一开始是空数组==>添加cinemaList,mytext依赖，当这俩改变时去进行重新渲染
+    const getCinemaList = useMemo(()=> cinemaList.filter(item=>item.name.toUpperCase().includes(mytext.toUpperCase()) || 
+    item.address.toUpperCase().includes(mytext.toUpperCase())
+    ),[cinemaList,mytext])
+    return {
+        getCinemaList
+    }
 }
 
 export default function Cinema(){
     const [mytext,setmytext] = useState("");
-    const {cinemaList} = useCinemaList();
-    const {getCinemaList} = useFilter(cinemaList,mytext);
+    const {cinemaList} = useCinemaList();//自定义组件
+    const {getCinemaList} = useFilter(cinemaList,mytext);//自定义组件
     return <div>
         {/* 受控组件，牵一发动全身，input调用==>mytext改变==>render重新调用==>则会重新渲染 */}
             <input value={mytext} onChange={(evt)=>{

@@ -3,8 +3,11 @@ import axios from 'axios'
 import './css/03-communination.css'
 // 尽量状态外部管理！
 //修改自02-advance==>09-context
+
 //子组件想要通信，需要设置context，并且设置共有的父组件供应商
 const GlobalContext = React.createContext()//创造context对象
+
+// 外部状态
 const initailState = {
     filmList:[],
     info:""
@@ -12,7 +15,7 @@ const initailState = {
 
 const reducer = (prevState,action)=>{
     var newstate = {...prevState}
-
+// 控制选择
     switch(action.type){
         case "change-filmlist":
             newstate.filmList = action.value;
@@ -25,12 +28,12 @@ const reducer = (prevState,action)=>{
     }
 }
 
-// useContext 减少组件层级
+// useContext 减少组件层级==>可以直接进行调用
 export default function App(){
     const [state,dispatch] = useReducer(reducer,initailState);
     // const [filmList, setfilmList] = useState([]);
     // const [info,setinfo] = useState("");
-// 先请求JSON数据
+    // 先请求JSON数据--第一次请求默认filmlist
     useEffect(()=>{
         axios.get('/test.json').then(res=>{
            dispatch({
@@ -63,6 +66,7 @@ function FilmItem(props){
     let {name, poster,grade,synopsis} = props;//解构
     // 解构
     const {dispatch}= useContext(GlobalContext);
+        // 绑定点击函数，每次点击时触发当前锁定应的介绍值
         return <div className='filmitem' onClick={()=>{
             dispatch({
                 type:"change-info",
@@ -78,13 +82,10 @@ function FilmItem(props){
         </div>
 }
 
-// 改造成函数组件
 function FilmDetail(){
-    const {state} = useContext(GlobalContext)
+    const {state} = useContext(GlobalContext);// 这里的state是与reducer里面的同步
     return (
-        <div className='filmdetail'>
-                        detail-{state.info}
-        </div>
+        <div className='filmdetail'>detail-{state.info}</div>
     )
 }
 

@@ -1,3 +1,4 @@
+// 路由组件
 import React, { Component } from 'react'
 // HashRouter as Router  将HashRouter重命名为Router;改成BrowserRouter就不需要一直改标签
 // BrowserRouter 没有#路径;是真正朝后端发送请求页面，后端没有对应的路径处理路径，就会404;
@@ -17,12 +18,12 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        {/* location.hash获取 */}
+        {/* 为了location.hash获取 */}
         {/* view放置页面视图 */}
         <Router>
           {/* 留插槽，让Tabbar组件插入 */}
           {this.props.children}
-            {/* 只渲染匹配到的第一个 */}
+            {/* Switch只渲染匹配到的第一个,匹配到就跳出 */}
             <Switch>
               {/* 做嵌套路由 不要进行精确匹配 */}
                 <Route path='/films' component={Films} />
@@ -47,11 +48,13 @@ export default class App extends Component {
                 {/* <Route path='/detail' component={Detail}/> */}
 
 
-                {/* 重定向==>from='/'==>是模糊匹配==>若没有匹配的Router则会到 to 里面所展示的router
+                {/* 前几个Route都不匹配重定向==>from='/'(指的是根路径)==>是模糊匹配==>若没有匹配的Router则会到 to 里面所展示的router
+                (新版本升级之后)每次刷新都是会以/开头便会直接重定向到films==>
                 ==>通过Switch组件进行处理每次刷新页面只会到/films的问题*/
                 }
                 {/* <Redirect from='/' to='/films'></Redirect> */}
-                {/* 精确匹配 exact  如果路径只有  /   跳转到/home */}
+                {/* 模糊匹配  路径只要含有/ 就跳转到/films  */}
+                {/* 精确匹配 exact  如果路径只有/ 跳转到/films */}
                 <Redirect from='/' to='/films' exact></Redirect>
                 <Route component={NotFound}/>
             </Switch>
