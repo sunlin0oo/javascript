@@ -25,10 +25,13 @@ export default class App extends Component {
           {this.props.children}
             {/* Switch只渲染匹配到的第一个,匹配到就跳出 */}
             <Switch>
-              {/* 做嵌套路由 不要进行精确匹配 */}
+              {/* 做嵌套路由==>Films下面还有子组件==>不要进行精确匹配==>先让他模糊匹配进入Films组件然后再去匹配内部的路由 */}
                 <Route path='/films' component={Films} />
-                {/* 这里写二级路由的话，只会进行覆盖，因为这两个路由Nowplaying与 films 是兄弟关系，而不是父子关系*/}
-                {/* <Route path='/films/nowplaying' component={Nowplaying}/> */}
+                
+                {/* 因为是模糊匹配即便是写成 /films/nowplaying 也是会先匹配上films==>Films
+                 这里写二级路由的话，只会进行覆盖，因为这两个路由Nowplaying与 films 是兄弟关系，而不是父子关系
+                <Route path='/films/nowplaying' component={Nowplaying}/>  所以转到Films组件下进行书写 变成父子关系 */}
+
                 <Route path='/cinemas' component={Cinemas}/>
 
                 {/*这里component属性写上将Center类传入  */}
@@ -54,7 +57,7 @@ export default class App extends Component {
                 }
                 {/* <Redirect from='/' to='/films'></Redirect> */}
                 {/* 模糊匹配  路径只要含有/ 就跳转到/films  */}
-                {/* 精确匹配 exact  如果路径只有/ 跳转到/films */}
+                {/* 精确匹配 exact  如果路径只有'/'时==> 跳转到/films */}
                 <Redirect from='/' to='/films' exact></Redirect>
                 <Route component={NotFound}/>
             </Switch>
