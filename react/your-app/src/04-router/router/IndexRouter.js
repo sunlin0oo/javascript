@@ -21,7 +21,7 @@ export default class App extends Component {
         {/* 为了location.hash获取 */}
         {/* view放置页面视图 */}
         <Router>
-          {/* 留插槽，让Tabbar组件插入 */}
+          {/* 留插槽，让Tabbar组件插入==>编程式导航 */}
           {this.props.children}
             {/* Switch只渲染匹配到的第一个,匹配到就跳出 */}
             <Switch>

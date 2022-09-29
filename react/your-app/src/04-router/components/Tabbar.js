@@ -11,7 +11,8 @@ export default function Tabbar() {
                 {/* <a href='#/films'>电影</a> */}
                 {/* 如果要监听改善，需要原生JS写window.onshashchangde==>location.hash */}
                 {/* 用声明式导航解决监听问题 */}
-                {/* activeClassName='choose'当选中时才会添加上，默认是添加class="active" */}
+                {/* activeClassName(固定属性名) activeClassName='choose' 当选中时才会添加上相对应的属性及css样式，默认是添加class="active" */}
+                {/* 这是声明式导航 */}
                 <NavLink to='/films' activeClassName={style.choose}>电影</NavLink>
                 {/* NavLink只能用在router里面 */}
             </li>
