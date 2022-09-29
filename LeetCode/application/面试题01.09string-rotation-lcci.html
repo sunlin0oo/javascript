@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const s1 = "waterbottle", s2 = "erbottlewat";
+        // 模拟做法==>考虑旋转之后的计算结果
+        var isFlipedString = function(s1, s2) {
+            const m = s1.length, n = s2.length;
+            if (m !== n) {
+                return false;
+            }
+            if (n === 0) {
+                return true;
+            }
+            // s1轮转 i 位 i 所指的是轮转的index
+            for (let i = 0; i < n; i++) {
+                let flag = true;
+                for (let j = 0; j < n; j++) {
+                    if (s1[(i + j) % n] !== s2[j]) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        // 检查 s2是否是s1+s1的子字符串
+        var isFlipedString = function(s1, s2) {
+            return s1.length === s2.length && (s1 + s1).indexOf(s2) !== -1;
+        };
+
+        var isFlipedString = function(s1, s2) {
+            const table = new Array(26).fill(0);
+            const sLen1 = s1.length;
+            const sLen2 = s2.length;
+            console.log(sLen1)
+            const a = 'a'.charCodeAt(0);
+            let temp1 = 0,temp2 = 0;
+            if(sLen1 !== sLen2) return false;
+            const ans = s2[0] + s2[sLen2-1];
+            let index = 0
+            for(let i = 1;i<sLen1;i++){
+                if(s1[i-1]+ s1[i] === ans) index = i-1;
+            }
+            const temp = sLen1 - index - 1;
+            for(let i = 0;i<index;i++){
+                if(s1[i] !== s2[temp + i]) return false
+            }
+            for(let i = index + 2;i<sLen1;i++){
+                if(s1[i] !== s2[i - index - 2]) return false
+            }
+            return true
+        };
+        console.log(isFlipedString(s1, s2));
+    </script>
+</body>
+</html>
