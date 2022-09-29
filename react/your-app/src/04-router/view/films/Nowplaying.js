@@ -15,8 +15,8 @@ export default function Nowplaying(props) {
         setlist(res.data.data.films)
     })
 }, [])
-  const history = useHistory();
-
+  const history = useHistory();// 等价于props.history
+  // 给每一个list绑定点击事件
   const handleChangePage=(id)=>{
     // 法一：
     // window.location.href = '#/detail/'+id
@@ -57,16 +57,20 @@ export default function Nowplaying(props) {
 function FilmItem(props){
   console.log(props);
   // <li key={item.filmId}>{item.name}</li>
-  // NavLink进行拼接
+
+  // NavLink进行拼接==>声明式导航
   // <li key={item.filmId}><NavLink to={'/detail/'+item.filmId}>{item.name}</NavLink></li>
+
   // 编程式导航
   // return <li key={item.filmId} onClick={()=>{
   //   handleChangePage(item.filmId)
   // }}>{item.name}</li>
+
   let {name,filmId} = props;//解构
   return <li onClick={()=>{
     props.history.push(`/detail/${filmId}`);
   }}>{name}</li>
 }
+
 // withRouter跨级传输
 const WithFilmItem = withRouter(FilmItem)
