@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-
+// 因为是router的孩子==>可以获得其属性值
 export default function Detail(props) {
   useEffect(()=>{
     console.log('create')

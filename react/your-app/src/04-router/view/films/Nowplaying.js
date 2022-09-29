@@ -16,7 +16,7 @@ export default function Nowplaying(props) {
     })
 }, [])
   const history = useHistory();// 等价于props.history
-  // 给每一个list绑定点击事件
+  // 给每一个list绑定点击事件==>点击对应的<li>进行页面的跳转
   const handleChangePage=(id)=>{
     // 法一：
     // window.location.href = '#/detail/'+id
@@ -25,7 +25,7 @@ export default function Nowplaying(props) {
     // console.log(props);
     // props.history.push(`/detail/${id}`)
 
-    // 法三：动态路由传参==>为主
+    // 法三：动态路由传参==>为主==>要与indexRouer中进行匹配
     history.push(`/detail/${id}`);
 
     //路由传参==>query传参

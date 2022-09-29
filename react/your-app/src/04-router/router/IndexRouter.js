@@ -45,7 +45,7 @@ export default class App extends Component {
 
                 <Route path='/login' component={Login}/>
 
-                {/* :myid 指 : 后面是模糊的  ==> 动态路由*/}
+                {/* :myid 指==>:==>后面是模糊的==>myid是占位符==> 动态路由==>优点可以将id值直接传输到组件中*/}
                 <Route path='/detail/:myid' component={Detail}/>
                 {/* query,state传参方式 是原先基本的Route写法 */}
                 {/* <Route path='/detail' component={Detail}/> */}
