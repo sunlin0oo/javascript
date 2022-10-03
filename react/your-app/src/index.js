@@ -1,8 +1,9 @@
 import React from 'react';
 // import 'antd/dist/antd.css' // antd-mobile--PC版本CSS
 // import ReactDOM from 'react-dom';
-// import App from './12-单元测试/App'
-import App from './03-hooks-函数式组件/15-useReducer3'
+import App from './13-redux-saga/App'
+// import App from './04-router/App'
+
 //react 18
 import { createRoot } from 'react-dom/client';
 // 必须要首字母大写

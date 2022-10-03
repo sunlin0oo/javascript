@@ -10,6 +10,7 @@ export default function Detail(props) {
       console.log('destory')
     }
   },[])
+  console.log('Detail - props',props);
   // 动态路由传参
   console.log(props.match.params.myid,"利用id去后端拿数据")
   // query传参
