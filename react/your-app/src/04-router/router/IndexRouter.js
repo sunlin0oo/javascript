@@ -11,9 +11,11 @@ import Detail from '../view/Detail'
 import Login from '../view/Login'
 // import Nowplaying from '../view/Nowplaying'
 
+// 授权函数==>验证字段==>是否授权
 function isAuth(){
     return localStorage.getItem('token');
 }
+
 export default class App extends Component {
   render() {
     return (
@@ -37,7 +39,7 @@ export default class App extends Component {
                 {/*这里component属性写上将Center类传入  */}
                 {/* <Route path='/center' component={Center}/> */}
                 
-                {/* render回调函数 渲染Center页面  可以书写逻辑,进行路由的拦截 */}
+                {/* 路由拦截: render回调函数 渲染Center页面  可以书写逻辑,进行路由的拦截 */}
                 {/* 这里只实例化<Center/> 而没有发送属性,没法使用history等属性方法;若要使用则需要添加参数propos就可以发送属性*/}
                 <Route path='/center' render={(props)=>{
                   console.log("props:::",props);
