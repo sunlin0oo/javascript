@@ -1,7 +1,7 @@
 import React from 'react';
 // import 'antd/dist/antd.css' // antd-mobile--PC版本CSS
 // import ReactDOM from 'react-dom';
-import App from './13-redux-saga/App'
+import App from './14-react-补充/懒加载/App'
 // import App from './04-router/App'
 
 //react 18
