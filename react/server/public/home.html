@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <button onclick="getData()">查询数据</button>
+    <button onclick="createData()">创建数据</button>
+    <button onclick="updateData()">更新数据</button>
+    <button onclick="deleteData()">删除数据</button>
+    <script>
+        function getData(){
+            const myquery = `
+            query{
+                getFilmInfo{
+                    id,name
+            }
+            }`
+            fetch('/graphql',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Accept':'application/json'
+                },
+                body:JSON.stringify({
+                    query:myquery
+                })
+                // res 拿到的才是真数据
+            }).then(res=> res.json()).then(res=>{
+                console.log(res);
+            })
+        }
+        // 流程会先发送POST请求，然后对query进行JSON编码,然后将input对myquery中进行替换
+        function createData(){
+            const myquery =
+            // 这里是要对标后端的Mutation中 createFilm(input:FilmInput)
+             `
+            mutation($input:FilmInput){
+                createFilm(input:$input){
+                    id,name
+                }
+            }
+            `
+            fetch('/graphql',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Accept':'application/json'
+                },
+                body:JSON.stringify({
+                    query:myquery,
+                    variables:{
+                        input:{
+                            name:"孙梓峰",
+                            price:666,
+                            poster:"推送孙梓峰"
+                        }
+                    }
+                })
+                // res 拿到的才是真数据
+            }).then(res=> res.json()).then(res=>{
+                console.log(res);
+            })
+        }
+
+        function updateData(){
+            const myquery =
+            // 这里是要对标后端的Mutation中 updateFilm(id:String!,input:FilmInput)
+             `
+             mutation($id:String!,$input:FilmInput){
+                updateFilm(id:$id,input:$input){
+                    id,name,poster,price
+                }
+            }
+            `
+            fetch('/graphql',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Accept':'application/json'
+                },
+                body:JSON.stringify({
+                    query:myquery,
+                    variables:{
+                        id:"633d373e23cf60952587340f",
+                        input:{
+                            name:"孙梓峰修改修改",
+                            price:666888,
+                            poster:"推送孙梓峰修改"
+                        }
+                    }
+                })
+                // res 拿到的才是真数据
+            }).then(res=> res.json()).then(res=>{
+                console.log(res);
+            })
+        }
+
+        function deleteData(){
+            const myquery =
+            // 这里是要对标后端的Mutation中 createFilm(input:FilmInput)
+             `
+            mutation($id:String!){
+                deleteFilm(id:$id)
+            }
+            `
+            fetch('/graphql',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'Accept':'application/json'
+                },
+                body:JSON.stringify({
+                    query:myquery,
+                    variables:{
+                        id:"633d373e23cf60952587340f"
+                    }
+                })
+                // res 拿到的才是真数据
+            }).then(res=> res.json()).then(res=>{
+                console.log(res);
+            })
+        }
+    </script>
+</body>
+</html>
