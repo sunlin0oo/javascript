@@ -13,12 +13,36 @@
     <button onclick="updateData()">更新数据</button>
     <button onclick="deleteData()">删除数据</button>
     <script>
+        // 需要根据后端04-db的情况进行修改
+        // function getData(){
+        //     const myquery = `
+        //     query{
+        //         getFilmInfo{
+        //             id,name
+        //     }
+        //     }`
+        //     fetch('/graphql',{
+        //         method:'POST',
+        //         headers:{
+        //             'Content-Type':'application/json',
+        //             'Accept':'application/json'
+        //         },
+        //         body:JSON.stringify({
+        //             query:myquery
+        //         })
+        //         // res 拿到的才是真数据
+        //     }).then(res=> res.json()).then(res=>{
+        //         console.log(res);
+        //     })
+        // }
+
+        // 增加参数版本
         function getData(){
             const myquery = `
-            query{
-                getFilmInfo{
+            query($id:String!){
+                getFilmInfo(id:$id){
                     id,name
-            }
+                }
             }`
             fetch('/graphql',{
                 method:'POST',
@@ -27,13 +51,18 @@
                     'Accept':'application/json'
                 },
                 body:JSON.stringify({
-                    query:myquery
+                    query:myquery,
+                    variables:{
+                        id:"633d373e23cf60952587340f"
+                    }
                 })
                 // res 拿到的才是真数据
             }).then(res=> res.json()).then(res=>{
                 console.log(res);
             })
         }
+
+
         // 流程会先发送POST请求，然后对query进行JSON编码,然后将input对myquery中进行替换
         function createData(){
             const myquery =

@@ -1,10 +1,11 @@
 /**
  * 1.启动db serve（外部）==>需要下载mongodb==>.\mongod.exe --dbpath=E:\mongodb6.0.2\data\db  或者 net start MongoDB/net stop MongoDB
+ *  .\mongod.exe --config 'E:\mongodb-win32-x86_64-windows-5.0.13\bin\mongodb.config'
  * 2.连接数据库（04-db.js）
  * 3.改造增删改查
  * 4.可视化
  */
-
+// 照葫芦画瓢
 // 通过nodemon node-dev进行node模块自动化
 const express = require('express');
 // 构建轮廓的方法
@@ -45,7 +46,7 @@ let Scchema = buildSchema(`
     }
 
     type Query{
-        getFilmInfo:[Film],
+        getFilmInfo(id:String!):[Film],
     }
 
     type Mutation{  
@@ -57,8 +58,9 @@ let Scchema = buildSchema(`
 // (查询)处理器===>获取多个资源，只用一个请求
 let root = {
     // 数组也可以进行按需所取，但是会将你所需的key全部取出
-    getFilmInfo(){
-        return FilmModel.find();
+    getFilmInfo({id}){
+        // 因为在mongoose中存储的都是下划线id
+        return FilmModel.find({_id:id});
     },
     createFilm({input}){
         /**
