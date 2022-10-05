@@ -13,6 +13,14 @@ module.exports = function(app) {
     })
   );
 
+  app.use(
+    '/graphql',
+    createProxyMiddleware({
+      target: 'https://localhost:3000',//目标;会加上请求路径，进行请求
+      changeOrigin: true
+    })
+  );
+
 //   app.use(
 //     '/ajax2',  // /api/list /api/detail /api/center /api/cart
 //     createProxyMiddleware({
