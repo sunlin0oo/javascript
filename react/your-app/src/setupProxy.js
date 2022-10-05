@@ -2,6 +2,7 @@
  * @作者: kerwin
  * @公众号: 大前端私房菜
  */
+// 这一块是啥来 我忘了 如果复习到重点看一看
 const { createProxyMiddleware } = require('http-proxy-middleware');
 // 每次修改完需要重启服务器
 module.exports = function(app) {
@@ -16,7 +17,7 @@ module.exports = function(app) {
   app.use(
     '/graphql',
     createProxyMiddleware({
-      target: 'https://localhost:3000',//目标;会加上请求路径，进行请求
+      target: 'http://localhost:3000',//目标;会加上请求路径，进行请求
       changeOrigin: true
     })
   );
