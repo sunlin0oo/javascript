@@ -1,7 +1,7 @@
 import React from 'react';
 // import 'antd/dist/antd.css' // antd-mobile--PC版本CSS
 // import ReactDOM from 'react-dom';
-import App from './15-graphql/02-query-参数'
+import App from './15-graphql/App'
 // import App from './04-router/App'
 
 //react 18
