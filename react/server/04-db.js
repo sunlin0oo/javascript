@@ -59,7 +59,8 @@ let Scchema = buildSchema(`
 let root = {
     // 数组也可以进行按需所取，但是会将你所需的key全部取出
     getFilmInfo({id}){
-        // 因为在mongoose中存储的都是下划线id
+        if(!id) return FilmModel.find();//如果查询错误的id，则返回所有的id
+        // 因为在mongoose中存储的都是下划线id=>查找指定的id
         return FilmModel.find({_id:id});
     },
     createFilm({input}){
@@ -69,7 +70,7 @@ let root = {
          */
         // 在这里返回的就是Promise对象
         return FilmModel.create({
-            // 将input进行分开
+            // 将input进行分开进行输入
             ...input
         })
         // .then(res=>{
