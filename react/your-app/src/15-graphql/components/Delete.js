@@ -8,9 +8,6 @@ class Delete extends Component {
         deleteFilm(id:$id)
     }
     `
-    state = {
-        id:"633d41c33764bd553c6493b6"
-    }
     render(){
         return(
             <div>
@@ -24,8 +21,10 @@ class Delete extends Component {
                                 <button onClick={()=>{
                                     deleteFilm({
                                         variables:{
-                                            id:this.state.id,
+                                            id:this.props.id,
                                         }
+                                    }).then(res=>{
+                                        this.props.fetch();
                                     })
                                 }}>deleteFilm</button>
                             </div>

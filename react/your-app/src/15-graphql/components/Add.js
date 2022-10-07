@@ -36,6 +36,8 @@ class Add extends Component {
                                                 price:Number(this.priceRef.current.value),
                                             }
                                         }
+                                    }).then(res=>{
+                                        this.props.cb();
                                     })
                                 }}>add</button>
                             </div>

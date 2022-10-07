@@ -11,12 +11,18 @@ const client = new ApolloClient({
     uri:'/graphql'
 })
 class App extends Component {
+    refetch = null;//存储refetch方法
     render() {
         return (
             // 通过ApolloProvider 提供整个客服端的配置==>client==>加上跨域
             <ApolloProvider client={client}>
-                <Add></Add>
-                <SunlinQuery></SunlinQuery>
+                <Add cb={()=>{
+                    this.refetch();//让SunlinQuery 重新请求一遍
+                }}></Add>
+                {/* 每次插入完之后需要让Query重新执行一遍==>子传父，回调函数调用==>refetch */}
+                <SunlinQuery fetch={(refetch)=>{
+                    this.refetch = refetch;
+                }}></SunlinQuery>
             </ApolloProvider>
         );
     }
