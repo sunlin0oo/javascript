@@ -12,6 +12,7 @@ const reducer = combineReducers({
     TabbarReducer,
     CinemaListReducer
 })
+// 作为中间件，不进行状态的修改，状态的修改交给reducer
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,composeEnhancers(applyMiddleware(reduxThunk,reduxPromise)));
 

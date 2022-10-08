@@ -6,7 +6,7 @@ export default function Detail(props) {
   useEffect(()=>{
     console.log('create')
 
-    // store.dispatch 通知
+    // store.dispatch 通知==>这里面传的是action对象
     store.dispatch(hide());
     return ()=>{
       console.log('destory')
