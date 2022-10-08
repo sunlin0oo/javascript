@@ -14,10 +14,9 @@ export default class App extends Component {
 
 
   // store.subsribe  订阅==>有人通知才会触发
-  
   componentDidMount(){
     store.subscribe(()=>{
-      // 通过store.getState()获取最新状态
+      // 通过store.getState()主动去获取最新状态
       // console.log('app订阅',store.getState());
       console.log('app订阅',store.getState().TabbarReducer);
       this.setState({

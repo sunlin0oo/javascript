@@ -7,7 +7,7 @@ export default function Detail(props) {
     console.log('create')
 
     // store.dispatch 通知==>这里面传的是action对象
-    store.dispatch(hide());
+    store.dispatch(hide());//通知到app订阅者==>将其写成函数直接对函数进行调用
     return ()=>{
       console.log('destory')
       store.dispatch(show())

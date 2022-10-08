@@ -16,12 +16,12 @@ const reducer = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,composeEnhancers(applyMiddleware(reduxThunk,reduxPromise)));
 
-// 整体部分未拆分
+// 将action放到reducer中进行处理==>整体部分未拆分
 // const reducer = (prevState={
 //     show:true,//赋值初始值
 //     cityName:"北京",
 // },action)=>{
-//     console.log("action::",action);
+//     console.log("action::",action);//可以获取到发布者的对象
 //     let newState = {...prevState};
 //     switch(action.type){
 //         case "kerwinhide-tabbar":
@@ -40,6 +40,7 @@ const store = createStore(reducer,composeEnhancers(applyMiddleware(reduxThunk,re
 // const store = createStore(reducer);
 
 export default store;
+
 /**Redux整体流程：
  * 1.(App.js) 进行 store.subsribe订阅
  * 2.当(Detail)创建时，触发useEffect==>store.dispatch==>actionCreator 获取：type:"kerwinhide-tabbar" 
