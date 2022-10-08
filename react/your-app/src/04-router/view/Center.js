@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom';
+// 当indexRouter中没传props
 function Center(props) {
   return (
     <div>
@@ -12,5 +13,6 @@ function Center(props) {
     </div>
   )
 }
-// 专门给孩子传输history
+
+// 专门给孩子传输history等属性值
 export default withRouter(Center)

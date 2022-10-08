@@ -36,11 +36,12 @@ export default class App extends Component {
 
                 <Route path='/cinemas' component={Cinemas}/>
 
-                {/*这里component属性写上将Center类传入  */}
+                {/*这里component属性写上将Center类传入,也传入了相关的属性参数  */}
                 {/* <Route path='/center' component={Center}/> */}
                 
                 {/* 路由拦截: render回调函数 渲染Center页面  可以书写逻辑,进行路由的拦截 */}
-                {/* 这里只实例化<Center/> 而没有发送属性,没法使用history等属性方法;若要使用则需要添加参数propos就可以发送属性*/}
+                {/* 这里只实例化<Center/> 而没有发送属性,没法使用history等属性方法;若要使用则需要添加参数propos就可以发送属性
+                {...props} 展开赋值给center组件*/}
                 <Route path='/center' render={(props)=>{
                   console.log("props:::",props);
                   return isAuth()?<Center myname='kerwin' {...props}/>:<Redirect to='/login'/>}}/>

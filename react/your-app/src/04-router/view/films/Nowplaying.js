@@ -43,7 +43,7 @@ export default function Nowplaying(props) {
         {
           // 渲染一个个组件
           list.map(item=>
-            // {...item}作为属性传到FilmItem中,{...props}通过父组件给子组件拿到props.history
+            // {...item}作为属性传到FilmItem中,{...props}通过父组件给子组件拿到props.history===>传给孩子
             // <FilmItem key={item.filmId} {...item} {...props}></FilmItem>
             <WithFilmItem key={item.filmId} {...item}></WithFilmItem>
           )
@@ -53,7 +53,7 @@ export default function Nowplaying(props) {
     </div>
   )
 }
-// FilmItem是Nowplaying的亲儿子
+// FilmItem本身是拿不到props.history之类的数据；由于是Nowplaying的亲儿子，可以父传子
 function FilmItem(props){
   console.log(props);
   // <li key={item.filmId}>{item.name}</li>
@@ -72,5 +72,5 @@ function FilmItem(props){
   }}>{name}</li>
 }
 
-// withRouter跨级传输
+// withRouter跨级传输==>做成父组件==>可以凭空给出history,match这类的方法
 const WithFilmItem = withRouter(FilmItem)
