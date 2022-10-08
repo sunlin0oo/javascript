@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const nums1 = [2,7,11,15], nums2 = [1,10,4,11];
+        var advantageCount = function(nums1, nums2) {
+
+            const n = nums1.length;
+            const idx1 = new Array(n).fill(0);
+            const idx2 = new Array(n).fill(0);
+            for (let i = 0; i < n; ++i) {
+                idx1[i] = i;
+                idx2[i] = i;
+            }
+            // 对nums1，nums2进行排序==>idx1,idx2都作为索引==>升序排列nums1，nums2==>从小到大
+            idx1.sort((i, j) => nums1[i] - nums1[j]);
+            idx2.sort((i, j) => nums2[i] - nums2[j]);
+            console.log('idx1',idx1,'idx2',idx2)
+
+            const ans = new Array(n).fill(0);
+            let left = 0, right = n - 1;
+            // 田忌赛马==>用nums1小的去和nums2大的进行匹配
+            for (let i = 0; i < n; ++i) {
+                // 比较首个元素
+                if (nums1[idx1[i]] > nums2[idx2[left]]) {
+                    ans[idx2[left]] = nums1[idx1[i]];
+                    ++left;
+                } else {
+                    // idx2最右侧 = nums1[idx1[i]]==>用小的比大的
+                    ans[idx2[right]] = nums1[idx1[i]];
+                    --right;
+                }
+            }
+            return ans;
+        };
+        console.log(advantageCount(nums1,nums2))
+    </script>
+</body>
+</html>
