@@ -11,8 +11,10 @@ export default class App extends Component {
     // isShow:store.getState(),
     isShow:store.getState().TabbarReducer
   }
-  // store.subsribe  订阅
 
+
+  // store.subsribe  订阅==>有人通知才会触发
+  
   componentDidMount(){
     store.subscribe(()=>{
       // 通过store.getState()获取最新状态
@@ -29,7 +31,7 @@ export default class App extends Component {
     return (
       <div>
             <MRouter> 
-              {/* 如果进入详细界面则会隐藏导航栏 */}
+              {/* 如果进入详细界面则会隐藏导航栏==>通过store进行控制s */}
               {this.state.isShow && <Tabbar></Tabbar>}
             </MRouter>
 
