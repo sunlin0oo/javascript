@@ -2,6 +2,7 @@ import React from 'react'
 import {HashRouter,NavLink,Redirect,Route, Switch} from 'react-router-dom'
 import Nowplaying from './films/Nowplaying'
 import Comingsoon from './films/Comingsoon'
+// 通过这种方法使得film.module.css变成对象，从而获得对应得到CSS名称
 import style from './css/film.module.css'
 console.log("style::",style);
 export default function Films() {
@@ -10,8 +11,8 @@ export default function Films() {
     <div className={style.active + 'aaaa'}>
       <div style={{height:"200px",background:"yellow"}}>大轮播</div>
       <ul>
-        {/* 单页面的CSS是重复的，别的文件引入，即可直接使用 ,但是可能会重名，通过在CSS文件中添加module==>film.module.css
-        来解决重名的问题，多使用id/class选择器，少用标签选择器*/}
+        {/* 单页面的CSS是重复的，别的文件引入，即可直接使用 ,但是可能会重名。
+        通过在CSS文件中添加module==>film.module.css==>随机生成一个唯一后缀来解决重名的问题，多使用id/class选择器，少用标签选择器==>不会二次加工，会全局影响*/}
         <li>
           <NavLink to='/films/nowplaying' activeClassName={style.active}>正在热映</NavLink>
         </li>
