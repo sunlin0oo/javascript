@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const s = "(()(()))";
+        // 栈想法
+        var scoreOfParentheses = function(s) {
+            // 使用栈 st 记录平衡字符串的分数,在开始之前要压入分数 0,表示空字符串的分数
+            const st= [0];
+            const len = s.length;
+            for(let i = 0;i<len;i++){
+                if(s[i] === '('){
+                    // 左括号压入分数0，表示A 前面的空字符串的分数
+                    st.push(0);
+                }else{
+                    // 如果 v=0，那么说明子平衡括号字符串 A 是空串==>分数是1
+                    let v = st.pop();
+                    // 否则是2v，然后把A的分数加到栈顶元素的
+                    let top = st.pop() + Math.max(2*v ,1);
+                    st.push(top);
+                }
+            }
+            return st[0];
+        }
+        console.log(scoreOfParentheses(s));
+    </script>
+</body>
+</html>
