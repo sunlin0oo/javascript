@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 注意审题！！！
+        const s1 = "ysmpagrkzsmmzmsssutzgpxrmoylkgemgfcperptsxjcsgojwourhxlhqkxumonfgrczmjvbhwvhpnocz",
+              s2 = "ysmpagrqzsmmzmsssutzgpxrmoylkgemgfcperptsxjcsgojwourhxlhkkxumonfgrczmjvbhwvhpnocz";
+        var areAlmostEqual = function(s1, s2) {
+            const len = s1.length;
+            let index = []
+            for(let i = 0;i<len;i++){
+                if(s1[i] !== s2[i]){
+                    index.push(i);
+                }
+            }
+            if(index.length > 2 || s1[index[0]] !== s2[index[1]] || s2[index[0]] !== s1[index[1]]) return false;
+            return true;
+        };
+        console.log(areAlmostEqual(s1, s2))
+    </script>
+</body>
+</html>
