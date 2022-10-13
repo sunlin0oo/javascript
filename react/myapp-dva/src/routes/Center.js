@@ -1,7 +1,14 @@
 import { withRouter } from 'dva/router'
 import React, { Component } from 'react'
+import request from '../utils/request'
 
 export default class Center extends Component {
+  // 在webpackckrc中进行反向代理
+  componentDidMount(){
+    request("/api/mmdb/movie/v3/list/hot.json?ct=%E5%8C%97%E4%BA%AC&ci=1&channelId=4").then(res=>{
+      console.log(res)
+  })
+  }
   render() {
     return (
       <div>
