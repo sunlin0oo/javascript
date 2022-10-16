@@ -5,7 +5,7 @@ import { useParams } from "umi";
 export default function Detail(props: any) {
     // console.log(props.params.id);与useParams 相同
     const params = useParams();
-    console.log(params.id);
+    // console.log(params.id);
     return (
         <div>
             Detail
