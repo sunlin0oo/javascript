@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { IndexBar, List } from 'antd-mobile';
-import { useHistory } from "umi";
-export default function City(props: any) {
+import { connect, useHistory } from "umi";
+function City(props: any) {
     const [list, setList] = useState<any>([])
     const history = useHistory();
     const filterCity = function (cities: any) {
@@ -23,9 +23,19 @@ export default function City(props: any) {
         }
         return newList;
     }
-
+    // 改变城市时出发的函数
     const changeCity = (item: any) => {
-        console.log(item);
+        console.log('item', item);
+
+        // 修改store中state的状态===>这里是发送者(将数据发送给订阅者)==>传到models==>reducer中对应的type:"changeCity"函数
+        props.dispatch({
+            // 要带上命名空间
+            type:"city/changeCity",
+            payload:{
+                cityName:item.name,
+                cityId:item.cityId
+            }
+        })
         history.push('/cinema');
     }
 
@@ -54,7 +64,8 @@ export default function City(props: any) {
                         >
                             <List>
                                 {items.map((item: any, index: number) => (
-                                    <List.Item key={index} onClick={(item) => {
+                                    // 在onClick事件中不能写item,会导致变成evt事件
+                                    <List.Item key={index} onClick={() => {
                                         changeCity(item)
                                     }}>{item.name}</List.Item>
                                 ))}
@@ -66,3 +77,9 @@ export default function City(props: any) {
         </div>
     )
 }
+/**export default connect(()=>{})(City)
+ * 没加小括号的话 会是一个函数，没有返回值的函数
+*/
+// 返回空对象
+// connect包裹后会有dispatch方法
+export default connect(()=>({}))(City)
