@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const fruits = [3,3,3,1,2,1,1,2,3,3,4];
+        /**
+         * 1.只能放2种水果
+         * 2.任意一棵树开始，采摘一次，然后移动到下一颗树
+         * 3.如果水果类型不符合篮子水果类型，则停止采摘
+        */
+        //    Hash做法
+        var totalFruit = function(fruits) {
+            const len = fruits.length;
+            // 用于记录水果种类
+            const cnt = new Map();
+            let ans = 0;
+            // 左边界
+            let left = 0;
+            for(let right = 0; right < len ;right++){
+                // 寻找有没有 没有设置，有的话基础+1
+                cnt.set(fruits[right],(cnt.get(fruits[right])|| 0) + 1);
+                // 剔除最靠近左边界的水果
+                while(cnt.size>2){
+                    cnt.set(fruits[left], cnt.get(fruits[left])-1);
+                    if(cnt.get(fruits[left]) === 0) cnt.delete(fruits[left]);
+                    left ++;
+                }
+                ans = Math.max(ans,right - left + 1);
+            }
+            return ans;
+        };
+        console.log(totalFruit(fruits));
+    </script>
+</body>
+</html>
