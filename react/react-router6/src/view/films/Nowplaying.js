@@ -20,10 +20,10 @@ export default function Nowplaying() {
     // 跳转页面
 
     // navigate// query(URLSearch) 传参/detail?id=1000==>会自动添加路由不需要动态路由
-    navigate(`/detail?id=${id}`)
+    // navigate(`/detail?id=${id}`)
     
     // 路由传参 /detail/1000
-    // navigate(`/detail?${id}`)
+    navigate(`/detail/${id}`)
   }
   return (
     <div>
