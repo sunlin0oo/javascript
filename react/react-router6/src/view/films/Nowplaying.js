@@ -19,10 +19,11 @@ export default function Nowplaying() {
   const handleChangePage = (id)=>{
     // 跳转页面
 
-    // navigate
+    // navigate// query(URLSearch) 传参/detail?id=1000==>会自动添加路由不需要动态路由
     navigate(`/detail?id=${id}`)
-    // query(URLSearch) 传参/detail?id=1000
+    
     // 路由传参 /detail/1000
+    // navigate(`/detail?${id}`)
   }
   return (
     <div>
