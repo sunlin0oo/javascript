@@ -8,6 +8,7 @@ import NotFound from '../view/NotFound';
 import Search from '../view/Search';
 import Nowplaying from '../view/films/Nowplaying';
 import ComingSoon from '../view/films/ComingSoon';
+import Detail from '../view/Detail';
 export default function MRouter() {
   return (
     <div>
@@ -24,6 +25,7 @@ export default function MRouter() {
         <Route path='/cinemas' element={<Cinema></Cinema>}></Route>
         <Route path='/cinemas/search' element={<Search></Search>}></Route>
         <Route path='/centers' element={<Center></Center>}></Route>
+        <Route path='/detail' element={<Detail></Detail>}></Route>
         {/* 方案1:Navigate组件代替Redirect(重定向组件)==> * 用万能匹配，匹配不到到films */}
         {/* <Route path='*' element={<Navigate to='/films'></Navigate>}></Route> */}
         {/* 方案2:自己写一个重定向组件==>将要传的值(路由)以属性的形式传过去 */}
