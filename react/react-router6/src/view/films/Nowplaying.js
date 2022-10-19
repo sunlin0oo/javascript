@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+// import FilmItem from './FilmItem-func';
+import FilmItem from './FilmItem_class';
 export default function Nowplaying() {
   const [list, setlist] = useState([]);
   useEffect(() => {
@@ -15,24 +17,26 @@ export default function Nowplaying() {
       setlist(res.data.data.films)
     })
   }, [])
-  const navigate = useNavigate();
-  const handleChangePage = (id)=>{
-    // 跳转页面
+  // const navigate = useNavigate();
+  // const handleChangePage = (id) => {
+  //   // 跳转页面
 
-    // navigate// query(URLSearch) 传参/detail?id=1000==>会自动添加路由不需要动态路由
-    // navigate(`/detail?id=${id}`)
-    
-    // 路由传参 /detail/1000
-    navigate(`/detail/${id}`)
-  }
+  //   // navigate// query(URLSearch) 传参/detail?id=1000==>会自动添加路由不需要动态路由
+  //   // navigate(`/detail?id=${id}`)
+
+  //   // 路由传参 /detail/1000
+  //   navigate(`/detail/${id}`)
+  // }
   return (
     <div>
       <ul>
-        {
+        {/* {
           list.map((item) => <li key={item.filmId} onClick={()=>{
             handleChangePage(item.filmId);
           }}>{item.name}</li>)
-        }
+        } */}
+        {/* 交给孩子组件进行处理 */}
+        {list.map((item) => <FilmItem key={item.filmId} {...item}></FilmItem>)}
       </ul>
     </div>
   )
