@@ -54,7 +54,7 @@ export default function MRouter() {
 //     return localStorage.getItem('token');
 // }
 
-
+// 路由拦截组件的封装
 function AuthComponent({ children }) {
   const isLogin = localStorage.getItem('token');
   return isLogin ? children : <Redirect to='/login'></Redirect>;
