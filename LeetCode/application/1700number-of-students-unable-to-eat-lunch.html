@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const students = [1,1,1,0,0,1], sandwiches = [1,0,0,0,1,1];
+        var countStudents = function (students, sandwiches) {
+            const len = students.length;
+            let temp;
+            let flag = 0;
+            let initLen, endLen;
+            while(sandwiches.length!==0){
+                initLen = students.length;
+                if(students[0] === sandwiches[0]){
+                    students.shift();
+                    sandwiches.shift();
+                }else{
+                    temp = students.shift();
+                    students.push(temp);
+                }
+                endLen = students.length;
+                if(initLen === endLen){
+                    flag++;
+                    if(flag === len) return students.length
+                }else{
+                    flag = 0;
+                }
+                console.log(initLen, endLen)
+            }
+            return students.length
+        };
+        console.log(countStudents(students, sandwiches));
+    </script>
+</body>
+
+</html>
