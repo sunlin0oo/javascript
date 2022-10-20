@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**进行递归判断
+         * 不理解不会做
+         * 思路:确定第1层就一个数字0;i代表层数;
+         * 每一层的数量是2^(i-1);
+         * 第i层的第j个数字，可以生成第i+1层第2*j-1 和2*j位置数字 1≤j≤2^(i-1);
+         * 第n层的第k个数字nums1，是被第n-1层的Math.floor((k+1)/2)位置的数字nums2生成;
+         * 若nums2 === 0 则会生成01  nums1=0 k≡1 (mod2)   nums1 = 1 k≡0 (mod2)
+         * 若nums2 === 1 则会生成10  nums1=1 k≡1 (mod2)   nums1 = 0 k≡0 (mod2)
+         * ^(异或) ==>具体的运算法则就是0⊕0=0,1⊕0=1,0⊕1=1,1⊕1=0(同为0,异为1)
+         * num1=(k&1)⊕1⊕num2
+        */
+        const n = 1, k = 1
+        var kthGrammar = function (n, k) {
+            if(n === 1){
+                return 0;
+            }
+            // 不理解
+            return (k & 1) ^ 1 ^ kthGrammar(n - 1, (k + 1) / 2);
+        };
+        console.log('kthGrammar', kthGrammar);
+    </script>
+</body>
+
+</html>
