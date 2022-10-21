@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 股票价格的跨度 = 股票价格小于或等于今天价格的最大连续日数（从今天开始往回数，包括今天）。
+        // 采用单调栈的方式进行
+        var StockSpanner = function () {
+            // 进行初始化
+            this.stack = [];
+            this.stack.push([-1, Number.MAX_VALUE]);
+            this.idx = -1;
+        };
+
+        /** 
+         * @param {number} price
+         * @return {number}
+         */
+        StockSpanner.prototype.next = function (price) {
+            this.idx++;
+            /**
+             * 栈的元素可以是股票价格的下标（即天数）和股票价格的二元数对，并且在栈中先插入一个最大值作为天数为 -1天的价格，来保证栈不会为空。
+            */
+            while(price >=this.stack[this.stack.length - 1][1]){
+                this.stack.pop()
+            }
+            let res = this.idx - this.stack[this.stack.length-1][0];
+            this.stack.push([this.idx,price]);
+            return res;
+        };
+
+        /**
+         * Your StockSpanner object will be instantiated and called as such:
+         * var obj = new StockSpanner()
+         * var param_1 = obj.next(price)
+         */
+        let price = 10
+        const obj = new StockSpanner();
+        console.log(obj.next(price));
+    </script>
+</body>
+
+</html>
