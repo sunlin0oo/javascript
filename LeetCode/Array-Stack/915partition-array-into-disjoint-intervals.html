@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const nums = [32,57,24,19,0,24,49,67,87,87];
+        var partitionDisjoint = function(nums) {
+            let len = nums.length;
+            let leftMax = nums[0], //作为数组中左侧最大值的代表
+            curMax = nums[0], //通过维护curMax作为数组中最大值的代表，当左侧leftPos(左边界)向右推进时进行替换leftMax
+            leftPos = 0;//leftPos的右侧都是大于等于的
+            for(let i = 1;i<len-1;i++){
+                curMax = Math.max(curMax, nums[i]);
+                if(nums[i] < leftMax){
+                    leftMax = curMax;
+                    leftPos = i
+                }
+            }
+            return leftPos + 1;
+        };
+        console.log(partitionDisjoint(nums));
+    </script>
+</body>
+</html>
