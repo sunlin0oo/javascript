@@ -35,7 +35,6 @@ class Board extends Component {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({xIsNext: !this.state.xIsNext});
     this.setState({squares: squares,
       xIsNext: !this.state.xIsNext});
   }
