@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var shortestSubarray = function (nums, k) {
+            const n = nums.length;
+            const preSumArr = new Array(n + 1).fill(0);// 前缀和
+            for (let i = 0; i < n; i++) {
+                preSumArr[i + 1] = preSumArr[i] + nums[i];
+            }
+            let res = n + 1; // 最大值数组长度 + 1==>这是不可能达到的值
+            const queue = [];// q 中暂存的元素是 访问过preSumArr 的下标
+            for (let i = 0; i <= n; i++) {
+                const curSum = preSumArr[i]; // 当前所要进行处理的前缀和
+                // curSum - preSumArr[queue[0]] >= k ==== preSumArr[i] - preSumArr[j] >= k (i>j)
+                // 第一次出现时,就找到了以j为起点的最短数组长度i-j,然后删除这个元素（头元素）==>后续即使还有以它为起点的满足条件的子数组，长度也会大于当前的长度。
+                while (queue.length != 0 && curSum - preSumArr[queue[0]] >= k) {
+                    // 求最小值
+                    res = Math.min(res, i - queue.shift());
+                }
+                /**q 中可能存在比preSumArr[i]更大元素，而这些元素(曾经访问过的前缀和preSumArr[j])和preSumArr[i]一样，只能作为再后续访问到的某个前缀和preSumArr[h]减数；==>减号前面的数是被减数,减号后面的数是减数
+                 * 而作为被减数时，更大的值只会让不等式==>preSumArr[h] - preSumArr[j]>=k更困难;即使都满足，后访问到的值也可以带来更短的长度(因为j是起点，起点高，后续的范围便要扩大)
+                 * 加进去的元素都会是 q 中的唯一最大值，使得 q 中的元素是按照添加顺序严格单调递增的，我们知道单调队列是满足这样的性质的。
+                */
+                while (queue.length != 0 && preSumArr[queue[queue.length - 1]] >= curSum) {
+                    queue.pop();
+                }
+                // 将每次访问的前缀和索引都放入到queue中保存
+                queue.push(i);// 每次访问过的前缀和的下标
+            }
+            return res < n + 1 ? res : -1;
+        };
+    </script>
+</body>
+
+</html>
