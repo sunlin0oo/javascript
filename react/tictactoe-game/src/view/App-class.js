@@ -37,6 +37,7 @@ export default class App extends Component {
       xIsNext: (step % 2) === 0,
     });
   }
+  
   render() {
     const history = this.state.history;
     console.log('history', history)
