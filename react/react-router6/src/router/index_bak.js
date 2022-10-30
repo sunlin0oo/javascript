@@ -16,10 +16,17 @@ export default function MRouter() {
     <div>
       {/* Route 必须包裹在Routes中 */}
       <Routes>
-        {/* index是嵌套路由==>匹配父路径，设置渲染的组件==>无法确定渲染子路由，通过index指定默认路由==>解决http://localhost:3000/什么都没加的情况下显示的问题*/}
-        {/* <Route index element={<Film></Film>}></Route> */}
+        {/* index是嵌套路由==>
+        匹配父路径（http://localhost:3000/ #/），设置渲染的组件==>
+        无法确定渲染子路由，通过index指定默认路由==>
+        解决http://localhost:3000什么都没加的情况下没有显示的问题*/}
+        {/*在最外层使用 可以说是要代替<Route path='/' element={<Film/>}></Route> 有相同的效果
+        但是 index ≠  path='/'
+         <Route index element={<Film></Film>}></Route> */}
         <Route path='/films' element={Lazyload('Film')}>
           <Route path='' element={<Redirect to='/films/nowplaying'></Redirect>}></Route>
+          {/* <Route index element={<Film></Film>}></Route>
+          当下面的子路由没有匹配的就会走这里  父路径则是http://localhost:3000/#/films */}
           {/* 相对路径==等价于==>/films/nowplaying */}
           <Route path='nowplaying' element={Lazyload('films/Nowplaying')}></Route>
           <Route path='comingsoon' element={Lazyload('films/Comingsoon')}></Route>
