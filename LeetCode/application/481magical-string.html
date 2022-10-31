@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const n = 10;
+        var magicalString = function (n) {
+            if (n < 4) {
+                return 1
+            };
+            const s = new Array(n).fill(0);
+            // 初始化构造函数
+            s[0] = '1'
+            s[1] = '2'
+            s[2] = '2';
+            let res = 1;
+            // 用指针i来指向现在需要构造的对应的组的大小
+            let i = 2;
+            // 用指针j来指向现在需要构造的对应组的位置
+            let j = 3;
+            const zeroCode = '0'.charCodeAt();
+            while (j < n) {
+                // 当前组所指的大小
+                console.log('s[i]', s[i]);
+                let size = s[i].charCodeAt() - zeroCode;
+                // 因为相邻组中的数字一定不会相同，所以我们可以通过 j 的前一个位置的数来判断当前需要填入的组中的数字(num);
+                const num = 3 - (s[j - 1].charCodeAt() - zeroCode);
+                console.log('s',s); 
+                while (size > 0 && j < n) {
+                    // fromCharCode==>将 Unicode 编码转为一个字符:
+                    // 填充到数组中
+                    s[j] = String.fromCharCode(zeroCode + num);
+                    if (num === 1) {
+                        res++;
+                    }
+                    ++j;
+                    // 直至组填充完毕
+                    --size;
+                }
+                // 每次填充i只会往前挪动一格
+                ++i
+            }
+            return res;
+        };
+        console.log(magicalString(n));
+    </script>
+</body>
+
+</html>
