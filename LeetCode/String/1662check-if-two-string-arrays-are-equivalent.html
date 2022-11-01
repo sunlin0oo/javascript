@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const word1 = ["ab", "c"], word2 = ["a", "bc"];
+        // 法一比对字符串
+        // var arrayStringsAreEqual = function (word1, word2) {
+        //     const len1 = word1.length;
+        //     const len2 = word2.length;
+        //     const sum1 = word1.reduce(function (value, item, index, arr) {
+        //         // console.log(value, item, index);
+        //         return value + item;
+        //     }, '')
+        //     const sum2 = word2.reduce(function (value, item, index, arr) {
+        //         // console.log(value, item, index);
+        //         return value + item;
+        //     }, '')
+        //     if (sum1 === sum2) return true
+        //     else return false;
+        // };
+        // 法二：遍历==>巨慢
+        var arrayStringsAreEqual = function (word1, word2) {
+            const len1 = word1.length;
+            const len2 = word2.length;
+            // p1 p2 遍历两个数组   设置两个指针 i 和 j，表示正在对比word1[p1][i] !== word2[p2][j]
+            let p1 = 0, p2 = 0, i = 0, j = 0;
+            while (p1 < len1 && p2 < len2){
+                console.log('word1[p1][i]', word1[p1][i]);
+                console.log('word2[p2][j]', word2[p2][j]);
+                // 比对每一个字符
+                if(word1[p1][i] !== word2[p2][j]){
+                    return false;
+                }
+                i++;
+                // 如果i达到第一个数组小块的length时，则跳到下一个数组小块
+                if(i === word1[p1].length){
+                    p1++;
+                    i = 0;
+                }
+                j++;
+                if(j === word2[p2].length){
+                    p2++;
+                    j = 0;
+                }
+            }
+            return p1 === word1.length && p2 === word2.length
+        };
+        console.log(arrayStringsAreEqual(word1, word2))
+    </script>
+</body>
+
+</html>
