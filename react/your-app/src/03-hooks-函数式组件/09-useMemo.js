@@ -25,7 +25,8 @@ export default function Cinema(){
             setcinemaList(res.data.data.cinemas)
         })
     })
-    //useMemo会记忆返回值，一开始是空数组==>添加cinemaList,mytext依赖，当这俩改变时去进行重新渲染
+    //useMemo会记忆返回值，一开始是空数组==>执行函数将函数结果返回给getCinemaList==>添加cinemaList,mytext依赖，当这俩改变时去进行重新渲染(计算属性)
+    //优点在于组件进行重新渲染时:如果不是cinemaList,mytext 两个依赖进行改变，则useMemo会给getCinemaList之前的缓存数值,将数值传出进行使用（节省计算时间）
     const getCinemaList = useMemo(()=> 
     cinemaList.filter(item=>item.name.toUpperCase().includes(mytext.toUpperCase()) || 
     item.address.toUpperCase().includes(mytext.toUpperCase())

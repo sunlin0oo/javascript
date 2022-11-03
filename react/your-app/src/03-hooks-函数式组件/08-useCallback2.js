@@ -57,7 +57,7 @@ export default function App() {
     //     console.log(newList)
     //     setList(newList);
     // },[list])
-
+    //useMemo会执行第一个函数并将执行结果返回 
     const handlerdel = useMemo(
         () => (index) => {
             console.log(index);
@@ -66,7 +66,7 @@ export default function App() {
             console.log(newList)
             setList(newList);
         }, [list])
-        
+
     return (
         <div>
             {/* 虽然setName会导致App组件重新渲染，但是只有涉及到它的依赖才会导致函数重新创建，否则函数则会一直延用之前的缓存函数 */}
