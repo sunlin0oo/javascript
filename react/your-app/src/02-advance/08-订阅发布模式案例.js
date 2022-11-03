@@ -68,7 +68,7 @@ class FilmItem extends Component{
     }
 }
 
-// 订阅者的组件，已经订阅上，根据发布者的操作去改变订阅者的东西
+// 订阅者的组件，已经订阅上，根据发布者的操作去改变订阅（监听）者的东西
 class FilmDetail extends Component{
 
     constructor(){

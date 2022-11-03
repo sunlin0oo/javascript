@@ -14,7 +14,7 @@ class Child extends Component{
 class Swiper extends Component{
   render(){
     return <div>
-      {/* 想要轮播什么内容，在这里留好插槽即可 */}
+      {/* 想要轮播什么内容，在这里留好插槽即可，有多少插多少 */}
       {this.props.children}
     </div>
   }
