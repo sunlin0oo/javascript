@@ -3,7 +3,7 @@ import React,{useRef, useState} from 'react'
 export default function App() {
     const [text,setText] = useState("");
     const [list,setList] = useState([1,2,3,4,5])
-    const mytext= useRef()//与ref近似
+    const mytext= useRef()//与ref近似=>返回一个可变的 ref 对象
 
     // const handlerChange = (evt)=>{
     //     setText(evt.target.value);
@@ -14,6 +14,7 @@ export default function App() {
         console.log(mytext.current);
         // list.push(text);//千万不要改变原状态，一定要深复制
         // setList([...list,text]);
+        // ...list 深复制存储之前的数据
         setList([...list,mytext.current.value]);
         // // 清空
         // setText("");
@@ -31,6 +32,7 @@ export default function App() {
   return (
     <div>
         {/* <input onChange={handlerChange} value = {text}/> */}
+        {/* React 都会将 ref 对象的 .current 属性设置为相应的 DOM 节点。 */}
         <input ref={mytext}/>
         <button onClick={handlerClick}>add</button>
         <ul>
