@@ -36,6 +36,7 @@ export default function App(){
     // 先请求JSON数据--第一次请求默认filmlist
     useEffect(()=>{
         axios.get('/test.json').then(res=>{
+            // 数据请求到后，将请求数据发送到reducer中进行处理
            dispatch({
             type:"change-filmlist",
             value:res.data.data.films
@@ -66,11 +67,11 @@ function FilmItem(props){
     let {name, poster,grade,synopsis} = props;//解构
     // 解构
     const {dispatch}= useContext(GlobalContext);
-        // 绑定点击函数，每次点击时触发当前锁定应的介绍值
+        // 绑定点击函数，每次点击时触发当前选中的标签，发送详细内容给reducer
         return <div className='filmitem' onClick={()=>{
             dispatch({
                 type:"change-info",
-                value:synopsis
+                value:synopsis // 介绍内容
             })
             console.log(synopsis);
             // value.changeInfo(synopsis);
