@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 将原问题转换成一个等价问题「先一直往终点走，然后选择某些步反向，所需要的最小步数」，然后在该问题上讨论。 
+        const target = 2;
+        /**
+         * k === 移动次数
+         * target === 目标数
+         * 设 k 为最小的满足s = [∑k,(i=1)] ≥ target 的正整数
+         * 相距距离:d=s−target
+         * 分四种情况:
+         * 1.恰好到达
+         * 2.越过终点，相距偶数==>相距是2则第1步反向走，相距是4则第2步反向走，
+         * 3.越过终点，相距奇数==>多走一步，变成情况2，否则是情况4
+         * 4.越过终点，相距奇数,且多走一步还是相距奇数==>多走两步，相距必然变偶数，转成情况2
+         * 都要归于情况2(偶数情况)结论:[1,s] 内的每个数字都可以由若干个不同的[1,n] 内的数组成
+         * 根据结论在 d 为偶数时，一定可以选择某些步，满足这些步长的和为d/2,将这些步反向，就能恰好到达终点
+         * d/2 指的是所需要的后退步数,
+         * 个人理解为什么是d/2:
+         * 首先d是超越target的距离;其次，如果反向走，则需要付出两倍的代价进行返回，故是d/2,且这样也能够代表第几步
+        */
+        var reachNumber = function(target) {
+            target = Math.abs(target);
+            let s = 0, n = 0;
+            while (s < target || (s-target)%2 === 1) { // 没有到达（越过）终点，或者相距奇数
+                s+= ++n;
+            }
+            return n
+        };
+        console.log(reachNumber(target))
+    </script>
+</body>
+</html>
