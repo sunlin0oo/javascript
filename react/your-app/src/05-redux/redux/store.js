@@ -41,15 +41,8 @@ const store = createStore(reducer,composeEnhancers(applyMiddleware(reduxThunk,re
 
 export default store;
 
-/**Redux整体流程：
- * 1.(App.js) 进行 store.subsribe订阅
- * 2.当(Detail)创建时，触发useEffect==>store.dispatch==>actionCreator 获取：type:"kerwinhide-tabbar" 
- *   当(Detail)销毁时时，触发useEffect==>store.dispatch==>actionCreator 获取：type:"kerwinshow-tabbar" 
- * 3.由store.js进行处理,发送到reducer
- * 4.通过reducer返回新状态出去
- * 5.通知订阅者*/ 
 
-// 原理
+// 重写CreateStore原理
 // function sunlinStore(reducer){
 //     var list = [];
 //     // 存储初始状态

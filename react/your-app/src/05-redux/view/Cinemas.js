@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import store from '../redux/store';
 import {getCinemaListAction} from '../redux/actionCreator/getCinemaListAction'
+/**Redux整体流程：
+ * 1.(search.js) 进行 store.subsribe订阅
+ * 2.进入search页面创建search组件触发dispatch 发送action
+ * 3.由store.js进行处理,发送action和prevState 到reducer中==>他会挨着去触发一遍，直到匹配相对应的type
+ * 4.通过reducer返回新状态出去
+ * 5.通知订阅者进行更新*/ 
 export default function Cinemas(props) {
   // 这里store.getState().cityName获取由redux到最新的数据
   // 拆开调用多了一层，相当于子redux是子空间，需要多套一层

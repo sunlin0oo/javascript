@@ -1,7 +1,7 @@
 const CinemaListReducer = (prevState={
     list:[]
 },action)=>{
-    console.log("action::",action);
+    console.log("CinemaListReducer-action::",action);
     let newState = {...prevState};
     switch(action.type){
         case "change-list":

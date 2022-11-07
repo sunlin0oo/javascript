@@ -1,7 +1,7 @@
 const CityReducer = (prevState={
     cityName:"北京",
 },action)=>{
-    console.log("action::",action);
+    console.log("CityReducer-action::",action);
     let newState = {...prevState};
     switch(action.type){
         case "change-city":

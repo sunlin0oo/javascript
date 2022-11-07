@@ -1,7 +1,8 @@
+// 选项卡reducer
 const TabbarReducer = (prevState={
     show:true,//赋值初始值
 },action)=>{
-    console.log("action::",action);
+    console.log("TabbarReducer-action::",action);
     let newState = {...prevState};
     switch(action.type){
         case "kerwinhide-tabbar":

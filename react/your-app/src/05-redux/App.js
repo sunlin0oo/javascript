@@ -9,14 +9,14 @@ import './view/css/App.css'
 export default class App extends Component {
   state = {
     // isShow:store.getState(),
-    isShow:store.getState().TabbarReducer
+    isShow:store.getState().TabbarReducer// 设置默认值true
   }
 
 
-  // store.subsribe  订阅==>有人通知才会触发
+  // store.subsribe  订阅==>有人通知才会触发!!!
   componentDidMount(){
     store.subscribe(()=>{
-      // 通过store.getState()主动去获取最新状态
+      // 通过store.getState()主动去获取最新状态==>这里获取到各种action，如果是分解，则需要先进行获取到对应actionName
       // console.log('app订阅',store.getState());
       console.log('app订阅',store.getState().TabbarReducer);
       this.setState({
