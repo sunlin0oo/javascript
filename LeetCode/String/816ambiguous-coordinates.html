@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * 思路：枚举以每个数字的索引为坐标进行处理
+        */
+        const s = "(00011)";
+        var ambiguousCoordinates = function(s) {
+            const res = [];
+            const n = s.length - 2; // 将括号的长度减去
+            // 将字符串裁剪出来
+            s = s.slice(1, s.length - 1);
+            // 遍历每一次位置可能出现的情况
+            for(let l = 1; l < n; l++){
+                // 从头开始获取坐标左侧字符
+                const lt = getPos(s.slice(0,l));
+                if(lt.length === 0) continue;
+                // 获取坐标右侧字符
+                const rt = getPos(s.slice(l));
+                if(rt.length === 0) continue;
+                // 在相同的情况下，进行枚举
+                for(const i of lt){
+                    for(const j of rt){
+                        res.push('(' + i + ', ' + j + ')')
+                    }
+                }
+            }
+            return res
+        };
+
+        const getPos = (s)=>{
+            const pos = [];
+            // 若s中仅存在0，或者首字母不是零的情况推进pos
+            if(s[0] !== '0' || '0' === s){
+                pos.push(s);
+            }
+            // for循环去进行添加 小数点 .
+            for(let p = 1; p < s.length; ++p){
+                // 如果不是第一个位置，且s[0] 是不可的/并且s的最后一个字符也是0==>也是不可==>s[s.length - 1] === '0' 判断末尾是否有零
+                if((p !== 1 && s[0] === '0') || s[s.length - 1] === '0') continue;
+                console.log(s,s.slice(0,p),s.slice(p))
+                pos.push(s.slice(0,p) + '.' + s.slice(p))
+            }
+            return pos;
+        }
+        console.log(ambiguousCoordinates(s))
+    </script>
+</body>
+</html>
