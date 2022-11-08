@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 遍历
+        const allowed = "ab", words = ["ad","bd","aaab","baa","badab"];
+        var countConsistentStrings = function (allowed, words) {
+            const Array = new Map();
+            const allLen = allowed.length;
+            let res = 0;
+            let stringLen;
+            let flag;
+            for(let i = 0;i<allLen;i++){
+                Array.set(allowed[i],i);
+            }
+            const wordLen = words.length;
+            for(let i = 0; i < wordLen; i++){
+                flag = true
+                stringLen = words[i].length;
+                for(let j = 0;j < stringLen;j++){
+                    if(!Array.has(words[i][j])){
+                        flag= false
+                        continue;
+                    };
+                }
+                if(flag) res++
+            }
+            return res;
+        };
+        console.log(countConsistentStrings(allowed, words));
+    </script>
+</body>
+
+</html>
