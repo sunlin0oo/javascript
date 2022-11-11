@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const s = "book";
+        var halvesAreAlike = function(s) {
+            // const map = new Map();
+            // const array = ['a','e','i','o','u','A','E','I','O','U']
+            // array.forEach((item)=>{
+            //     map.set(item);  
+            // })
+            // 可以用indexOf代替Map(情况比较单一:适合数组不复杂的情况)
+            const h = "aeiouAEIOU";
+            let firstNum = 0;
+            let secondNum = 0;
+            const len = s.length / 2;
+            // const first = s.slice(0,len);
+            // const second = s.slice(len);
+            for(let i = 0;i<len ; i++){
+                // if(map.has(s[i])) firstNum++;
+                // if(map.has(s[len + i])) secondNum ++;
+                if (h.indexOf(s[i]) >= 0)firstNum++
+                if (h.indexOf(s[len + i]) >= 0)secondNum++
+            }
+            if(firstNum === secondNum) return true;
+            return false
+        };
+        console.log(halvesAreAlike(s));
+    </script>
+</body>
+</html>
