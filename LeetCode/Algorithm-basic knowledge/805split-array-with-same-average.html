@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 不会 奶奶的
+        const nums = [1,2,3,4,5,6,7,8];
+        /**
+         * 推导公式==>折半搜索  
+         * 数组 A 的平均值与数组 nums 的平均值相等。
+         * 此时我们可以将数组 nums 中的每个元素减去 nums 的平均值，这样数组 nums 的平均值则变为 0。(代数检验)
+         * 此时题目中的问题则可以变为：从 nums 中找出若干个元素组成集合 A，使得 A 的元素之和为 0，剩下的元素组成集合 B，它们的和也同样为 0。
+        */
+        var splitArraySameAverage = function (nums) {
+            if (nums.length === 1) {
+                return false
+            }
+            const n = nums.length, m = Math.floor(n / 2);
+            let sum = 0;
+            // 求出nums的总和
+            for (let i = 0; i < n; i++) sum += nums[i];
+            // 本意是减去平均值，使得数组的平均值为零;这样操作避免浮点数
+            for (let i = 0; i < n; i++) nums[i] = nums[i] * n - sum;
+            // 此时题目中的问题则可以变为：从 nums 中找出若干个元素组成集合 A，使得 A 的元素之和为 0，剩下的元素组成集合 B，它们的和也同样为 0。
+            /**
+             * 从 n 个元素中取出若干个元素形成不同的子集，则此时一共有 2^n 种方法
+             * 因此考虑分成两部分进行操作,这两个数组分别有 2^(n/2) 种不同的子集选择的方法
+             * A0中所有选择的方法得到不同子集的元素之和的集合为left
+             * B0中所有选择的方法得到不同子集的元素之和的集合为right
+             * 但是不能同时选择A0 B0中所有元素，这样会导致数组B空
+             * */
+            const left = new Set();
+            // 遍历左侧所有可能的组成方式==>1<<m是2的m次方,用i生成000,001,010,011,100...111的序列 
+            for (let i = 1; i < (1 << m); i++) { // 排除掉空集
+                // tot 为划分元素总和
+                let tot = 0; //左侧之和
+                // 遍历左侧所有元素
+                for (let j = 0; j < m; j++) {
+                    console.log('i & (1 << j)),nums[j]', i, (1 << j), nums[j]);
+                    /**位运算 ==>用二进制的方法生成子集==>s创建的子集表的展示==>https://blog.csdn.net/superSmart_Dong/article/details/109440389
+                     * ==>判断这个子集是否会产生0
+                     * i取值为0~2^n-1:表示子集种类有2^n个
+                     * j取值为0~n:表示集合中元素的取值范围
+                     * 遍历i中每一位，看是否为1
+                     * 这些序列的0、1位正好可以对应一个子集中全集在该位置上的元素是否存在，将其作为子集中存在的元素的标记，输出对应元素。
+                     * 详细解释:https://jiangyiming.blog.csdn.net/article/details/80737637?spm=1001.2101.3001.6650.4&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-80737637-blog-109440389.pc_relevant_aa&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-80737637-blog-109440389.pc_relevant_aa&utm_relevant_index=9
+                     * https://blog.csdn.net/weixin_43774168/article/details/108504516?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-108504516-blog-80737637.pc_relevant_3mothn_strategy_recovery&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-2-108504516-blog-80737637.pc_relevant_3mothn_strategy_recovery&utm_relevant_index=3 
+                     * 用(1<<j)生成001,010,100的序列
+                     * 相与，i在j位上是否为1,若是1，则证明子集存在进行操作
+                     *  */
+                    if ((i & (1 << j)) !== 0) {
+                        tot += nums[j];
+                    }
+                }
+                // 如果存在一个子数组和为 0 则返回
+                if (tot === 0) {
+                    return true;
+                }
+                left.add(tot);
+            }
+            let rsum = 0;
+            // 右侧数组之和
+            for (let i = m; i < n; i++) {
+                rsum += nums[i];
+            }
+            for (let i = 1; i < (1 << (n - m)); i++) {
+                let tot = 0;
+                for (let j = m; j < n; j++) {
+                    if ((i & (1 << (j - m))) != 0) {
+                        tot += nums[j];
+                    }
+                }
+                // 如果存在一个子数组和为 0 或者哈希表 left 中是否存在该和的相反数
+                if (tot === 0 || (rsum !== tot && left.has(-tot))) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        console.log(splitArraySameAverage(nums))
+    </script>
+</body>
+
+</html>
