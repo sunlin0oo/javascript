@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const boxTypes = [[5, 10], [2, 5], [4, 7], [3, 9]], truckSize = 10
+        // 执行时间会变得很慢
+        var maximumUnits = function (boxTypes, truckSize) {
+            const boxArray = boxTypes.sort((a, b) => b[1] - a[1]);
+            let res = 0;
+            let len = boxTypes.length
+            for (let i = 0; i < len; i++) {
+                let numberOfBoxes = boxArray[i][0];
+                let numberOfUnitsPerBox = boxArray[i][1];
+                if (truckSize < numberOfBoxes) {
+                    res += (truckSize * numberOfUnitsPerBox);
+                    break;
+                }
+                truckSize -= numberOfBoxes;
+                res += (numberOfBoxes * numberOfUnitsPerBox)
+            }
+            return res
+        };
+        // 这个速度会提高4倍
+        var maximumUnits = function (boxTypes, truckSize) {
+            boxTypes.sort((a, b) => b[1] - a[1]);
+            let res = 0;
+            for (const boxType of boxTypes) {
+                let numberOfBoxes = boxType[0];
+                let numberOfUnitsPerBox = boxType[1];
+                if (numberOfBoxes < truckSize) {
+                    res += numberOfBoxes * numberOfUnitsPerBox;
+                    truckSize -= numberOfBoxes;
+                } else {
+                    res += truckSize * numberOfUnitsPerBox;
+                    break;
+                }
+            }
+            return res;
+        };
+        console.log(maximumUnits(boxTypes, truckSize));
+    </script>
+</body>
+
+</html>
