@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const nums = [1,0,2];
+        /**如果是局部倒置，那么一定就是全局倒置。所以，全局倒置是包含局部倒置的。
+         * 一个局部倒置一定是一个全局倒置，因此要判断数组中局部倒置的数量是否与全局倒置的数量相等，只需要检查有没有非局部倒置就可以了
+         *==>非局部倒置指的是 nums[i]>nums[j] i<j−1 
+         *==>并且要非相邻数字，相邻数字的话就是局部倒置*/
+        var isIdealPermutation = function(nums) {
+            let n = nums.length, minSuff = nums[n-1];
+            for(let i = n - 3; i >=0; i--){
+                // 存在一个非局部倒置的话 就会使得 局部倒置!==0全局倒置
+                if(nums[i] > minSuff) return false;
+                // minSuff维护最小后缀
+                minSuff = Math.min(minSuff,nums[i+1]);
+            }
+            return true;
+        };
+        console.log(isIdealPermutation(nums));
+    </script>
+</body>
+</html>
