@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const s = "abcde", words = ["a", "bb", "acd", "ace"];
+        // 二分查找
+        var numMatchingSubseq = function (s, words) {
+            // 不能使用Map因为这不是唯一的标识
+            // 创建26个位置索引数组,用于记录s中每个字母的位置
+            const pos = new Array(26).fill(0).map(() => new Array());
+            const len = s.length;
+            const init = 'a'.charCodeAt();
+            for (let i = 0; i < len; i++) {
+                pos[s[i].charCodeAt() - init].push(i);
+            }
+            let res = words.length;
+            for (const w of words) {
+                const wLen = w.length
+                if (wLen > len) {
+                    res--;
+                    continue;
+                }
+                let p = -1;// 当前字母位置的指针===
+                for (let i = 0; i < wLen; i++) {
+                    const c = w[i];
+                    // 查看words中的字母是否在s中存在  ||  搜索对应字母的最后一个字母位置是否小于等于目标位置
+                    if (pos[c.charCodeAt() - init].length === 0 || pos[c.charCodeAt() - init][pos[c.charCodeAt() - init].length - 1] <= p) {
+                        res--;
+                        break;
+                    }
+                    p = binarySearch(pos[c.charCodeAt() - init], p)
+                }
+            }
+            return res
+        };
+        // 二分查找==>这样可以更快的找到比p 大的位置
+        const binarySearch = (list, target) => {
+            let left = 0, right = list.length - 1;
+            while (left < right) {
+                const mid = left + Math.floor((right - left) / 2);
+                if (list[mid] > target) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+            }
+            return list[left];
+        };
+        console.log(numMatchingSubseq(s, words))
+    </script>
+</body>
+
+</html>
