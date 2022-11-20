@@ -1,8 +1,8 @@
 import React from 'react';
 // import 'antd/dist/antd.css' // antd-mobile--PC版本CSS
 // import ReactDOM from 'react-dom';
-// import App from './15-graphql/App'
-import App from './05-redux/App'
+import App from './15-graphql/App'
+// import App from './05-redux/App'
 
 //react 18
 import { createRoot } from 'react-dom/client';

@@ -17,7 +17,7 @@ class App extends Component {
             // 通过ApolloProvider 提供整个客服端的配置==>client==>加上跨域
             <ApolloProvider client={client}>
                 <Add cb={()=>{
-                    this.refetch();//让SunlinQuery 重新请求一遍
+                    this.refetch();//让SunlinQuery 重新请求一遍,然后刷新界面
                 }}></Add>
                 {/* 每次插入完之后需要让Query重新执行一遍==>子传父，回调函数调用==>refetch */}
                 <SunlinQuery fetch={(refetch)=>{

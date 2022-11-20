@@ -14,7 +14,7 @@ class Delete extends Component {
                 <Mutation mutation={this.deleteFilm}>
                     {/* 回调函数中保证返回值==>对应的变量放到上面的gql查询语句中 */}
                     {
-                        // 这里的回调方法是后端的方法名称;后端的查询数据会在回调函数第二个参数中给出
+                        // (这里的回调方法是后端的方法名称;后端的查询数据会在回调函数第二个参数中给出)
                         (deleteFilm,{data})=>{
                             console.log('data',data)
                             return <div>

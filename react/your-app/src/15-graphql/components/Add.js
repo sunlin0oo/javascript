@@ -37,6 +37,7 @@ class Add extends Component {
                                             }
                                         }
                                     }).then(res=>{
+                                        // 成功后执行回调函数
                                         this.props.cb();
                                     })
                                 }}>add</button>

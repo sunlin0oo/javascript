@@ -6,7 +6,7 @@ const {buildSchema} = require('graphql')
 // require('express-graphql')返回一个对象，该对象具有一个被调用的属性graphqlHTTP，该对象是您要调用的函数。  
 const graphqlHttp = require('express-graphql').graphqlHTTP;
 // 所支持查询的类型==>需要言行一致==> : 后面是需要返回的类型
-let Scchema = buildSchema(`
+let Schema = buildSchema(`
     type Query{
         hello:String,
         getName:String,
@@ -41,7 +41,7 @@ app.use('/list',function(req,res){
 })
 
 app.use('/graphql',graphqlHttp({
-    schema:Scchema,
+    schema:Schema,
     rootValue:root,
     // 开启调试器
     graphiql:true

@@ -24,7 +24,7 @@ class SunlinQuery extends Component {
                 })
             }}></input>
             {/*Query是一个组件==>为了能够使得删除或者更新后能够及时的更新数据，需要让Query重新执行一次
-            ==>调用refetch==>可以强制进行更新 */}
+            ==>调用refetch方法！！！！==>可以强制进行更新 */}
             <Query query={this.query} variables={{id:this.state.id}}>
                 {
                     ({loading, data, refetch})=>{
@@ -37,6 +37,7 @@ class SunlinQuery extends Component {
                                 data.getFilmInfo.map(item=><li key={item.id} style={{border:'1px solid black',padding:'10px'}}>
                                     <div>名字：{item.name}</div>
                                     <div>价格：{item.price}</div>
+                                    {/* 传给Delete 回调refetch() 函数 */}
                                     <Delete id={item.id} fetch={()=>{
                                         refetch();
                                     }}></Delete>
