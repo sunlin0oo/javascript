@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "mockjs": "^1.1.0",
     "styled-components": "^5.3.5"
   }
 }
