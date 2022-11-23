@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const lowLimit = 19, highLimit = 28;
+        // 慢
+        var countBalls = function (lowLimit, highLimit) {
+            const res = new Array(highLimit).fill(0);
+            console.log(res);
+            let max = 0;
+            for (let i = lowLimit; i <= highLimit; i++) {
+                let string = String(i);
+                const len = string.length;
+                let index = 0;
+                for (let j = 0; j < len; j++) {
+                    index += Number(string[j]);
+                }
+                res[index - 1] += 1
+                max = Math.max(res[index - 1], max);
+            }
+            return max
+        };
+        // 快
+        var countBalls = function (lowLimit, highLimit) {
+            const count = new Map();
+            let res = 0;
+            for (let i = lowLimit; i <= highLimit; i++) {
+                let box = 0, x = i;
+                while (x !== 0) {
+                    box += x % 10;
+                    x = Math.floor(x / 10);
+                }
+                // 唯一性可以用Hash表
+                count.set(box, (count.get(box) || 0) + 1);
+                res = Math.max(res, count.get(box));
+            }
+            return res;
+        };
+        console.log(countBalls(lowLimit, highLimit))
+    </script>
+</body>
+<html>
