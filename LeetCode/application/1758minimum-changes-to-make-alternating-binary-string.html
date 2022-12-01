@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const s = "0100";
+        /**
+         * 开头为 0，后续交替的字符串；
+         * 开头为 1，后续交替的字符串。
+         * 变成这两种不同的交替二进制字符串所需要的最少操作数加起来等于 s的长度，
+         * 我们只需要计算出变为其中一种字符串的最少操作数，就可以推出另一个最少操作数，然后取最小值即可。
+        */
+        var minOperations = function (s) {
+            let cnt = 0;
+            for (let i = 0; i < s.length; i++) {
+                const c = s[i];
+                // i % 2 保持开头为 0，后续交替的字符串
+                if (c !== (String.fromCharCode('0'.charCodeAt() + i % 2))) {
+                    cnt++;
+                }
+            }
+            return Math.min(cnt, s.length - cnt);
+        };
+        console.log(minOperations(s))
+    </script>
+</body>
+
+</html>
