@@ -39,16 +39,19 @@
             const set = new Set();
             let n = word.length, p1 = 0, p2;
             while (true) {
+                // 不是数字且范围内 p1++
                 while (p1 < n && !isDigit(word[p1])) {
                     p1++;
                 }
                 if (p1 === n) {
                     break;
                 }
+                // p1是数字的左边界，p2是数字的右边界
                 p2 = p1;
                 while (p2 < n && isDigit(word[p2])) {
                     p2++;
                 }
+                // 排除二进制的问题
                 while (p2 - p1 > 1 && word[p1] === '0') {
                     p1++;
                 }
@@ -57,7 +60,7 @@
             }
             return set.size;
         };
-
+        // 判断是否是数字
         const isDigit = (ch) => {
             return '0' <= ch && ch <= '9';
         }
