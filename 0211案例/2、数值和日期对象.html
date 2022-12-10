@@ -31,6 +31,9 @@
         // var date=new Date();
         // console.log(date)
 
+        // console.log(date.toLocaleString()) // 返回与浏览器运行的本地环境一致的日期和时间
+        // console.log(date.toString()); //返回带时区信息的时间和日期
+        // console.log(date.toDateString())//显示日期中的年月日
         // console.log(date.getFullYear());
         // console.log(date.getYear());
         // console.log(date.getMonth());//0-11
@@ -110,6 +113,12 @@
         // function getZero(n){
         //     return n<10 ? "0"+n : n;
         // }
+
+        // 创建特定时间
+        let date = new Date("July 24,2022");
+        console.log(date);
+        console.log(date.toDateString())// 若Date未设置特定日期，则显示本机，有则显示设定日期
+
     </script>
 </body>
 </html>
