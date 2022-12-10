@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-   
+
         // 处理字符串
         // 判断密码中必须包含小写字母，大写字母，数字，并且起始字符不能数字，并且长度是8-16的0-9a-zA-Z
         // /^(?=\D+\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,16}$/
@@ -16,7 +16,7 @@
         // 元字符
 
         // 字面量创建
-        // var reg=/a/g ;  //   /正则表达式内容/修饰符
+        // var reg=/a/g ;  //let expression = /pattern/flags;   /正则表达式内容/修饰符
 
 
         // g   全局查找  从头找到尾
@@ -49,7 +49,7 @@
        
 
         //  var str="abcdaef".replace(/a/g,"0");//将全局a替换成0
-                                            // item, index,string
+        // item, index,string
         // var str="abcdaef".replace(/a/g,function(a,index,c){
         //      if(index===0) return "0";
         //      return "z";
@@ -69,10 +69,14 @@
         // });
         // console.log(str);
 
+        //    var arr= "akdsakjds,akjdsaksjd.aksjdaskd,alkdsjewodjgwffiweof.".split(/\.|,/);
+        //    console.log(arr)
 
-
-    //    var arr= "akdsakjds,akjdsaksjd.aksjdaskd,alkdsjewodjgwffiweof.".split(/\.|,/);
-    //    console.log(arr)
+        // ( ) [ ] {}  \ ^ $ ? * + .  如果要匹配字符本身，必须使用反斜杠来转义
+        // let pattern2 = /[ba]at/i; //匹配第一个'bat'和'cat',忽略大小写
+        // let pattern2 = /\[bc\]at/i // 匹配第一个'[bc]bat',忽略大小写
+        // let pattern3 = /.at/gi; // 匹配所有以'at'结尾的三字符组合，忽略大小写
+        // let pattern3 = /\.at/gi; // 匹配所有'.at'结尾的三字符组合，忽略大小写
     </script>
 </body>
 </html>
