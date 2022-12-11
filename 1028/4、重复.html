@@ -42,6 +42,15 @@
         // {1,}     +必须在目标对象中连续出现一次或多次
         // {0,1}    ?必须在目标对象中连续出现零次或一次
 
+        let text = "mom ans dad and baby";
+        let pattern = /mom( and dad( and baby)?)?/gi;
+        // 模式包含两个捕获组 最内部的匹配项： and baby  以及外部的匹配项and dad 或者 and dad and baby
+        let matches = pattern.exec(text);
+        console.log(matches.input);
+        console.log(matches.index);
+        console.log(matches[0]);
+        console.log(matches[1]);
+        console.log(matches[2]);
 
         console.log("colour".match(/colou?r/));
 
