@@ -214,21 +214,26 @@
         // 1）、普通实例化方法中和构造函数中this指向实例化的对象
         // 2）、当出现call，apply，bind，箭头函数、回调函数，事件函数等特殊使用时，遵照特殊使用的this
         // 3）、静态方法中的this指向当前类，或者构造函数
-        // class Box{
-        //     constructor(){
-        //         console.log(this)//实例化的对象
-        //         this.play();
-        //     }
-        //     play(){
-        //         console.log(this)//实例化的对象
-        //     }
-        //     static run(){
-        //         console.log(this)//Box类
-        //     }
-        // }
+        class Box{
+            constructor(){
+                console.log(this)//实例化的对象
+                this.play();
+            }
+            play(){
+                console.log(this)//实例化的对象
+            }
+            static run(){
+                console.log(this)//Box类
+            }
+        }
 
-        // var b=new Box();
-        // Box.run();
+        var b=new Box();
+        const a = new Box();
+        // constructor用于表示对象类型
+        console.log(a.constructor === Box);// true
+        console.log(b.constructor === Box);// true
+        // 通过构造函数可以确保实例被标识为特定类型
+        Box.run();
 
 
         // 8、ES5中面向对象
@@ -240,6 +245,10 @@
         // function Box(){
         //     console.log(this)
         // }
+
+        function Person() {}
+
+        console.log(Person.prototype)
 
         // Box.prototype.a=1;
         // Box.prototype.play=function(){
