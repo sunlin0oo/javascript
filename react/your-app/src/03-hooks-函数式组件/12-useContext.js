@@ -85,6 +85,7 @@ function FilmItem(props){
     const value = useContext(GlobalContext);//直接将GlobalContext当参数传入==>这里value返回的是供应商所提供的服务对象(value),可直接调用对应的函数及参数,无需下面进行回调
         return <div className='filmitem' onClick={()=>{
             console.log(synopsis);
+            // 改变全局变量GlobalContext中的info
             value.changeInfo(synopsis);
             console.log("111111111");
         }}>
