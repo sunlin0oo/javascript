@@ -22,6 +22,13 @@
 
         // var obj={}
         // //创建一个对象的代理，从而实现基本操作的拦截和自定义
+        // let proxy = new Proxy(target,handler)
+        // const handler = {
+        //     get(trapTarget, property, receiver) {
+        //         return trapTarget[property]
+        //     }
+        // }
+        
         // var p=new Proxy(obj,{
         //     set:function(o,key,value){
         //         // if(key === "a") return //阻断设置
@@ -272,6 +279,20 @@
         //    var names=Object.getOwnPropertySymbols(p);
         //    console.log(names)
  
+        // 反射API：处理程序对象中所有可以捕获的方法都有对应的反射(Reflect)API方法
+        // 通过反射API定义空代理对象
+        const target = {
+            foo: 'bar'
+        }
+
+        const handler = {
+            // get() {
+            //     return Reflect.get(...arguments);
+            // }
+            get: Reflect.get
+        };
+
+        const proxy = new Proxy(target, handler);
 
         //   获取对象所有的属性
         //   var names=Reflect.ownKeys(obj)
