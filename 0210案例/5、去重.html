@@ -108,6 +108,15 @@
     // }
     // console.log(arr[3][4])
 
+    let aa = [[1, 2], [2, 3], [1, 2],[3, 3],[4, 3],[3, 3],[1, 3],[2, 3],];
+    // 利用的是对象添加 key - values 时的特性，把数组作为对象的 key 值，达到去重的目的，最后再用 es6 的 Object.values 把值取出来
+    let obj = {};
+    aa.forEach(item => {
+        console.log(item);
+        obj[item] = item
+    });
+    aa = Object.values(obj);
+    console.log(aa, obj);
     
     </script>
 </body>
