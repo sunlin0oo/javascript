@@ -14,15 +14,45 @@
         // var p=new Promise(function(resolve,reject){
         //     resolve();
         // })
-        // Promise 实例有一个then方法，用来指定下一步的回调函数。
+                
+        // let p = new Promise((resolve, reject)=> setTimeout(resolve(3), 1000));
+        // setTimeout(console.log, 2000, p);
+        
+
+        // Promise 实例有一个then(thenable接口)方法，用来指定下一步的回调函数。
         // p.then(function(){
 
         // }).catch(function(){
 
         // })
-        
-        let p = new Promise((resolve, reject)=> setTimeout(resolve(3), 1000));
-        setTimeout(console.log, 2000, p);
+
+        function onResolved(id) {
+            setTimeout(console.log, 0, id, 'resolved');
+        }
+
+        function onRejected(id) {
+            setTimeout(console.log, 0, id, 'reject');
+        }
+
+        // let p1 = new Promise((resolve, reject) => setTimeout(resolve, 3000));
+        // let p2 = new Promise((resolve, reject) => setTimeout(reject, 2000));
+        // then最多接受两个参数: onResolved, onReject
+        // p1.then(() => onResolved('p1'),
+        //         () => onRejected('p1'));// p1 resolved
+        // p2.then(() => onResolved('p2'),
+        //         () => onRejected('p2'));// p2 reject
+        // // 规范写法
+        // p2.then(null, () => onRejected('p2'));// p2 reject
+
+        // Promise.prototype.then()方法返回一个新的期约实例
+
+        let p1 = new Promise(()=>{});
+        let p2 = p1.then();
+
+        setTimeout(console.log, 0, p1);// Promise {<pending>}
+        setTimeout(console.log, 0, p2);// Promise {<pending>}
+        setTimeout(console.log, 0, p1 === p2);// false
+
 
         //     init();
         //     // console.log("aaa")
@@ -66,7 +96,7 @@
         //     console.log("bbb")
         // })
 
-          // then() 用法辨析
+        // then() 用法辨析
         // 写法一:f3回调函数的参数，是f2函数的运行结果
         // f1().then(function () {
         //     return f2();
