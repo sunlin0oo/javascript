@@ -10,7 +10,8 @@
 
 <body>
     <script>
-        // 要使用await，必须写在async函数中
+
+        // 要使用await，必须写在async函数中==>不允许出现在箭头函数中，同步函数声明中，同步函数表达式中，IIFE使用同步函数表达式或箭头函数
         // await只能等待Promise
         // async function fn() {
         //     // await  等待
@@ -31,6 +32,47 @@
 
         // 否则直接a = fn() ==>console.log(a)===>async 执行后返回一个promise对象
 
+        // async function foo() {
+        //     console.log(2);
+        //     console.log(await Promise.resolve(8));
+        //     console.log(9);
+        // }
+
+        // async function bar() {
+        //     console.log(4);
+        //     console.log(await 6);
+        //     console.log(7);
+        // }
+
+        // console.log(1);
+        // foo();
+        // console.log(3);
+        // bar();
+        // console.log(5);
+        /**
+         * 打印1
+         * 执行foo()
+         * 打印2
+         * ☆☆await关键字暂停执行，向消息队列中添加一个Promise在落地之后执行的任务☆☆
+         * foo()退出
+         * 打印3
+         * 执行bar()
+         * 打印4
+         * await关键字暂停执行，为立即可用的值6向消息队列中添加一个任务
+         * bar() quit
+         * 打印5
+         * ☆☆Javascript运行时向消息队列中取出解决await Promise的处理程序，并将解决的值8提供给Promise☆☆
+         * ☆☆Javascript运行时向消息队列中添加一个执行恢复执行foo()函数的任务☆☆
+         * Javascript运行时向消息队列中取出回复执行bar()任务及值6
+         * bar(恢复执行，await取得值6)
+         * bar(打印6)
+         * bar(打印7)
+         * bar退出
+         * Javascript运行时向消息队列中取出回复执行foo()任务及值8
+         * foo(打印8)
+         * foo(打印9)
+         * 退出foo()
+        */
 
     //     function loadImage(src) {
     //         return new Promise(function (resolve, reject) {
@@ -82,6 +124,21 @@
     // }
 
     // 阻塞式同步
+    // 异步函数策略
+    // 1.实现sleep()
+    // async function sleep(delay) {
+    //     return new Promise((resolve) => setTimeout(resolve, delay));13864332616
+    // }
+
+    // async function foo() {
+    //     const t0 = Date.now();
+    //     await sleep(1500);
+    //     console.log(Date.now());
+    // }
+
+    // foo() // 1502;
+    // 2.利用平行执行
+
     </script>
 </body>
 
