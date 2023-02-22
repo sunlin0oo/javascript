@@ -44,8 +44,8 @@
         var div1=document.querySelector(".div1");
         var div2=document.querySelector(".div2");
         var div3=document.querySelector(".div3");
-        // 事件侦听对象.addEventListener(事件类型,事件回调函数,是否在捕获阶段触发|{once:true 是否只触发一次},捕获阶段是优先被找到)
-        div1.addEventListener("click",clickHandler1);
+        // 事件侦听对象.addEventListener(事件类型,事件回调函数,是否在捕获阶段触发|{once:true 是否只触发一次},捕获阶段是优先被找到，默认false为冒泡阶段调用事件处理程序)
+        div1.addEventListener("click",clickHandler1, true);
         div2.addEventListener("click",clickHandler2);
         div3.addEventListener("click",clickHandler3);
 
@@ -76,11 +76,11 @@
        /* 
             e.currentTarget    this  当前事件函数触发侦听事件的对象
             e.target e.srcElement     事件触发的目标对象（最终点到的谁）
-
-     阶段：捕获       目标       冒泡
-        起： 外      达到目标      内
-             |                    |
-        终： 内                   外
+     事件流程：
+     阶段1：捕获 ===>  目标  ===> 阶段3：冒泡
+        起： 外                          内
+             |                           |
+        终： 内 ===> 阶段2：达到目标 ===>  外
 
 
              事件默认的触发方式是系统触发，冒泡阶段触发
