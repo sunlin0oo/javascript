@@ -56,8 +56,10 @@
 
 
         // 当表单的内容与原来的内容不同时，失焦时触发---如果第一次输入三个a，触发，再输入三个a就不会触发
-
-        
+        window.addEventListener('load', (e) => {
+            console.log('Loaded!');
+        })
+        // onload
         var input=document.querySelector("input");
         // input.addEventListener("change",changeHandler);
 
