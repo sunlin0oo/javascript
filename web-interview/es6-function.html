@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const foo = 1
+        // 属性简写
+        const baz = { foo};
+        const o = {
+            method() {
+                return 'Hello';
+            }
+        };
+        // 等价于
+        // const o = {
+        //     method: function(){
+        //         return 'Hello';
+        //     }
+        // }
+
+        // super关键字
+        const proto = {
+            foo: 'hello'
+        };
+
+        const obj = {
+            foo: 'world',
+            find() {
+                return super.foo;
+            }
+        };
+
+        Object.setPrototypeOf(obj, proto); // 为obj设置原型对象
+        console.log(obj.find()) // "hello"
+
+        //  在解构赋值中，未被读取的可遍历的属性，分配到指定的对象上面
+        let {x, y, ...z} = {x: 1, y: 2, a:3, b:3};
+        console.log(x, y, z);
+        
+        let obj1 = {a : {b:1}};
+        let {...g} = obj1;
+
+        obj1.a.b = 3;
+        console.log(g.a.b);
+
+        
+    </script>
+</body>
+
+</html>

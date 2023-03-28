@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        var arr=[1,2,3];
+        var arr = [1, 2, 3];
         console.log(arr)
 
         // at获取索引对应的元素
@@ -17,21 +19,21 @@
         console.log(arr.at(-1))
 
 
-    //     function arrayAt(array,index){
-    //         if(!array || array.constructor!==Array) throw new TypeError("当前的array不是一个数组!");
-    //         if(array.length===0) return;
-    //         index=~~index;
-    //         if(index<0) index=array.length+index;
-    //         return array[index];
-    //     }
+        //     function arrayAt(array,index){
+        //         if(!array || array.constructor!==Array) throw new TypeError("当前的array不是一个数组!");
+        //         if(array.length===0) return;
+        //         index=~~index;
+        //         if(index<0) index=array.length+index;
+        //         return array[index];
+        //     }
 
-    //    console.log(arrayAt(arr,-4)) 
+        //    console.log(arrayAt(arr,-4)) 
 
 
 
-        var arr1=["a","b","c","d","e","f"];
+        var arr1 = ["a", "b", "c", "d", "e", "f"];
 
-        var arr2=["a","b","c","d","e"]
+        var arr2 = ["a", "b", "c", "d", "e"]
         // arr.copyWithin(target,start,end)
         // target 是新数组从什么位置开始
         // start 是从原数组的什么位置开始复制
@@ -40,20 +42,20 @@
         console.log(arr1)
         // 修改原数组
 
-        function arrayCopyWithin(array,target,start,end){
-            if(!array || array.constructor!==Array) throw new TypeError("当前的array不是一个数组!");
-            target=~~target
-            start=~~start;
-            if(end===undefined) end=array.length;
-            if(target<0) target=(target+array.length<0 ? 0 : target+array.length);
-            if(start<0) start=(start+array.length<0 ? 0 : start+array.length);
-            if(end<0) end=(end+array.length<0 ? 0 : end+array.length);
-            var arr=[];
-            for(var i=0;i<array.length;i++){
-                arr[i]=array[i];
+        function arrayCopyWithin(array, target, start, end) {
+            if (!array || array.constructor !== Array) throw new TypeError("当前的array不是一个数组!");
+            target = ~~target
+            start = ~~start;
+            if (end === undefined) end = array.length;
+            if (target < 0) target = (target + array.length < 0 ? 0 : target + array.length);
+            if (start < 0) start = (start + array.length < 0 ? 0 : start + array.length);
+            if (end < 0) end = (end + array.length < 0 ? 0 : end + array.length);
+            var arr = [];
+            for (var i = 0; i < array.length; i++) {
+                arr[i] = array[i];
             }
-            for(var j=target;j<target+start+end;j++,start++){
-                array[j]=arr[start]
+            for (var j = target; j < target + start + end; j++, start++) {
+                array[j] = arr[start]
             }
             return array;
         }
@@ -63,7 +65,7 @@
         // var arr2=arr.copyWithin(-2,-5,-1);
         // console.log(arr1,arr2);
 
-        
+
         // // 将数组转换为迭代器
         // console.log(arr.entries());
 
@@ -73,53 +75,53 @@
 
 
         // 判断数组中是否存在该元素
-        
+
         // console.log(arr.includes("d"))
 
 
-            // function arrayIncludes(array,seachElement){
-            //     if(!array || array.constructor!==Array) throw new TypeError("当前的array不是一个数组!");
-            //     for(var i=0;i<array.length;i++){
-            //         if(array[i]===seachElement) return true;
-            //     }
-            //     return false;
-            // }
+        // function arrayIncludes(array,seachElement){
+        //     if(!array || array.constructor!==Array) throw new TypeError("当前的array不是一个数组!");
+        //     for(var i=0;i<array.length;i++){
+        //         if(array[i]===seachElement) return true;
+        //     }
+        //     return false;
+        // }
 
 
-            // console.log(arr.keys());
-            // for(var index of arr.keys()){
-            //     console.log(index)
-            // }
+        // console.log(arr.keys());
+        // for(var index of arr.keys()){
+        //     console.log(index)
+        // }
 
-            // console.log(arr.values())
-            // for(var value of arr.values()){
-            //     console.log(value)
-            // }
+        // console.log(arr.values())
+        // for(var value of arr.values()){
+        //     console.log(value)
+        // }
 
 
         //   var arr1=arr.reverse();
         //   console.log(arr1)
         // 修改原数组
 
-            // function arrayReverse(array){
-            //     if(!array || array.constructor!==Array) throw new TypeError("当前的array不是一个数组!");
-            //     if(array.length<2) return array;
-            //     for(var i=0;i<~~(array.length/2);i++){
-            //         var temp=array[i];
-            //         array[i]=array[array.length-i-1];
-            //         array[array.length-i-1]=temp;
-            //     }
-            //     return array;
-            // }
+        // function arrayReverse(array){
+        //     if(!array || array.constructor!==Array) throw new TypeError("当前的array不是一个数组!");
+        //     if(array.length<2) return array;
+        //     for(var i=0;i<~~(array.length/2);i++){
+        //         var temp=array[i];
+        //         array[i]=array[array.length-i-1];
+        //         array[array.length-i-1]=temp;
+        //     }
+        //     return array;
+        // }
 
-            // var arr1=arrayReverse(arr);
-            // console.log(arr1);
-
-
+        // var arr1=arrayReverse(arr);
+        // console.log(arr1);
 
 
-            // sort  排序 修改原数组
-            var arr=[1,5,2,4,7,3,10,12,20];
+
+
+        // sort  排序 修改原数组
+        var arr = [1, 5, 2, 4, 7, 3, 10, 12, 20];
 
         //    arr.sort();
         //     arr.sort(function(a,b){
@@ -137,4 +139,5 @@
         console.log(num.valueOf());
     </script>
 </body>
+
 </html>
