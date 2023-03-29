@@ -20,7 +20,7 @@
     <div></div>
     <script>
 
-        // var obj={}
+        var obj={}
         // //创建一个对象的代理，从而实现基本操作的拦截和自定义
         // let proxy = new Proxy(target,handler)
         // const handler = {
@@ -28,7 +28,38 @@
         //         return trapTarget[property]
         //     }
         // }
+
+        /**
+         * 若需要在Proxy内部调用对象的默认行为，建议使用Reflect，其是ES6中操作对象而提供的新 API
+         * 基本特点：
+         * 只要Proxy对象具有的代理方法，Reflect对象全部具有，以静态方法的形式存在
+         * 修改某些Object方法的返回结果，让其变得更合理（定义不存在属性行为的时候不报错而是返回false）
+         * 让Object操作都变成函数行为
+        */
+
+        var person = {
+            name: "张三"
+        };
+
+        // const proxy1 = new Proxy(person, {
+        //     get: function(target, propKey) {
+        //         console.log('Reflect', Reflect.get(target,propKey))
+        //         return Reflect.get(target,propKey)
+        //     }
+        // });
+        // proxy1.name // "张三"
+
+        const handler1 = {
+            get(target, propKey) {
+                return 'abc';
+            }
+        };
+
+        const proxy1 = new Proxy(person, handler1);
+        console.log(proxy1.name);
+
         
+        // 改写get,set函数
         // var p=new Proxy(obj,{
         //     set:function(o,key,value){
         //         // if(key === "a") return //阻断设置
@@ -38,7 +69,9 @@
         //         value=Math.abs(value);
         //         o[key]=value;
         //     },
-        //     get:function(o,key){
+
+        // // get接受三个参数，依次为目标对象、属性名和 proxy 实例本身，最后一个参数可选
+        //     get:function(o,key, receiver){
         //         var value=o[key];
         //         value=~~value;
         //         value=Math.abs(value);
@@ -262,7 +295,6 @@
             // })
             
             // console.log("a" in p);//检查a是否是p的属性 false
-
 
             // ownKeys
 
