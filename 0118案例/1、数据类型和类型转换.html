@@ -34,13 +34,16 @@
         // 0xFF65  //16进制
 
 
-        // Boolean
-        // true   //真
-        // false  //假
+       
 
-        // undefined  //未定义
-
-        // null   //空值
+        /**
+         *  Boolean：
+            true   //真
+            false  //假
+         * null   //空值
+         * undefined
+         * undefined 值是由 null值派生而来
+        */
 
 
         // // 复杂类型  复合类型
@@ -64,6 +67,7 @@
         // console.log(typeof f);
        
         // console.log(typeof f==="undefined")
+
          // bigint  大整型
         //  function 函数
         // symbol  唯一值
@@ -81,11 +85,16 @@
         // console.log(typeof h)
 
 
-        /* 
-        1、类型中存在栈中类型和存在堆中的相同类型有什么关系，有什么不同
-        2、为什么null使用typeof判断时是object
-        3、为什么var g;  var h=undefined;虽然值和类型相同但是其含义不同
-        4、symbol是什么东西，有什么用
+        /**
+         * 1、类型中存在栈中类型和存在堆中的相同类型有什么关系，有什么不同
+            JS变量都存放在内存中，而内存给变量开辟了两块区域，分别为栈区域和堆区域
+            栈像个容器，容量小速度快，存放基本类型==>存取速度快，但不灵活，同时由于结构简单，在变量使用完成后就可以将其释放，内存回收容易实现。
+            堆像个房间，容量较大，存放引用类型，但是引用类型的引用还是存在栈内存中的 ===>使用灵活，可以动态增加或删除空间，但是存取比较慢
+         * 2、为什么null使用typeof判断时是object ===>null 值表示一个空对象指针，这也是给typeof传一个 null 会返回 "object" 的原因
+         * 3、为什么var g;  var h=undefined;虽然值和类型相同但是其含义不同
+            个人理解：var g 定义变量，但变量为空 (没有值) var h=undefined h赋值类型为undefined
+         * 4、symbol是什么东西，有什么用
+            Symbol （符号）是原始值，且符号实例是唯一、不可变的。符号的用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险
         
         */
 
