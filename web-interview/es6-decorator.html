@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+* Decorator两大优点：
+* 代码可读性变强了，装饰器命名相当于一个注释
+* 在不改变原有代码情况下，对原来功能进行扩展
+*/
+
+        /**
+         * 类装饰
+         * 当对类本身进行装饰的时候，能够接受一个参数，即类本身
+         * */
+        // @decorator
+        class A { }
+
+        // 等价于
+        // class A {}
+        // A = decorator(A) || A
+
+        function testable(target) {
+            target.isTestable = true;
+        }
+
+        @testable
+        class MyTestableClass {
+        }
+
+        console.log('1', MyTestableClass.isTestable) // true
+
+    </script>
+</body>
+
+</html>
