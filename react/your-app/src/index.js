@@ -1,8 +1,8 @@
-import React from 'react';
+import {React, StrictMode} from 'react';
 // import 'antd/dist/antd.css' // antd-mobile--PC版本CSS
 // import ReactDOM from 'react-dom';
 // import App from './15-graphql/App'
-import App from './16-mock/App'
+import App from './17-searchableProduct/App'
 
 //react 18
 import { createRoot } from 'react-dom/client';
@@ -14,8 +14,10 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 // <App /> 是一段jsx
 root.render(
   // redux持久化
-    <App/>
-  );
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
 
 //react 17
 // ReactDOM.render(<App />,document.getElementById("root"));
