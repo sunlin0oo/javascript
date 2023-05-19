@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        Worker 输出内容：<span id='app'></span>
+        <input type='text' title='' id='msg'>
+        <button onclick='sendMessage()'>发送</button>
+        <button onclick='stopWorker()'>stop!</button>
+    </div>
+
+    <script type='text/javascript'>
+        /**
+         * https://www.cnblogs.com/goloving/p/13962441.html
+         * Web Workers 使得一个Web应用程序可以在与主执行线程分离的后台线程中运行一个脚本操作。这样做的好处是可以在一个单独的线程中执行费时的处理任务，从而允许主（通常是UI）线程运行而不被阻塞。
+         * Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。
+         * 但是注意这并不是意味着JS语言本身支持了多线程能力，而是浏览器作为宿主环境提供了JS一个多线程运行的环境。
+         * 而且Worker 线程一旦新建成功，就会始终运行，不会被主线程上的活动（比如用户点击按钮、提交表单）打断。
+         * 这样有利于随时响应主线程的通信。但是，这也造成了 Worker 比较耗费资源，不应该过度使用，而且一旦使用完毕，就应该注意及时关闭。
+        */
+        /**
+         * 1.Worker()构造函数
+         * 第一个参数是脚本的网址（必须遵守同源政策）
+         * 第二个参数是配置对象
+        */
+        // var myWorker = new Worker('worker.js', { name: 'myWorker' });
+
+        // 2.消息传递
+        // myWorker.postMessage('start');
+
+        // myWorker.postMessage({ method: 'echo', args: 'start' });
+
+        // 由js发送可以接受
+        // myWorker.onmessage = function (event) {
+        //     // data属性可以获取 Worker 发来的数据。
+        //     console.log('Received message ' + event.data);
+        //     // doSomething();
+        // }
+
+        // function doSomething() {
+        //     // 执行任务
+        //     myWorker.postMessage('Work done!');
+        //     myWorker.terminate();
+        // }
+
+        if (typeof (Worker) === 'undefined')    // 使用Worker前检查一下浏览器是否支持
+            document.writeln(' Sorry! No Web Worker support.. ')
+        else {
+            window.w = new Worker('worker.js')
+            window.w.onmessage = ev => {
+                document.getElementById('app').innerHTML = ev.data
+            }
+
+            window.w.onerror = err => {
+                w.terminate()
+                console.log(error.filename, error.lineno, error.message) // 发生错误的文件名、行号、错误内容
+            }
+
+            function sendMessage() {
+                const msg = document.getElementById('msg')
+                window.w.postMessage(msg.value)
+            }
+
+            function stopWorker() {
+                window.w.terminate()
+            }
+        }
+
+    </script>
+</body>
+
+</html>
