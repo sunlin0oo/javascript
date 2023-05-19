@@ -17,8 +17,8 @@ function ProductRow({ product }) {
         </span>;
     return (
         <tr>
-            <td>{name}</td>
-            <td>{product.price}</td>
+            <td className='ProductRow'>{name}</td>
+            <td className='ProductRow'>{product.price}</td>
         </tr>
     )
 }
@@ -77,7 +77,7 @@ function ProductTable({ products, filterText, inStockOnly }) {
     return (
         <table>
             <thead>
-                <tr>
+                <tr className='trClass'>
                     <th className='productTable'>Name</th>
                     <th className='productTable'>Price</th>
                 </tr>
@@ -104,7 +104,7 @@ function FilterableProductTable({ products }) {
     const [filterText, setFilterText] = useState('');
     const [inStockOnly, setInStockOnly] = useState(false);
     return (
-        <div>
+        <div className='content'>
             <SearchBar filterText={filterText} inStockOnly={inStockOnly} onChangeFilterText={setFilterText} onChangeInStockOnly={setInStockOnly}></SearchBar>
             <ProductTable filterText={filterText} inStockOnly={inStockOnly} products={products}></ProductTable>
         </div>

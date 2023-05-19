@@ -1,19 +1,23 @@
 .search {
-    height: 20px;
     width:100%;
-    margin: 8px;
     background: rgba(255, 255, 255, 0.3);
+}
+.content{
+    width:100%;
 }
 .Form {
     width: 50%;
 }
-/* .productTable {
-    width:20%;
-} */
-/* .productCategory {
-    margin: 10px;
-    width:5%;
-} */
-/* .tbodyCategoryRow {
-    left: 500px;
-} */
+table {
+    width: 50%;
+}
+.productTable {
+    width:50%;
+}
+.productCategory {
+    width:100%;
+}
+.ProductRow {
+    width:50%;
+    text-align: center;
+}
