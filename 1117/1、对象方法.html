@@ -51,7 +51,22 @@
         // var obj={
         //     a:1,b:2
         // }
+        
         //  var o=Object.create(obj);//用obj创建了一个新数组是o, o继承了obj的基因 里面也有a:1b:2
+        // _proto_: 这是每个对象都有的隐式原型属性，指向了创建该对象的构造函数的原型。
+        // 手写new过程
+        function create() {
+            // 创建一个空的对象
+            let obj = new Object();
+            // 获得构造函数
+            let Con = [].shift.call(arguments);
+            // 链接到原型
+            obj._proto_ = Con.prototype;
+            // 绑定this，执行构造函数
+            let result = Con.apply(obj, arguments);
+            // 确保 new 出来是个对象
+            return typeof result === 'object' ? result : obj;
+        }
         // console.log(o.__proto__ === obj)//true 引用关系
         //  o.c=10;
         //  console.log(o);

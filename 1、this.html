@@ -241,6 +241,11 @@
         // 1、函数作为普通函数执行时，this，仍然指向window和undefined
         // 2、通过new 把函数作为构造函数使用时，返回一个实例化对象，构造函数中this执行当前返回实例化对象
         // 3、原型prototype上的方法中this指向调用当前方法的实例化对象
+        /**
+         * prototype 属性。这是一个显式原型属性，只有函数才拥有该属性;
+         * 
+        */
+        let fun = Function.prototype.bind() // 这样创建的函数是没有prototype属性的
         // 4、函数作为对象定义的方法，中this指向当前函数，也就是构造函数
         // function Box(){
         //     console.log(this)
