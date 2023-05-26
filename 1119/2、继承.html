@@ -1,62 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        //ES6
-        class Box1{
-            constructor(a){
-                // this.a=a;
-                // console.log(a);
+        //ES6-Class继承
+        class Box1 {
+            constructor(value) {
+                this.val = value;
             }
-            play(){
-                console.log(this.a,"---play");
-            }
-        }
-
-        class Ball1 extends Box1{
-            constructor(a){
-                super(a)
+            getValue() {
+                console.log('value', this.val);
             }
         }
-// 将Box1放到Ball1原型链下
-        var a=new Box1();
-        var b=new Ball1();
-        console.log(a)
-        console.log(b);
 
-// -----------------------------------
+        class Ball1 extends Box1 {
+            constructor(value) {
+                super(value)
+            }
+        }
+        // 将Box1放到Ball1原型链下
+        let box1 = new Box1(1);
+        console.log(box1)
+        box1.getValue();
 
-        function Box(a){
-            this.a=a;
+        let ball1 = new Ball1(2);
+        console.log(ball1);
+       ball1.getValue();
+
+        // -----------------------------------
+
+        // 寄生式继承，执行一次==>解决掉继承了父类函数时调用了构造函数
+
+        function Parent(value) {
+            this.val = value;
+        }
+
+        Parent.prototype.getValue = function() {
+            console.log(this.val)
+        }
+        // 等价于Super
+        function Child(value) {
+            Parent.call(this, value)
+        }
+
+        Child.prototype = Object.create(Parent.prototype, {
+            constructor:{
+                value: Child,
+                enumerable: false,
+                writable: true,
+                configurable: true
+            }
+        })
+
+        const child = new Child(1)
+        
+        child.getValue();
+        console.log(child instanceof Parent);// true
+
+        
+        function Box(a) {
+            this.a = a;
             console.log(a);
         }
 
-        Box.prototype.play=function(){
+        Box.prototype.play = function () {
             // console.log("play");
-            console.log(this.a,"---play");
+            console.log(this.a, "---play");
         }
-
-
 
         // var b=new Box(3);
         // b.play();
-
-
-        // 寄生式继承，执行一次
-        // 将Box的原型寄生到函数F上，new F()只执行F不执行Box
-        // function F(){
-
-        // }
-      
-        // F.prototype=Box.prototype;
-        // Ball.prototype=new F();
-        
 
         // //原型继承，但是会执行2次，另外一次属于Box内
         // function Ball(a){
@@ -68,55 +88,56 @@
         // var c=new Ball(1);
         // // c.__proto__=new Box();
         // console.log(c)
-        
 
 
-        Function.prototype.extends=function(superClass){
+
+        Function.prototype.extends = function (superClass) {
             // this  继承的子类
             //  F类
-            function F(){}
+            function F() { }
             // 寄生，中间载体
-            F.prototype=superClass.prototype;
+            F.prototype = superClass.prototype;
             // 父类没有construcor,重现添加上
-            if(superClass.prototype.constructor!==superClass){
-                Object.defineProperty(superClass.prototype,"constructor",{
-                    value:superClass
+            if (superClass.prototype.constructor !== superClass) {
+                Object.defineProperty(superClass.prototype, "constructor", {
+                    value: superClass
                 })
             }
             // 先保存Ball原有的原型
-            var proto=this.prototype;
-            this.prototype=new F();
+            var proto = this.prototype;
+            this.prototype = new F();
             // 返回所有自有属性key，不管是否可枚举，但不包括继承自原型的属性==>数组
-            var names=Reflect.ownKeys(proto);
-            for(var i=0;i<names.length;i++){
-                var desc=Object.getOwnPropertyDescriptor(proto,names[i]);
-                Object.defineProperty(this.prototype,names[i],desc);
+            var names = Reflect.ownKeys(proto);
+            for (var i = 0; i < names.length; i++) {
+                var desc = Object.getOwnPropertyDescriptor(proto, names[i]);
+                Object.defineProperty(this.prototype, names[i], desc);
             }
-            this.prototype.super=function(arguments){
+            this.prototype.super = function (arguments) {
                 // 这里的this就是Ball
-                superClass.apply(this,arguments);
+                superClass.apply(this, arguments);
             }
             // 将superClass方法附在原型supers上
-            this.prototype.supers=superClass.prototype;
+            this.prototype.supers = superClass.prototype;
         }
 
 
 
-        function Ball(a){
+        function Ball(a) {
             this.super(arguments);
         }
-        Ball.prototype.run=function(){
+        Ball.prototype.run = function () {
             console.log("run")
         }
         // 重写
-        Ball.prototype.play=function(){
-            this.supers.play.apply(this,arguments)
+        Ball.prototype.play = function () {
+            this.supers.play.apply(this, arguments)
             console.log("aaa")
         }
 
         Ball.extends(Box);
-        var b=new Ball(5);
+        var b = new Ball(5);
         b.play();
     </script>
 </body>
+
 </html>
