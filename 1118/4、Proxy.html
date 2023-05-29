@@ -85,19 +85,21 @@
 
         // obj就是源对象，p就是代理对象
         // obj有什么，p就有什么
-        // p有什么，obj不一定有==>默认设置回去
-        p.a=1;
-        p.b=10;
-        obj.c=10;
-        p.d=100;
+        
+        // p.a=1;
+        // p.b=10;
+        // obj.c=10;
+        // p.d=100;
 
-
+        // p有什么，obj不一定有==>如果对Set没有操作的话，代理对象会自动处理
         // p.a=10;//调用了代理的set方法  a就是key  10就是value，会针对所有属性
         // obj.a=20;//不会调用代理的set方法
         // console.log(p);
+        // console.log(obj.d);
+        
+        // p.a="a";// 代理中设置了阻断，故不会给obj中添加上属性a
         // console.log(obj);
-
-        // p.a="a";
+        // console.log(p.a);//p虽然设置了a，但是没有进行保存，故p.a仍是undefined
         // p.a=-100;
         // p.a=true;
         // p.b="s";
