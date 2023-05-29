@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        div{
+        div {
             width: 50px;
             height: 50px;
             background-color: red;
@@ -16,11 +17,12 @@
         }
     </style>
 </head>
+
 <body>
     <div></div>
     <script>
 
-        var obj={}
+        var obj = {}
         // //创建一个对象的代理，从而实现基本操作的拦截和自定义
         // let proxy = new Proxy(target,handler)
         // const handler = {
@@ -43,7 +45,7 @@
 
         // const proxy1 = new Proxy(person, {
         //     get: function(target, propKey) {
-        //         console.log('Reflect', Reflect.get(target,propKey))
+        //         console.log('Reflect', Reflect)
         //         return Reflect.get(target,propKey)
         //     }
         // });
@@ -55,50 +57,52 @@
             }
         };
 
-        const proxy1 = new Proxy(person, handler1);
-        console.log(proxy1.name);
+        const proxy2 = new Proxy(person, handler1);
+        console.log(proxy2.name);
 
-        
+
         // 改写get,set函数
-        // var p=new Proxy(obj,{
-        //     set:function(o,key,value){
-        //         // if(key === "a") return //阻断设置
-        //         // o==>obj   key 设置属性  value设置的属性值
-        //         // 值变成正整数
-        //         value=~~value;
-        //         value=Math.abs(value);
-        //         o[key]=value;
-        //     },
+        var p = new Proxy(obj, {
+            set: function (target, property, value, receiver) {
+                console.log(`set触发,赋值${target}对象${property}属性${value},最初赋值对象：`, receiver);
+                // if(key === "a") return //阻断设置
+                // o==>obj   key 设置属性  value设置的属性值
+                // 值变成正整数
+                value = ~~value;
+                value = Math.abs(value);
+                target[property] = value;
+            },
 
-        // // get接受三个参数，依次为目标对象、属性名和 proxy 实例本身，最后一个参数可选
-        //     get:function(o,key, receiver){
-        //         var value=o[key];
-        //         value=~~value;
-        //         value=Math.abs(value);
-        //         return value;
-        //     }
-        // });
+            // get接受三个参数，依次为目标对象、属性名和 proxy 实例本身，最后一个参数可选
+            get: function (target, property, ProxyTarget) {
+                console.log(`get触发,读取${property}属性`);
+                var value = target[property];
+                value = ~~value;
+                value = Math.abs(value);
+                return value;
+            }
+        });
 
         // obj就是源对象，p就是代理对象
         // obj有什么，p就有什么
         // p有什么，obj不一定有==>默认设置回去
-        // p.a=1;
-        // p.b=10;
-        // obj.c=10;
-        // p.d=100;
+        p.a=1;
+        p.b=10;
+        obj.c=10;
+        p.d=100;
 
 
         // p.a=10;//调用了代理的set方法  a就是key  10就是value，会针对所有属性
-        // obj.a=10;//不会调用代理的set方法
+        // obj.a=20;//不会调用代理的set方法
         // console.log(p);
-        // console.log(obj.d);
-        
+        // console.log(obj);
+
         // p.a="a";
         // p.a=-100;
         // p.a=true;
         // p.b="s";
         // obj.c="f"
-        // 对某对象的属性需要处理某种事情时，则需要代理，
+        ////对某对象的属性需要处理某种事情时，则需要代理，
         // console.log(obj);
         // console.log(p.c);
         // console.log(obj.c);
@@ -153,7 +157,7 @@
 
         // div.x=200;
         // p.x++;
-      
+
         // p.x++;  p.x=p.x+1;
         // p.x++;
 
@@ -191,126 +195,126 @@
         //    }
         // })
 
-    //    var a=Object.getPrototypeOf(p)
-    //     console.log(o1)
+        //    var a=Object.getPrototypeOf(p)
+        //     console.log(o1)
 
-    // var o3=[1,2,3];
-    // Object.setPrototypeOf(p,o3);
-    // console.log(o1);
-
-
-
-    // 是否可以扩展和设置不扩展
-            // var obj={a:1,b:2};
-
-            // var p=new Proxy(obj,{
-            // 是否可以扩展
-            //     isExtensible(obj){
-            //         return Object.isExtensible(obj);
-            //     },
-            // 禁止扩展
-            //     preventExtensions(obj){
-                // Object.seal()方法用于密封一个对象，即将对象设置为不可扩展，同时将对象的所有自有属性都设置为不可配置（包括Symbol值的属性）。 冰冻！
-            //         Object.seal(obj);
-            //         return true;
-            //     }
-            // })
-            // Object.preventExtensions(p);
-            // // obj.c=10;
-            // // delete obj.a;
-
-            // // console.log(obj)
-            // console.log(Object.isExtensible(p))
-          
-
-            // getOwnPropertyDescriptor
-            // var obj={};
-            // Object.defineProperties(obj,{
-            //     a:{
-            //         writable:true,
-            //         value:1
-            //     },
-            //     b:{
-            //         value:10
-            //     }
-            // });
-
-            //对于拿到值及逆行修改
-            // var p=new Proxy(obj,{
-            //     getOwnPropertyDescriptor(o,key){
-            //         var desc=Object.getOwnPropertyDescriptor(o,key);
-            //         desc.value=10;
-            //         return desc;
-            //     }
-            // });
-            
-            ////两个结果不同，代理结果与原结果不同
-            // var desc=Object.getOwnPropertyDescriptor(p,"a");
-            // var desc1=Object.getOwnPropertyDescriptor(obj,"a");
-            // console.log(desc1)
+        // var o3=[1,2,3];
+        // Object.setPrototypeOf(p,o3);
+        // console.log(o1);
 
 
 
-            // defineProperty
-            // var obj={};
-            // //只能做是否定义的操作
-            // var p=new Proxy(obj,{
-            //     defineProperty(o,key,desc){
-            //         if(key==="a") return true;
-            // //不要设置
-            //         Object.defineProperty(o,key,desc);
-            //         return true;
-            //     }
-            // })
+        // 是否可以扩展和设置不扩展
+        // var obj={a:1,b:2};
 
-            // Object.defineProperty(p,"b",{
-            //     value:10,
-            //     enumerable:true
-            // });
-            // console.log(obj)
-            // p.b=10;
-            // p.a=100;
-            // console.log(obj)
+        // var p=new Proxy(obj,{
+        // 是否可以扩展
+        //     isExtensible(obj){
+        //         return Object.isExtensible(obj);
+        //     },
+        // 禁止扩展
+        //     preventExtensions(obj){
+        // Object.seal()方法用于密封一个对象，即将对象设置为不可扩展，同时将对象的所有自有属性都设置为不可配置（包括Symbol值的属性）。 冰冻！
+        //         Object.seal(obj);
+        //         return true;
+        //     }
+        // })
+        // Object.preventExtensions(p);
+        // // obj.c=10;
+        // // delete obj.a;
 
-
-
-
-            // var obj={a:1,b:2,c:3};
-            // Object.defineProperty(obj,"d",{ 
-            //     value:10
-            // })
-            // var p=new Proxy(obj,{
-            //     has(o,key){
-            //         if(key==="__proto__") return false;
-            //         return key in o
-            //     }
-            // })
-             // console.log("a" in p);//检查a是否是p的属性 true
+        // // console.log(obj)
+        // console.log(Object.isExtensible(p))
 
 
-            // var p=new Proxy(obj,{
-            //     has(o,key){
-            //         console.log(key)
-            //     }
-            // })
-            
-            // console.log("a" in p);//检查a是否是p的属性 false
+        // getOwnPropertyDescriptor
+        // var obj={};
+        // Object.defineProperties(obj,{
+        //     a:{
+        //         writable:true,
+        //         value:1
+        //     },
+        //     b:{
+        //         value:10
+        //     }
+        // });
 
-            // ownKeys
+        //对于拿到值及逆行修改
+        // var p=new Proxy(obj,{
+        //     getOwnPropertyDescriptor(o,key){
+        //         var desc=Object.getOwnPropertyDescriptor(o,key);
+        //         desc.value=10;
+        //         return desc;
+        //     }
+        // });
 
-            // var s=Symbol();
-            // var obj={a:1,b:2,c:3,[s]:10};
-            // var p=new Proxy(obj,{
-            //     ownKeys(o){
-            //// return Object.getOwnPropertyNames(o)
-            //         return Reflect.ownKeys(o);
-            //     }
-            // })
+        ////两个结果不同，代理结果与原结果不同
+        // var desc=Object.getOwnPropertyDescriptor(p,"a");
+        // var desc1=Object.getOwnPropertyDescriptor(obj,"a");
+        // console.log(desc1)
+
+
+
+        // defineProperty
+        // var obj={};
+        // //只能做是否定义的操作
+        // var p=new Proxy(obj,{
+        //     defineProperty(o,key,desc){
+        //         if(key==="a") return true;
+        // //不要设置
+        //         Object.defineProperty(o,key,desc);
+        //         return true;
+        //     }
+        // })
+
+        // Object.defineProperty(p,"b",{
+        //     value:10,
+        //     enumerable:true
+        // });
+        // console.log(obj)
+        // p.b=10;
+        // p.a=100;
+        // console.log(obj)
+
+
+
+
+        // var obj={a:1,b:2,c:3};
+        // Object.defineProperty(obj,"d",{ 
+        //     value:10
+        // })
+        // var p=new Proxy(obj,{
+        //     has(o,key){
+        //         if(key==="__proto__") return false;
+        //         return key in o
+        //     }
+        // })
+        // console.log("a" in p);//检查a是否是p的属性 true
+
+
+        // var p=new Proxy(obj,{
+        //     has(o,key){
+        //         console.log(key)
+        //     }
+        // })
+
+        // console.log("a" in p);//检查a是否是p的属性 false
+
+        // ownKeys
+
+        // var s=Symbol();
+        // var obj={a:1,b:2,c:3,[s]:10};
+        // var p=new Proxy(obj,{
+        //     ownKeys(o){
+        //// return Object.getOwnPropertyNames(o)
+        //         return Reflect.ownKeys(o);
+        //     }
+        // })
 
         //    var names=Object.getOwnPropertyNames(p)
         //    var names=Object.getOwnPropertySymbols(p);
         //    console.log(names)
- 
+
         // 反射API：处理程序对象中所有可以捕获的方法都有对应的反射(Reflect)API方法
         // 通过反射API定义空代理对象
         const target = {
@@ -329,7 +333,7 @@
         //   获取对象所有的属性
         //   var names=Reflect.ownKeys(obj)
         //   console.log(names)
-            
+
 
         // apply
         // var fn=function(a,b){
@@ -344,7 +348,7 @@
         // }
 
         // var p=new Proxy(fn,{
-            // //f:fn,this.Arg: 替换this,参数对象
+        // //f:fn,this.Arg: 替换this,参数对象
         //     apply(f,thisArg,argArray){
         //         // if(thisArg===null) thisArg={a:1,b:2};
         ////f.length === 形参的数量
@@ -359,50 +363,79 @@
         //     }
         // })
 
-    // apply call 或者直接执行代理函数，都会执行apply
-    //   var s= p.apply({a:1},[3,4]);
-    //   console.log(s)
+        // apply call 或者直接执行代理函数，都会执行apply
+        //   var s= p.apply({a:1},[3,4]);
+        //   console.log(s)
 
-    // var s=p.apply(null,[6]);
-    // console.log(s)
+        // var s=p.apply(null,[6]);
+        // console.log(s)
 
-    //  var s=p.call({a:1},3);
+        //  var s=p.call({a:1},3);
 
-    // p(2);
-    // fn(3,4)
+        // p(2);
+        // fn(3,4)
 
-
-
-
-            // class Box{
-            //     a;
-            //     b;
-            //     constructor(a,b){
-            //         this.a=a;
-            //         this.b=b;
-            //     }
-            //     init(){
-            //         console.log("init");
-            //     }
-            // }
+        // class Box{
+        //     a;
+        //     b;
+        //     constructor(a,b){
+        //         this.a=a;
+        //         this.b=b;
+        //     }
+        //     init(){
+        //         console.log("init");
+        //     }
+        // }
 
 
-            // var b=new Box(3,4);
-            // console.log(b.a,b.b)
+        // var b=new Box(3,4);
+        // console.log(b.a,b.b)
 
-            // var p=new Proxy(Box,{
-            //     construct(F,argArr,newTarget){
-            //         // console.log(newTarget)//代理对象
-            //         var o=new F(...argArr);
-            //         o.init();
-            //         return o;
-            //     }
-            // })
+        // var p=new Proxy(Box,{
+        //     construct(F,argArr,newTarget){
+        //         // console.log(newTarget)//代理对象
+        //         var o=new F(...argArr);
+        //         o.init();
+        //         return o;
+        //     }
+        // })
 
-            // var b=new p(3,4);
-            // console.log(b)
+        // var b=new p(3,4);
+        // console.log(b)
 
-            // var b=new Box();
+        // var b=new Box();
+
+        //  数据响应式
+        let onWatch = (obj, setBind, getLogger) => {
+            let handler = {
+                get(target, property, receiver) {
+                    getLogger(target, property);
+                    if(typeof target[property] === 'object' && target[property] !==null) {
+                        return new Proxy(target[property, handler])
+                    } else {
+                        return Reflect.get(target, property, receiver)
+                    }
+                },
+                set(target, property, value, receiver) {
+                    setBind(value, property);
+                    return Reflect.set(target, property, value);
+                }
+            }
+            return new Proxy(obj, handler);
+        }
+
+        let obj1 = { a: 1 };
+        const p1 = onWatch(obj1,
+            (v, property) => {
+                console.log(`监听到属性${property}改变为${v}`)
+            },
+            (target, property) => {
+                console.log(`${property} = ${target[property]}`);
+            }
+        )
+        p1.a = 2;
+        p1.a;
     </script>
 </body>
+
 </html>
