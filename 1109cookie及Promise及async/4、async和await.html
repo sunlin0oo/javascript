@@ -18,6 +18,28 @@
         //     return 1;
         // }
 
+        let a = 0;
+        let b = async () => {
+            //    a = a + await 10;// 因为加法运算，先算左边再算右边，故a=0会先固定下来
+            //    console.log('2', a);
+            /**
+             * a = await a + 10; 原理同上  console.log(await a); 结果是0
+             * 
+             * await 针对的前面的一个整体
+             * a + 10 是两个个体
+             * 故 a = await (a + 10) ==== await (10 + a) === 10
+            */
+            // a = await (a + 10);
+            //await 10 执行完a++ 接下来去执行等待10，再加a时，a的值为1
+            a = await 10 + a;// 这样会a结果会是11
+
+            console.log('3', a);
+        }
+
+        b();
+        a++;
+        console.log('1', a);
+
         // function fn1() {
         //     return new Promise(function (resolve, reject) {
         //         resolve(1);
@@ -74,49 +96,49 @@
          * 退出foo()
         */
 
-    //     function loadImage(src) {
-    //         return new Promise(function (resolve, reject) {
-    //             var img = new Image();
-    //             img.src = src;
-    //             img.onload = function () {
-    //                 resolve(img); //只能传一个参数
-    //             }
-    //             img.onerror = function (err) {
-    //                 reject(err)
-    //             }
-    //         });
-    //     }
+        //     function loadImage(src) {
+        //         return new Promise(function (resolve, reject) {
+        //             var img = new Image();
+        //             img.src = src;
+        //             img.onload = function () {
+        //                 resolve(img); //只能传一个参数
+        //             }
+        //             img.onerror = function (err) {
+        //                 reject(err)
+        //             }
+        //         });
+        //     }
 
-    //    async function loads(){
-    //         var arr=[];
-    //         for(var i=1;i<13;i++){
-    //             var img=await loadImage(`./img/${i}.jpg`);//加载完才执行下一条语句
-    //             arr.push(img.src);
-    //         }
-    //         console.log(arr);
-    //     }
+        //    async function loads(){
+        //         var arr=[];
+        //         for(var i=1;i<13;i++){
+        //             var img=await loadImage(`./img/${i}.jpg`);//加载完才执行下一条语句
+        //             arr.push(img.src);
+        //         }
+        //         console.log(arr);
+        //     }
 
-    //     loads();
+        //     loads();
 
 
 
-    function showLight(light){
-        return new Promise(function(resolve,reject){
-            setTimeout(function(){
-                console.log(light);
-                resolve();
-            },2000);
-        })
-    }
+        function showLight(light) {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    console.log(light);
+                    resolve();
+                }, 2000);
+            })
+        }
 
-    async function show(){
-        await showLight("红灯");
-        await setTimeout(function(){
-            console.log("aaaa")
-        },5000);
-        await showLight("绿灯");
-    }
-    show();
+        async function show() {
+            await showLight("红灯");
+            await setTimeout(function () {
+                console.log("aaaa")
+            }, 5000);
+            await showLight("绿灯");
+        }
+        show();
     // 红灯  绿灯  aaaa
     // //箭头函数就是async函数（异步箭头函数）==>与上文相同
     // const  showTime=async ()=>{
