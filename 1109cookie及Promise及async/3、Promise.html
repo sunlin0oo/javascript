@@ -10,6 +10,9 @@
 
 <body>
     <script>
+        /**
+         * Promise三种状态:等待态（Pending）、执行态（Fulfilled）和拒绝态（Rejected)
+        */
         //写法：回调函数==>函数名及参数取名固定（建议）
         // var p=new Promise(function(resolve,reject){
         //     resolve();
@@ -34,11 +37,12 @@
             setTimeout(console.log, 0, id, 'reject');
         }
 
+        // then最多接受两个参数: onResolved, onReject==> 一定返回一个Promise对象
         // let p1 = new Promise((resolve, reject) => setTimeout(resolve, 3000));
-        // let p2 = new Promise((resolve, reject) => setTimeout(reject, 2000));
-        // then最多接受两个参数: onResolved, onReject
         // p1.then(() => onResolved('p1'),
         //         () => onRejected('p1'));// p1 resolved
+
+        // let p2 = new Promise((resolve, reject) => setTimeout(reject, 2000));
         // p2.then(() => onResolved('p2'),
         //         () => onRejected('p2'));// p2 reject
         // // 规范写法
@@ -508,18 +512,123 @@
          * 只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才会结束
         */
 
-        const resolved = Promise.resolve(42);
-        const rejected = Promise.reject(-1);
+        // const resolved = Promise.resolve(42);
+        // const rejected = Promise.reject(-1);
 
-        const allSettledPromise = Promise.allSettled([resolved, rejected]);
+        // const allSettledPromise = Promise.allSettled([resolved, rejected]);
 
-        allSettledPromise.then(function (results) {
-            console.log(results);
-        });
+        // allSettledPromise.then(function (results) {
+        //     console.log(results);
+        // });
 
 
         // Promise.resolve() 将现有对象转为 Promise对象
         // Promise.reject(); 方法也会返回一个新的 Promise 实例，该实例的状态为rejected
+
+        /**
+         * 手写Promise
+        */
+        // 定义Pormise三大状态值
+        const PENDING = 'pending';
+        const RESOLVED = 'resolved';
+        const REJECTED = 'rejected';
+
+        function MyPromise(fn) {
+            // 用于获取正确的this对象==>MyPromise
+            const that = this;
+            that.state = PENDING;
+            // 用于保存resolve和reject传入的值
+            that.value = null;
+            that.resolvedCallbacks = [];
+            that.rejectedCallbacks = [];
+            //resolve 函数--简易版
+            // function resolve(value) {
+            //     console.log('我执行了resolve');
+            //     if(that.state === PENDING){
+            //         that.state = RESOLVED;
+            //         that.value = value;
+            //         that.resolvedCallbacks.map(cb => cb(that.value))
+            //     }
+            // }
+            // resolve --规范版
+            function resolve(value) {
+                if(value instanceof MyPromise) {
+                    return value.then(resolve, reject);
+                }
+                // setTimeout模拟，只能触发宏任务；queueMicrotask可触发微任务
+                queueMicrotask(() => {
+                    if(that.state === PENDING) {
+                        that.state = RESOLVED;
+                        that.value = value;
+                        that.resolvedCallbacks.map(cb => cb(that.value))
+                    }
+                })
+            }
+            //reject 函数--简易版
+            // function reject(value) {
+            //     if(that.state === PENDING){
+            //         that.state = RESJECTED;
+            //         that.value = value;
+            //         that.rejectedCallbacks.map(cb => cb(that.value))
+            //     }
+            // }
+            // reject 规范版
+            function reject(value) {
+                queueMicrotask(() => {
+                    if(that.state === PENDING) {
+                        that.state = REJECTED;
+                        that.value = value;
+                        that.resolvedCallbacks.map(cb => cb(that.value))
+                    }
+                })
+            }
+
+            try{
+                fn(resolve, reject);
+            } catch (e){
+                reject(e);
+            }
+
+        }
+
+        MyPromise.prototype.then = function(onFulfilled, onRejected) {
+            const that = this;
+            /**
+             * 首先判断是否是函数类型
+             * 若不是，则需要创建一个函数赋值对应参数;
+             * */ 
+            onFulfilled = typeof onFulfilled === 'function'? onFulfilled : v => v;
+            onRejected = 
+            typeof onRejected === 'function'
+                ? onRejected 
+                :r => {
+                    throw r;
+                }
+
+            if(that.state === PENDING){
+                that.resolvedCallbacks.push(onFulfilled);
+                that.rejectedCallbacks.push(onRejected);
+            }
+
+            if(that.state === RESOLVED){
+                onFulfilled(that.value);
+            }
+
+            if(that.state === REJECTED){
+                onRejected(that.value);
+            }
+        }
+
+        new MyPromise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(1)
+            },0)
+        })
+        .then(value=>{
+            console.log('MyPromise', value)
+        })
+
+
 
         // 相同
         // var p=Promise.resolve(1);
