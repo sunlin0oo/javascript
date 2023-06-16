@@ -539,6 +539,7 @@
             that.state = PENDING;
             // 用于保存resolve和reject传入的值
             that.value = null;
+            // 用于保存then中的回调，因为当执行完Promise时状态可能还是等待中，应把then中的回调保存用于状态改变时使用
             that.resolvedCallbacks = [];
             that.rejectedCallbacks = [];
             //resolve 函数--简易版
@@ -547,6 +548,7 @@
             //     if(that.state === PENDING){
             //         that.state = RESOLVED;
             //         that.value = value;
+            // // 遍历resolved中的函数
             //         that.resolvedCallbacks.map(cb => cb(that.value))
             //     }
             // }
@@ -582,17 +584,69 @@
                     }
                 })
             }
-
+            // 执行态逻辑--简易版
             try{
                 fn(resolve, reject);
             } catch (e){
                 reject(e);
             }
-
+            
         }
 
         MyPromise.prototype.then = function(onFulfilled, onRejected) {
+            // promise2是.then返回的，x则是对应的传参体
+            function resolutionProcedure(promise2, x, resolve, reject) {
+                // 首先规范x 不能与 promise2相同，防止发生循环引用的问题
+                if (promise2 === x) {
+                    return reject(new TypeError('Error'))
+                };
+                /**
+                 * 如果 x 为 Promise ，则使 promise 接受 x 的状态：
+                        如果 x 处于等待态， promise 需保持为等待态直至 x 被执行或拒绝
+                        如果 x 处于执行态，用相同的值执行 promise
+                        如果 x 处于拒绝态，用相同的据因拒绝 promise
+                */
+                if (x instanceof MyPromise) {
+                    x.then(function(value) {
+                        resolutionProcedure(promise2, value, resolve, reject)
+                    },reject)
+                }
+                // 用于判断是否已经调用过该函数
+                let called = false;
+                // 是否是对象或者函数，若不是则传到resolve中
+                if (x !== null && (typeof x === 'object' || typeof x === 'function')){
+                    try{
+                        // x是对象或者函数，x.then 赋值给then,判断结果不是函数类型，则传到resolve中
+                        let then = x.then;
+                        if (typeof then === 'function') {
+                            then.call(
+                                x,
+                                y => {
+                                    if (called) return;
+                                    called = true;
+                                    resolutionProcedure(promise2, y, reject, reject)
+                                },
+                                e => {
+                                    if(called) return
+                                    called = true
+                                    reject(e)
+                                }
+                            )
+                        } else {
+                            resolve(x)
+                        }
+                    }catch{
+                        if(called) return;
+                        called = true;
+                        reject(e)
+                    }
+                }else{
+                    resolve(x)
+                }
+            }
+
             const that = this;
+            let promise2;
             /**
              * 首先判断是否是函数类型
              * 若不是，则需要创建一个函数赋值对应参数;
@@ -604,19 +658,79 @@
                 :r => {
                     throw r;
                 }
+            //简易版
+            // if(that.state === PENDING){
+            //     that.resolvedCallbacks.push(onFulfilled);
+            //     that.rejectedCallbacks.push(onRejected);
+            // }
+            // 规范版
+            console.log('that.state' ,that.state);
+            if(that.state === PENDING) {
+                // 返回一个新的Promise，并传入一个函数
+                return (promise2 = new MyPromise((resolve, reject) => {
+                    
+                    that.resolvedCallbacks.push(() => {
+                        try {
+                            // resolved的里面的回调执行函数
+                            const x = onFulfilled(that.value);
+                            // console.log(x);
+                            resolutionProcedure(promise2, x, resolve, reject);
+                        }catch(r){
+                            reject(r);
+                        }
+                    })
 
-            if(that.state === PENDING){
-                that.resolvedCallbacks.push(onFulfilled);
-                that.rejectedCallbacks.push(onRejected);
-            }
+                    that.rejectedCallbacks.push(() => {
+                        try {
+                            const x = onRejected(that.value);
+                            resolutionProcedure(promise2, x, resolve, reject);
+                        }catch(r){
+                            reject(r);
+                        }
+                    })
+                }))
 
-            if(that.state === RESOLVED){
-                onFulfilled(that.value);
             }
-
-            if(that.state === REJECTED){
-                onRejected(that.value);
+            //--------------------------------------------------------------------------------
+            //简易版
+            // if(that.state === RESOLVED){
+            //     onFulfilled(that.value);
+            // }
+            // 规范版
+            if(that.state === RESOLVED) {
+                return (promise2 = new MyPromise((resolve, reject) => {
+                        queueMicrotask(()=>{
+                            try{
+                                const x = onFulfilled(that.value);
+                                resolutionProcedure(promise2, x, resolve, reject)
+                            } catch (reason){
+                                reject(reason);
+                            }
+                        })
+                    })
+                )
             }
+            //--------------------------------------------------------------------------------
+            //简易版
+            // if(that.state === REJECTED){
+            //     onRejected(that.value);
+            // }
+            // 规范版
+            if(that.state === REJECTED) {
+                return (promise2 = new MyPromise((resolve, reject) => {
+                        queueMicrotask(()=>{
+                            try{
+                                const x = onRejected(that.value);
+                                resolutionProcedure(promise2, x, resolve, reject)
+                            } catch (reason){
+                                reject(reason);
+                            }
+                        })
+                    })
+                )
+            }
+           
+            //--------------------------------------------------------------------------------
         }
 
         new MyPromise((resolve, reject) => {
@@ -624,7 +738,8 @@
                 resolve(1)
             },0)
         })
-        .then(value=>{
+        .then((value)=>{
+            return value
             console.log('MyPromise', value)
         })
 
