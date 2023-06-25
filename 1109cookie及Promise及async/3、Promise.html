@@ -594,7 +594,10 @@
         }
 
         MyPromise.prototype.then = function(onFulfilled, onRejected) {
-            // promise2是.then返回的，x则是对应的传参体
+            /**
+             * 兼容多种Promise的resolutionProcedure
+             * promise2是.then返回的，x则是对应的传参体
+             * */ 
             function resolutionProcedure(promise2, x, resolve, reject) {
                 // 首先规范x 不能与 promise2相同，防止发生循环引用的问题
                 if (promise2 === x) {
@@ -646,6 +649,7 @@
             }
 
             const that = this;
+            // 用于保存新返回的变量
             let promise2;
             /**
              * 首先判断是否是函数类型
@@ -729,7 +733,6 @@
                     })
                 )
             }
-           
             //--------------------------------------------------------------------------------
         }
 
