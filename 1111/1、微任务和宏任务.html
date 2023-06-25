@@ -153,10 +153,19 @@
         // console.log("b")
 
 
+        //async函数返回一个promise对象，下面两种方法是等效的
+        // function f() {
+        //     return Promise.resolve('TEST');
+        // }
+
+        // // asyncF is equivalent to f!
+        // async function asyncF() {
+        //     return 'TEST';
+        // }
 
         // async function fn(){
         //      console.log(1);
-        // 不管await后面跟着的是什么，await都会阻塞后面的代码
+        // await命令后面是一个 Promise对象，返回该对象的结果;不管await后面跟着的是什么，await都会阻塞后面的代码（即加入微任务列表）
         //      await console.log(2)
         //      console.log(3);
         //  }
@@ -180,11 +189,8 @@
         
         // a 1 b 2 3
     </script>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    
+    
     <script>
         //  for(var i=0;i<1000000000;i++){
 
@@ -205,10 +211,31 @@
         // console.log("d")
     </script>
 
+    <!-- <script>
+      async function async1() {
+          console.log('async1 start')
+          await async2()
+          console.log('async1 end')
+      }
+      async function async2() {
+          console.log('async2')
+      }
+      console.log('script start')
+      setTimeout(function () {
+          console.log('settimeout')
+      })
+      async1()
+      new Promise(function (resolve) {
+          console.log('promise1')
+          resolve()
+      }).then(function () {
+          console.log('promise2')
+      })
+      console.log('script end')
+    </script> -->
 
 <!-- 比如当前js进程已经在处理宏任务队列了，而你又向微任务队列推送了一个函数，那么它将无法在本次循环周期执行，只能在js引擎进入下个循环周期时才会被执行。 -->
-<!-- 
-<script>
+<!-- <script>
   // 微任务
 //    Promise.resolve().then(function(){
 //         setTimeout(function(){
@@ -383,8 +410,9 @@
 
 
     // 1，2，18，19，3，5,4,9,10,11,17,20,13,12,6,7,16,8,15,14
-</script>
-<script>
+</script> -->
+
+<!-- <script>
   setTimeout(function(){
     Promise.resolve().then(function(){
       console.log(1);
