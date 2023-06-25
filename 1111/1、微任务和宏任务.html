@@ -10,7 +10,11 @@
 
 <body>
     <script>
-      /**函数体预先进行解析，而函数内的东西则在执行的时候才会去解析*/
+      /**
+       * 同步代码(属于宏任务)会放入执行栈中，进行执行
+       * 异步代码会被挂起，并在需要执行的时候加入到Task中 
+       * 执行栈中，为空时，事件循环就会从Task队列中拿出需要执行的代码放入执行栈中执行
+       * 函数体预先进行解析，而函数内的东西则在执行的时候才会去解析*/
         /* 
             微任务（micro task）==>每个任务流最后执行==>Promise的then或者catch方法中的回调函数，await
             process.nextTick(nodejs)，nodejs提供的注册微任务的方法
@@ -150,30 +154,31 @@
 
 
 
-        /* async function fn(){
-             console.log(1);
-             await console.log(2)
-             console.log(3);
-         }
+        // async function fn(){
+        //      console.log(1);
+        // 不管await后面跟着的是什么，await都会阻塞后面的代码
+        //      await console.log(2)
+        //      console.log(3);
+        //  }
 
-         console.log("a");
-         fn();
-         console.log("b");
-         a 1 b 2 3*/
+        //  console.log("a");
+        //  fn();
+        //  console.log("b");
+        //  a 1 2 b 3
 
-        /* async function fn(){
-            console.log(1);
-            await Promise.resolve().then(function(){
-                console.log(2)
-            })
-            console.log(3);
-        }
+        // async function fn(){
+        //     console.log(1);
+        //     await Promise.resolve().then(function(){
+        //         console.log(2)
+        //     })
+        //     console.log(3);
+        // }
 
-        console.log("a");
-        fn();
-        console.log("b"); 
+        // console.log("a");
+        // fn();
+        // console.log("b"); 
         
-        a 1 b 2 3*/
+        // a 1 b 2 3
     </script>
     <div></div>
     <div></div>
@@ -202,7 +207,7 @@
 
 
 <!-- 比如当前js进程已经在处理宏任务队列了，而你又向微任务队列推送了一个函数，那么它将无法在本次循环周期执行，只能在js引擎进入下个循环周期时才会被执行。 -->
-
+<!-- 
 <script>
   // 微任务
 //    Promise.resolve().then(function(){
@@ -407,7 +412,7 @@
   }).then(function(){
     console.log(3);
   })
-</script>
+</script> -->
 </body>
 
 </html>
