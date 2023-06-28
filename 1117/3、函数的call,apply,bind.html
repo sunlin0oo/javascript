@@ -127,6 +127,68 @@
     // fns.bind({a:1})(2,3);
 
     // setTimeout(fns.bind({a:1}),500)
+
+    const fn = function(a,b){
+        console.log('a', a);
+        console.log('b', b);
+        // 先执行函数再删除，故存在Symbol
+        console.log('this', this);
+    }
+
+    const o= {a:1}
+
+    // 手写Call==>不能使用箭头函数，箭头函数默认Window
+    // Function.prototype.myCall = function(context){
+    //     // 查看是否为空，空则默认
+    //     if(typeof context === 'undefined' || typeof context === 'null') context = window;
+    //     const symbol = Symbol();
+    //     // 为context创造属性Symbol用于调用函数使用
+    //     context[symbol] = this;
+    //     // 剥离参数
+    //     const args = [...arguments].slice(1);
+    //     // 执行函数
+    //     const result = context[symbol](...args);
+    //     // 删除执行函数
+    //     delete context[symbol];
+    //     return result;
+    // };
+
+    // fn.myCall(o,1,2);
+    // fn.call(o,1,2);
+
+    // 手写Apply==>不能使用箭头函数，箭头函数默认Window
+    // Function.prototype.myApply = function(context) {
+    //     if(typeof context === 'undefined' || typeof context === 'null') context = window;
+    //     const symbol = Symbol();
+    //     context[symbol] = this; // 改变this指向
+    //     let result;
+    //     if(arguments[1]){
+    //         result = context[symbol](...arguments[1]);
+    //     }else {
+    //         result = context[symbol]()
+    //     }
+    //     delete context[symbol];
+    //     return result;
+    // }
+
+    // fn.myApply(o,[1,2]);
+    // fn.apply(o,[1,2]);
+
+    // 手写Bind==>不能使用箭头函数，箭头函数默认Window
+    Function.prototype.myBind = function(context) {
+        if(typeof context === 'undefined' || typeof context === 'null') context = window;
+        const _this = this;
+        const args = [...arguments].slice(1);
+        // bind会返回一个函数
+        return function F() {
+            // 判断是否为构造函数
+            if(this instanceof F) {
+                return new _this(...args, ...arguments)
+            }
+            // 为了处理fn.bind(obj, 1)(2)
+            return _this.apply(context, args.concat(...arguments))
+        }
+    }
     </script>
 </body>
 </html>
