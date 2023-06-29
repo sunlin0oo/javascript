@@ -53,9 +53,17 @@
         // }
         
         //  var o=Object.create(obj);//用obj创建了一个新数组是o, o继承了obj的基因 里面也有a:1b:2
-        // _proto_: 这是每个对象都有的隐式原型属性，指向了创建该对象的构造函数的原型。
+        /**
+         * _proto_: 这是每个**对象**都有的隐式原型属性，指向了创建该对象的构造函数的原型。
+         * prototype:是**函数**下面的属性,用来实现基于原型得继承与属性的共享;
+         * Function除了有prototype 还有_proto_
+         * */ 
+        function One(name, age) {
+            this.name = name;
+            this.age = age;
+        }
         // 手写new过程
-        function create() {
+        function myNew() {
             // 创建一个空的对象
             let obj = new Object();
             // 获得构造函数
@@ -66,6 +74,24 @@
             let result = Con.apply(obj, arguments);
             // 确保 new 出来是个对象
             return typeof result === 'object' ? result : obj;
+        }
+
+        let myObj = myNew(One, "XiaoMing", "18");
+        console.log("myObj:", myObj);
+
+        // instanceof 手写
+        function myInstanceof(sourcr, target) {
+            // 首先获取类型的原型
+            let prototype = target.prototype;
+            // 获取对象的原型
+            let proto = sourcr._proto_;
+            // 一直循环判断对象的原型是否等于类型的原型，直至对象原型为null
+            while(true) {
+                if(proto === null || proto === undefined)return false;
+                // 找到相同的原型对象
+                if(prototype === proto) return true;
+                proto = proto._proto_;
+            }
         }
         // console.log(o.__proto__ === obj)//true 引用关系
         //  o.c=10;

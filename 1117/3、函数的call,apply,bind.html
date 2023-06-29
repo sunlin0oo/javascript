@@ -261,33 +261,6 @@
 
         tom.say(); // Error: tom.say is not a function
 
-        // new 函数的手写
-        function myNew() {
-            // 创建一个空对象
-            let obj = {};
-            // 获取构造函数
-            let Con = [].shift.call(arguments);
-            // 设置空对象原型
-            obj._proto_ = Con.prototype;
-            // 绑定this并执行构造函数
-            let result = Con.apply(obj, arguments);
-            // 确保返回值为对象
-            return result instanceof Object ? result : obj;
-        }
-
-        // instanceof 手写
-        function myInstanceof(left, right) {
-            // 首先获取类型的原型
-            let prototype = right.prototype;
-            // 获取对象的原型
-            left = left._proto_;
-            // 一直循环判断对象的原型是否等于类型的原型，直至对象原型为null
-            while(true) {
-                if(left === null || left === undefined)return false;
-                if(prototype === left) return true;
-                left = left._proto_;
-            }
-        }
     </script>
 </body>
 
