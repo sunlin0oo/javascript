@@ -54,10 +54,34 @@
         
         //  var o=Object.create(obj);//用obj创建了一个新数组是o, o继承了obj的基因 里面也有a:1b:2
         /**
-         * _proto_: 这是每个**对象**都有的隐式原型属性，指向了创建该对象的构造函数的原型。
+         * _proto_: 这是每个**对象**都有的隐式原型属性，指向了创建该对象的构造函数的原型==>原型也是对象。
          * prototype:是**函数**下面的属性,用来实现基于原型得继承与属性的共享;
-         * Function除了有prototype 还有_proto_
-         * */ 
+         * 函数数也有__proto__的，因为函数也是对象
+         * prototype与_proto_理解：
+         * https://www.cnblogs.com/chengzp/p/prototype.html
+         * https://zhuanlan.zhihu.com/p/81448205
+         * js原型链最终指向的是Object原型对象
+         * */
+        /**
+         * 构造函数:M
+         * 实例(对象)：o3
+         * M.prototype === o3.__proto__:原型对象
+         * M.prototype.constructor === M
+         * M.__proto__ === Function.prototype
+         * M.prototype === Object.prototype
+        */
+        const M = function (name) { this.name = name; }
+        // 实例就是对象，在本例中，M就是构造函数 通过new创造出o3实例。
+        const o3 = new M('o3');
+        const o4 = new M();
+        // 通过一个构造函数创建出来的多个实例，实例的原型上添加一个方法，这样所有的实例都有该方法了
+        o3.__proto__.say=function(){
+            console.log('hello world')
+        }
+        o3.say();
+        o4.say();
+
+
         function One(name, age) {
             this.name = name;
             this.age = age;
@@ -79,7 +103,8 @@
         let myObj = myNew(One, "XiaoMing", "18");
         console.log("myObj:", myObj);
 
-        // instanceof 手写
+        // instanceof 手写 ==> 判断实例对象的__proto__和生成该实例的构造函数的prototype是不是引用的同一个地址。
+
         function myInstanceof(sourcr, target) {
             // 首先获取类型的原型
             let prototype = target.prototype;
@@ -373,61 +398,61 @@
         // console.log(obj)
 
         //在对象中, a属性可枚举,值为1. b属性不可枚举值为10, c属性不可枚举值为aaa
-        var obj={};
-        obj.b=10;
-        Object.defineProperties(obj,{
-            a:{
-                enumerable:true,
-                value:1
-            },
-            b:{
-                enumerable:false,
-                value:10
-            },
-            c:{
-                enumerable:false,
-                value:function(){
-                    console.log("aaa")
-                }
-            }
-        })
+        // var obj={};
+        // obj.b=10;
+        // Object.defineProperties(obj,{
+        //     a:{
+        //         enumerable:true,
+        //         value:1
+        //     },
+        //     b:{
+        //         enumerable:false,
+        //         value:10
+        //     },
+        //     c:{
+        //         enumerable:false,
+        //         value:function(){
+        //             console.log("aaa")
+        //         }
+        //     }
+        // })
        
       
 
-        var d=Symbol();
-        obj[d]=10;
-        // console.log(obj)
+        // var d=Symbol();
+        // obj[d]=10;
+        // // console.log(obj)
 
-        // 获取所有属性名转换为数组，可以获取所有属性名
-        // 获取对象的所有字符串属性
-        var arr=Object.getOwnPropertyNames(obj);
-        // console.log(arr);
-        // 获取对象的所有Symbol属性
-        var arr1=Object.getOwnPropertySymbols(obj);
-        // console.log(arr1);
-            // console.log(arr);
+        // // 获取所有属性名转换为数组，可以获取所有属性名
+        // // 获取对象的所有字符串属性
+        // var arr=Object.getOwnPropertyNames(obj);
+        // // console.log(arr);
+        // // 获取对象的所有Symbol属性
+        // var arr1=Object.getOwnPropertySymbols(obj);
+        // // console.log(arr1);
+        //     // console.log(arr);
 
-        // 只能获取可枚举
-        // console.log(Object.keys(obj));
+        // // 只能获取可枚举
+        // // console.log(Object.keys(obj));
 
         
-        var arr=Object.getOwnPropertyNames(obj).concat(Object.getOwnPropertySymbols(obj));
-        // console.log(arr);
+        // var arr=Object.getOwnPropertyNames(obj).concat(Object.getOwnPropertySymbols(obj));
+        // // console.log(arr);
 
-        //   for(var key in obj){
-        //     console.log(key,obj[key]);
-        // }
+        // //   for(var key in obj){
+        // //     console.log(key,obj[key]);
+        // // }
+
+        // // for(var i=0;i<arr.length;i++){
+        // //     console.log(arr[i],obj[arr[i]]);
+        // // }
 
         // for(var i=0;i<arr.length;i++){
-        //     console.log(arr[i],obj[arr[i]]);
+        //     // 获取属性的描述对象
+        //     var disc=Object.getOwnPropertyDescriptor(obj,arr[i]);
+        //     console.log(arr[i],disc);
+        //     console.log("disc.value",disc.value);
         // }
-
-        for(var i=0;i<arr.length;i++){
-            // 获取属性的描述对象
-            var disc=Object.getOwnPropertyDescriptor(obj,arr[i]);
-            console.log(arr[i],disc);
-            console.log("disc.value",disc.value);
-        }
 
         //  w只能获取到所有字符串属性的描述对象
         // console.log(Object.getOwnPropertyDescriptors(obj))
