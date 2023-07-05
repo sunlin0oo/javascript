@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #container {
+            width: 100%;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            background-color: #444;
+            font-size: 30px;
+        }
+    </style>
 </head>
+
+
+
 <body>
     <form>
         <input type="text">
-        <input type="text">
     </form>
-
+    <button></button>
+    <div id="container"></div>
     <script>
+        function setValue(v) {
+            console.log('setValue-this', this);
+            console.log('setValue-v', v);
+        }
 
         // focus 聚焦   blur 失焦    针对表单元素，不能事件委托
         // focusin 聚焦   focusout 失焦  针对表单，可以事件委托
 
         // 表单元素  超链接  点击产生，tab切换
 
-        var input=document.querySelector("input");
+        const input = document.querySelector("input");
+        const button = document.querySelector("button");
         // input.addEventListener("focus",focusHandler);
         // input.addEventListener("blur",focusHandler);
 
@@ -30,33 +50,117 @@
         // function focusHandler(e){
         //     console.log(e.type)
         // }
+        input.addEventListener("input", inputHandler);
+        button.addEventListener("click", clickHandler);
 
-            var id;
-            input.addEventListener("input",inputHandler);
+        /**
+         * 节流：在第一次触发事件时，不立即执行函数，一段时间后再执行
+         * 防抖：在函数执行一次之后，该函数在指定的事件期限内不再工作，过一段事件再工作
+        */
+        /**
+        * 防抖函数:
+        *  func是用户传入需要防抖的函数
+        *  wait是等待时间
+        *  immediate是否立即执行
+        */
+        function debounce3(func, wait = 50, immediate) {
+            // 缓存一个定时器id
+            let timeout;
             /**
-             * 节流：在第一次触发事件时，不立即执行函数，一段时间后再执行
-             * 防抖：在函数执行一次之后，该函数在指定的事件期限内不再工作，过一段事件再工作
+            * 这里需要返回的函数是每次用户实际调用的防抖函数
+            * 若已设定过定时器了就清空上一次的定时器
+            * 开始新的定时器，延迟执行用户传入方法
+           */
+            return function () {
+                let that = this;
+                let args = arguments;
+                if (timeout) clearTimeout(timeout);
+                // true 立即执行
+                if (immediate) {
+                    // 如果已经执行过，不再执行
+                    let callNow = !timeout;
+                    // 等待N秒后 赋值null。赋值为null后如果下次事件触发事件小于等待时间，函数依旧不会被执行
+                    timeout = setTimeout(function () { timeout = null; }, wait)
+                    // 如果timeout 为undefined或null时，callNow 为true，立即执行函数
+                    if (callNow) { func.apply(that, args) } // 使用apply是为了修改函数执行，满足调用函数的条件
+                } else {
+                    // 问题是为何变成这样就无法实现防抖操作
+                    // timeout = setTimeout(func.apply(that, args), wait) 
+                    timeout = setTimeout(() => {func.apply(that, args)}, wait)
+                }
+            }
+        }
+
+
+        // 防抖函数.js
+        var count = 1;
+        var container = document.getElementById('container');
+
+        function getUserAction(e) {
+            console.log('this', this) // this 应该指向div
+            console.log('e', e)    // e 不应该打印undefined 
+            container.innerHTML = count++;
+        };
+
+        // container.onmousemove = getUserAction;  // this 指向div 
+        // container.onmousemove = debounce2(getUserAction, 500); 
+        container.onmousemove = debounce3(getUserAction, 500, true);
+
+        // 输入函数可以仿照上面的进行书写
+        // input.onClick = debounce3(setValue, 2000, true);
+
+        const debounceFunc = debounce3(setValue, 1000, false)
+        const id = null;
+
+        function inputHandler(e) {
+            // console.log('input.value', input.value);
+            /* 
+                data: "s"  当前输入的内容
+                inputType: "insertText"  输入方式
+                isComposing: false  是否开启了输入法
             */
+            //    防抖函数
+            // if (id) return;
+            // id = setTimeout(function () {
+            //     setvalue(input.value);
+            //     clearTimeout(id);
+            //     id = undefined;//为了能够使id能够进入达到节流的效果
+            // }, 500);
+            debounceFunc(e.target.value);
+        }
 
-            function inputHandler(e){
-                // console.log(input.value)
-                /* 
-                    data: "s"  当前输入的内容
-                    inputType: "insertText"  输入方式
-                    isComposing: false  是否开启了输入法
+        /**
+         * 节流函数
+        */
+
+        const throttle = (func, wait = 50) => {
+            // 上次执行该函数时间
+            let lastTime = 0;
+            return function (...arguments) {
+                let now = + new Date();
+                /**
+                 * 将当前时间和上一次执行函数时间对比
+                 * 若差值大于设置的等待时间则执行函数
                 */
-               if(id) return;
-                id=setTimeout(function(){
-                    setvalue(input.value);
-                    clearTimeout(id);
-                    id=undefined;//为了能够使id能够进入达到节流的效果
-                },500);
+                if (now - lastTime > wait) {
+                    lastTime = now;
+                    func.apply(this, arguments);//改变this的指向，让其指向调用这个方法的对象
+                }
             }
+        }
+        const throttleFunc = throttle(setValue, 5000)
 
-            function setvalue(v){
-                console.log(v);
-            }
+        // setInterval(throttle(() => {
+        //     console.log(1)
+        // }, 5000),
+        //     1
+        // )
+
+        function clickHandler(e) {
+            throttleFunc('1111');
+        }
 
     </script>
 </body>
+
 </html>
