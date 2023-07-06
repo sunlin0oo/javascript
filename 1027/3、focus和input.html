@@ -84,8 +84,9 @@
                     // 如果timeout 为undefined或null时，callNow 为true，立即执行函数
                     if (callNow) { func.apply(that, args) } // 使用apply是为了修改函数执行，满足调用函数的条件
                 } else {
-                    // timeout = setTimeout(function(){func.apply(that, args);}, wait) 
-                    timeout = setTimeout(() => {func.apply(that, args)}, wait)
+                    // 不可用箭头函数，箭头函数中 call, apply,bind 都无法改变函数的this指向
+                    timeout = setTimeout(function(){func.apply(that, args);}, wait) 
+                    // timeout = setTimeout(() => {func.apply(that, args)}, wait)
                 }
             }
         }
