@@ -84,8 +84,7 @@
                     // 如果timeout 为undefined或null时，callNow 为true，立即执行函数
                     if (callNow) { func.apply(that, args) } // 使用apply是为了修改函数执行，满足调用函数的条件
                 } else {
-                    // 问题是为何变成这样就无法实现防抖操作
-                    // timeout = setTimeout(func.apply(that, args), wait) 
+                    // timeout = setTimeout(function(){func.apply(that, args);}, wait) 
                     timeout = setTimeout(() => {func.apply(that, args)}, wait)
                 }
             }
@@ -111,8 +110,12 @@
 
         const debounceFunc = debounce3(setValue, 1000, false)
         const id = null;
-
+        function test(){
+            console.log(1111);
+        }
         function inputHandler(e) {
+            // 函数不能加()加了括号就会立即执行
+            setTimeout(test,5000);
             // console.log('input.value', input.value);
             /* 
                 data: "s"  当前输入的内容
