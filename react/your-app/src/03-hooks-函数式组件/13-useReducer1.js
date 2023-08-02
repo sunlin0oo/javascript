@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 // useReducer 是 useState 的替代方案
 // 处理函数==>纯函数
 const reducer = (prevState, action) => {
-  // prevState:上一次的State值(第一次是intialState);action:dispatch传入的type类型
+  // prevState:上一次的State值(第一次是intialState);action:dispatch传入的type类型及各种其他参数
   console.log("reducer", prevState, action);
   // 不要直接修改原状态，对老状态进行深复制
   let newstate = { ...prevState };
