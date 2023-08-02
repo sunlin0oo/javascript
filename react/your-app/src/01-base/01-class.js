@@ -29,6 +29,10 @@ import React from "react";
 export default class App extends React.Component{
     render(){ 
         //  必须要单标签,不可以有兄弟节点
+        /** 
+         * return 一行HTML标签可以写在一行上
+         * 如果HTML标签不在一行上的话，需要用括号进行包裹
+         * */ 
         return <div>hello react Component</div>
     }
 }

@@ -8,6 +8,7 @@ class Navbar extends Component{
         </div>
     }
 }
+// 组件的首字母必须要大写！
 // Child组件是Navbar的孩子，不可以写在爷爷(App)
 function Child(){
     return <div>Child</div>
