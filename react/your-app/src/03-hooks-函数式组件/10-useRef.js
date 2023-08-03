@@ -3,6 +3,7 @@ import React,{useRef, useState} from 'react'
 export default function App() {
     const [text,setText] = useState("");
     const [list,setList] = useState([1,2,3,4,5])
+    //与 state 一样，React 会在每次重新渲染之间保留 ref。但是，设置 state 会重新渲染组件，更改 ref 不会！
     const mytext= useRef()//与ref近似=>返回一个可变的 ref 对象
 
     // const handlerChange = (evt)=>{

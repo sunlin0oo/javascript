@@ -17,7 +17,7 @@ export default class App extends Component {
                 },]
     }
   render() {
-    // 设置key值：为了列表的复用和重排，提高性能==>id是唯一的
+    // 设置key值：为了列表的复用和重排，提高性能==>id是唯一的==> key 不是全局唯一的。它们只能指定 父组件内部 的顺序。
     let newlist = this.state.list.map(item=><li key={item.id}>{item.text}</li>);
     return (
       <div>
