@@ -60,6 +60,12 @@ return (
 //     return localStorage.getItem('token');
 // }
 
+
+/**
+ * children可以传递的内容
+ * 1.普通文本 2.普通标签元素 3..函数 4.jsx
+ * 若组件内部传递多个则是数组，需要使用map进行遍历处理
+ */
 // 路由拦截组件的封装
 function AuthComponent({ children }) {
   const isLogin = localStorage.getItem('token');
