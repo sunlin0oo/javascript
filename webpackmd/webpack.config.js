@@ -4,12 +4,13 @@ const path = require('path') // 导入node.js 中专门操作路径模块
 module.exports = {
  
     // entry:'指定要处理哪个文件
-    entry: path.join(__dirname, './src/index.js'),
- 
+    // entry: path.join(__dirname, './src/index.js'),
+    entry: path.join(__dirname, './src/main.js'),
     // 制定生成文件要存放到哪里
     output: {
         // 存放的目录
-        path: path.join(__dirname, 'dist'),
+        // path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'dist_public'),
         // 生成的文件名
         filename: 'dist.js'
     },
@@ -19,7 +20,8 @@ module.exports = {
     ]
   },
   plugins: [],
-  mode: 'development' ,
+  mode: 'development' , // 开发模式
+  // mode:production // 生产环境
   devServer: {
     static: './dist', //设置Http服务器的文件根目录
         // port:8088, //端口
