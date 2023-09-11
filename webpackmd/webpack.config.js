@@ -12,7 +12,12 @@ module.exports = {
     // path: path.join(__dirname, 'dist'),
     path: path.join(__dirname, 'dist_public'),
     // 生成的文件名
-    filename: 'js/dist.js'
+    filename: 'js/dist.js',
+    /** 
+     * 自动清空上次打包内容
+     * 原理：在打包之前将path清空，再进行打包
+    */
+    clean: true
   },
   module: {
     rules: [
