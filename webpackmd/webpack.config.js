@@ -1,5 +1,5 @@
 const path = require('path') // 导入node.js 中专门操作路径模块
-
+const ESLintPlugin = require('eslint-webpack-plugin');
 //使用node.js 中的导出语法，向外导出 一个 webpack配置对象
 module.exports = {
 
@@ -74,7 +74,11 @@ module.exports = {
     ]
   },
   // 插件
-  plugins: [],
+  plugins: [
+    new ESLintPlugin({
+      context: path.join(__dirname, 'src') // 配置eslint检测范围
+    })
+  ],
   mode: 'development', // 开发模式
   // mode:production // 生产环境
   devServer: {
