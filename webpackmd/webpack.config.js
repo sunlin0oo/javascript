@@ -16,9 +16,18 @@ module.exports = {
     },
      module:{
     rules: [
-      // loader
+      // loader的配置
+      {
+        test: /\.css$/i,  //只检测.css文件
+        // 执行顺序，从右往左(从下到上)
+        use: [
+          "style-loader", // 将js中css通过创建style标签添加到html文件中生效
+          "css-loader"  // 将css资源编译commonjs的模块js中
+        ],
+      }
     ]
   },
+  // 插件
   plugins: [],
   mode: 'development' , // 开发模式
   // mode:production // 生产环境
