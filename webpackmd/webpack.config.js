@@ -70,7 +70,15 @@ module.exports = {
         generator: {
           filename: 'static/images/[hash][ext][query]'
         }
-      }
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/, // 设置哪些目录不需要扫描
+        use: [{
+          loader: 'babel-loader?cacheDirectory', //开启缓存，可以设置缓存目录
+        },
+        ]
+      },
     ]
   },
   // 插件
