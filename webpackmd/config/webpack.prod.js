@@ -2,6 +2,28 @@ const path = require('path') // 导入node.js 中专门操作路径模块
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+// 用于获取style样式的loader
+function getStyleLoader(pre){
+  return [
+    MiniCssExtractPlugin.loader, // 提取CSS为单独的文件
+    // "style-loader", // 将js中css通过创建style标签添加到html文件中生效
+    "css-loader",  // 将css资源编译commonjs的模块js中
+    // 给loader写配置项需要写成对象形式
+    {
+      loader: 'postcss-loader',
+      options: {
+        postcssOptions: {
+          plugins: [
+            'postcss-preset-env', // 可以解决大多数样式兼容性问题
+          ]
+        }
+      }
+    },
+    pre,
+  ].filter(Boolean);
+}
 
 //使用node.js 中的导出语法，向外导出 一个 webpack配置对象
 module.exports = {
@@ -29,71 +51,15 @@ module.exports = {
       {
         test: /\.css$/i,  //只检测.css文件
         // 执行顺序，从右往左(从下到上)
-        use: [
-          MiniCssExtractPlugin.loader, // 提取CSS为单独的文件
-          // "style-loader", // 将js中css通过创建style标签添加到html文件中生效
-          "css-loader",  // 将css资源编译commonjs的模块js中
-          // 给loader写配置项需要写成对象形式
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [
-                  'postcss-preset-env', // 可以解决大多数样式兼容性问题
-                ]
-              }
-            }
-          }
-        ],
+        use: getStyleLoader(),
       },
       {
         test: /\.less$/i,
-        use: [
-          // compiles Less to CSS
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [
-                  'postcss-preset-env', // 可以解决大多数样式兼容性问题
-                ]
-              }
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [
-                  'postcss-preset-env', // 可以解决大多数样式兼容性问题
-                ]
-              }
-            }
-          },
-          'less-loader',// 将less编译成css
-        ],
+        use: getStyleLoader('less-loader'),
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          // 将 JS 字符串生成为 style 节点
-          MiniCssExtractPlugin.loader,
-          // 将 CSS 转化成 CommonJS 模块
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [
-                  'postcss-preset-env', // 可以解决大多数样式兼容性问题
-                ]
-              }
-            }
-          },
-          // 将 Sass 编译成 CSS
-          'sass-loader',
-        ],
+        use: getStyleLoader('sass-loader'),
       },
       {
         test: /\.styl$/,
@@ -144,6 +110,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "static/css/main.css"
     }),
+    new CssMinimizerPlugin(),
   ],
   // mode: 'development', // 开发模式
   mode: "production" // 生产环境
