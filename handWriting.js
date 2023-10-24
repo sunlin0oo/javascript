@@ -507,3 +507,27 @@ function deepCopy(object) {
         }
     }
 }
+
+// 使用SetTimeOut实现SetInterval
+function mySetInterval(fn, delay){
+    let timer = null;
+    function interval(){
+        fn();
+        timer = setTimeout(interval, delay);
+    }
+    interval();
+    return {
+        cancel:()=>{
+            clearTimeout(timer);
+        }
+    }
+}
+// 使用SetInterval实现SetTimeOut
+function mySetTimeOut(fn, delay){
+    let timer = null;
+    function timeOut(){
+        fn();
+        clearInterval(timer);
+    }
+    timer = setInterval(timeOut(timer),delay);
+}
