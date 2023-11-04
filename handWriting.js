@@ -10,7 +10,14 @@ function create(obj) {
     return new F()
 }
 
-// ex:
+/**
+ * Object.create()实现的步骤：
+ * 创建一个空的构造函数F
+ * F的prototype对象 指向传入对象的__proto__ ；
+ * new一个F的实例并返回
+ * b.__proto__ = a;
+ * b --> a --> Object.prototype --> null
+ */
 const a = { name: '1' };
 const b = create(a);
 console.log(a.name); // 1
@@ -29,8 +36,8 @@ function myInstanceof(left, right) {
         proto = Object.getPrototypeof(proto);
     }
 }
-
-// 手写 new 操作符
+ 
+// 手写 new 操作符 （new的作用，实际上是让实例的__proto__指向F的prototype）（还不理解的话，可以想成是实现了继承，创建的对象是以传入的对象为原型继承得来的）
 function objectFactory() {
     let newObject = null;
     /**
