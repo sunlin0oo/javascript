@@ -36,6 +36,16 @@ function myInstanceof(left, right) {
         proto = Object.getPrototypeof(proto);
     }
 }
+
+function getAnyType(obj){
+    const type = typeof obj;
+    if(type !== 'object') return type;
+    /**
+     * 原先this 指向 Object.prototype.toString 方法本身
+     * 通过使用.call()方法，我们将Object.prototype.toString()方法应用于obj对象(修改toString的this指向);
+     */
+    return Object.prototype.toString.call(obj).replace(/^\[object (\S+)\]$/, '$1'); 
+}
  
 // 手写 new 操作符 （new的作用，实际上是让实例的__proto__指向F的prototype）（还不理解的话，可以想成是实现了继承，创建的对象是以传入的对象为原型继承得来的）
 function objectFactory() {
